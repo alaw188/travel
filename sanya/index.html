@@ -170,6 +170,16 @@ table{border-collapse:collapse;width:100%}
 .grid-2{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))}
 .grid-ov{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:860px){.grid-ov{grid-template-columns:1fr}}
+/* ---------- room photos (09 ROOM) ---------- */
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+.shot{margin:0;overflow:hidden;border-radius:14px;background:var(--aqua-soft);box-shadow:0 10px 26px rgba(2,22,30,.12)}
+.shot img{display:block;width:100%;height:auto;aspect-ratio:960/660;object-fit:cover}
+.shot__cap{
+  padding:11px 13px 12px;font-size:12.5px;line-height:1.5;color:var(--ink-soft);
+  background:#fff;border-top:1px solid var(--line);
+}
+.shot__cap span{display:block;margin-top:3px;font-size:10.5px;color:var(--ink-mute);letter-spacing:.03em}
 .panel{padding:20px}
 .panel__t{
   font-size:16px;display:flex;align-items:center;gap:9px;margin-bottom:14px;
@@ -638,6 +648,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     <a href="#budget">預算</a>
     <a href="#tips">提示</a>
     <a href="#drive">自駕</a>
+    <a href="#room">房間</a>
   </div>
 </nav>
 
@@ -2467,6 +2478,84 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 
     <div class="note">
       停車收費為依公開資料整理的<b>研究估算</b>，各場站可能隨旺淡季、節慶與政府惠民措施調整；充電樁數量與可用狀態亦屬即時變動。租車自駕前建議逐一撥打場站或於高德／Map APP 內先行確認，不要只依賴本表。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 ROOM ============ -->
+<section class="sec" id="room">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div class="sec__kicker">09　ROOM</div>
+      <h2 class="sec__title">住宿：1 Bedroom Suite Ocean View</h2>
+      <p class="sec__sub">本次訂下的房型為 <b>1 Bedroom Suite Ocean View – Lounge Access</b>，是全程唯一連住兩晚的據點，也是整趟行程的活動中心。以下為房型資料與實際照片。</p>
+    </div>
+
+    <div class="kpis rv">
+      <div class="kpi kpi--main">
+        <div class="kpi__k">房型</div>
+        <div class="kpi__v" style="font-size:19px;line-height:1.35">1 Bedroom Suite<br>Ocean View</div>
+        <div class="kpi__d">含 Lounge Access 行政酒廊</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__k">室內面積</div>
+        <div class="kpi__v"><sub>約</sub>118<sub>㎡</sub></div>
+        <div class="kpi__d">起居區與臥室同層</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__k">景觀</div>
+        <div class="kpi__v" style="font-size:19px;line-height:1.35">海景<br>＋ 陽台</div>
+        <div class="kpi__d">落地窗直面南海</div>
+      </div>
+      <div class="kpi kpi--gold">
+        <div class="kpi__k">兩晚房價</div>
+        <div class="kpi__v"><sub>¥</sub>4,330</div>
+        <div class="kpi__d">已含兩晚早餐與酒廊</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:20px">
+      <figure class="shot rv">
+        <img src="assets/hotel/suite_bedroom.jpg" alt="海景套房臥室區，四柱床與海景落地窗" loading="lazy" decoding="async" width="960" height="660">
+        <figcaption class="shot__cap">臥室區 — 四柱床與落地窗海景<span>照片：酒店官網酒店相册</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <img src="assets/hotel/suite_living.jpg" alt="海景套房起居區，扶手椅與大窗外的海景與綠地" loading="lazy" decoding="async" width="960" height="660">
+        <figcaption class="shot__cap">起居區 — 大窗同時望見海景與綠地<span>照片：酒店官網酒店相册</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <img src="assets/hotel/suite_oceanview.jpg" alt="客房落地窗與陽台外的海景" loading="lazy" decoding="async" width="960" height="660">
+        <figcaption class="shot__cap">客房落地窗 — 直視南海<span>照片：酒店官網酒店相册</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card panel rv">
+        <h3 class="panel__t"><i>◷</i>行政酒廊時刻表</h3>
+        <p style="font-size:14.5px;color:var(--ink-soft)">Lounge Access 禮遇隨房價附上，<b>下表為本行程實際會用到的三個時段</b>。酒廊位於館內，無需離開飯店；穿著請保持休閒得體。</p>
+        <div class="spot__dl" style="margin-top:12px">
+          <div><span class="k">早餐</span><span class="v">07:30 開始（Day 1–3 皆含，Day 3 用至 10:00 退房）</span></div>
+          <div><span class="k">下午茶</span><span class="v"><b>15:00–17:00</b> — Day 1 入住後直接上樓補水與小食</span></div>
+          <div><span class="k">Happy Hour</span><span class="v"><b>18:00–20:30</b> — 酒水與輕食份量足以當輕晚餐，Day 1 與 Day 2 都用這餐解決</span></div>
+        </div>
+        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:12px"><b>10/25 14:00 退房後酒廊即停止服務</b>，當日早餐仍可於退房前用完；晚餐須改至館內餐廳自費（天府中餐廳、濤·海底）或海棠68一帶。</p>
+      </div>
+
+      <div class="card panel rv">
+        <h3 class="panel__t gold"><i>⚑</i>入住實務提醒</h3>
+        <ul class="tick">
+          <li><span><b>入住 15:00／退房 10/25 14:00。</b>Day 1 11:30 抵達，先寄存行李至禮賓部，到 15:00 再進房。</span></li>
+          <li><span><b>確認房型與禮遇</b>：check-in 時請再次確認房間為 118㎡ 海景套房，並確認 Lounge Access 已掛在房卡上。</span></li>
+          <li><span><b>退房當天的行李寄存</b>與免稅採購動線：先採購再回飯店取行李，順序不要反。</span></li>
+          <li><span><b>泳池與海灘</b>：海棠灣浪大，不建議下海；玩水以酒店泳池為主（設施照片見 03 SPOTS）。</span></li>
+        </ul>
+        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:11px">下榻地址為<b>海棠北路 128 號</b>，飯店專用連廊可步行至 cdf 免稅城，無需叫車。</p>
+        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:9px">以上房型與面積為依公開資料整理的<b>研究估算</b>；<b>床型配置與房內設施細項未經官方確認</b>，建議訂房前或 check-in 時向酒店查證。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      房間照片取自<a href="https://www.interconsanya.cn/picture.html" target="_blank" rel="noopener">酒店官網的酒店相册</a>（<code>interconsanya.cn/picture.html</code>），版權仍屬酒店與其圖片供應商所有，僅作個人行程參考之用。房型規格以實際訂房確認為準。
     </div>
   </div>
 </section>
