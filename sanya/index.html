@@ -171,6 +171,9 @@ table{border-collapse:collapse;width:100%}
 .grid-ov{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:860px){.grid-ov{grid-template-columns:1fr}}
 /* ---------- room photos (09 ROOM) ---------- */
+.grid-3{display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.grid-3{grid-template-columns:1fr}}
 .shot{margin:0;overflow:hidden;border-radius:14px;background:var(--aqua-soft);box-shadow:0 10px 26px rgba(2,22,30,.12)}
 .shot img{display:block;width:100%;height:auto;aspect-ratio:960/660;object-fit:cover}
 .shot__cap{
@@ -2522,18 +2525,22 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </div>
     </div>
 
-    <div class="grid-ov" style="margin-top:20px">
+    <div class="grid-3" style="margin-top:20px">
       <figure class="shot rv">
         <img src="https://digital.ihg.com/is/image/ihg/intercontinental-sanya-8672437335-3x2" alt="套房陽台，藍色單椅與茶几，窗外望見海景與綠地" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
         <figcaption class="shot__cap">陽台 — 單椅區與海景<span>照片：IHG 官方圖庫</span></figcaption>
       </figure>
       <figure class="shot rv">
-        <img src="https://digital.ihg.com/is/image/ihg/intercontinental-sanya-7585314458-3x2" alt="臥室區，雙槽大理石 vanity、浴袍與落地窗海景" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
-        <figcaption class="shot__cap">臥室 — 雙槽大理石 vanity 與浴袍<span>照片：IHG 官方圖庫</span></figcaption>
+        <img src="https://digital.ihg.com/is/image/ihg/intercontinental-sanya-7585314458-3x2" alt="臥室與浴室，雙槽 vanity、浴袍，窗外海景與陽台" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
+        <figcaption class="shot__cap">臥室 — vanity、浴袍與海景陽台<span>照片：IHG 官方圖庫</span></figcaption>
       </figure>
       <figure class="shot rv">
-        <img src="https://digital.ihg.com/is/image/ihg/intercontinental-sanya-7583875620-3x2" alt="套房主臥，king size 大床、電視櫃與落地窗海景" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
-        <figcaption class="shot__cap">主臥 — king size 大床與海景落地窗<span>照片：IHG 官方圖庫</span></figcaption>
+        <img src="https://ak-d.tripcdn.com/images/0221112000baksb85C0E9_W_1280_853_R5.webp" alt="套房客廳，沙發座位區、牆掛電視與滑門通往海景陽台" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
+        <figcaption class="shot__cap">客廳 — 沙發座位區與海景陽台<span>照片：Trip.com</span></figcaption>
+      </figure>
+      <figure class="shot rv">
+        <img src="https://ak-d.tripcdn.com/images/02013120009bzuomeA7F1_W_1280_853_R5.webp" alt="主浴室，乾濕分離淋浴間、雙浴袍與長檯面洗手台" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
+        <figcaption class="shot__cap">主浴室 — 乾濕分離與雙浴袍<span>照片：Trip.com</span></figcaption>
       </figure>
       <figure class="shot rv">
         <img src="https://ak-d.tripcdn.com/images/1mc6l12000b2hurmp3527_R_960_660_R5_D.jpg" alt="客房起居區的落地窗與陽台外的南海海景" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
