@@ -379,6 +379,15 @@ table.t td{padding:13px 16px;border-top:1px solid var(--line);vertical-align:top
 table.t tbody tr:hover{background:#f8fcfc}
 table.t td:first-child{font-weight:600;white-space:nowrap}
 table.t .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* 08 DRIVE 停車表：收費為長文，允許換行；欄寬預設平衡 */
+table.t--park{min-width:980px}
+table.t--park td:nth-child(3),
+table.t--park td:nth-child(4){white-space:normal;min-width:0}
+table.t--park th:nth-child(1){width:16%}
+table.t--park th:nth-child(2){width:19%}
+table.t--park th:nth-child(3){width:26%}
+table.t--park th:nth-child(4){width:14%}
+table.t--park th:nth-child(5){width:25%}
 table.t tr.sum td{background:var(--aqua-soft);font-weight:700;border-top:2px solid var(--aqua)}
 table.t tr.sum td:first-child{color:var(--sea-700)}
 .mut{color:var(--ink-mute);font-size:12.5px}
@@ -2546,7 +2555,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 
     <div class="tbox rv">
       <div class="tscroll">
-        <table class="t" style="min-width:840px">
+        <table class="t t--park">
           <thead>
             <tr>
               <th>目的地</th>
