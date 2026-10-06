@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import math, random
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 SRC = "A_hand_drawn_watercolor_illust_2026-10-06T02-33-54.png"
 im = Image.open(SRC).convert("RGB").resize((1536, 1024), Image.LANCZOS)
@@ -111,28 +111,24 @@ def leg(a, b, color, ctrl=None):
     pts = [A, B] if ctrl is None else [qbez(A, ctrl, B, i/90.0) for i in range(91)]
     dashed(dr, pts, color)
 
-TEAL, GOLD, CORAL = (15, 79, 92), (201, 162, 39), (224, 120, 86)
-leg("airport", "hotel", TEAL)
-leg("hotel", "mayan", TEAL)
-leg("hotel", "cdf", TEAL)
-leg("hotel", "yalong", GOLD)
-leg("yalong", "aquarium", GOLD)
-leg("aquarium", "hotel", GOLD)
-leg("hotel", "diadia", GOLD)
-leg("diadia", "houhai", GOLD, ctrl=(930, 800))
-leg("hotel", "tianya", CORAL, ctrl=(700, 760))
-leg("tianya", "town", CORAL)
-leg("town", "airport", CORAL, ctrl=(280, 300))
+# 2026-10-06 per user: no route lines, no day badges — key locations only
 
-def badge(x, y, text, color, radius=40):
-    dr.ellipse([x-radius, y-radius, x+radius, y+radius], fill=color, outline=(255, 255, 255), width=3)
-    f = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 26)
-    bb = dr.textbbox((0, 0), text, font=f)
-    dr.text((x-(bb[2]-bb[0])/2, y-(bb[3]-bb[1])/2-2), text, font=f, fill=(255, 255, 255))
+def soften(x0, y0, x1, y1, rad=9, feather=20):
+    """Blur the filled area to hide tile seams, feathered at borders."""
+    box = (max(0, x0 - feather), max(0, y0 - feather),
+           min(W, x1 + feather), min(H, y1 + feather))
+    region = im.crop(box).filter(ImageFilter.GaussianBlur(rad))
+    mask = Image.new('L', (box[2] - box[0], box[3] - box[1]), 0)
+    md = mask.load()
+    for yy in range(mask.height):
+        for xx in range(mask.width):
+            dx = min(xx, mask.width - 1 - xx)
+            dy = min(yy, mask.height - 1 - yy)
+            md[xx, yy] = int(255 * min(1.0, min(dx, dy) / feather))
+    im.paste(region, box, mask)
 
-badge(480, 195, "DAY 1", TEAL)
-badge(437, 443, "DAY 2", GOLD)
-badge(560, 700, "DAY 3", CORAL)
+soften(740, 605, 1140, 875)
+soften(1330, 960, W - 4, H - 4)
 
 im.save("cover_no_wm.png")
 im.resize((1080, 720)).save("_cover_prev.png")
