@@ -163,6 +163,8 @@ table{border-collapse:collapse;width:100%}
 .chip--cost{background:var(--gold-soft);color:#8a6c07;border-color:#efdda6}
 .chip--mode{background:var(--sea-800);color:#cfeef1;border-color:transparent}
 .chip--walk{background:var(--gold);color:#3a2c00;border-color:transparent}
+.chip--drive{background:#1f7a4d;color:#ddf3e6;border-color:transparent}
+.chip--taxi{background:#6a4c93;color:#efe6fa;border-color:transparent}
 .chip--air{background:var(--coral);color:#fff;border-color:transparent}
 .chip--hi{background:var(--coral-soft);color:#a8402c;border-color:#f5c9c1}
 
@@ -853,7 +855,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </div>
             <p class="ev__p">同一趟的士 2 個落客點：先接 J's Home，再前往深圳灣口岸，全程約 <b>65–80 分鐘</b>。香港的士按錶收費，另計隧道費與行李附加費，<b>合計約 HK$460（約 ¥400）</b>。深圳灣口岸通關時間為 <b>06:30–24:00</b>，抵達時已開放；過關後在深圳側按 App 指示前往網約車上車點。</p>
             <div class="chips">
-              <span class="chip chip--walk">🚕 的士（香港）</span>
+              <span class="chip chip--taxi">🚕 的士（香港）</span>
               <span class="chip">約 58 km</span>
               <span class="chip chip--time">65–80 分鐘</span>
               <span class="chip chip--cost">一趟合計約 HK$460</span>
@@ -1249,7 +1251,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </div>
             <p class="ev__p"><b>一嗨租車 09:30 送車到酒店</b>，辦妥手續取車——之後行李可先放後備箱，接著補眠、泳池或沙灘散步都好。免稅城 10:00 開放，若 Day 1 晚有漏買，可經連廊去補購（結帳須於 <b>16:10</b> 前）。<b>晚間 20:30 於三亞機場還車</b>，還車點就在航站樓旁。</p>
             <div class="chips">
-              <span class="chip chip--mode">🚗 一嗨租車</span>
+              <span class="chip chip--drive">🚗 租車自駕</span>
               <span class="chip chip--cost">全天約 ¥85（2 人）</span>
               <span class="chip chip--time">09:30 酒店取車</span>
               <span class="chip chip--hi">20:30 機場還車</span>
@@ -1296,7 +1298,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </div>
             <p class="ev__p">退房後一路向西，橫跨三亞灣到最西端，約 <b>50 公里</b>、65–75 分鐘，是全趟最長的一段地面交通；午後出發車流順暢，<b>行李已在後備箱</b>，一路向西不回頭。</p>
             <div class="chips">
-              <span class="chip chip--mode">🚗 自駕（一嗨租車）</span>
+              <span class="chip chip--drive">🚗 租車自駕</span>
               <span class="chip">約 50 km</span>
               <span class="chip chip--time">65–75 分鐘</span>
               <span class="chip chip--cost">車租 ¥85 已計</span>
@@ -1375,7 +1377,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </div>
             <p class="ev__p">小鎮距鳳凰機場僅約 <b>15 公里</b>、15–20 分鐘，沿三亞灣路往南即達；行李一直在車上，<b>直接開到機場還車點、20:30 前辦妥還車</b>，步行即進航站樓。</p>
             <div class="chips">
-              <span class="chip chip--mode">🚗 自駕</span>
+              <span class="chip chip--drive">🚗 租車自駕</span>
               <span class="chip">約 15 km</span>
               <span class="chip chip--time">15–20 分鐘</span>
               <span class="chip chip--hi">20:30 前還車</span>
@@ -1426,7 +1428,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </div>
             <p class="ev__p">深夜車流少，車程約 <b>45–60 分鐘</b>；同一趟的士 2 個落客點，先送 J's Home 再返回 A's Home。</p>
             <div class="chips">
-              <span class="chip chip--walk">🚕 的士（香港）</span>
+              <span class="chip chip--taxi">🚕 的士（香港）</span>
               <span class="chip">約 44 km</span>
               <span class="chip chip--cost">約 HK$360</span>
             </div>
@@ -2128,7 +2130,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           <tbody>
             <tr>
               <td>A's Home → J's Home<br>→ 深圳灣口岸（香港）</td>
-              <td><span class="chip chip--walk">🚕 的士</span></td>
+              <td><span class="chip chip--taxi">🚕 的士</span></td>
               <td class="num">約 58 km</td>
               <td class="num">65–80 分鐘</td>
               <td class="num">HK$460</td>
@@ -2232,7 +2234,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </tr>
             <tr>
               <td>一嗨租車：酒店取車 → 機場還車</td>
-              <td><span class="chip chip--mode">🚗 自駕（租車）</span></td>
+              <td><span class="chip chip--drive">🚗 租車自駕</span></td>
               <td class="num">約 65 km</td>
               <td class="num">—</td>
               <td class="num">¥85</td>
@@ -2240,7 +2242,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </tr>
             <tr>
               <td>酒店 → 天涯海角（自駕）</td>
-              <td><span class="chip chip--mode">🚗 自駕</span></td>
+              <td><span class="chip chip--drive">🚗 租車自駕</span></td>
               <td class="num">約 50 km</td>
               <td class="num">65–75 分鐘</td>
               <td class="num">車租已計</td>
@@ -2256,7 +2258,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </tr>
             <tr>
               <td>天涯小鎮 → 三亞機場（自駕）</td>
-              <td><span class="chip chip--mode">🚗 自駕</span></td>
+              <td><span class="chip chip--drive">🚗 租車自駕</span></td>
               <td class="num">約 15 km</td>
               <td class="num">15–20 分鐘</td>
               <td class="num">車租已計</td>
@@ -2264,7 +2266,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             </tr>
             <tr>
               <td>香港機場 → J's Home<br>→ A's Home（香港）</td>
-              <td><span class="chip chip--walk">🚕 的士</span></td>
+              <td><span class="chip chip--taxi">🚕 的士</span></td>
               <td class="num">約 44 km</td>
               <td class="num">45–60 分鐘</td>
               <td class="num">HK$360</td>
