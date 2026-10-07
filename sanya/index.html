@@ -2242,7 +2242,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
               <td class="num">約 65 km</td>
               <td class="num">—</td>
               <td class="num">¥85</td>
-              <td class="mut">Day 3 09:00 送車到酒店、20:30 於三亞機場還車；費用約 ¥85（以平台報價為準）</td>
+              <td class="mut">Day 3 09:00 送車到酒店、20:30 於三亞機場還車；費用約 ¥85</td>
             </tr>
             <tr>
               <td>酒店 → 天涯海角（自駕）</td>
@@ -2655,7 +2655,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             <tr>
               <td><b>一嗨租車（Day 3 取還車）</b><br><span class="mut">09:00 酒店取車／20:30 機場還車</span></td>
               <td>專人送車到酒店；還車點位於機場航站樓旁</td>
-              <td class="num"><b>約 ¥85</b>（全天，以平台報價為準）</td>
+              <td class="num"><b>約 ¥85</b>（全天）</td>
               <td><span class="mut">車型以平台供車為準（多為新能源）</span></td>
               <td class="mut">行李隨車不必寄存；還車後步行即達航站樓。取車時建議拍照留存車況</td>
             </tr>
@@ -2820,19 +2820,17 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   /* ---------- transport: show/hide 備選 rows ---------- */
   var optSeg = document.getElementById('optSeg');
   if (optSeg) {
+    var optBtn = optSeg.querySelector('button');
     var tpTable = document.querySelector('#transport table.t');
     var optRows = tpTable ? [].slice.call(tpTable.querySelectorAll('tbody tr')).filter(function (tr) {
       return tr.querySelector('.tagopt');
     }) : [];
-    function setOpt(mode) {
-      var show = mode === 'show';
-      optSeg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x.dataset.opt === mode); });
-      optRows.forEach(function (tr) { tr.style.display = show ? '' : 'none'; });
-    }
-    optSeg.querySelectorAll('button').forEach(function (b) {
-      b.addEventListener('click', function () { setOpt(b.dataset.opt); });
+    optBtn.addEventListener('click', function () {
+      var on = optBtn.classList.toggle('is-on');
+      optBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      optBtn.textContent = on ? '隱藏備選路線' : '顯示備選路線';
+      optRows.forEach(function (tr) { tr.style.display = on ? '' : 'none'; });
     });
-    setOpt('hide');
   }
 
   /* ---------- table card labels（手機卡片式表格用） ---------- */
