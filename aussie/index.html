@@ -60,15 +60,15 @@
   .tag{display:inline-block;background:var(--sand2);color:#8a6d1f;border:1px solid #e7d9b0;border-radius:999px;font-size:.8rem;padding:2px 12px;margin-left:8px;white-space:nowrap}
   .tag.blue{background:#e4f1f6;color:var(--ocean-dark);border-color:#bcd9e4}
   .tag.green{background:#e7f2ec;color:var(--leaf);border-color:#c2ddd0}
-  .ftable{width:100%;border-collapse:collapse;font-size:.95rem}
-  .ftable td{padding:10px 0;border-top:1px dashed #e8e2d4;vertical-align:top}
+  .ftable{width:100%;border-collapse:collapse;font-size:.95rem;min-width:640px}
+  .ftable td{padding:10px 0;border-top:1px dashed #e8e2d4;vertical-align:top;white-space:nowrap}
   .ftable tr:first-child td{border-top:0}
-  .ftable .fd{color:var(--muted);white-space:nowrap;padding-right:16px}
-  .ftable .fr{font-weight:800;color:var(--ocean-dark);white-space:nowrap}
-  .ftable .ft{text-align:right;color:var(--muted);white-space:nowrap;padding-left:14px}
-  .ftable .fb{text-align:right;color:var(--muted);padding-left:14px;max-width:160px}
+  .ftable .fd{color:var(--muted);padding-right:14px}
+  .ftable .ft{color:var(--muted);padding-right:14px}
+  .ftable .fr{font-weight:800;color:var(--ocean-dark)}
+  .ftable .fb{text-align:right;color:var(--muted);padding-left:14px}
   .ftable .fhead td{font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:0 0 4px;font-weight:600}
-  @media(max-width:640px){.ftable{font-size:.88rem}.ftable .fd,.ftable .fhead{display:none}.ftable .fr{white-space:normal}.ftable .tag{margin-left:0}}
+  @media(max-width:640px){.ftable{font-size:.88rem}}
 
   /* ---------- Hotels ---------- */
   .hotel{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(43,43,43,.07);display:flex;flex-direction:column}
@@ -185,13 +185,13 @@
 <section id="flights">
   <h2><span class="dot"></span>航班資訊</h2>
   <p class="lead">來程搭國泰商務客艙，回程經新加坡轉機。</p>
-  <div class="flight" style="display:block;padding:4px 22px">
+  <div class="flight" style="display:block;padding:4px 22px;overflow-x:auto">
     <table class="ftable">
-      <tr class="fhead"><td class="fd">日期</td><td>航段</td><td>航班</td><td class="ft">時間</td><td class="fb">行李</td></tr>
-      <tr><td class="fd">12/11 五</td><td class="fr">🛫 香港 → 悉尼</td><td><span class="tag blue">CX111 商務</span></td><td class="ft">19:05 → 07:15（翌日）</td><td class="fb">寄艙 40kg</td></tr>
-      <tr><td class="fd">12/17 四</td><td class="fr">✈️ 悉尼 → 墨爾本</td><td><span class="tag">內陸機</span></td><td class="ft">11:00 → 12:30</td><td class="fb">手提 8–10kg<br>寄艙 23/25kg</td></tr>
-      <tr><td class="fd">12/24 四</td><td class="fr">🛬 墨爾本 → 新加坡</td><td><span class="tag blue">SQ218</span></td><td class="ft">00:35 → 05:15</td><td class="fb">寄艙 35kg（合共）</td></tr>
-      <tr><td class="fd">12/24 四</td><td class="fr">🏠 新加坡 → 香港</td><td><span class="tag blue">SQ874</span></td><td class="ft">07:30 → 11:20</td><td class="fb">寄艙 35kg（合共）</td></tr>
+      <tr class="fhead"><td class="fd">日期</td><td class="ft">時間</td><td>航班</td><td>航段</td><td class="fb">寄艙</td><td class="fb">手提</td></tr>
+      <tr><td class="fd">12/11 五</td><td class="ft">19:05 → 07:15（翌日）</td><td><span class="tag blue">CX111 商務</span></td><td class="fr">🛫 香港 → 悉尼</td><td class="fb">40kg</td><td class="fb">7kg</td></tr>
+      <tr><td class="fd">12/17 四</td><td class="ft">11:00 → 12:30</td><td><span class="tag">內陸機</span></td><td class="fr">✈️ 悉尼 → 墨爾本</td><td class="fb">23/25kg</td><td class="fb">8–10kg</td></tr>
+      <tr><td class="fd">12/24 四</td><td class="ft">00:35 → 05:15</td><td><span class="tag blue">SQ218</span></td><td class="fr">🛬 墨爾本 → 新加坡</td><td class="fb">35kg（合共）</td><td class="fb">7kg</td></tr>
+      <tr><td class="fd">12/24 四</td><td class="ft">07:30 → 11:20</td><td><span class="tag blue">SQ874</span></td><td class="fr">🏠 新加坡 → 香港</td><td class="fb">35kg（合共）</td><td class="fb">7kg</td></tr>
     </table>
   </div>
   <div class="day-notes" style="margin-top:14px"><b>👨 備註：</b>Andy 搭國泰 CX105 香港 → 墨爾本，12/17（四）中午 12:30 抵達同大家會合。</div>
