@@ -106,6 +106,23 @@
   .tip h4{color:var(--ocean-dark);margin-bottom:6px}
   .tip p{font-size:.93rem;color:#555}
 
+  /* ---------- 餐廳攻略 ---------- */
+  .bk{background:var(--card);border-radius:16px;box-shadow:0 3px 14px rgba(43,43,43,.07);overflow:hidden;display:flex;flex-direction:column}
+  .bk-head{padding:11px 16px;color:#fff;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px}
+  .bk-head h3{font-size:1.02rem}
+  .bk-when{font-size:.78rem;background:rgba(255,255,255,.2);padding:2px 12px;border-radius:999px;white-space:nowrap}
+  .bk.sydney .bk-head{background:linear-gradient(120deg,var(--ocean-dark),var(--ocean))}
+  .bk.melb .bk-head{background:linear-gradient(120deg,#2c5d47,var(--leaf))}
+  .bk-body{padding:10px 16px 13px;flex:1}
+  .bk-body ul{list-style:none}
+  .bk-body li{font-size:.88rem;color:#555;padding:5px 0;border-bottom:1px dashed #eee3d2}
+  .bk-body li:last-child{border-bottom:none}
+  .bk-body li b.k{color:var(--ocean-dark)}
+  .bk-body a{color:var(--ocean);font-weight:600;text-decoration:none;word-break:break-all}
+  .bk-body a:hover{text-decoration:underline}
+  .bk-body .win{color:#8a6d1f;font-weight:700}
+  .bk-body .hot{color:#b34700;font-weight:700}
+
   footer{text-align:center;padding:24px 20px 32px;color:var(--muted);font-size:.9rem}
   @media(max-width:640px){
     .places{grid-template-columns:1fr}
@@ -139,6 +156,7 @@
     <li><a href="#sydney">悉尼行程</a></li>
     <li><a href="#melbourne">墨爾本行程</a></li>
     <li><a href="#tips">實用貼士</a></li>
+    <li><a href="#bookings">餐廳攻略</a></li>
   </ul>
 </nav>
 
@@ -391,6 +409,93 @@
     <div class="tip"><h4>🎫 需要預約嘅活動</h4><p><b>Sydney Opera House</b> 導賞團、<b>Phillip Island 企鵝歸巢</b>、<b>Klook 獵人谷／雅拉河谷一日團</b> — 全部建議出發前上網訂定。</p></div>
     <div class="tip"><h4>🌉 Ben 的私藏路線</h4><p>可以由 <b>Milsons Point</b> 沿海港大橋行去 <b>The Rocks</b>（2.4km／約 30 分鐘），風景一流，係人少少知嘅散步路線。</p></div>
     <div class="tip"><h4>🌦️ 12 月天氣</h4><p>12 月係澳洲<b>夏天</b>，日間可達 25–30°C，陽光猛烈。記得帶防曬、太陽眼鏡同帽，晚上海邊會有風，帶件薄外套。</p></div>
+  </div>
+</section>
+
+<!-- ================= BOOKINGS ================= -->
+<section id="bookings">
+  <h2><span class="dot"></span>餐廳攻略 — 訂位情報</h2>
+  <p class="lead">每間想食嘅餐廳：官網、訂位連結、開放窗口同重點情報一次過列晒。</p>
+
+  <div class="day-notes">
+    <b>🗓 訂位時間表：</b><br>
+    <b>① 11 月 1–10 日</b> — 每日 check 下面各間嘅訂位頁，12 月日期一開放就即刻訂（12 月係 Christmas party season，五六日晚市搶得好快）。<br>
+    <b>② 11 月 15 日朝 7:00am</b> — <b>The Gidley 開搶</b>（官方確認 30 日窗口，每日朝 7 點放新日期，遲一日好位就冇）。<br>
+    <b>③ 後備</b> — 網上滿咗就直接打電話，好多店會留少量電話位。
+  </div>
+
+  <div class="grid c3" style="margin-top:14px">
+
+    <div class="bk sydney">
+      <div class="bk-head"><h3>6HEAD Sydney</h3><span class="bk-when">12/12（六）晚餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://6head.com.au" target="_blank" rel="noopener">6head.com.au</a></li>
+        <li><b class="k">🔗 訂位：</b><a href="https://6head.com.au/bookings/sydney/" target="_blank" rel="noopener">6head.com.au/bookings/sydney</a></li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開 — 估計 11 月初開放 12 月檔</span></li>
+        <li><b class="k">ℹ️ 情報：</b>Campbell's Stores 1839 歷史建築（The Rocks）· 牛排＋海鮮 · 12:00–22:30 · <b>官網有中文菜单</b>，長輩睇餐牌無難度</li>
+      </ul></div>
+    </div>
+
+    <div class="bk sydney">
+      <div class="bk-head"><h3>Margaret（Double Bay）</h3><span class="bk-when">12/13（日）晚餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://www.margaretdoublebay.com" target="_blank" rel="noopener">margaretdoublebay.com</a></li>
+        <li><b class="k">🔗 訂位：</b>官網「Book Now」（Margaret Family Group）</li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開</span></li>
+        <li><b class="k">⚠️ 注意：</b>呢間正式係 <b>Neil Perry 旗艦餐廳 Margaret</b>，唔係 cafe！晚餐逢三至日、午餐逢四至日 · 木火燒烤 · 招牌漢堡係<b>午餐時段</b>出品 · 2026 世界最佳牛排榜澳洲 No.1</li>
+      </ul></div>
+    </div>
+
+    <div class="bk sydney">
+      <div class="bk-head"><h3>Bar Totti's（Bondi）</h3><span class="bk-when">12/14（一）晚餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://bartottis.com.au" target="_blank" rel="noopener">bartottis.com.au</a></li>
+        <li><b class="k">🔗 訂位：</b>官網「Book Now」</li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開 — 與 6HEAD 同集團（Applejack）</span></li>
+        <li><b class="k">ℹ️ 情報：</b>木火烤包必試 · 意式小食＋酒 · Bondi 分店有陽光庭院；Wynyard 另有城市分店，唔好去錯</li>
+      </ul></div>
+    </div>
+
+    <div class="bk sydney">
+      <div class="bk-head"><h3>The Gidley</h3><span class="bk-when">12/15（二）晚餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://www.thegidley.com" target="_blank" rel="noopener">thegidley.com</a></li>
+        <li><b class="k">🔗 訂位：</b>官網「Book Now」（Liquid &amp; Larder）</li>
+        <li><b class="k">📅 窗口：</b><span class="hot">官方確認：30 日前開放，每日朝 7:00am 放新日期 → 11 月 15 日朝 7am 開搶！</span></li>
+        <li><b class="k">ℹ️ 情報：</b>老派牛排館 · <b>有素食選擇（適合媽媽）</b> · 記得訂位時表明</li>
+      </ul></div>
+    </div>
+
+    <div class="bk sydney">
+      <div class="bk-head"><h3>The Grounds of Alexandria</h3><span class="bk-when">12/16（三）午餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://thegrounds.com.au" target="_blank" rel="noopener">thegrounds.com.au</a></li>
+        <li><b class="k">🔗 訂位：</b>官網「BOOK TABLE」（The Cafe / The Potting Shed）</li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開</span></li>
+        <li><b class="k">ℹ️ 情報：</b>The Cafe 週一至五 7:00–15:30、六日 7:00–16:00 · 舊派餅廠改建＋有機花園 · 附近有 lululemon outlet</li>
+      </ul></div>
+    </div>
+
+    <div class="bk melb">
+      <div class="bk-head"><h3>Higher Ground</h3><span class="bk-when">12/21（一）午餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://highergroundmelbourne.com.au" target="_blank" rel="noopener">highergroundmelbourne.com.au</a></li>
+        <li><b class="k">🔗 訂位：</b><a href="https://www.onlinedining.com.au/venue/higher-ground" target="_blank" rel="noopener">onlinedining.com.au/venue/higher-ground</a></li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開（Online Dining 平台一般 30–90 日）</span></li>
+        <li><b class="k">ℹ️ 情報：</b>650 Little Bourke St · 週一至五 7:00–17:00、六日 7:30–17:00（12/21 週一有開）· 百年發電站改建，打卡一流</li>
+      </ul></div>
+    </div>
+
+    <div class="bk melb">
+      <div class="bk-head"><h3>Grain Store</h3><span class="bk-when">12/21（一）早餐／午餐</span></div>
+      <div class="bk-body"><ul>
+        <li><b class="k">🌐 官網：</b><a href="https://www.grainstore.com.au" target="_blank" rel="noopener">grainstore.com.au</a></li>
+        <li><b class="k">🔗 訂位：</b><a href="https://www.grainstore.com.au/bookings" target="_blank" rel="noopener">grainstore.com.au/bookings</a></li>
+        <li><b class="k">📅 窗口：</b><span class="win">未公開 — 電話 03 9972 6993 直接問最快</span></li>
+        <li><b class="k">ℹ️ 情報：</b>週一至五 7:00–15:00、六日 8:00–15:00（12/21 週一有開）· 明亮工業風 · 建議訂位</li>
+      </ul></div>
+    </div>
+
   </div>
 </section>
 
