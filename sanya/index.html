@@ -198,6 +198,9 @@ table{border-collapse:collapse;width:100%}
   border-radius:var(--r-sm);overflow:hidden;font-size:14.5px;
 }
 .kv__r{background:var(--card);padding:10px 13px}
+.kv--2col{grid-template-columns:1fr 1fr}
+.kv--2col .kv__r--wide{grid-column:1/-1}
+@media (max-width:640px){.kv--2col{grid-template-columns:1fr}}
 .kv__k{font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em;font-weight:700}
 .kv__v{font-weight:600;margin-top:4px;line-height:1.6}
 .kv__v small{display:block;font-weight:400;color:var(--ink-mute);font-size:12.5px;margin-top:4px;line-height:1.55}
@@ -724,7 +727,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     <div class="grid-ov">
       <div class="card panel rv">
         <h3 class="panel__t"><i>✈</i>航班資訊</h3>
-        <div class="kv">
+        <div class="kv kv--2col">
           <div class="kv__r">
             <div class="kv__k">去程　10/23（五）</div>
             <div class="kv__v">CZ3978　SZX 09:25 → SYX 11:05
@@ -758,8 +761,8 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 
       <div class="card panel rv">
         <h3 class="panel__t gold"><i>⌂</i>住宿與酒廊禮遇</h3>
-        <div class="kv">
-          <div class="kv__r">
+        <div class="kv kv--2col">
+          <div class="kv__r kv__r--wide">
             <div class="kv__k">房型</div>
             <div class="kv__v">1 Bedroom Suite Ocean View
               <small>118㎡　·　含 Lounge Access 行政酒廊</small>
