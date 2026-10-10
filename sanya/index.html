@@ -199,8 +199,9 @@ table{border-collapse:collapse;width:100%}
 }
 .kv__r{background:var(--card);padding:10px 13px}
 .kv--2col{grid-template-columns:1fr 1fr}
-.kv--2col .kv__r--wide{grid-column:1/-1}
-@media (max-width:640px){.kv--2col{grid-template-columns:1fr}}
+.kv--3col{grid-template-columns:repeat(3,1fr)}
+.kv--2col .kv__r--wide,.kv--3col .kv__r--wide{grid-column:1/-1}
+@media (max-width:640px){.kv--2col,.kv--3col{grid-template-columns:1fr}}
 .kv__k{font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em;font-weight:700}
 .kv__v{font-weight:600;margin-top:4px;line-height:1.6}
 .kv__v small{display:block;font-weight:400;color:var(--ink-mute);font-size:12.5px;margin-top:4px;line-height:1.55}
@@ -761,7 +762,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 
       <div class="card panel rv">
         <h3 class="panel__t gold"><i>⌂</i>住宿與酒廊禮遇</h3>
-        <div class="kv kv--2col">
+        <div class="kv kv--3col">
           <div class="kv__r kv__r--wide">
             <div class="kv__k">房型</div>
             <div class="kv__v">1 Bedroom Suite Ocean View
@@ -780,12 +781,6 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
             <div class="kv__k">Happy Hour</div>
             <div class="kv__v">18:00 – 20:30
               <small>酒水供應至 20:30，可作輕晚餐</small>
-            </div>
-          </div>
-          <div class="kv__r">
-            <div class="kv__k">退房　10/25（日）</div>
-            <div class="kv__v">14:00
-              <small>酒廊禮遇至退房為止；行李可寄存禮賓部</small>
             </div>
           </div>
         </div>
