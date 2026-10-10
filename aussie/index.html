@@ -66,7 +66,9 @@
   .ftable .fd{color:var(--muted);white-space:nowrap;padding-right:16px}
   .ftable .fr{font-weight:800;color:var(--ocean-dark);white-space:nowrap}
   .ftable .ft{text-align:right;color:var(--muted);white-space:nowrap;padding-left:14px}
-  @media(max-width:640px){.ftable{font-size:.88rem}.ftable .fd{display:none}.ftable .tag{margin-left:0}}
+  .ftable .fb{text-align:right;color:var(--muted);padding-left:14px;max-width:160px}
+  .ftable .fhead td{font-size:.72rem;letter-spacing:.08em;color:var(--muted);padding:0 0 4px;font-weight:600}
+  @media(max-width:640px){.ftable{font-size:.88rem}.ftable .fd,.ftable .fhead{display:none}.ftable .fr{white-space:normal}.ftable .tag{margin-left:0}}
 
   /* ---------- Hotels ---------- */
   .hotel{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 3px 14px rgba(43,43,43,.07);display:flex;flex-direction:column}
@@ -185,14 +187,14 @@
   <p class="lead">來程搭國泰商務客艙，回程經新加坡轉機。</p>
   <div class="flight" style="display:block;padding:4px 22px">
     <table class="ftable">
-      <tr><td class="fd">12/11 五</td><td class="fr">🛫 香港 → 悉尼</td><td><span class="tag blue">CX111 商務</span></td><td class="ft">19:05 → 07:15（翌日）</td></tr>
-      <tr><td class="fd">12/17 四</td><td class="fr">✈️ 悉尼 → 墨爾本</td><td><span class="tag">內陸機</span></td><td class="ft">11:00 → 12:30</td></tr>
-      <tr><td class="fd">12/17 四</td><td class="fr">👨 香港 → 墨爾本</td><td><span class="tag green">Andy · CX105</span></td><td class="ft">12:30 抵達</td></tr>
-      <tr><td class="fd">12/24 四</td><td class="fr">🛬 墨爾本 → 新加坡</td><td><span class="tag blue">SQ218</span></td><td class="ft">00:35 → 05:15</td></tr>
-      <tr><td class="fd">12/24 四</td><td class="fr">🏠 新加坡 → 香港</td><td><span class="tag blue">SQ874</span></td><td class="ft">07:30 → 11:20</td></tr>
+      <tr class="fhead"><td class="fd">日期</td><td>航段</td><td>航班</td><td class="ft">時間</td><td class="fb">行李</td></tr>
+      <tr><td class="fd">12/11 五</td><td class="fr">🛫 香港 → 悉尼</td><td><span class="tag blue">CX111 商務</span></td><td class="ft">19:05 → 07:15（翌日）</td><td class="fb">寄艙 40kg</td></tr>
+      <tr><td class="fd">12/17 四</td><td class="fr">✈️ 悉尼 → 墨爾本</td><td><span class="tag">內陸機</span></td><td class="ft">11:00 → 12:30</td><td class="fb">手提 8–10kg<br>寄艙 23/25kg</td></tr>
+      <tr><td class="fd">12/24 四</td><td class="fr">🛬 墨爾本 → 新加坡</td><td><span class="tag blue">SQ218</span></td><td class="ft">00:35 → 05:15</td><td class="fb">寄艙 35kg（合共）</td></tr>
+      <tr><td class="fd">12/24 四</td><td class="fr">🏠 新加坡 → 香港</td><td><span class="tag blue">SQ874</span></td><td class="ft">07:30 → 11:20</td><td class="fb">寄艙 35kg（合共）</td></tr>
     </table>
   </div>
-  <div class="day-notes" style="margin-top:14px"><b>🧳 行李：</b>內陸機手提 8–10kg ＋ 寄艙 23/25kg；新航寄艙合共 35kg。</div>
+  <div class="day-notes" style="margin-top:14px"><b>👨 備註：</b>Andy 搭國泰 CX105 香港 → 墨爾本，12/17（四）中午 12:30 抵達同大家會合。</div>
 </section>
 
 <!-- ================= HOTELS ================= -->
