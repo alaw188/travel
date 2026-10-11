@@ -131,10 +131,6 @@ table{border-collapse:collapse;width:100%}
   color:rgba(255,255,255,.80);letter-spacing:.05em;
 }
 .hero__meta b{color:#fff;font-weight:600}
-.hero__cards{
-  margin-top:38px;display:grid;gap:14px;
-  grid-template-columns:repeat(auto-fit,minmax(min(232px,100%),1fr));
-}
 .hc{
   background:rgba(255,255,255,.075);
   border:1px solid rgba(255,255,255,.16);
@@ -150,6 +146,20 @@ table{border-collapse:collapse;width:100%}
 .hc__v small{display:block;font-size:13px;font-weight:400;color:rgba(255,255,255,.68);margin-top:5px;letter-spacing:0}
 .hc--gold .hc__k{color:var(--gold)}
 .hc--coral .hc__k{color:#ff9d8a}
+
+/* overview summary cards (light background variant) */
+.ovcards{margin-top:22px;display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.ovcards .hc{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 17px;backdrop-filter:none;color:var(--ink);
+}
+.ovcards .hc:hover{background:var(--card);transform:none;box-shadow:var(--shadow)}
+.ovcards .hc__k{color:var(--teal)}
+.ovcards .hc__v small{color:var(--ink-mute)}
+.ovcards .hc--gold .hc__k{color:#8a6c07}
+.ovcards .hc--coral .hc__k{color:#c04a34}
+.ovmap{margin-top:34px}
+@media (max-width:860px){.ovcards{grid-template-columns:1fr}}
 
 /* ---------- tabs / chips ---------- */
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
@@ -634,7 +644,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   table.t tr.sum td:first-child{padding-bottom:2px}
 }
 
-/* ===== 00 SUMMARY（卡通手繪地圖）===== */
+/* ===== 概覽段尾：卡通手繪行程地圖 ===== */
 .summ{margin:8px auto 0;max-width:1320px}
 .summ-intro{
   max-width:980px;margin:0 auto 18px;text-align:center;
@@ -691,7 +701,20 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       以度假村為核心，重點景點打卡，交通以網約車為主
     </div>
 
-    <div class="hero__cards">
+    </div>
+  </div>
+</header>
+
+<!-- ============ 01 OVERVIEW ============ -->
+<section class="sec" id="overview">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <div class="sec__kicker">01　OVERVIEW</div>
+      <h2 class="sec__title">行程概覽與重點安排</h2>
+      <p class="sec__sub">以下是本次行程的固定條件與重點選擇，其餘行程細節都由此展開。</p>
+    </div>
+
+    <div class="ovcards rv">
       <div class="hc">
         <div class="hc__k">去程航班</div>
         <div class="hc__v">CZ3978　SZX → SYX
@@ -710,32 +733,6 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           <small>1 Bedroom Suite Ocean View – Lounge Access<br>118㎡ 海景套房　·　含行政酒廊禮遇</small>
         </div>
       </div>
-    </div>
-  </div>
-</header>
-
-<!-- ============ 00 SUMMARY ============ -->
-<section class="sec sec--sum" id="summary">
-  <div class="wrap">
-    <p class="summ-intro rv">三天兩夜，以海棠灣為基地、不進市區：Day 1 抵達<b>機場</b>後入住<b>酒店</b>，午餐在<b>瑰麗 MAYAN</b> 沙灘吧、晚逛<b>免稅城</b>；Day 2 上<b>亞龍灣</b>、午後看<b>亞特蘭蒂斯</b>水族館，晚上到<b>嗲嗲的椰子雞</b>與<b>後海村</b>續攤；Day 3 西行<b>天涯海角</b>後返程。</p>
-    <figure class="summ rv">
-      <div class="summ__frame">
-        <img src="img/cartoon-preview/map_web.jpg?v=4"
-             alt="三亞三日度假遊手繪水彩行程地圖"
-             loading="lazy" decoding="async"
-             width="1536" height="1024">
-      </div>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ 01 OVERVIEW ============ -->
-<section class="sec" id="overview">
-  <div class="wrap">
-    <div class="sec__head rv">
-      <div class="sec__kicker">01　OVERVIEW</div>
-      <h2 class="sec__title">行程概覽與重點安排</h2>
-      <p class="sec__sub">以下是本次行程的固定條件與重點選擇，其餘行程細節都由此展開。</p>
     </div>
 
     <div class="grid-ov">
@@ -825,6 +822,18 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           <li><span><b>機場往返</b>：Day 1 SYX → 酒店網約車約 40 km、50–60 分鐘、¥80 – 130；Day 3 自駕直達機場並於 20:30 前還車。</span></li>
         </ul>
       </div>
+    </div>
+    <div class="ovmap">
+    <p class="summ-intro rv">三天兩夜，以海棠灣為基地、不進市區：Day 1 抵達<b>機場</b>後入住<b>酒店</b>，午餐在<b>瑰麗 MAYAN</b> 沙灘吧、晚逛<b>免稅城</b>；Day 2 上<b>亞龍灣</b>、午後看<b>亞特蘭蒂斯</b>水族館，晚上到<b>嗲嗲的椰子雞</b>與<b>後海村</b>續攤；Day 3 西行<b>天涯海角</b>後返程。</p>
+    <figure class="summ rv">
+      <div class="summ__frame">
+        <img src="img/cartoon-preview/map_web.jpg?v=4"
+             alt="三亞三日度假遊手繪水彩行程地圖"
+             loading="lazy" decoding="async"
+             width="1536" height="1024">
+      </div>
+    </figure>
+  
     </div>
   </div>
 </section>
