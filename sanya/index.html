@@ -472,6 +472,11 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 .group::after{content:"";flex:1 1 auto;height:1px;background:var(--line)}
 
 .spots{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))}
+.spots--c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.spots--c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1120px){.spots--c4{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){.spots--c3,.spots--c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.spots--c3,.spots--c4{grid-template-columns:1fr}}
 .spot{padding:16px 17px;position:relative;overflow:hidden}
 .spot::before{
   content:"";position:absolute;top:0;left:0;width:100%;height:2.5px;
@@ -520,7 +525,9 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 .spot__dl .v{flex:1 1 auto;color:var(--ink-soft);min-width:0}
 
 /* ---------- tips ---------- */
-.tips{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(288px,100%),1fr))}
+.tips{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.tips{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.tips{grid-template-columns:1fr}}
 .tip{padding:18px;position:relative;overflow:hidden}
 .tip::before{
   content:"";position:absolute;top:0;left:0;width:100%;height:3px;
@@ -1457,7 +1464,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">近郊 <span>30 分鐘內</span></h3>
-    <div class="spots">
+    <div class="spots spots--c3">
       <article class="card spot rv">
         <figure class="spot__fig" data-label="失落空間水族館">
           <img class="spot__img" src="img/atlantis-aquarium.jpg" alt="失落的空間水族館大使環礁湖" loading="lazy" title="失落的空間水族館 · 大使環礁湖實景" onerror="this.remove()">
@@ -1559,7 +1566,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">經典 <span>需半日至一日</span></h3>
-    <div class="spots">
+    <div class="spots spots--c3">
       <article class="card spot spot--mid rv">
         <figure class="spot__fig" data-label="分界洲島">
           <img class="spot__img" src="img/fenjiezhou.jpg" alt="分界洲島" loading="lazy" title="分界洲島導覽圖" onerror="this.remove()">
@@ -1643,7 +1650,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">順遊 <span>需整日往返</span></h3>
-    <div class="spots">
+    <div class="spots spots--c3">
       <article class="card spot spot--far rv">
         <figure class="spot__fig" data-label="天涯海角">
           <img class="spot__img" src="img/tianya-aerial.jpg" alt="天涯海角" loading="lazy" title="天涯海角沙灘與巨石實景航拍" onerror="this.remove()">
@@ -1695,7 +1702,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group group--gold">夜生活 <span>可延續至 24:00</span></h3>
-    <div class="spots">
+    <div class="spots spots--c3">
       <article class="card spot spot--bar rv">
         <figure class="spot__fig" data-label="後海·集合 GHO BAR">
           <img class="spot__img" src="img/gho-bar.jpg" alt="後海·集合 GHO BAR 吧檯" loading="lazy" title="後海·集合 GHO BAR（後海村沙灘酒吧）· 攜程" onerror="this.remove()">
@@ -1797,7 +1804,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group group--gold">餐廳與美食 <span>行程內 ＋ 三亞名店</span></h3>
-    <div class="spots">
+    <div class="spots spots--c4">
       <article class="card spot spot--bar rv">
         <figure class="spot__fig" data-label="沙灘吧 · 海景">
           <img class="spot__img" src="img/mayan-beach-bar.jpg" alt="MAYAN 沙灘吧" loading="lazy" title="MAYAN 沙灘吧（Rosewood Sanya）" onerror="this.remove()">
