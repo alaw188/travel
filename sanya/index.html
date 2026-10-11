@@ -480,12 +480,10 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 .group--gold{color:#8a6c07}
 .group::after{content:"";flex:1 1 auto;height:1px;background:var(--line)}
 
-.spots{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))}
-.spots--c3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.spots--c4{grid-template-columns:repeat(4,minmax(0,1fr))}
-@media (max-width:1120px){.spots--c4{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:980px){.spots--c3,.spots--c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:620px){.spots--c3,.spots--c4{grid-template-columns:1fr}}
+/* 卡片牆統一為 3 欄（3×N）網格：桌面 3 欄 → 平板 2 欄 → 手機 1 欄 */
+.spots{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.spots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.spots{grid-template-columns:1fr}}
 .spot{padding:16px 17px;position:relative;overflow:hidden}
 .spot::before{
   content:"";position:absolute;top:0;left:0;width:100%;height:2.5px;
@@ -1458,24 +1456,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">近郊 <span>30 分鐘內</span></h3>
-    <div class="spots spots--c3">
-      <article class="card spot rv">
-        <figure class="spot__fig" data-label="失落空間水族館">
-          <img class="spot__img" src="img/atlantis-aquarium.jpg" alt="失落的空間水族館大使環礁湖" loading="lazy" title="失落的空間水族館 · 大使環礁湖實景" onerror="this.remove()">
-          <figcaption class="spot__cap">照片：攜程 Trip.com · 失落的空間水族館實景</figcaption>
-        </figure>
-        <div class="spot__top">
-          <h4>亞特蘭蒂斯水族館（失落的空間） <span class="lvl lvl--free">行程內</span></h4>
-          <span class="spot__dist">海棠北路 36 號　·　Day 2 午後</span>
-        </div>
-        <p class="spot__lead">亞特蘭蒂斯酒店內的海洋水族館——巨型拱形玻璃與海底隧道裡逾 280 種海洋生物游弋，白鯨與鯊魚近在咫尺，室內涼爽，是午後避曬的好去處。</p>
-        <div class="spot__dl">
-          <div><span class="k">位置</span><span class="v">海棠北路 36 號，從洲際車程約 <b>10 分鐘</b>（約 4 km）；與免稅城同在海棠北路一線。</span></div>
-          <div><span class="k">實用</span><span class="v">開放 <b>10:00–20:00</b>，門票 <b>¥198／人</b>（不含水世界）；建議停留約 2 小時。</span></div>
-          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E4%B8%89%E4%BA%9A%C2%B7%E4%BA%9A%E7%89%B9%E5%85%B0%E8%92%82%E6%96%AF%E6%B0%B4%E6%97%8F%E9%A6%86&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
-        </div>
-      </article>
-
+    <div class="spots">
       <article class="card spot rv">
         <figure class="spot__fig" data-label="cdf 免稅城">
           <img class="spot__img" src="img/cdf-mall.jpg" alt="三亞國際免稅城" loading="lazy" title="三亞國際免稅城實景航拍" onerror="this.remove()">
@@ -1494,18 +1475,19 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </article>
 
       <article class="card spot rv">
-        <figure class="spot__fig" data-label="蜈支洲島">
-          <img class="spot__img" src="img/wuzhizhou.webp" alt="蜈支洲島" loading="lazy" title="蜈支洲島實景（Klook）" onerror="this.remove()">
-          <figcaption class="spot__cap">照片：Klook</figcaption>
+        <figure class="spot__fig" data-label="失落空間水族館">
+          <img class="spot__img" src="img/atlantis-aquarium.jpg" alt="失落的空間水族館大使環礁湖" loading="lazy" title="失落的空間水族館 · 大使環礁湖實景" onerror="this.remove()">
+          <figcaption class="spot__cap">照片：攜程 Trip.com · 失落的空間水族館實景</figcaption>
         </figure>
         <div class="spot__top">
-          <h4>蜈支洲島 <span class="lvl">5A</span></h4>
-          <span class="spot__dist">島距直線 7.2 km　·　至碼頭約 18 分鐘</span>
+          <h4>亞特蘭蒂斯水族館（失落的空間） <span class="lvl lvl--free">行程內</span></h4>
+          <span class="spot__dist">海棠北路 36 號　·　Day 2 午後</span>
         </div>
-        <p class="spot__lead">海南最負盛名的海島景區，面積僅 1.48 平方公里，海水能見度可達 6–27 公尺，被稱作「中國的馬爾代夫」。環島潛水、情人橋與觀日岩是主要看點。</p>
+        <p class="spot__lead">亞特蘭蒂斯酒店內的海洋水族館——巨型拱形玻璃與海底隧道裡逾 280 種海洋生物游弋，白鯨與鯊魚近在咫尺，室內涼爽，是午後避曬的好去處。</p>
         <div class="spot__dl">
-          <div><span class="k">歷史</span><span class="v">古稱「古崎洲」「牛奇洲」，標準地名為牛奇洲。人文記載可追溯至清代，光緒年間道人吳華存曾在島上建有「海上涵三觀」庵堂。</span></div>
-          <div><span class="k">實用</span><span class="v">營業 08:30–19:30，上島至 16:00、下島至 19:30（另有 21:00 夜間班次）。門票含往返船票約 ¥133–144。建議早上出發避開人潮，船班受海況影響會臨時調整。</span></div>
+          <div><span class="k">位置</span><span class="v">海棠北路 36 號，從洲際車程約 <b>10 分鐘</b>（約 4 km）；與免稅城同在海棠北路一線。</span></div>
+          <div><span class="k">實用</span><span class="v">開放 <b>10:00–20:00</b>，門票 <b>¥198／人</b>（不含水世界）；建議停留約 2 小時。</span></div>
+          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E4%B8%89%E4%BA%9A%C2%B7%E4%BA%9A%E7%89%B9%E5%85%B0%E8%92%82%E6%96%AF%E6%B0%B4%E6%97%8F%E9%A6%86&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
         </div>
       </article>
 
@@ -1522,6 +1504,22 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
         <div class="spot__dl">
           <div><span class="k">亮點</span><span class="v">衝浪、趕海、沙灘酒吧群；傍晚到入夜氣氛最好，可一路待到 24:00。</span></div>
           <div><span class="k">實用</span><span class="v">全天免費開放。海邊有多家衝浪店可租板與教學。夜間回程叫車較慢，建議提前預約。</span></div>
+        </div>
+      </article>
+
+      <article class="card spot rv">
+        <figure class="spot__fig" data-label="蜈支洲島">
+          <img class="spot__img" src="img/wuzhizhou.webp" alt="蜈支洲島" loading="lazy" title="蜈支洲島實景（Klook）" onerror="this.remove()">
+          <figcaption class="spot__cap">照片：Klook</figcaption>
+        </figure>
+        <div class="spot__top">
+          <h4>蜈支洲島 <span class="lvl">5A</span></h4>
+          <span class="spot__dist">島距直線 7.2 km　·　至碼頭約 18 分鐘</span>
+        </div>
+        <p class="spot__lead">海南最負盛名的海島景區，面積僅 1.48 平方公里，海水能見度可達 6–27 公尺，被稱作「中國的馬爾代夫」。環島潛水、情人橋與觀日岩是主要看點。</p>
+        <div class="spot__dl">
+          <div><span class="k">歷史</span><span class="v">古稱「古崎洲」「牛奇洲」，標準地名為牛奇洲。人文記載可追溯至清代，光緒年間道人吳華存曾在島上建有「海上涵三觀」庵堂。</span></div>
+          <div><span class="k">實用</span><span class="v">營業 08:30–19:30，上島至 16:00、下島至 19:30（另有 21:00 夜間班次）。門票含往返船票約 ¥133–144。建議早上出發避開人潮，船班受海況影響會臨時調整。</span></div>
         </div>
       </article>
 
@@ -1560,23 +1558,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">經典 <span>需半日至一日</span></h3>
-    <div class="spots spots--c3">
-      <article class="card spot spot--mid rv">
-        <figure class="spot__fig" data-label="分界洲島">
-          <img class="spot__img" src="img/fenjiezhou.jpg" alt="分界洲島" loading="lazy" title="分界洲島導覽圖" onerror="this.remove()">
-          <figcaption class="spot__cap">照片：分界洲島導覽圖</figcaption>
-        </figure>
-        <div class="spot__top">
-          <h4>分界洲島 <span class="lvl">5A</span></h4>
-          <span class="spot__dist">陵水牛嶺外海　·　車程約 50–60 分鐘＋渡輪</span>
-        </div>
-        <p class="spot__lead">海南島南北氣候的分界線小島——嶺北陰嶺南晴，島因此得名。水清沙白，潛點素質不輸蜈支洲島，遊客相對少；島上海洋劇場可近距離看海豚海獅。</p>
-        <div class="spot__dl">
-          <div><span class="k">實用</span><span class="v">門票＋往返船票<b>約 ¥127–132</b>（線上預訂 ¥119 起），觀光車 <b>¥40</b> 建議加購；海洋劇場、潛水等須另購項目票。車程約 1 小時，適合整日替換，出發前查詢船班海況。</span></div>
-          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E5%88%86%E7%95%8C%E6%B4%B2%E5%B2%9B&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
-        </div>
-      </article>
-
+    <div class="spots">
       <article class="card spot spot--mid rv">
         <figure class="spot__fig" data-label="亞龍灣熱帶天堂森林公園">
           <img class="spot__img" src="img/yalong-forest.jpg" alt="亞龍灣熱帶天堂森林公園" loading="lazy" title="亞龍灣熱帶天堂森林公園實景（Klook）" onerror="this.remove()">
@@ -1590,6 +1572,22 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
         <div class="spot__dl">
           <div><span class="k">歷史</span><span class="v">因電影《非誠勿擾 II》主要取景而聲名大噪，片中的試婚房與鳥巢度假村至今仍是熱門打卡點。</span></div>
           <div><span class="k">實用</span><span class="v">約 07:30–18:00（17:30 停止入園；各來源略有出入，以現場為準）。<b>套票約 ¥272／人</b>：門票＋來回遊覽車＋全海景玻璃棧橋＋雨林魔幻影院＋過江龍索橋（本次採用，2 人約 ¥544）。園區大且坡度陡，遊覽車強烈建議含上。</span></div>
+        </div>
+      </article>
+
+      <article class="card spot spot--mid rv">
+        <figure class="spot__fig" data-label="分界洲島">
+          <img class="spot__img" src="img/fenjiezhou.jpg" alt="分界洲島" loading="lazy" title="分界洲島導覽圖" onerror="this.remove()">
+          <figcaption class="spot__cap">照片：分界洲島導覽圖</figcaption>
+        </figure>
+        <div class="spot__top">
+          <h4>分界洲島 <span class="lvl">5A</span></h4>
+          <span class="spot__dist">陵水牛嶺外海　·　車程約 50–60 分鐘＋渡輪</span>
+        </div>
+        <p class="spot__lead">海南島南北氣候的分界線小島——嶺北陰嶺南晴，島因此得名。水清沙白，潛點素質不輸蜈支洲島，遊客相對少；島上海洋劇場可近距離看海豚海獅。</p>
+        <div class="spot__dl">
+          <div><span class="k">實用</span><span class="v">門票＋往返船票<b>約 ¥127–132</b>（線上預訂 ¥119 起），觀光車 <b>¥40</b> 建議加購；海洋劇場、潛水等須另購項目票。車程約 1 小時，適合整日替換，出發前查詢船班海況。</span></div>
+          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E5%88%86%E7%95%8C%E6%B4%B2%E5%B2%9B&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
         </div>
       </article>
 
@@ -1644,7 +1642,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group">順遊 <span>需整日往返</span></h3>
-    <div class="spots spots--c3">
+    <div class="spots">
       <article class="card spot spot--far rv">
         <figure class="spot__fig" data-label="天涯海角">
           <img class="spot__img" src="img/tianya-aerial.jpg" alt="天涯海角" loading="lazy" title="天涯海角沙灘與巨石實景航拍" onerror="this.remove()">
@@ -1696,7 +1694,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group group--gold">夜生活 <span>可延續至 24:00</span></h3>
-    <div class="spots spots--c3">
+    <div class="spots">
       <article class="card spot spot--bar rv">
         <figure class="spot__fig" data-label="後海·集合 GHO BAR">
           <img class="spot__img" src="img/gho-bar.jpg" alt="後海·集合 GHO BAR 吧檯" loading="lazy" title="後海·集合 GHO BAR（後海村沙灘酒吧）· 攜程" onerror="this.remove()">
@@ -1798,7 +1796,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     </div>
 
     <h3 class="group group--gold">餐廳與美食 <span>行程內 ＋ 三亞名店</span></h3>
-    <div class="spots spots--c4">
+    <div class="spots">
       <article class="card spot spot--bar rv">
         <figure class="spot__fig" data-label="沙灘吧 · 海景">
           <img class="spot__img" src="img/mayan-beach-bar.jpg" alt="MAYAN 沙灘吧" loading="lazy" title="MAYAN 沙灘吧（Rosewood Sanya）" onerror="this.remove()">
@@ -1813,6 +1811,23 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           <div><span class="k">位置</span><span class="v">海棠北路 6 號（近海昌不夜城與海棠廣場），從洲際車程約 <b>10 分鐘</b>。瑰麗住客另享 MAYAN 精選啤酒禮遇。</span></div>
           <div><span class="k">實用</span><span class="v">人均約 <b>¥200</b>（區間 ¥150–250，研究估算）。假日子午市熱門，<b>建議提前訂座</b>；菜單與評價見大眾點評／美團。</span></div>
           <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=MAYAN%E6%B2%99%E6%BB%A9%E5%90%A7&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
+        </div>
+      </article>
+
+      <article class="card spot spot--bar rv">
+        <figure class="spot__fig" data-label="鄉村海味">
+          <img class="spot__img" src="img/xiangcun.webp" alt="鄉村海味海鮮餐廳" loading="lazy" title="鄉村海味海鮮餐廳實景（攜程）" onerror="this.remove()">
+          <figcaption class="spot__cap">照片：攜程 Trip.com</figcaption>
+        </figure>
+        <div class="spot__top">
+          <h4>鄉村海味海鮮餐廳（亞龍灣森林公園店） <span class="lvl lvl--free">行程內</span></h4>
+          <span class="spot__dist">六盤村紅色二隊 112 號（公園正門外）　·　Day 2 午餐</span>
+        </div>
+        <p class="spot__lead">公園正門外的市井海鮮老店，大眾點評 5.0 分——各式海鮮料理口碑極佳、幾乎無雷區；海南文昌雞與海南椰子飯也是招牌。</p>
+        <div class="spot__dl">
+          <div><span class="k">位置</span><span class="v">距鳥巢度假村約 <b>850 公尺</b>，下山即到，與上午行程無縫銜接，看完魚再開車往亞特蘭蒂斯。</span></div>
+          <div><span class="k">實用</span><span class="v">營業 <b>11:00–23:00</b>，人均約 <b>¥126</b>。市井小店無官方網站，菜單與評價見大眾點評／美團。</span></div>
+          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E9%84%89%E6%9D%91%E6%B5%B7%E5%91%B3%E6%B5%B7%E9%B2%9C%E9%A4%90%E5%8E%85&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
         </div>
       </article>
 
@@ -1834,19 +1849,17 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </article>
 
       <article class="card spot spot--bar rv">
-        <figure class="spot__fig" data-label="鄉村海味">
-          <img class="spot__img" src="img/xiangcun.webp" alt="鄉村海味海鮮餐廳" loading="lazy" title="鄉村海味海鮮餐廳實景（攜程）" onerror="this.remove()">
-          <figcaption class="spot__cap">照片：攜程 Trip.com</figcaption>
+        <figure class="spot__fig" data-label="海底餐廳示意">
+          <img class="spot__img" src="https://dimg04.c-ctrip.com/images/1tx6812000ikp8tmrFF65_W_640_0.jpg" alt="濤·海底餐廳" loading="lazy" title="濤·海底餐廳（洲際館內）" onerror="this.remove()">
+          <figcaption class="spot__cap">照片：攜程</figcaption>
         </figure>
         <div class="spot__top">
-          <h4>鄉村海味海鮮餐廳（亞龍灣森林公園店） <span class="lvl lvl--free">行程內</span></h4>
-          <span class="spot__dist">六盤村紅色二隊 112 號（公園正門外）　·　Day 2 午餐</span>
+          <h4>濤·海底餐廳（洲際館內） <span class="lvl lvl--free">行程內</span></h4>
+          <span class="spot__dist">館內　·　Day 3 午餐</span>
         </div>
-        <p class="spot__lead">公園正門外的市井海鮮老店，大眾點評 5.0 分——各式海鮮料理口碑極佳、幾乎無雷區；海南文昌雞與海南椰子飯也是招牌。</p>
+        <p class="spot__lead">國內少見的海洋餐廳——用餐時魚群從頭頂游過，並有水中美人魚表演（演出多在晚餐時段），已排入 Day 3 午餐。</p>
         <div class="spot__dl">
-          <div><span class="k">位置</span><span class="v">距鳥巢度假村約 <b>850 公尺</b>，下山即到，與上午行程無縫銜接，看完魚再開車往亞特蘭蒂斯。</span></div>
-          <div><span class="k">實用</span><span class="v">營業 <b>11:00–23:00</b>，人均約 <b>¥126</b>。市井小店無官方網站，菜單與評價見大眾點評／美團。</span></div>
-          <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://uri.amap.com/search?keyword=%E9%84%89%E6%9D%91%E6%B5%B7%E5%91%B3%E6%B5%B7%E9%B2%9C%E9%A4%90%E5%8E%85&amp;city=460200&amp;src=sanya-trip&amp;coordinate=gaode" target="_blank" rel="noopener">在高德地圖查看 ↗</a></span></div>
+          <div><span class="k">實用</span><span class="v">海鮮自助形式，<b>建議提前訂位</b>；訂位與菜單見洲際官網餐飲頁。</span></div>
         </div>
       </article>
 
@@ -1880,21 +1893,6 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
         <div class="spot__dl">
           <div><span class="k">實用</span><span class="v">假日晚餐時段常滿，<b>建議提前一天訂位</b>；菜單與訂位見洲際官網餐飲頁。</span></div>
           <div><span class="k">連結</span><span class="v"><a class="ev__go" href="https://www.ihg.com/intercontinental/hotels/cn/zh/sanya/syxic/hoteldetail/dining" target="_blank" rel="noopener">洲際官網餐飲頁 ↗</a></span></div>
-        </div>
-      </article>
-
-      <article class="card spot spot--bar rv">
-        <figure class="spot__fig" data-label="海底餐廳示意">
-          <img class="spot__img" src="https://dimg04.c-ctrip.com/images/1tx6812000ikp8tmrFF65_W_640_0.jpg" alt="濤·海底餐廳" loading="lazy" title="濤·海底餐廳（洲際館內）" onerror="this.remove()">
-          <figcaption class="spot__cap">照片：攜程</figcaption>
-        </figure>
-        <div class="spot__top">
-          <h4>濤·海底餐廳（洲際館內） <span class="lvl lvl--free">行程內</span></h4>
-          <span class="spot__dist">館內　·　Day 3 午餐</span>
-        </div>
-        <p class="spot__lead">國內少見的海洋餐廳——用餐時魚群從頭頂游過，並有水中美人魚表演（演出多在晚餐時段），已排入 Day 3 午餐。</p>
-        <div class="spot__dl">
-          <div><span class="k">實用</span><span class="v">海鮮自助形式，<b>建議提前訂位</b>；訂位與菜單見洲際官網餐飲頁。</span></div>
         </div>
       </article>
 
