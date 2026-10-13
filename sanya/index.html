@@ -133,7 +133,7 @@ table{border-collapse:collapse;width:100%}
 .hero__meta b{color:#fff;font-weight:600}
 /* ---------- overview 3-pillar summary ---------- */
 .pillars{
-  margin-top:24px;display:grid;gap:14px;align-items:start;
+  margin-top:24px;display:grid;gap:14px;align-items:stretch;
   grid-template-columns:repeat(3,minmax(0,1fr));
 }
 .pillar{
@@ -155,14 +155,14 @@ table{border-collapse:collapse;width:100%}
   display:block;font-size:12.5px;font-weight:400;color:var(--ink-mute);
   margin-top:6px;letter-spacing:0;line-height:1.6;
 }
-.pillar .kv{margin-top:12px}
-.pillar>.warn{margin-top:18px}
+.pillar .kv{margin:12px 0 18px}
+.pillar>.warn{margin-top:auto}
 /* in-pillar sub-blocks (住宿柱：酒廊時刻表／入住實務提醒) */
 .pillar__hub{
   margin-top:16px;padding-top:13px;border-top:1px dashed var(--line);
   font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--gold);
 }
-.pillar__list{display:grid;gap:9px;list-style:none;padding:0;margin-top:12px;font-size:12.5px;line-height:1.62;color:var(--ink-soft)}
+.pillar__list{display:grid;gap:9px;list-style:none;padding:0;margin:12px 0 18px;font-size:12.5px;line-height:1.62;color:var(--ink-soft)}
 .pillar__list li{position:relative;padding-left:14px}
 .pillar__list li::before{
   content:"";position:absolute;left:3px;top:8px;width:4.5px;height:4.5px;border-radius:50%;
@@ -770,9 +770,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
         <div class="kv">
           <div class="kv__r">
             <div class="kv__k">早餐</div>
-            <div class="kv__v">07:30 開始
-              <small>Day 1–3 皆含</small>
-            </div>
+            <div class="kv__v">07:30 開始</div>
           </div>
           <div class="kv__r">
             <div class="kv__k">下午茶</div>
