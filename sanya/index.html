@@ -133,7 +133,7 @@ table{border-collapse:collapse;width:100%}
 .hero__meta b{color:#fff;font-weight:600}
 /* ---------- overview 3-pillar summary ---------- */
 .pillars{
-  margin-top:24px;display:grid;gap:14px;align-items:stretch;
+  margin-top:24px;display:grid;gap:14px;align-items:start;
   grid-template-columns:repeat(3,minmax(0,1fr));
 }
 .pillar{
@@ -155,8 +155,20 @@ table{border-collapse:collapse;width:100%}
   display:block;font-size:12.5px;font-weight:400;color:var(--ink-mute);
   margin-top:6px;letter-spacing:0;line-height:1.6;
 }
-.pillar .kv{margin:14px 0 18px}
-.pillar>.warn{margin-top:auto}
+.pillar .kv{margin-top:12px}
+.pillar>.warn{margin-top:18px}
+/* in-pillar sub-blocks (住宿柱：酒廊時刻表／入住實務提醒) */
+.pillar__hub{
+  margin-top:16px;padding-top:13px;border-top:1px dashed var(--line);
+  font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--gold);
+}
+.pillar__list{display:grid;gap:9px;list-style:none;padding:0;margin-top:12px;font-size:12.5px;line-height:1.62;color:var(--ink-soft)}
+.pillar__list li{position:relative;padding-left:14px}
+.pillar__list li::before{
+  content:"";position:absolute;left:3px;top:8px;width:4.5px;height:4.5px;border-radius:50%;
+  background:var(--gold);opacity:.75;
+}
+.pillar__list b{color:var(--ink);font-weight:700}
 .ovmap{margin-top:34px}
 @media (max-width:1000px){.pillars{grid-template-columns:1fr}}
 
@@ -751,16 +763,32 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       <section class="pillar pillar--gold rv">
         <div class="pillar__k">住宿</div>
         <div class="pillar__v">三亞海棠灣洲際度假酒店
-          <small>1 Bedroom Suite Ocean View　·　118㎡ 海景套房</small>
+          <small>1 Bedroom Suite Ocean View　·　118㎡ 海景套房<br>海棠北路 128 號</small>
         </div>
+
+        <div class="pillar__hub">行政酒廊時刻表</div>
         <div class="kv">
           <div class="kv__r">
-            <div class="kv__k">行政酒廊禮遇</div>
-            <div class="kv__v">早餐 07:00 – 10:30<br>下午茶 15:00 – 17:00<br>Happy Hour 18:00 – 20:30
-              <small>酒水供應至 20:30，可作輕晚餐；禮遇含於房價</small>
+            <div class="kv__k">早餐</div>
+            <div class="kv__v">07:30 開始
+              <small>Day 1–3 皆含</small>
             </div>
           </div>
+          <div class="kv__r">
+            <div class="kv__k">下午茶</div>
+            <div class="kv__v">15:00 – 17:00</div>
+          </div>
+          <div class="kv__r">
+            <div class="kv__k">Happy Hour</div>
+            <div class="kv__v">18:00 – 20:30</div>
+          </div>
         </div>
+
+        <div class="pillar__hub">入住實務提醒</div>
+        <ul class="pillar__list">
+          <li><b>入住 15:00／退房 10/25 14:00</b>；Day 1 11:30 抵達；退房後酒廊即停止服務。</li>
+        </ul>
+
         <div class="warn">
           <b>海域提醒：</b>海棠灣海況較為洶湧，<b>不建議下海游泳</b>，想玩水請以酒店泳池為主。
         </div>
@@ -801,53 +829,12 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </section>
     </div>
 
-    <div class="grid-2" style="margin-top:16px">
-      <div class="card panel rv">
-        <h3 class="panel__t"><i>◷</i>行政酒廊時刻表</h3>
-        <p style="font-size:14.5px;color:var(--ink-soft)">Lounge Access 禮遇隨房價附上，<b>下表為本行程實際會用到的三個時段</b>。酒廊位於館內，無需離開飯店；穿著請保持休閒得體。</p>
-        <div class="kv" style="margin-top:12px">
-          <div class="kv__r">
-            <div class="kv__k">早餐</div>
-            <div class="kv__v">07:30 開始
-              <small>Day 1–3 皆含；Day 3 用至 10:00 退房</small>
-            </div>
-          </div>
-          <div class="kv__r">
-            <div class="kv__k">下午茶</div>
-            <div class="kv__v">15:00–17:00
-              <small>Day 1 入住後直接上樓補水與小食</small>
-            </div>
-          </div>
-          <div class="kv__r">
-            <div class="kv__k">Happy Hour</div>
-            <div class="kv__v">18:00–20:30
-              <small>兩天皆安排 18:00–19:00：Day 1 當輕晚餐，Day 2 墊胃後出外用正餐</small>
-            </div>
-          </div>
-        </div>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:12px"><b>10/25 14:00 退房後酒廊即停止服務</b>，當日早餐仍可於退房前用完；午後西行天涯小鎮，晚餐可在鎮上海鮮大排檔解決（館內天府中餐廳、濤·海底為留館備選）。</p>
-      </div>
-
-      <div class="card panel rv">
-        <h3 class="panel__t gold"><i>⚑</i>入住實務提醒</h3>
-        <ul class="tick">
-          <li><span><b>入住 15:00／退房 10/25 14:00。</b>Day 1 11:30 抵達，先寄存行李至禮賓部，到 15:00 再進房。</span></li>
-          <li><span><b>確認房型與禮遇</b>：check-in 時請再次確認房間為 118㎡ 海景套房，並確認 Lounge Access 已掛在房卡上。</span></li>
-          <li><span><b>退房後行李隨車</b>：午後西行天涯海角、天涯小鎮至機場一路順路，行李直接放後備箱。</span></li>
-          <li><span><b>泳池與海灘</b>：海棠灣浪大，不建議下海；玩水以酒店泳池為主（設施照片見 03 SPOTS）。</span></li>
-        </ul>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:11px">下榻地址為<b>海棠北路 128 號</b>，飯店專用連廊可步行至 cdf 免稅城，無需叫車。</p>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:9px">以上房型與面積為依公開資料整理的<b>研究估算</b>；<b>床型配置與房內設施細項未經官方確認</b>，建議訂房前或 check-in 時向酒店查證。</p>
-      </div>
-    </div>
-
     <div class="grid-ov">
 
       <div class="card panel rv">
         <h3 class="panel__t coral"><i>★</i>行程亮點</h3>
         <ul class="tick">
           <li><span><b>鬆弛節奏</b>：以海棠灣為度假基地、不進市區；重點行程之外，時間留給酒廊、泳池與沙灘。</span></li>
-          <li><span><b>行政酒廊禮遇</b>：酒廊餐飲全含於房價，Day 1–2 晚餐可先以輕食墊底。</span></li>
           <li><span><b>Day 2</b>：亞龍灣熱帶天堂森林公園（含遊覽車）＋ 亞特蘭蒂斯<b>水族館</b>。</span></li>
           <li><span><b>Day 2 夜</b>：後海村沙灘酒吧，把一天延長到 24:00。</span></li>
           <li><span><b>Day 3</b>：上午取車後自由休息，午後退房自駕西行——15:30 天涯海角、順遊天涯小鎮，晚間赴機場還車。</span></li>
