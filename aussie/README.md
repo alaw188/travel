@@ -64,6 +64,7 @@ aussie/
 
 ## 待辦 / 後續跟進（Follow-ups）
 
+- [ ] 🛂 **澳洲 ETA（出發前必辦）**：全部家人持 HKSAR 護照，須經「Australian ETA」手機 App 申請 ETA（subclass 601）· A$20／人 · 多數即時獲批 · 12 個月有效期；建議 11 月內辦妥
 - [ ] 訂位：Cafe Margaret、6HEAD、Bar Totti's、The Gidley（必訂）；The Grounds、Higher Ground、Grain Store、mimi's（建議訂）
 - [ ] 訂團：Klook 獵人谷一日遊（12/15，$1,275／位含午餐）；Yarra Valley 酒莊團（12/20，兩個選項 8:45 / 9:30 出發）
 - [ ] 訂票：Sydney Opera House 導賞團；Phillip Island Penguin Parade（12/19 黃昏場）
