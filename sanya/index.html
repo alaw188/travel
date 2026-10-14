@@ -131,6 +131,21 @@ table{border-collapse:collapse;width:100%}
   color:rgba(255,255,255,.80);letter-spacing:.05em;
 }
 .hero__meta b{color:#fff;font-weight:600}
+/* ---------- hero: take-off countdown ---------- */
+.hero__count{
+  display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-top:18px;padding:9px 16px;border-radius:999px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(63,191,199,.34);
+  backdrop-filter:blur(4px);
+}
+.hero__count-k{font-size:11.5px;letter-spacing:.17em;font-weight:700;color:var(--aqua)}
+.hero__count-v{font-size:13.5px;color:rgba(255,255,255,.82);letter-spacing:.02em}
+.hero__count-v b{font-size:16px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.hero__count-f{font-size:11.5px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+@media (max-width:620px){
+  .hero__count{gap:8px;padding:8px 14px}
+  .hero__count-v b{font-size:15px}
+}
 /* ---------- overview 3-pillar summary ---------- */
 .pillars{
   margin-top:24px;display:grid;gap:14px;align-items:stretch;
@@ -708,6 +723,13 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     <div class="hero__meta">
       <b>2026 年 10 月 23 日（五）— 10 月 25 日（日）</b>　·　2 位成人　·　
       以度假村為核心，重點景點打卡，交通以網約車為主
+    </div>
+
+    <!-- 起飛倒數：目標時間改 data-depart 即可；時間到自動消失 -->
+    <div class="hero__count" id="heroCount" data-depart="2026-10-23T09:25:00+08:00" hidden>
+      <span class="hero__count-k">距離起飛</span>
+      <span class="hero__count-v"><b id="cdD">0</b> 天 <b id="cdH">0</b> 小時 <b id="cdM">0</b> 分</span>
+      <span class="hero__count-f">CZ3978　10/23 09:25　深圳寶安 SZX</span>
     </div>
   </div>
 </header>
@@ -3251,6 +3273,36 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   window.addEventListener('resize', function () {
     if (map) { setTimeout(function () { map.invalidateSize(); }, 120); }
   });
+})();
+
+/* ---------- hero: 起飛倒數（時間到自動消失） ---------- */
+(function () {
+  var box = document.getElementById('heroCount');
+  if (!box) { return; }
+  var target = Date.parse(box.getAttribute('data-depart'));
+  var d = document.getElementById('cdD');
+  var h = document.getElementById('cdH');
+  var m = document.getElementById('cdM');
+  var timer = null;
+
+  function tick() {
+    var left = target - Date.now();
+    if (isNaN(target) || left <= 0) {
+      box.remove();
+      if (timer) { clearInterval(timer); timer = null; }
+      return;
+    }
+    var mins = Math.floor(left / 60000);
+    d.textContent = Math.floor(mins / 1440);
+    h.textContent = Math.floor((mins % 1440) / 60);
+    m.textContent = mins % 60;
+    box.hidden = false;
+  }
+
+  tick();
+  if (timer === null && document.getElementById('heroCount')) {
+    timer = setInterval(tick, 15000);
+  }
 })();
 </script>
 </body>
