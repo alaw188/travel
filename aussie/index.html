@@ -16,6 +16,12 @@
   body{font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",Segoe UI,sans-serif;background:var(--sand);color:var(--ink);line-height:1.7;overflow-x:hidden}
   img{max-width:100%;display:block}
 
+  /* ---------- 出發倒數橫幅 ---------- */
+  :root{--cdh:38px}
+  .cdbar{position:sticky;top:0;z-index:70;height:var(--cdh);background:linear-gradient(90deg,var(--ocean-dark),var(--ocean),#2e8fae);color:#fff;overflow:hidden}
+  .cdbar__txt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:13.5px;font-weight:700;letter-spacing:.05em;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .cdbar__txt b{color:#ffd98a;font-size:15px}
+
   /* ---------- 滾動進度條 ---------- */
   .progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--coral),var(--gold),var(--leaf));z-index:99;transition:width .1s linear}
 
@@ -45,7 +51,7 @@
   .pt:nth-child(6){left:60%;top:74%;font-size:1.1rem;animation-delay:1.8s}
   @keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(4deg)}}
 
-  nav{position:sticky;top:0;z-index:50;background:rgba(253,246,236,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid #eadfcf;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+  nav{position:sticky;top:var(--cdh,0px);z-index:50;background:rgba(253,246,236,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid #eadfcf;box-shadow:0 2px 10px rgba(0,0,0,.05)}
   nav ul{display:flex;justify-content:center;gap:6px;list-style:none;padding:7px 12px;flex-wrap:wrap}
   nav a{text-decoration:none;color:var(--ocean-dark);font-weight:600;font-size:.95rem;padding:6px 14px;border-radius:999px;transition:background .2s,transform .2s}
   nav a:hover{background:var(--sand2);transform:translateY(-1px)}
@@ -201,6 +207,9 @@
     .day-head{padding:12px 14px}
     .place .pic{height:160px}
     .pt:nth-child(n+5){display:none}
+    :root{--cdh:34px}
+    .cdbar__txt{font-size:11.5px;letter-spacing:.03em}
+    .cdbar__txt b{font-size:13px}
   }
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -209,6 +218,11 @@
 </style>
 </head>
 <body>
+
+<!-- 出發倒數（置中）：目標時間只需改呢一處 data-depart；時間到／過期會成塊自動移除 -->
+<div class="cdbar" id="cdbar" data-depart="2026-12-11T19:05:00+08:00" hidden>
+  <span class="cdbar__txt">距離出發 <b id="cdD">0</b> 天 <b id="cdH">0</b> 小時 <b id="cdM">0</b> 分 <b id="cdS">0</b> 秒</span>
+</div>
 
 <div class="progress" id="progress"></div>
 
@@ -850,6 +864,34 @@ Object.keys(DAYS).forEach(renderDay);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
   totop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+/* ---------- 出發倒數橫幅：每秒更新；時間到或已過期 → 整塊從 DOM 移除（不留空位） ---------- */
+(function(){
+  const bar = document.getElementById('cdbar');
+  if (!bar) return;
+  const target = Date.parse(bar.getAttribute('data-depart'));
+  const dEl = document.getElementById('cdD'), hEl = document.getElementById('cdH'),
+        mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
+  let timer = null;
+  const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+  const tick = () => {
+    const left = target - Date.now();
+    if (isNaN(target) || left <= 0){
+      stop();
+      document.documentElement.style.setProperty('--cdh','0px'); /* 高度歸零：sticky nav 貼返頂，不留空位 */
+      bar.remove();
+      return;
+    }
+    const secs = Math.floor(left / 1000);
+    dEl.textContent = Math.floor(secs / 86400);
+    hEl.textContent = Math.floor((secs % 86400) / 3600);
+    mEl.textContent = Math.floor((secs % 3600) / 60);
+    sEl.textContent = String(secs % 60).padStart(2, '0');
+    bar.hidden = false;
+  };
+  tick();
+  if (document.getElementById('cdbar')) timer = setInterval(tick, 1000);
 })();
 </script>
 </body>
