@@ -146,9 +146,9 @@
   .place .pic{height:150px;background:linear-gradient(130deg,#dfe9e2,#c8d9dd);position:relative;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#8ba79a;overflow:hidden}
   .place .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
   .place:hover .pic img{transform:scale(1.08)}
-  .place .pic .cat{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700;color:var(--ocean-dark);transition:transform .2s}
+  .place .pic .cat{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700;color:var(--ocean-dark);transition:transform .2s}
   .place:hover .pic .cat{transform:scale(1.06)}
-  .place .pic .book{position:absolute;top:10px;right:10px;background:var(--coral);color:#fff;border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700;animation:pulseBook 2.2s ease-in-out infinite}
+  .place .pic .book{position:absolute;top:10px;right:10px;z-index:2;background:var(--coral);color:#fff;border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700;animation:pulseBook 2.2s ease-in-out infinite}
   @keyframes pulseBook{0%,100%{box-shadow:0 0 0 0 rgba(224,122,95,.55)}50%{box-shadow:0 0 0 8px rgba(224,122,95,0)}}
   .place .info{padding:11px 14px 13px;flex:1;display:flex;flex-direction:column}
   .place h4{font-size:1.08rem;color:var(--ocean-dark)}
