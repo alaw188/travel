@@ -820,10 +820,14 @@ window.__imgFallback = function(img){
   img.src = "img/" + img.dataset.slug + "." + exts[i];
 };
 
+/* 每日卡片排序：資訊 → 一日遊 → 酒莊 → 景點 → 海灘 → 古蹟 → 咖啡 → 餐廳 → 甜點 → 市場 → 購物 */
+const CAT_ORDER = ["info","tour","wine","scenic","beach","historic","cafe","food","dessert","market","shopping"];
+
 function renderDay(id){
   const host = document.getElementById(id);
   if(!host) return;
-  host.innerHTML = DAYS[id].map((p,i)=>{
+  const sorted = [...DAYS[id]].sort((a,b) => CAT_ORDER.indexOf(a.type) - CAT_ORDER.indexOf(b.type));
+  host.innerHTML = sorted.map((p,i)=>{
     const cat = CATS[p.type] || CATS.info;
     /* 本地圖片：img/<slug>.jpg（slug 產生規則同 _dl.ps1 一致）；載入失敗自動 fallback 顯示圖標 */
     let slug = p.n.replace(/[^A-Za-z0-9]+/g, "_");
