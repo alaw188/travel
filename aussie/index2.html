@@ -108,6 +108,7 @@
   .place .hours{font-size:.8rem;color:var(--muted);margin-top:8px}
   .place .cost{font-size:.83rem;color:#9a6b1f;background:var(--sand2);display:inline-block;padding:2px 12px;border-radius:999px;margin-top:10px;font-weight:700;align-self:flex-start}
   .place .cost.free{color:var(--leaf);background:#e7f2ec}
+  .place .dish{font-size:.83rem;color:#b34700;background:#fdf1e6;border:1px solid #f5d9c9;display:inline-block;padding:2px 12px;border-radius:999px;margin-top:10px;font-weight:700;align-self:flex-start}
   .place .hours a{color:var(--ocean);text-decoration:none;font-weight:600}
   .place .hours a:hover{text-decoration:underline}
 
@@ -693,6 +694,43 @@ const IMGS = {
   "Hector's Deli":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg/960px-20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg"
 };
 
+/* ---------- 餐廳／咖啡店招牌必試 ---------- */
+const DISHES = {
+  "Pho Thin Chatswood":"生牛牛肉粉（phở tái）、牛腩河",
+  "Cafe Margaret Double Bay":"招牌漢堡、木火燒烤菜式",
+  "Bondi Surf Seafoods":"炸魚薯條、海鮮拼盤",
+  "mimi's":"生蠔、海鮮拼盤",
+  "6HEAD Sydney":"乾式熟成牛排、海鮮拼盤、生蠔",
+  "Bar Totti's":"木火烤包、劍蝦、意式小食",
+  "The Gidley":"乾式熟成牛排、黑安格斯牛扒（有素食選擇）",
+  "BISTECCA":"Bistecca alla Fiorentina 佛羅倫斯 T 骨牛扒",
+  "Toby's Estate Coffee Roasters":"單一產區咖啡、Batch Brew",
+  "The Grounds of Alexandria":"精品咖啡、Brunch 全日早餐",
+  "The Grounds Coffee Factory":"咖啡、甜點",
+  "The Grumpy Barista":"咖啡、Batch Brew",
+  "Pizza Bros":"手工薄餅、意式小食",
+  "Seven Seeds Coffee Roasters":"咖啡、Brunch 全日早餐",
+  "Baguette Studios":"法包、酥皮牛角包",
+  "Lune Croissanterie":"世界級可頌（Croissant）",
+  "Hareruya Pantry CBD":"日式菠蘿包（Melon Pan）",
+  "Market Lane Coffee":"單一產區咖啡、Brunch",
+  "South Melbourne Market":"即開生蠔、手工薄餅",
+  "ST. ALi Coffee Roasters":"精品咖啡、Brunch 全日早餐",
+  "Proud Mary Coffee":"單一產區咖啡、全日早餐",
+  "Lulu & me Cheesecakes":"芝士蛋糕、日式芝士撻",
+  "Terror Twilight":"雞尾酒、小食拼盤",
+  "Bakemono Bakers":"日式菠蘿包、手工麵包",
+  "Patricia Coffee Brewers":"Picolo 濃縮咖啡、Batch Brew",
+  "Dukes Coffee Roasters":"精品咖啡、Batch Brew",
+  "Industry Beans":"單一產區咖啡、Brunch",
+  "Higher Ground":"全日早餐、咖啡、烤肉菜式",
+  "Pidapipó":"手工 Gelato 雪糕",
+  "Vacation Coffee":"單一產區咖啡",
+  "Grain Store":"Brunch 全日早餐、季節性菜式",
+  "The Hardware Société":"法蘭西多士、焗蛋",
+  "Hector's Deli":"煙燻肉三文治、Deli 拼盤"
+};
+
 /* ---------- 渲染 ---------- */
 /* 本地圖片載入失敗時，依次嘗試 jpg → jpeg → png → webp，全部失敗先顯示分類圖標 */
 window.__imgFallback = function(img){
@@ -726,6 +764,7 @@ function renderDay(id){
         <h4>${p.n}${p.zh ? `<span>${p.zh}</span>` : ""}</h4>
         <p>${p.d}</p>
         <div class="hours">🕒 ${p.hours || "Google Maps"} ${p.wiki ? `· <a href="${mapUrl}" target="_blank" rel="noopener">📍 地圖</a>` : `· <a href="${mapUrl}" target="_blank" rel="noopener">📍 地圖</a>`}</div>
+        ${DISHES[p.n] ? `<div class="dish">⭐ 招牌必試：${DISHES[p.n]}</div>` : ""}
         ${p.cost ? `<div class="cost${isFree ? " free" : ""}">💰 ${p.cost}</div>` : ""}
       </div>
     </article>`;
