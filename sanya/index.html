@@ -235,10 +235,6 @@ table{border-collapse:collapse;width:100%}
   border-radius:var(--r-sm);overflow:hidden;font-size:14.5px;
 }
 .kv__r{background:var(--card);padding:10px 13px}
-.kv--2col{grid-template-columns:1fr 1fr}
-.kv--3col{grid-template-columns:repeat(3,1fr)}
-.kv--2col .kv__r--wide,.kv--3col .kv__r--wide{grid-column:1/-1}
-@media (max-width:640px){.kv--2col,.kv--3col{grid-template-columns:1fr}}
 .kv__k{font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em;font-weight:700}
 .kv__v{font-weight:600;margin-top:4px;line-height:1.6}
 .kv__v small{display:block;font-weight:400;color:var(--ink-mute);font-size:12.5px;margin-top:4px;line-height:1.55}
@@ -600,6 +596,17 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 .top.is-on{opacity:1;pointer-events:auto}
 .top:hover{background:var(--sea-600)}
 
+/* ---------- 小工具 ---------- */
+.notep{font-size:14.5px;color:var(--ink-soft);line-height:1.66}
+.notep+.notep{margin-top:9px}
+.notep--sm{font-size:13.5px;line-height:1.6;margin-top:10px}
+.mt10{margin-top:10px}
+.mt20{margin-top:20px}
+.kpi__v--2l{font-size:19px;line-height:1.35}
+.seg--mt{margin:0 0 14px;width:max-content}
+.t--wide{min-width:520px}
+.foot__note{flex:1 1 320px}
+
 /* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
 .rv.is-in{opacity:1;transform:none}
@@ -687,14 +694,8 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   border-radius:16px;
 }
 .summ__frame img{display:block;width:100%;height:auto}
-.summ__caption{
-  text-align:center;font-size:13.5px;color:var(--ink-mute);
-  padding:12px 6px 0;line-height:1.6;
-  font-family:var(--font-serif,serif);letter-spacing:.02em;
-}
 @media (max-width:780px){
   .summ__frame{border-radius:0}
-  .summ__caption{font-size:12.5px;padding:10px 4px 0}
   .summ-intro{font-size:14.5px;padding:0 4px;margin-bottom:14px}
 }
 </style>
@@ -1286,7 +1287,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           <li><b>南田溫泉</b>（半日）：直線約 5 km、車程約 12–15 分鐘。雨天備案首選，記得帶泳衣；原訂的 SPA 已取消，這裡是唯一能泡湯的選項。</li>
           <li>與亞龍灣熱帶天堂二選一時，若偏愛海島就選蜈支洲島，偏愛雨林與山景就照原計畫。</li>
         </ul>
-        <p style="margin-top:10px">其餘景點的完整背景、亮點、歷史與票價，見 <b>03 重點景點與備選方案</b>。</p>
+        <p class="mt10">其餘景點的完整背景、亮點、歷史與票價，見 <b>03 重點景點與備選方案</b>。</p>
       </div>
     </div>
 
@@ -2190,7 +2191,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       <p class="sec__sub">主線以網約車為主、Day 3 租車自駕，另有三段步行。費用為 2 人一台車的整車價。</p>
     </div>
 
-    <div class="seg rv" id="optSeg" style="margin:0 0 14px;width:max-content">
+    <div class="seg seg--mt rv" id="optSeg">
       <button type="button" data-opt="show">顯示備選</button>
       <button type="button" data-opt="hide" class="is-on">隱藏備選</button>
     </div>
@@ -2461,7 +2462,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     <div class="kpis rv">
       <div class="kpi kpi--main">
         <div class="kpi__k">房型</div>
-        <div class="kpi__v" style="font-size:19px;line-height:1.35">1 Bedroom Suite<br>Ocean View</div>
+        <div class="kpi__v kpi__v--2l">1 Bedroom Suite<br>Ocean View</div>
         <div class="kpi__d">含 Lounge Access 行政酒廊</div>
       </div>
       <div class="kpi">
@@ -2471,7 +2472,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </div>
       <div class="kpi">
         <div class="kpi__k">景觀</div>
-        <div class="kpi__v" style="font-size:19px;line-height:1.35">海景<br>＋ 陽台</div>
+        <div class="kpi__v kpi__v--2l">海景<br>＋ 陽台</div>
         <div class="kpi__d">落地窗直面南海</div>
       </div>
       <div class="kpi kpi--gold">
@@ -2481,7 +2482,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       </div>
     </div>
 
-    <div class="grid-3" style="margin-top:20px">
+    <div class="grid-3 mt20">
       <figure class="shot rv">
         <img src="https://digital.ihg.com/is/image/ihg/intercontinental-sanya-8672437335-3x2" alt="套房陽台，藍色單椅與茶几，窗外望見海景與綠地" loading="lazy" decoding="async" onerror="this.closest('.shot').remove()">
         <figcaption class="shot__cap">陽台 — 單椅區與海景<span>照片：IHG 官方圖庫</span></figcaption>
@@ -2611,21 +2612,21 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
           </tbody>
         </table>
       </div>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:10px">停車收費為 <b>2025–2026 年公開資料整理</b>（預約平台、景區官方與政府公告），現場以告示為準。</p>
+      <p class="notep notep--sm">停車收費為 <b>2025–2026 年公開資料整理</b>（預約平台、景區官方與政府公告），現場以告示為準。</p>
     </div>
 
-    <div class="grid-2" style="margin-top:20px">
+    <div class="grid-2 mt20">
       <div class="card panel rv">
         <h3 class="panel__t"><i>⚠</i>海南自駕的法定限制</h3>
-        <p style="font-size:14.5px;color:var(--ink-soft)"><b>外地號牌小客車（含新能源車）每年在海南省行政區域內行駛累計不得超過 120 天。</b>超過後每日扣 3 分並罰款 ¥200，車輛亦不得繼續上路行駛。天數由交通監控設備自動累計，<b>車輛停放不佔用道路行駛時不計入當年天數</b>。</p>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:9px">海南<b>並未</b>實施針對外地車的限行，因此租用車輛可正常進入與行駛。租車時務必帶齊<b>行駛證、駕照與有效保險</b>，並在取車前確認車況與胎況。早年設有的過渡期備案制度已於 <b>2020 年 12 月 31 日</b>截止，現行以天數累計為準。</p>
+        <p class="notep"><b>外地號牌小客車（含新能源車）每年在海南省行政區域內行駛累計不得超過 120 天。</b>超過後每日扣 3 分並罰款 ¥200，車輛亦不得繼續上路行駛。天數由交通監控設備自動累計，<b>車輛停放不佔用道路行駛時不計入當年天數</b>。</p>
+        <p class="notep">海南<b>並未</b>實施針對外地車的限行，因此租用車輛可正常進入與行駛。租車時務必帶齊<b>行駛證、駕照與有效保險</b>，並在取車前確認車況與胎況。早年設有的過渡期備案制度已於 <b>2020 年 12 月 31 日</b>截止，現行以天數累計為準。</p>
       </div>
 
       <div class="card panel rv">
         <h3 class="panel__t gold"><i>⚡</i>充電與用車習慣</h3>
-        <p style="font-size:14.5px;color:var(--ink-soft)">三亞高溫多雨，<b>充電樁供應集中於市區與大型停車場</b>，亞龍灣與後海村一帶公開樁位較少。行程中<b>充電最穩妥的兩個補給點</b>是亞特蘭蒂斯（充電期間停車免費）與<b>cdf 免稅城（V2G 示範站）</b>；天涯海角景區亦設有大功率充電站。</p>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:9px">多數充電樁<b>充電免費停車 2 小時</b>；<b>充電完成後應於 20 分鐘內挪車</b>，違者按場地方要求收取約 ¥10／小時佔位費。本行程多為短程移動（多數單段 4–20 公里），補電需求不高，但 Day 3 往天涯海角單程 50 公里，建議出發前充至滿電。</p>
-        <p style="font-size:14.5px;color:var(--ink-soft);margin-top:9px">市區與景區周邊限速變化很快，可能由 80 km/h 驟降至 40 km/h，<b>開啟導航語音提示</b>；斑馬線前必須停車禮讓行人，否則罰款 ¥200 起。亞龍灣熱帶天堂園內為全程盤山公路，彎道多、坡度大，駕駛留意會車。</p>
+        <p class="notep">三亞高溫多雨，<b>充電樁供應集中於市區與大型停車場</b>，亞龍灣與後海村一帶公開樁位較少。行程中<b>充電最穩妥的兩個補給點</b>是亞特蘭蒂斯（充電期間停車免費）與<b>cdf 免稅城（V2G 示範站）</b>；天涯海角景區亦設有大功率充電站。</p>
+        <p class="notep">多數充電樁<b>充電免費停車 2 小時</b>；<b>充電完成後應於 20 分鐘內挪車</b>，違者按場地方要求收取約 ¥10／小時佔位費。本行程多為短程移動（多數單段 4–20 公里），補電需求不高，但 Day 3 往天涯海角單程 50 公里，建議出發前充至滿電。</p>
+        <p class="notep">市區與景區周邊限速變化很快，可能由 80 km/h 驟降至 40 km/h，<b>開啟導航語音提示</b>；斑馬線前必須停車禮讓行人，否則罰款 ¥200 起。亞龍灣熱帶天堂園內為全程盤山公路，彎道多、坡度大，駕駛留意會車。</p>
       </div>
     </div>
 
@@ -2667,7 +2668,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     <div class="grid-2">
       <div class="tbox rv">
         <div class="tscroll">
-          <table class="t" style="min-width:520px">
+          <table class="t t--wide">
             <thead>
               <tr>
                 <th>項目</th>
@@ -2786,7 +2787,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       <b>三亞海棠灣・三日慢活行程</b><br>
       2026 年 10 月 23 日 — 10 月 25 日　·　2 位成人　·　幣別：人民幣（¥）
     </div>
-    <div style="flex:1 1 320px">
+    <div class="foot__note">
       所有票價、房價、車資與營業時間均為依公開資料整理的研究估算，非即時報價，
       出發前請再次向酒店、景區與航空公司確認。
       <a href="#overview">回到頂部</a>
@@ -2801,6 +2802,24 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
 (function () {
   'use strict';
 
+  /* ---------- 共用：debounce + 地圖尺寸重算（避免 resize 事件洪洪觸發） ---------- */
+  var map = null;
+  var mapSizeTimer = null;
+  function invalidateMapSoon(delay) {
+    clearTimeout(mapSizeTimer);
+    mapSizeTimer = setTimeout(function () {
+      if (map) { map.invalidateSize(); }
+    }, delay || 120);
+  }
+  function debounce(fn, wait) {
+    var t = null;
+    return function () {
+      var args = arguments;
+      clearTimeout(t);
+      t = setTimeout(function () { fn.apply(null, args); }, wait);
+    };
+  }
+
   /* ---------- day tabs ---------- */
   var tabs = document.querySelectorAll('.daytabs button');
   var days = document.querySelectorAll('.day');
@@ -2809,7 +2828,7 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
       var d = btn.dataset.day;
       tabs.forEach(function (b) { b.classList.toggle('is-on', b === btn); });
       days.forEach(function (p) { p.classList.toggle('is-on', p.dataset.day === d); });
-      if (map) { setTimeout(function () { map.invalidateSize(); }, 60); }
+      invalidateMapSoon(60);
     });
   });
 
@@ -2818,31 +2837,34 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   var TOTALS = { full: 12345, ground: 5145 };
   var LABELS = { full: '含機票＋住宿估算合計', ground: '地面消費合計（不含機票與住宿）' };
   var MAX = { full: 4000, ground: 2610 };
+  var bcRows = [].slice.call(document.querySelectorAll('.bcrow'));
+  var bcTotal = document.getElementById('bcTotal');
+  var bcLabel = document.getElementById('bcLabel');
 
   function paint(mode) {
     var max = MAX[mode];
-    document.querySelectorAll('.bcrow').forEach(function (row) {
+    bcRows.forEach(function (row) {
       var fill = row.querySelector('.bcrow__fill');
       var val = row.querySelector('.bcrow__v');
       var v = parseFloat(fill.dataset[mode]);
       if (isNaN(v) || v < 0) {
         row.classList.add('is-off');
         fill.style.width = '0%';
-        val.textContent = val.dataset[mode];
       } else {
         row.classList.remove('is-off');
         fill.style.width = Math.max(2, (v / max) * 100) + '%';
-        val.textContent = val.dataset[mode];
       }
+      val.textContent = val.dataset[mode];
     });
-    document.getElementById('bcTotal').textContent = '¥' + TOTALS[mode].toLocaleString('en-US');
-    document.getElementById('bcLabel').textContent = LABELS[mode];
+    bcTotal.textContent = '¥' + TOTALS[mode].toLocaleString('en-US');
+    bcLabel.textContent = LABELS[mode];
   }
 
   if (seg) {
-    seg.querySelectorAll('button').forEach(function (b) {
+    var segBtns = [].slice.call(seg.querySelectorAll('button'));
+    segBtns.forEach(function (b) {
       b.addEventListener('click', function () {
-        seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x === b); });
+        segBtns.forEach(function (x) { x.classList.toggle('is-on', x === b); });
         paint(b.dataset.mode);
       });
     });
@@ -2855,12 +2877,13 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     var optRows = tpTable ? [].slice.call(tpTable.querySelectorAll('tbody tr')).filter(function (tr) {
       return tr.querySelector('.tagopt');
     }) : [];
+    var optBtns = [].slice.call(optSeg.querySelectorAll('button'));
     function setOpt(mode) {
       var show = mode === 'show';
-      optSeg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x.dataset.opt === mode); });
+      optBtns.forEach(function (x) { x.classList.toggle('is-on', x.dataset.opt === mode); });
       optRows.forEach(function (tr) { tr.style.display = show ? '' : 'none'; });
     }
-    optSeg.querySelectorAll('button').forEach(function (b) {
+    optBtns.forEach(function (b) {
       b.addEventListener('click', function () { setOpt(b.dataset.opt); });
     });
     setOpt('hide');
@@ -2893,14 +2916,23 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     revealables.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* ---------- active nav ---------- */
+  /* ---------- active nav（段落位置快取；依實際位置取最近者，不依賴連結順序） ---------- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
-  var sections = navLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  var navMap = navLinks.map(function (a) {
+    return { link: a, sec: document.querySelector(a.getAttribute('href')), top: Infinity };
+  });
+  function measureSections() {
+    navMap.forEach(function (m) { m.top = m.sec ? m.sec.offsetTop : Infinity; });
+  }
   function syncNav() {
     var pos = window.scrollY + 110;
-    var idx = 0;
-    sections.forEach(function (s, i) { if (s && s.offsetTop <= pos) { idx = i; } });
-    navLinks.forEach(function (a, i) { a.classList.toggle('is-on', i === idx); });
+    var best = null;
+    navMap.forEach(function (m) {
+      if (m.top <= pos && (!best || m.top >= best.top)) { best = m; }
+    });
+    navLinks.forEach(function (a) { a.classList.toggle('is-on', best !== null && a === best.link); });
+    /* 捲到最頂（尚未進入任何段落）時，維持第一個連結高亮 */
+    if (best === null) { navLinks[0].classList.add('is-on'); }
   }
 
   /* ---------- back to top ---------- */
@@ -2914,12 +2946,16 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     toTop.classList.toggle('is-on', window.scrollY > 620);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', debounce(function () {
+    measureSections();
+    syncNav();
+    invalidateMapSoon();
+  }, 150));
+  measureSections();
   onScroll();
   paint('full');
 
   /* ---------- map ---------- */
-  var map = null;
-
   /* ---- WGS-84 → GCJ-02（火星坐標）----
      底圖全程使用高德圖磚，高德採用 GCJ-02；而圖資來源為 WGS-84。
      兩者在三亞相差約 450 公尺，因此座標必須先換算，否則標記會明顯偏移。 */
@@ -3203,41 +3239,46 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
     });
   }
 
-  document.querySelectorAll('.mapbar button[data-base]').forEach(function (b) {
+  /* ---------- 地圖工具列：按鈕清單只在初始化時查詢一次 ---------- */
+  var baseBtns = [].slice.call(document.querySelectorAll('.mapbar button[data-base]'));
+  var layerBtns = [].slice.call(document.querySelectorAll('.mapbar button[data-layer]'));
+  var spotsBtns = [].slice.call(document.querySelectorAll('.mapbar button[data-spots]'));
+  var fitBtns = [].slice.call(document.querySelectorAll('.mapbar button[data-fit]'));
+
+  function activate(list, el) {
+    list.forEach(function (x) { x.classList.toggle('is-on', x === el); });
+  }
+
+  /* 依 id 取得 GCJ 座標（找不到就略過） */
+  function ptsOf(ids) {
+    var pts = [];
+    ids.forEach(function (id) { var p = byId(id); if (p) { pts.push(p.gcj); } });
+    return pts;
+  }
+  function fitPts(pts, maxZoom) {
+    if (pts.length) { map.fitBounds(L.latLngBounds(pts), { padding: [46, 46], maxZoom: maxZoom }); }
+  }
+
+  baseBtns.forEach(function (b) {
     b.addEventListener('click', function () {
-      document.querySelectorAll('.mapbar button[data-base]').forEach(function (x) {
-        x.classList.toggle('is-on', x === b);
-      });
+      activate(baseBtns, b);
       setBase(b.dataset.base);
     });
   });
 
-  document.querySelectorAll('.mapbar button[data-layer]').forEach(function (b) {
+  layerBtns.forEach(function (b) {
     b.addEventListener('click', function () {
-      document.querySelectorAll('.mapbar button[data-layer]').forEach(function (x) {
-        x.classList.toggle('is-on', x === b);
-      });
-      drawRoutes(b.dataset.layer);
-      if (b.dataset.layer === 'all') {
+      activate(layerBtns, b);
+      var layer = b.dataset.layer;
+      drawRoutes(layer);
+      if (layer === 'all') {
         /* 全部動線：視圖放大到涵蓋 Day 1–3 全部主線地點 */
-        map.fitBounds(L.latLngBounds(POIS.map(function (p) { return p.gcj; })), { padding: [46, 46], maxZoom: 12 });
-      } else if (b.dataset.layer === 'day2' || b.dataset.layer === 'day3') {
+        fitPts(POIS.map(function (p) { return p.gcj; }), 12);
+      } else if (layer !== 'none') {
         /* 單日動線：視圖涵蓋該日所有端點 */
-        var pts = [];
-        (ROUTES[b.dataset.layer] || []).forEach(function (r) {
-          var a = byId(r.from), b2 = byId(r.to);
-          if (a) { pts.push(a.gcj); }
-          if (b2) { pts.push(b2.gcj); }
-        });
-        if (pts.length) { map.fitBounds(L.latLngBounds(pts), { padding: [46, 46], maxZoom: 12 }); }
-      } else if (b.dataset.layer === 'day1') {
-        var pts1 = [];
-        (ROUTES.day1 || []).forEach(function (r) {
-          var a = byId(r.from), b1 = byId(r.to);
-          if (a) { pts1.push(a.gcj); }
-          if (b1) { pts1.push(b1.gcj); }
-        });
-        if (pts1.length) { map.fitBounds(L.latLngBounds(pts1), { padding: [46, 46], maxZoom: 12 }); }
+        var ids = [];
+        (ROUTES[layer] || []).forEach(function (r) { ids.push(r.from, r.to); });
+        fitPts(ptsOf(ids), 12);
       }
     });
   });
@@ -3250,30 +3291,26 @@ table.t tr.sum td:first-child{color:var(--sea-700)}
   function fitResort() {
     var pts = SPOTS_ON
       ? POIS.map(function (p) { return p.gcj; }).concat(SCENIC.map(function (s) { return s.gcj; }))
-      : POIS.filter(function (p) { return FIT_IDS.indexOf(p.id) >= 0; }).map(function (p) { return p.gcj; });
-    map.fitBounds(L.latLngBounds(pts), { padding: [46, 46], maxZoom: 14 });
+      : ptsOf(FIT_IDS);
+    fitPts(pts, 14);
   }
 
-  document.querySelectorAll('.mapbar button[data-spots]').forEach(function (b) {
+  spotsBtns.forEach(function (b) {
     b.addEventListener('click', function () {
       SPOTS_ON = !SPOTS_ON;
-      b.classList.toggle('is-on', SPOTS_ON);
+      activate(spotsBtns, b);
       if (SPOTS_ON) { spotLayer.addTo(map); } else { map.removeLayer(spotLayer); }
       fitResort();
     });
   });
 
-  document.querySelectorAll('.mapbar button[data-fit]').forEach(function (b) {
+  fitBtns.forEach(function (b) {
     b.addEventListener('click', function () { fitResort(); });
   });
 
   wirePoiCards();
   drawRoutes('day1');
   fitResort();
-
-  window.addEventListener('resize', function () {
-    if (map) { setTimeout(function () { map.invalidateSize(); }, 120); }
-  });
 })();
 
 /* ---------- nav ribbon: 起飛倒數（含秒；時間到自動消失） ---------- */
