@@ -21,7 +21,6 @@
   .hero::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:60px;background:var(--sand);clip-path:polygon(0 100%,100% 100%,100% 55%,75% 80%,50% 45%,25% 80%,0 60%)}
   .hero .kicker{letter-spacing:.35em;font-size:.85rem;opacity:.85;text-transform:uppercase}
   .hero h1{font-size:clamp(2rem,5.5vw,3.4rem);margin:.5rem 0 .3rem;font-weight:800}
-  .hero .sub{font-size:clamp(1rem,2.4vw,1.3rem);opacity:.92}
   .hero .dates{display:inline-block;margin-top:14px;padding:8px 24px;border:1.5px solid rgba(255,255,255,.55);border-radius:999px;font-size:1.02rem;letter-spacing:.08em}
 
   nav{position:sticky;top:0;z-index:50;background:rgba(253,246,236,.96);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid #eadfcf;box-shadow:0 2px 10px rgba(0,0,0,.05)}
@@ -37,7 +36,6 @@
 
   /* ---------- Summary cards ---------- */
   .grid{display:grid;gap:13px}
-  .grid.c4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
   .grid.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
   @media(max-width:480px){
     .grid.c2 .stat{padding:12px 12px;gap:10px}
@@ -54,12 +52,8 @@
 
   /* ---------- Flights ---------- */
   .flight{background:var(--card);border-radius:16px;padding:18px 22px;box-shadow:0 3px 14px rgba(43,43,43,.07);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-  .flight .route{font-weight:800;font-size:1.15rem;color:var(--ocean-dark)}
-  .flight .route .arrow{color:var(--coral);margin:0 8px}
-  .flight .meta{color:var(--muted);font-size:.92rem}
   .tag{display:inline-block;background:var(--sand2);color:#8a6d1f;border:1px solid #e7d9b0;border-radius:999px;font-size:.8rem;padding:2px 12px;margin-left:8px;white-space:nowrap}
   .tag.blue{background:#e4f1f6;color:var(--ocean-dark);border-color:#bcd9e4}
-  .tag.green{background:#e7f2ec;color:var(--leaf);border-color:#c2ddd0}
   .ftable{width:100%;border-collapse:collapse;font-size:.95rem;min-width:640px}
   .ftable td{padding:10px 0;border-top:1px dashed #e8e2d4;vertical-align:top;white-space:nowrap}
   .ftable tr:first-child td{border-top:0}
@@ -98,7 +92,7 @@
   .place{background:#fff;border:1px solid #eee5d6;border-radius:14px;overflow:hidden;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
   .place:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(43,43,43,.12)}
   .place .pic{height:150px;background:linear-gradient(130deg,#dfe9e2,#c8d9dd);position:relative;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#8ba79a;overflow:hidden}
-  .place .pic img{width:100%;height:100%;object-fit:cover}
+  .place .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .place .pic .cat{position:absolute;top:10px;left:10px;z-index:2;background:rgba(255,255,255,.92);border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700;color:var(--ocean-dark)}
   .place .pic .book{position:absolute;top:10px;right:10px;z-index:2;background:var(--coral);color:#fff;border-radius:999px;font-size:.75rem;padding:3px 12px;font-weight:700}
   .place .info{padding:11px 14px 13px;flex:1;display:flex;flex-direction:column}
@@ -582,7 +576,6 @@ const DAYS = {
   ]
 };
 
-
 /* ---------- 費用參考（A$ 為澳洲元；免費則標示綠色） ---------- */
 const FREE = "免費";
 const COSTS = {
@@ -618,13 +611,13 @@ const COSTS = {
   "Seven Seeds Coffee Roasters":"約 A$20–30／位",
   "Baguette Studios":"約 A$10–15／位",
   "Queen Victoria Market":"免費入場 · 購物消費自便",
-  "Lune Croissanterie Melbourne CBD on Russell":"約 A$8–15／位",
+  "Lune Croissanterie":"約 A$8–15／位",
   "Hareruya Pantry CBD":"約 A$10–20／位",
   "Chinatown Melbourne":FREE,
   "Bourke Street Mall":FREE,
-  "Market Lane Coffee - South Melbourne":"約 A$6–10／杯",
+  "Market Lane Coffee":"約 A$6–10／杯",
   "South Melbourne Market":"免費入場 · 消費自便",
-  "ST. ALi Coffee Roasters - South Melbourne":"約 A$20–30／位",
+  "ST. ALi Coffee Roasters":"約 A$20–30／位",
   "Brighton Beach Bathing Boxes":FREE,
   "Twelve Apostles":FREE,
   "Proud Mary Coffee":"約 A$20–30／位",
@@ -639,8 +632,8 @@ const COSTS = {
   "Dukes Coffee Roasters":"約 A$5–8／杯",
   "Industry Beans":"約 A$20–30／位",
   "Higher Ground":"約 A$35–50／位",
-  "Pidapipó CBD":"約 A$6–10／杯",
-  "Vacation Coffee CBD":"約 A$5–8／杯",
+  "Pidapipó":"約 A$6–10／杯",
+  "Vacation Coffee":"約 A$5–8／杯",
   "Grain Store":"約 A$30–45／位",
   "The Hardware Société":"約 A$25–35／位",
   "Hector's Deli":"約 A$15–20／位",
@@ -649,50 +642,6 @@ const COSTS = {
   "The Block Arcade":FREE,
   "Federation Square":FREE,
   "Myer Melbourne":FREE
-};
-
-/* ---------- 圖片來源對照表（僅作紀錄）：圖片已下載到本地 img/ 資料夾，網站用本地檔 ---------- */
-const IMGS = {
-  "Pho Thin Chatswood":"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/3_mushroom_curry_noodle_soup_with_ph%E1%BB%9F_-_Pho_2025-11-12.jpg/960px-3_mushroom_curry_noodle_soup_with_ph%E1%BB%9F_-_Pho_2025-11-12.jpg",
-  "Cafe Margaret Double Bay":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Caravan%2C_Clerkenwell%2C_London_%285624758902%29.jpg/960px-Caravan%2C_Clerkenwell%2C_London_%285624758902%29.jpg",
-  "mimi's":"https://upload.wikimedia.org/wikipedia/commons/e/ea/C%C3%B3ctel_Negroni_Campari.jpg",
-  "Bondi Surf Seafoods":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Fish-and-chips-in-a-paper-bag.jpg/960px-Fish-and-chips-in-a-paper-bag.jpg",
-  "6HEAD Sydney":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Grilled_steak_served_on_a_plate_with_avocado_and_sauce.jpg/960px-Grilled_steak_served_on_a_plate_with_avocado_and_sauce.jpg",
-  "Paramount Coffee Project":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2019_02_Awesome_Coffee_Shop_in_Korat.jpg/960px-2019_02_Awesome_Coffee_Shop_in_Korat.jpg",
-  "Single O Surry Hills":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "Beta Coffee":"https://commons.wikimedia.org/wiki/File:Devonshire_Street_Surry_Hills_001.jpg",
-  "Queen Victoria Market":"https://commons.wikimedia.org/wiki/File:Queen_Victoria_Market,_Melbourne_shed_B.jpg",
-  "Bar Totti's":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Antipasto_01_%28RaBoe%29.jpg/960px-Antipasto_01_%28RaBoe%29.jpg",
-  "The Gidley":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Grilled_steak_served_on_a_plate_with_avocado_and_sauce.jpg/960px-Grilled_steak_served_on_a_plate_with_avocado_and_sauce.jpg",
-  "BISTECCA":"https://upload.wikimedia.org/wikipedia/commons/e/ea/C%C3%B3ctel_Negroni_Campari.jpg",
-  "Toby's Estate Coffee Roasters":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "The Grounds of Alexandria":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2019_02_Awesome_Coffee_Shop_in_Korat.jpg/960px-2019_02_Awesome_Coffee_Shop_in_Korat.jpg",
-  "The Grounds Coffee Factory":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "The Grumpy Barista":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2019_02_Awesome_Coffee_Shop_in_Korat.jpg/960px-2019_02_Awesome_Coffee_Shop_in_Korat.jpg",
-  "Pizza Bros":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/960px-Eq_it-na_pizza-margherita_sep2005_sml.jpg",
-  "Baguette Studios":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg/960px-20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg",
-  "Lune Croissanterie":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Croissant%2C_whole.jpg/960px-Croissant%2C_whole.jpg",
-  "South Melbourne Market":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Shops_inside_South_Melbourne_Market.jpg/960px-Shops_inside_South_Melbourne_Market.jpg",
-  "SYD → MEL 內陸機":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Qantas_%28VH-ZNN%29_Boeing_787-9_Dreamliner_on_final_at_Melbourne_Airport_%281%29.jpg/960px-Qantas_%28VH-ZNN%29_Boeing_787-9_Dreamliner_on_final_at_Melbourne_Airport_%281%29.jpg",
-  "Hareruya Pantry CBD":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Melon_bread_%28with_chocolate_chips%29_2023-11-05.jpg/960px-Melon_bread_%28with_chocolate_chips%29_2023-11-05.jpg",
-  "Market Lane Coffee":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "ST. ALi Coffee Roasters":"https://commons.wikimedia.org/wiki/File:Magic_(coffee)_at_St_Ali_South_Melbourne.jpg",
-  "Proud Mary Coffee":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "Lulu & me Cheesecakes":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Cheesecake_with_slice_cut_out.jpg/960px-Cheesecake_with_slice_cut_out.jpg",
-  "Phillip Island · Penguin Parade":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Eudyptula_minor_Bruny_1.jpg/960px-Eudyptula_minor_Bruny_1.jpg",
-  "Terror Twilight":"https://www.terrortwilight.com.au/（官網相片 TERRORCATERING-180621-WR-106.jpg）",
-  "雅拉河谷史詩葡萄酒導賞團":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Aerial_View_-_Landschaft_Markgr%C3%A4flerland1.jpg/960px-Aerial_View_-_Landschaft_Markgr%C3%A4flerland1.jpg",
-  "雅拉河谷酒莊導覽一日遊":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Aerial_View_-_Landschaft_Markgr%C3%A4flerland1.jpg/960px-Aerial_View_-_Landschaft_Markgr%C3%A4flerland1.jpg",
-  "Bakemono Bakers":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Melon_bread_%28with_chocolate_chips%29_2023-11-05.jpg/960px-Melon_bread_%28with_chocolate_chips%29_2023-11-05.jpg",
-  "Patricia Coffee Brewers":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "Dukes Coffee Roasters":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/2019_02_Awesome_Coffee_Shop_in_Korat.jpg/960px-2019_02_Awesome_Coffee_Shop_in_Korat.jpg",
-  "Industry Beans":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "Higher Ground":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Caravan%2C_Clerkenwell%2C_London_%285624758902%29.jpg/960px-Caravan%2C_Clerkenwell%2C_London_%285624758902%29.jpg",
-  "Pidapipó":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Gelato_Cup_Ice-cream_Cake_Cow.jpg/960px-Gelato_Cup_Ice-cream_Cake_Cow.jpg",
-  "Vacation Coffee":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Flat_White_1.jpg/960px-Flat_White_1.jpg",
-  "Grain Store":"https://www.grainstore.com.au/（官網相片 grainstore+62.jpg）",
-  "The Hardware Société":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Burger%2C_fries%2C_and_eggs_benedict_-_La_Tessa.jpg/960px-Burger%2C_fries%2C_and_eggs_benedict_-_La_Tessa.jpg",
-  "Hector's Deli":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg/960px-20240817_Paris_Baguette_at_360_Shopping_Plaza_%28Greenland_Metropolis%29.jpg"
 };
 
 /* ---------- 餐廳／咖啡店招牌必試 ---------- */
@@ -754,23 +703,23 @@ function renderDay(id){
     /* 本地圖片：img/<slug>.jpg（slug 產生規則同 _dl.ps1 一致）；載入失敗自動 fallback 顯示圖標 */
     let slug = p.n.replace(/[^A-Za-z0-9]+/g, "_");
     if (!/[A-Za-z0-9]/.test(p.n)) slug = id + "_" + i;
-    p.cost = COSTS[p.n] || p.cost;
-    const isFree = p.cost === FREE || (p.cost && p.cost.startsWith(FREE));
+    const cost = COSTS[p.n];
+    const isFree = cost === FREE || (cost && cost.startsWith(FREE));
     const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.n + (p.wiki && p.wiki.includes(",") ? "" : (p.zh ? " " + p.zh.split("/")[0] : "")) + " Australia");
     return `
     <article class="place">
-      <div class="pic" id="pic-${id}-${i}">
+      <div class="pic">
         <span class="cat">${cat.label}</span>
         ${p.book ? '<span class="book">📌 需訂位／預約</span>' : ''}
         <span class="ph">${cat.icon}</span>
-        <img src="img/${slug}.jpg" data-slug="${slug}" data-ei="0" alt="${p.n}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="window.__imgFallback(this)">
+        <img src="img/${slug}.jpg" data-slug="${slug}" data-ei="0" alt="${p.n}" loading="lazy" onerror="window.__imgFallback(this)">
       </div>
       <div class="info">
         <h4>${p.n}${p.zh ? `<span>${p.zh}</span>` : ""}</h4>
         <p>${p.d}</p>
-        <div class="hours">🕒 ${p.hours || "Google Maps"} ${p.wiki ? `· <a href="${mapUrl}" target="_blank" rel="noopener">📍 地圖</a>` : `· <a href="${mapUrl}" target="_blank" rel="noopener">📍 地圖</a>`}</div>
+        <div class="hours">🕒 ${p.hours || "Google Maps"} · <a href="${mapUrl}" target="_blank" rel="noopener">📍 地圖</a></div>
         ${DISHES[p.n] ? `<div class="dish">⭐ 招牌必試：${DISHES[p.n]}</div>` : ""}
-        ${p.cost ? `<div class="cost${isFree ? " free" : ""}">💰 ${p.cost}</div>` : ""}
+        ${cost ? `<div class="cost${isFree ? " free" : ""}">💰 ${cost}</div>` : ""}
       </div>
     </article>`;
   }).join("");
