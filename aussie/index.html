@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a3d54">
 <title>2026 澳洲 14 天之旅 — 悉尼 + 墨爾本</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   :root{
     --ocean:#0e5a7a; --ocean-dark:#0a3d54; --sand:#fdf6ec; --sand2:#f7ead7;
@@ -208,6 +209,131 @@
     *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
     .reveal{opacity:1;transform:none}
   }
+
+/* =========================================================
+   V2（地圖互動版）專用樣式
+   ========================================================= */
+  body.v2 .v1-part{display:none}
+  #v2{display:none}
+  body.v2 #v2{display:block}
+
+  /* 版本切換 */
+  .vsw{position:fixed;right:14px;top:calc(var(--cdh) + 10px);z-index:80;display:flex;gap:2px;background:rgba(255,255,255,.94);border:1px solid #e0d3bd;border-radius:999px;padding:3px;box-shadow:0 6px 18px rgba(43,43,43,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .vsw__b{border:0;background:none;font-family:inherit;font-size:.78rem;font-weight:800;color:#7a7267;padding:5px 13px;border-radius:999px;cursor:pointer;transition:all .18s;white-space:nowrap}
+  .vsw__b:hover{color:var(--ocean-dark)}
+  .vsw__b.is-on{background:var(--ocean);color:#fff;box-shadow:0 3px 9px rgba(14,90,122,.32)}
+
+  /* 工具列 */
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .pills{display:flex;flex-wrap:wrap;gap:6px}
+  .pill{font-size:.82rem;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid var(--line,#eadfcf);background:#fff;color:#5b5347;cursor:pointer;transition:all .18s;white-space:nowrap}
+  .pill:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(43,43,43,.1)}
+  .pill.is-on{background:var(--ocean);color:#fff;border-color:transparent;box-shadow:0 5px 14px rgba(14,90,122,.28)}
+  .tool-btn{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;padding:7px 16px;border-radius:999px;border:1px solid #d8cbb4;background:linear-gradient(120deg,#fff,#fdf6ec);color:#7a4a2b;cursor:pointer;transition:all .18s;box-shadow:0 3px 10px rgba(43,43,43,.07)}
+  .tool-btn:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(43,43,43,.14)}
+  .tool-btn.is-on{background:linear-gradient(120deg,#b34700,#d98324);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(179,71,0,.35)}
+
+  /* 圖例（兩個框） */
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+  .lgbox{background:rgba(255,255,255,.72);border:1px solid #eadfcf;border-radius:12px;padding:8px 12px}
+  .lgbox__t{font-size:.68rem;letter-spacing:.12em;color:#6b6459;font-weight:700;margin-bottom:5px}
+  .lgbox__b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+  .lg-item{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;color:#5b5347}
+  .lg-item i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;display:inline-block}
+  .lg-item.dash i{background:none;border:2px dashed #d98324;width:10px;height:7px;border-radius:2px}
+
+  /* 版面 */
+  .layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:16px;align-items:start}
+  .mapcol{position:sticky;top:calc(var(--cdh) + 54px);display:grid;gap:12px}
+  #melbourne-map{margin-top:10px;padding-top:24px;border-top:1px dashed #e5d7bd}
+
+  /* 地圖 */
+  .mapcard{background:#fff;border-radius:18px;box-shadow:0 4px 18px rgba(43,43,43,.09);border:1px solid #f0e6d5;overflow:hidden;position:relative}
+  .mapbox{height:clamp(300px,42vh,440px);background:#eaf0e8;touch-action:manipulation;z-index:0}
+  .leaflet-container{font-family:inherit;background:#eaf0e8}
+  .leaflet-control-attribution{font-size:9.5px!important;background:rgba(255,255,255,.75)!important}
+  .mpin{position:relative;display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--mc);color:#fff;font-weight:800;font-size:12px;border:2px solid #123038;box-shadow:0 2px 6px rgba(0,0,0,.28);transition:all .18s;cursor:pointer;font-variant-numeric:tabular-nums}
+  .mpin:hover{transform:scale(1.15)}
+  .mpin.is-on{transform:scale(1.32);box-shadow:0 0 0 5px rgba(14,90,122,.25),0 4px 12px rgba(0,0,0,.35);z-index:5}
+  .mpin.is-off{opacity:.42;filter:grayscale(.85)}
+  .mpin .cnt{position:absolute;top:-8px;right:-8px;min-width:16px;height:16px;border-radius:99px;background:#fff;color:var(--mc);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--mc);padding:0 2px}
+  .maphint{position:absolute;right:8px;top:8px;z-index:400;font-size:.66rem;color:#5b5347;background:rgba(255,255,255,.88);border:1px solid #e5d7bd;padding:2px 9px;border-radius:99px;white-space:nowrap;pointer-events:none}
+  .mascot{position:absolute;left:10px;bottom:30px;max-width:78%;display:flex;align-items:flex-end;gap:7px;pointer-events:none;z-index:400}
+  .mascot[hidden]{display:none!important}
+  .mascot .bubble{background:rgba(255,255,255,.96);border:1.5px solid #e5d7bd;border-radius:14px 14px 14px 4px;padding:6px 11px;font-size:.78rem;color:#4a4238;box-shadow:0 6px 16px rgba(43,43,43,.12);line-height:1.45}
+  .mascot .face{font-size:1.35rem;line-height:1}
+
+  /* 詳情條 */
+  .detail{background:#fff;border-radius:16px;border:1px solid #f0e6d5;box-shadow:0 4px 16px rgba(43,43,43,.08);padding:13px 15px;min-height:96px}
+  @media(min-width:981px){ .detail{max-height:56vh;overflow-y:auto} }
+  .dt-empty{color:#6b6459;font-size:.88rem;display:flex;align-items:center;gap:8px;min-height:66px}
+  .dt-empty[hidden]{display:none!important}
+  .dt-on{display:flex;gap:12px;align-items:flex-start}
+  .dt-on[hidden]{display:none!important}
+  .dt-figure{flex:none;width:140px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:linear-gradient(130deg,#dfe9e2,#c8d9dd)}
+  .dt-figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .dt-figure[hidden]{display:none}
+  .dt-body{flex:1;min-width:0}
+  .dt-top{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+  .dt-chip{font-size:.72rem;font-weight:800;color:#fff;background:var(--ocean);padding:1px 9px;border-radius:999px}
+  .dt-name{font-size:1.05rem;font-weight:800;color:var(--ocean-dark)}
+  .dt-zh{font-size:.8rem;color:#6b6459;font-weight:500}
+  .dt-desc{font-size:.86rem;color:#555;margin-top:6px;line-height:1.75}
+  .dt-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+  .dt-line{width:100%;font-size:.79rem;color:#6b6459}
+  .dt-line a{color:var(--ocean);font-weight:600;text-decoration:none}
+  .dt-line a:hover{text-decoration:underline}
+  .dt-pill{font-size:.78rem;font-weight:700;padding:2px 11px;border-radius:999px;background:var(--sand2);color:#9a6b1f}
+  .dt-pill[hidden]{display:none!important}
+  .dt-pill.dish{background:#fdf1e6;color:#b34700;border:1px solid #f5d9c9}
+  .dt-pill.book{background:var(--coral);color:#fff}
+  .dt-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;border-top:1px dashed #eee3d2;padding-top:9px}
+  .dt-nav button{font-size:.8rem;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid #dcd0bb;background:#fff;color:var(--ocean-dark);cursor:pointer;transition:all .18s}
+  .dt-nav button:hover{background:var(--sand2)}
+  .dt-pos{font-size:.75rem;color:#6b6459;font-variant-numeric:tabular-nums}
+
+  /* 時間線 */
+  .tlcol{display:grid;gap:13px}
+  .tl-card{background:#fff;border-radius:16px;box-shadow:0 3px 14px rgba(43,43,43,.08);overflow:hidden;border:1px solid #f2e9d9;transition:all .18s}
+  .tl-card.is-dim{opacity:.32}
+  .tl-head{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff;background:var(--dc)}
+  .tl-num{width:30px;height:30px;border-radius:9px;background:#fff;color:var(--dc);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex:none}
+  .tl-h-t{font-weight:800;font-size:.94rem;line-height:1.3}
+  .tl-h-s{font-size:.74rem;opacity:.85;line-height:1.35}
+  .tl-body{padding:9px 12px 11px}
+  .tl-item{position:relative;display:flex;gap:10px;padding:6px 0 6px 30px;cursor:pointer;border-radius:10px;transition:all .18s}
+  .tl-item::before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:#eee3d2}
+  .tl-item:first-child::before{top:12px}
+  .tl-item:last-child::before{bottom:calc(100% - 14px)}
+  .tl-item::after{content:attr(data-n);position:absolute;left:2px;top:9px;width:20px;height:20px;border-radius:50%;background:#fff;border:2.5px solid var(--dc);color:var(--dc);font-size:.66rem;font-weight:800;display:flex;align-items:center;justify-content:center;z-index:1}
+  .tl-item:hover{background:#fdf8f0}
+  .tl-item.is-on{background:#fdf1e0;box-shadow:inset 0 0 0 1.5px var(--dc)}
+  .tl-item.is-alt{box-shadow:inset 0 0 0 1.5px #e8b072;border:1px dashed #e8b072}
+  .tl-item.is-alt::after{border-style:dashed}
+  .tl-time{flex:none;width:44px;font-size:.72rem;color:#9b9184;font-weight:700;font-variant-numeric:tabular-nums;padding-top:2px}
+  .tl-main{min-width:0;flex:1}
+  .tl-name{font-size:.88rem;font-weight:700;color:#2f2a24;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .tl-name i{width:7px;height:7px;border-radius:50%;background:var(--c,#999);flex:none}
+  .tl-desc{font-size:.78rem;color:#7a7267;line-height:1.5}
+  .tl-free{background:#fff;border-radius:16px;border:1px dashed #d8cbb4;padding:12px 15px;font-size:.84rem;color:#6b6357}
+  .tl-free b{color:var(--ocean-dark)}
+  .tl-free li{margin-left:16px;margin-top:4px}
+
+  @media(max-width:980px){
+    .layout{grid-template-columns:1fr}
+    .mapcol{position:static;top:auto}
+  }
+  @media(max-width:640px){
+    .legend{grid-template-columns:1fr}
+    .pill{font-size:.78rem;padding:5px 11px}
+    .dt-on{flex-direction:column}
+    .dt-figure{width:100%;aspect-ratio:16/10}
+    .dt-desc{font-size:.84rem}
+    .maphint{font-size:.62rem}
+    .vsw{right:8px;top:calc(var(--cdh) + 6px)}
+    .vsw__b{font-size:.72rem;padding:5px 10px}
+  }
+
 </style>
 </head>
 <body>
@@ -218,6 +344,12 @@
 </div>
 
 <div class="progress" id="progress"></div>
+
+<!-- 版本切換：v1 = 經典版（相片卡片）；v2 = 地圖互動版 -->
+<div class="vsw" role="group" aria-label="版本切換">
+  <button class="vsw__b is-on" data-v="1">經典版</button>
+  <button class="vsw__b" data-v="2">地圖版</button>
+</div>
 
 <header class="hero">
   <span class="pt">✈️</span><span class="pt">🌊</span><span class="pt">☕</span><span class="pt">🎄</span><span class="pt">🐧</span><span class="pt">🍷</span>
@@ -232,8 +364,8 @@
     <li><a href="#overview">行程總覽</a></li>
     <li><a href="#flights">航班</a></li>
     <li><a href="#hotels">住宿</a></li>
-    <li><a href="#sydney">悉尼行程</a></li>
-    <li><a href="#melbourne">墨爾本行程</a></li>
+    <li><a href="#sydney" id="nav-sydney">悉尼行程</a></li>
+    <li><a href="#melbourne" id="nav-melbourne">墨爾本行程</a></li>
     <li><a href="#tips">實用貼士</a></li>
     <li><a href="#bookings">餐廳攻略</a></li>
   </ul>
@@ -302,7 +434,7 @@
 </section>
 
 <!-- ================= SYDNEY ================= -->
-<section id="sydney">
+<section id="sydney" class="v1-part">
   <h2><span class="dot"></span>悉尼 Sydney · 12 月 11 – 17 日</h2>
   <p class="lead">地標、海灘、歷史街區，仲有藍山同酒莊一日遊。所有景點名稱保留英文，方便問路同導航。</p>
 
@@ -373,7 +505,7 @@
 </section>
 
 <!-- ================= MELBOURNE ================= -->
-<section id="melbourne">
+<section id="melbourne" class="v1-part">
   <h2><span class="dot"></span>墨爾本 Melbourne · 12 月 17 – 24 日</h2>
   <p class="lead">世界咖啡之都：每一天都由一杯好咖啡開始，仲有大自然同企鵝！</p>
 
@@ -436,6 +568,112 @@
     </div>
   </div>
 </section>
+
+<!-- ================= V2：地圖互動版 ================= -->
+<div id="v2">
+
+<!-- ================= MAP · SYDNEY ================= -->
+<section id="sydney-map" class="city-sec" data-city="sydney">
+  <h2><span class="dot"></span>悉尼 Sydney · 行程地圖</h2>
+  <p class="lead">12/11 – 12/17 · 歌劇院、海灘、藍山同獵人谷。左邊地圖、右邊時間線兩邊同步，撳「一鍵帶路」會自動逐站導覽。</p>
+
+  <div class="toolbar">
+    <div class="pills js-pills"></div>
+    <button class="tool-btn js-tour"><span class="js-tour-ico">🧭</span><span class="js-tour-txt">一鍵帶路</span></button>
+  </div>
+
+  <div class="legend js-legend"></div>
+
+  <div class="layout">
+    <div class="mapcol">
+      <div class="mapcard">
+        <div class="js-map mapbox" role="region" aria-label="悉尼行程地圖"></div>
+        <div class="maphint">點地圖編號 / 右側卡片 → 詳情條更新</div>
+        <div class="mascot js-mascot" hidden>
+          <span class="face">🧭</span><span class="bubble js-mascot-txt"></span>
+        </div>
+      </div>
+      <div class="detail js-detail">
+        <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
+        <div class="dt-on js-on" hidden>
+          <div class="dt-figure"><img class="js-photo" alt=""></div>
+          <div class="dt-body">
+            <div class="dt-top">
+              <span class="dt-chip js-chip"></span>
+              <span class="dt-name js-name"></span>
+              <span class="dt-zh js-zh"></span>
+            </div>
+            <p class="dt-desc js-desc"></p>
+            <div class="dt-meta">
+              <div class="dt-line js-hours"></div>
+              <span class="dt-pill js-cost" hidden></span>
+              <span class="dt-pill dish js-dish" hidden></span>
+              <span class="dt-pill book js-book" hidden>📌 需訂位／預約</span>
+            </div>
+            <div class="dt-nav">
+              <button class="js-prev">‹ 上一站</button>
+              <span class="dt-pos js-pos"></span>
+              <button class="js-next">下一站 ›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tlcol js-timeline"></div>
+  </div>
+</section>
+
+<!-- ================= MAP · MELBOURNE ================= -->
+<section id="melbourne-map" class="city-sec" data-city="melbourne">
+  <h2><span class="dot"></span>墨爾本 Melbourne · 行程地圖</h2>
+  <p class="lead">12/17 – 12/24 · 咖啡之都、彩虹小屋、十二門徒石同企鵝島。用法同上面一樣：撳編號或卡片就更新詳情。</p>
+
+  <div class="toolbar">
+    <div class="pills js-pills"></div>
+    <button class="tool-btn js-tour"><span class="js-tour-ico">🧭</span><span class="js-tour-txt">一鍵帶路</span></button>
+  </div>
+
+  <div class="legend js-legend"></div>
+
+  <div class="layout">
+    <div class="mapcol">
+      <div class="mapcard">
+        <div class="js-map mapbox" role="region" aria-label="墨爾本行程地圖"></div>
+        <div class="maphint">點地圖編號 / 右側卡片 → 詳情條更新</div>
+        <div class="mascot js-mascot" hidden>
+          <span class="face">🧭</span><span class="bubble js-mascot-txt"></span>
+        </div>
+      </div>
+      <div class="detail js-detail">
+        <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
+        <div class="dt-on js-on" hidden>
+          <div class="dt-figure"><img class="js-photo" alt=""></div>
+          <div class="dt-body">
+            <div class="dt-top">
+              <span class="dt-chip js-chip"></span>
+              <span class="dt-name js-name"></span>
+              <span class="dt-zh js-zh"></span>
+            </div>
+            <p class="dt-desc js-desc"></p>
+            <div class="dt-meta">
+              <div class="dt-line js-hours"></div>
+              <span class="dt-pill js-cost" hidden></span>
+              <span class="dt-pill dish js-dish" hidden></span>
+              <span class="dt-pill book js-book" hidden>📌 需訂位／預約</span>
+            </div>
+            <div class="dt-nav">
+              <button class="js-prev">‹ 上一站</button>
+              <span class="dt-pos js-pos"></span>
+              <button class="js-next">下一站 ›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tlcol js-timeline"></div>
+  </div>
+</section>
+</div>
 
 <!-- ================= TIPS ================= -->
 <section id="tips">
@@ -549,6 +787,7 @@
 
 <button class="totop" id="totop" aria-label="回到頂部">⬆</button>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 /* =========================================================
    行程資料：type 決定圖標分類；wiki 為 Wikipedia 條目（自動抓圖）；
@@ -891,6 +1130,587 @@ Object.keys(DAYS).forEach(renderDay);
   };
   tick();
   if (bar.isConnected) timer = setInterval(tick, 1000);
+})();
+/* =========================================================
+   V2ï¼ˆåœ°åœ–äº’å‹•ç‰ˆï¼‰è³‡æ–™ï¼‹å¼•æ“Ž
+   ========================================================= */
+const PCAT = {
+  "交通":{c:"#6b7280", i:"✈"},
+  "住宿":{c:"#0e5a7a", i:"🏨"},
+  "景點":{c:"#2f7d4f", i:"🏞"},
+  "文化":{c:"#8a6d1f", i:"🏛"},
+  "海灘":{c:"#128b96", i:"🏖"},
+  "咖啡":{c:"#a0522d", i:"☕"},
+  "美食":{c:"#c0483a", i:"🍽"},
+  "市場":{c:"#b07b45", i:"🏪"},
+  "購物":{c:"#6a4c93", i:"🛍"},
+  "酒莊":{c:"#8a3b5c", i:"🍷"},
+  "夜生活":{c:"#4a4a8a", i:"🌙"}
+};
+
+const DMETA = {
+  12:{label:"12/12（六）", title:"Circular Quay 海港經典", sub:"落機・歌劇院・大橋・岩石區", color:"#0e5a7a"},
+  13:{label:"12/13（日）", title:"Bondi 海灘輕鬆日", sub:"Double Bay・Bondi・海鮮", color:"#128b96"},
+  14:{label:"12/14（一）", title:"咖啡 + 魚市場 + 大教堂", sub:"Surry Hills 咖啡巡禮", color:"#6a4c93"},
+  15:{label:"12/15（二）", title:"藍山／獵人谷一日遊", sub:"酒莊中文團・牛排晚餐", color:"#2f7d4f"},
+  16:{label:"12/16（三）", title:"Alexandria 文青區", sub:"Hea 遊日・咖啡・公園", color:"#a9743f"},
+  17:{label:"12/17（四）", title:"悉尼 → 墨爾本", sub:"內陸機・QVM・唐人街", color:"#c0483a"},
+  18:{label:"12/18（五）", title:"南市場 + Brighton", sub:"Brunch・彩虹小屋日落", color:"#c9a227"},
+  19:{label:"12/19（六）", title:"十二門徒石 + 企鵝島", sub:"大自然長途日", color:"#7a6a2f"},
+  20:{label:"12/20（日）", title:"雅拉河谷品酒", sub:"酒莊導賞團", color:"#8a3b5c"},
+  21:{label:"12/21（一）", title:"CBD 咖啡 + 購物巡禮", sub:"圖書館・拱廊・百貨", color:"#2f6fd8"}
+};
+
+const POIS = [
+  /* ---- 12/12 Circular Quay ---- */
+  {id:"d12-1", day:12, name:"Sydney Airport 抵達", time:"07:15", cat:"交通", lat:-33.9399, lng:151.1753, desc:"落機後 T1 入境，Uber／機場接送／火車三個方案。"},
+  {id:"d12-2", day:12, name:"Meriton Suites Chatswood", time:"09:30", cat:"住宿", lat:-33.7969, lng:151.1833, desc:"先寄存行李，一般下午兩三點先有房。"},
+  {id:"d12-3", day:12, name:"Pho Thin Chatswood", time:"11:30", cat:"美食", lat:-33.7960, lng:151.1828, desc:"越南河補充體力，距酒店步行 9 分鐘。"},
+  {id:"d12-4", day:12, name:"Sydney Opera House", time:"14:00", cat:"景點", lat:-33.8568, lng:151.2153, desc:"貝殼屋頂地標，可加導賞團入場（建議預約）。"},
+  {id:"d12-5", day:12, name:"Mrs Macquarie's Chair", time:"15:30", cat:"文化", lat:-33.8596, lng:151.2155, desc:"1811 年石椅，影歌劇院＋大橋同框嘅最佳位置。"},
+  {id:"d12-6", day:12, name:"Sydney Harbour Bridge", time:"16:15", cat:"文化", lat:-33.8523, lng:151.2108, desc:"行橋免費；想刺激可上 BridgeClimb 或 Pylon Lookout。"},
+  {id:"d12-7", day:12, name:"The Rocks", time:"17:00", cat:"文化", lat:-33.8599, lng:151.2089, desc:"悉尼最古老街區，週末有 Rocks Markets 市集。"},
+  {id:"d12-8", day:12, name:"6HEAD Sydney", time:"18:30", cat:"美食", lat:-33.8583, lng:151.2088, desc:"牛排＋海鮮，記得提早訂位（官網有中文菜單）。"},
+
+  /* ---- 12/13 Bondi ---- */
+  {id:"d13-1", day:13, name:"Cafe Margaret Double Bay", time:"10:30", cat:"咖啡", lat:-33.8775, lng:151.2430, desc:"人氣 Cafe，招牌漢堡必試；食完直接去海灘好順路。"},
+  {id:"d13-2", day:13, name:"Bondi Beach", time:"12:30", cat:"海灘", lat:-33.8908, lng:151.2743, desc:"澳洲最出名沙灘，行海濱步道、睇衝浪手。"},
+  {id:"d13-3", day:13, name:"Bondi Surf Seafoods", time:"13:30", cat:"美食", lat:-33.8915, lng:151.2767, desc:"本地人最愛海鮮外賣，炸魚薯條喺海邊食特別好味。"},
+  {id:"d13-4", day:13, name:"mimi's", time:"18:30", cat:"美食", lat:-33.9205, lng:151.2575, desc:"Coogee 海邊晚餐，睇住海景食飯（需訂位）。"},
+
+  /* ---- 12/14 咖啡 + 魚市場 ---- */
+  {id:"d14-1", day:14, name:"Paramount Coffee Project", time:"08:30", cat:"咖啡", lat:-33.8847, lng:151.2094, desc:"高樓底工業風，炸雞係招牌之一。"},
+  {id:"d14-2", day:14, name:"Single O Surry Hills", time:"10:00", cat:"咖啡", lat:-33.8838, lng:151.2095, desc:"街邊咖啡店，自家烘焙配時令小食。"},
+  {id:"d14-3", day:14, name:"Beta Coffee", time:"11:00", cat:"咖啡", lat:-33.8866, lng:151.2066, desc:"順路補給站，Surry Hills 街角小店。"},
+  {id:"d14-4", day:14, name:"Sydney Fish Market", time:"12:30", cat:"市場", lat:-33.8697, lng:151.1926, desc:"南半球最大魚市場：生蠔、龍蝦、壽司任揀。"},
+  {id:"d14-5", day:14, name:"St Mary's Cathedral", time:"15:00", cat:"文化", lat:-33.8715, lng:151.2133, desc:"哥德式大教堂，入內記得衣著莊重。"},
+  {id:"d14-6", day:14, name:"Bar Totti's", time:"18:30", cat:"美食", lat:-33.8905, lng:151.2775, desc:"木火烤包＋意式小食，氣氛熱鬧（需訂位）。"},
+
+  /* ---- 12/15 一日遊 ---- */
+  {id:"d15-1", day:15, name:"Blue Mountains", time:"08:30", cat:"景點", alt:true, lat:-33.7320, lng:150.3120, desc:"三姊妹峰要行步道落樓梯，長輩較辛苦 — 備選。"},
+  {id:"d15-2", day:15, name:"Hunter Valley 獵人谷", time:"11:15", cat:"酒莊", lat:-32.7800, lng:151.2900, desc:"Klook 中文團（11:15–17:15，$1,275 含午餐），坐車為主。"},
+  {id:"d15-3", day:15, name:"The Gidley", time:"19:00", cat:"美食", lat:-33.8763, lng:151.2098, desc:"老派牛排館，有素食選擇（適合媽媽）。"},
+  {id:"d15-4", day:15, name:"BISTECCA", time:"19:00", cat:"美食", alt:true, lat:-33.8620, lng:151.2010, desc:"成人向意式牛排館，雞尾酒單豐富 — 備選。"},
+
+  /* ---- 12/16 Alexandria ---- */
+  {id:"d16-1", day:16, name:"Toby's Estate Coffee", time:"08:00", cat:"咖啡", lat:-33.9046, lng:151.1944, desc:"單一產區濃縮、冷萃樣樣齊，空間明亮。"},
+  {id:"d16-2", day:16, name:"The Grounds of Alexandria", time:"10:00", cat:"咖啡", lat:-33.9097, lng:151.1944, desc:"舊派餅廠改建：紅磚牆、花園、市集檔攤，要訂位。"},
+  {id:"d16-3", day:16, name:"The Grounds Coffee Factory", time:"11:00", cat:"咖啡", alt:true, lat:-33.9102, lng:151.1950, desc:"同場咖啡工場，Ben 評價「麻麻」— 可順路睇。"},
+  {id:"d16-4", day:16, name:"The Grumpy Barista", time:"12:00", cat:"咖啡", alt:true, lat:-33.9000, lng:151.1980, desc:"名字有趣嘅小店，行完可以再補一杯。"},
+  {id:"d16-5", day:16, name:"Sydney Park", time:"15:00", cat:"景點", lat:-33.9100, lng:151.1850, desc:"40 公頃草地＋濕地，仲有磚窯煙囪遺跡。"},
+  {id:"d16-6", day:16, name:"Pizza Bros", time:"18:00", cat:"美食", lat:-33.9060, lng:151.1930, desc:"輕鬆 Pizza 晚餐，為 Hea 遊日收尾。"},
+
+  /* ---- 12/17 悉尼 → 墨爾本 ---- */
+  {id:"d17-1", day:17, name:"SYD → MEL 內陸機", time:"11:00", cat:"交通", lat:-33.9399, lng:151.1753, desc:"悉尼機場起飛，票價約 HK$700–1,500／位。"},
+  {id:"d17-2", day:17, name:"Melbourne Airport 抵達", time:"12:30", cat:"交通", lat:-37.6690, lng:144.8410, desc:"出關後叫車去 Carlton，約 25 分鐘。"},
+  {id:"d17-3", day:17, name:"Swanston Central", time:"13:40", cat:"住宿", lat:-37.8063, lng:144.9600, desc:"160 Victoria St Carlton，放低行李先。"},
+  {id:"d17-4", day:17, name:"Seven Seeds Coffee", time:"14:20", cat:"咖啡", lat:-37.8037, lng:144.9560, desc:"工業風烘焙工場，brunch 同三文治都出色。"},
+  {id:"d17-5", day:17, name:"Baguette Studios", time:"14:50", cat:"咖啡", lat:-37.8080, lng:144.9580, desc:"手工法包店，買個包做下午小食。"},
+  {id:"d17-6", day:17, name:"Queen Victoria Market", time:"15:10", cat:"市場", lat:-37.8076, lng:144.9568, desc:"留意 3pm 收檔 — 趕唔切就搬去 12/22 早上。"},
+  {id:"d17-7", day:17, name:"Lune Croissanterie", time:"15:50", cat:"美食", lat:-37.8120, lng:144.9660, desc:"世界級可頌，賣完即收，早啲去排隊。"},
+  {id:"d17-8", day:17, name:"Hareruya Pantry CBD", time:"16:30", cat:"美食", lat:-37.8115, lng:144.9640, desc:"日式小食店，順路一試。"},
+  {id:"d17-9", day:17, name:"Chinatown Melbourne", time:"17:15", cat:"文化", lat:-37.8115, lng:144.9700, desc:"澳洲最古老唐人街，想食返啱口味嚟呢度。"},
+  {id:"d17-10", day:17, name:"Bourke Street Mall", time:"18:30", cat:"購物", lat:-37.8136, lng:144.9646, desc:"只限行人同電車嘅購物大街，經常有街頭表演。"},
+
+  /* ---- 12/18 南市場 + Brighton ---- */
+  {id:"d18-1", day:18, name:"Market Lane Coffee", time:"09:00", cat:"咖啡", lat:-37.8295, lng:144.9565, desc:"墨爾本咖啡界名店，簡潔專注咖啡本身。"},
+  {id:"d18-2", day:18, name:"South Melbourne Market", time:"10:00", cat:"市場", lat:-37.8298, lng:144.9560, desc:"1867 年開市紅磚市場，Brunch 同買手信好地方。"},
+  {id:"d18-3", day:18, name:"ST. ALi Coffee Roasters", time:"12:30", cat:"咖啡", lat:-37.8288, lng:144.9548, desc:"倉庫風空間，藝術感咖啡配創意 brunch。"},
+  {id:"d18-4", day:18, name:"Brighton Bathing Boxes", time:"15:00", cat:"海灘", lat:-37.9180, lng:144.9860, desc:"82 間彩色小屋，黃昏光線最靚（需預約車位）。"},
+
+  /* ---- 12/19 十二門徒 + 企鵝島 ---- */
+  {id:"d19-1", day:19, name:"Twelve Apostles", time:"10:30", cat:"景點", lat:-38.6650, lng:143.1050, desc:"大洋路石灰岩巨柱，沿路仲有 Loch Ard 峽谷。"},
+  {id:"d19-2", day:19, name:"Proud Mary Coffee", time:"13:00", cat:"咖啡", lat:-37.7995, lng:144.9840, desc:"回程途經 Collingwood，紅磚牆潮店。"},
+  {id:"d19-3", day:19, name:"Lulu & me Cheesecakes", time:"15:00", cat:"美食", alt:true, lat:-37.8100, lng:144.9600, desc:"人氣芝士蛋糕，去企鵝島前補充能量。"},
+  {id:"d19-4", day:19, name:"Phillip Island Penguin Parade", time:"黃昏", cat:"景點", lat:-38.5100, lng:145.1500, desc:"日落後小企鵝上岸返巢，記得提早訂票。"},
+  {id:"d19-5", day:19, name:"Terror Twilight", time:"21:30", cat:"夜生活", lat:-37.7985, lng:144.9840, desc:"睇完企鵝返市區食晚餐（車程約 2 小時）。"},
+
+  /* ---- 12/20 Yarra Valley ---- */
+  {id:"d20-1", day:20, name:"雅拉河谷・史詩葡萄酒導賞團", time:"08:45", cat:"酒莊", lat:-37.7000, lng:145.3500, desc:"5.0★ 小團，包午餐；可加朱古力、氈酒品嚐。"},
+  {id:"d20-2", day:20, name:"雅拉河谷・酒莊導覽一日遊", time:"09:30", cat:"酒莊", alt:true, lat:-37.7150, lng:145.3300, desc:"較鬆動嘅備選，深入百年酒莊睇釀酒過程。"},
+
+  /* ---- 12/21 CBD ---- */
+  {id:"d21-1", day:21, name:"State Library Victoria", time:"10:00", cat:"文化", lat:-37.8098, lng:144.9646, desc:"1856 年開放，La Trobe 圓頂閱覽室必睇（免費）。"},
+  {id:"d21-2", day:21, name:"Bakemono Bakers", time:"10:40", cat:"咖啡", lat:-37.8132, lng:144.9630, desc:"日式手工麵包店，出品精緻。"},
+  {id:"d21-3", day:21, name:"Melbourne Central", time:"11:15", cat:"購物", lat:-37.8100, lng:144.9620, desc:"商場中庭保留 1888 年子彈製造塔。"},
+  {id:"d21-4", day:21, name:"Emporium Melbourne", time:"11:45", cat:"購物", lat:-37.8115, lng:144.9630, desc:"國際品牌商場，頂層有大型美食廣場。"},
+  {id:"d21-5", day:21, name:"The Block Arcade", time:"12:15", cat:"文化", lat:-37.8158, lng:144.9644, desc:"1892 年華麗拱廊，Hopetoun 茶室喺入面。"},
+  {id:"d21-6", day:21, name:"Patricia Coffee Brewers", time:"12:45", cat:"咖啡", lat:-37.8160, lng:144.9570, desc:"冇位坐嘅極簡咖啡吧，全墨爾本最好一杯之一。"},
+  {id:"d21-7", day:21, name:"Dukes Coffee Roasters", time:"13:15", cat:"咖啡", lat:-37.8168, lng:144.9650, desc:"木系明亮店面，出品穩定。"},
+  {id:"d21-8", day:21, name:"Higher Ground", time:"13:30", cat:"美食", lat:-37.8163, lng:144.9560, desc:"百年發電站改建，紅磚工業風（建議訂位）。"},
+  {id:"d21-9", day:21, name:"Grain Store", time:"13:40", cat:"美食", alt:true, lat:-37.8195, lng:144.9560, desc:"明亮工業風 Brunch — 同 Higher Ground 二揀一。"},
+  {id:"d21-10", day:21, name:"Pidapipó", time:"14:30", cat:"美食", lat:-37.8170, lng:144.9650, desc:"人氣手工 gelato，經典同季節限定口味。"},
+  {id:"d21-11", day:21, name:"Vacation Coffee", time:"15:00", cat:"咖啡", alt:true, lat:-37.8150, lng:144.9640, desc:"CBD 咖啡巡禮其中一站 — 飲唔晒可以跳過。"},
+  {id:"d21-12", day:21, name:"The Hardware Société", time:"15:30", cat:"美食", alt:true, lat:-37.8150, lng:144.9560, desc:"法蘭西多士同焗蛋係招牌 — 備選。"},
+  {id:"d21-13", day:21, name:"Hector's Deli", time:"16:00", cat:"美食", alt:true, lat:-37.8180, lng:144.9930, desc:"Richmond 人氣 deli，三文治一流 — 備選。"},
+  {id:"d21-14", day:21, name:"Federation Square", time:"17:00", cat:"景點", lat:-37.8180, lng:144.9690, desc:"墨爾本城市客廳，對面就係 Flinders Street 車站。"},
+  {id:"d21-15", day:21, name:"Myer Melbourne", time:"17:30", cat:"購物", lat:-37.8120, lng:144.9620, desc:"聖誕櫥窗傳統，12 月氣氛一流。"}
+];
+
+const NOTE22 = [
+  {d:"12/22（二）", t:"自由日 — 返去未行完嘅咖啡店、補買手信，或喺 Carlton 附近 hea。"},
+  {d:"12/23（三）", t:"收拾行李 — 留意 35kg 寄艙限額；退房後可寄存行李再行最後一轉。"},
+  {d:"12/24（四）", t:"00:35 SQ218 起飛 = <b>12/23 晚上</b>要到機場（21:30 前）；轉 SQ874 07:30–11:20 返港。"}
+];
+
+const INFO = (function(){ const o = {}; Object.keys(DAYS).forEach(k => DAYS[k].forEach(p => { o[p.n] = p; })); return o; })();
+
+/* =========================================================
+   2. 引擎：每個城市一個獨立實例（Leaflet 真地圖＋時間線＋詳情條）
+   底圖：OpenStreetMap（免費、無需 key）
+   ========================================================= */
+POIS.forEach(p => {
+  p._city = (p.id === 'd17-1') ? 'sydney' : (p.day <= 16 ? 'sydney' : 'melbourne');
+});
+
+const dayColor = d => (DMETA[d] ? DMETA[d].color : '#0e5a7a');
+const catInfo  = c => (PCAT[c] || {c:'#8d8375', i:'•'});
+const byId = {};
+POIS.forEach(p => { byId[p.id] = p; });
+
+const dayOrder = {};
+POIS.forEach(p => { (dayOrder[p.day] = dayOrder[p.day] || []).push(p); });
+Object.keys(dayOrder).forEach(d => dayOrder[d].forEach((p,i) => { p._n = i + 1; }));
+
+let lastActive = null;
+const MAP_OK = (typeof L !== 'undefined');
+
+/* ---------- 對應 index.html 嘅完整資料（名稱可能有少許差異） ---------- */
+const IMG_EXTS = ['jpg','jpeg','png','webp'];
+const ALIAS = { 'Hunter Valley 獵人谷':'Hunter Valley Wine Tours' };
+const normKey = s => String(s).replace(/[・·\s]+/g, '');
+const canon = n => ALIAS[n] || n;
+const INFO_N = {}, COSTS_N = {}, DISHES_N = {};
+Object.keys(INFO).forEach(k => { INFO_N[normKey(k)] = INFO[k]; });
+Object.keys(COSTS).forEach(k => { COSTS_N[normKey(k)] = COSTS[k]; });
+Object.keys(DISHES).forEach(k => { DISHES_N[normKey(k)] = DISHES[k]; });
+const infoOf = n => INFO[canon(n)] || INFO_N[normKey(canon(n))] || {};
+const costOf = n => COSTS[canon(n)] || COSTS_N[normKey(canon(n))] || '';
+const dishOf = n => DISHES[canon(n)] || DISHES_N[normKey(canon(n))] || '';
+
+function slugOf(p){
+  const nm = canon(p.name);
+  const s = nm.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  if (s) return s;
+  const arr = POIS.filter(x => x.day === p.day);   /* 純中文名 → d<day>_<index> */
+  return 'd' + p.day + '_' + arr.indexOf(p);
+}
+function mapsUrl(p){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.name + ' Australia');
+}
+
+function MakeCity(section){
+  const city = section.dataset.city;
+  const pool = POIS.filter(p => p._city === city);
+  const days = [...new Set(pool.map(p => p.day))].sort((a,b) => a-b);
+
+  const mapEl   = section.querySelector('.js-map');
+  const elPills = section.querySelector('.js-pills');
+  const elLegend= section.querySelector('.js-legend');
+  const elTL    = section.querySelector('.js-timeline');
+  const elEmpty = section.querySelector('.js-empty');
+  const elOn    = section.querySelector('.js-on');
+  const elChip  = section.querySelector('.js-chip');
+  const elName  = section.querySelector('.js-name');
+  const elZh    = section.querySelector('.js-zh');
+  const elDesc  = section.querySelector('.js-desc');
+  const elHours = section.querySelector('.js-hours');
+  const elCost  = section.querySelector('.js-cost');
+  const elDish  = section.querySelector('.js-dish');
+  const elBook  = section.querySelector('.js-book');
+  const elFig   = section.querySelector('.dt-figure');
+  const elPhoto = section.querySelector('.js-photo');
+  const elPos   = section.querySelector('.js-pos');
+  const btnTour = section.querySelector('.js-tour');
+  const tourIco = section.querySelector('.js-tour-ico');
+  const tourTxt = section.querySelector('.js-tour-txt');
+  const mascot  = section.querySelector('.js-mascot');
+  const mascotTxt = section.querySelector('.js-mascot-txt');
+
+  let map = null, mMarkers = null, mLines = null;
+  let curDay = null, list = pool, idx = -1, timer = null;
+
+  /* ---------- 地圖初始化 ---------- */
+  function initMap(){
+    if (!MAP_OK){
+      mapEl.innerHTML = '<div style="padding:26px 18px;text-align:center;color:#6b6459;font-size:.9rem;line-height:1.8">' +
+        '地圖底圖需要網絡連線（OpenStreetMap）。<br>右邊時間線同詳情條仍然可以正常使用。</div>';
+      return;
+    }
+    map = L.map(mapEl, {zoomControl:true, scrollWheelZoom:true});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, subdomains: 'abc',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+    }).addTo(map);
+    mMarkers = L.layerGroup().addTo(map);
+    mLines = L.layerGroup().addTo(map);
+    map.setView([pool[0].lat, pool[0].lng], 11);
+  }
+
+  const ll = (p) => [p.lat, p.lng];
+  const icon = (html, size) => L.divIcon({className:'', html, iconSize:[size,size], iconAnchor:[size/2, size/2]});
+
+  /* ---------- 每日中心點 ---------- */
+  function dayCentroids(){
+    return days.map(d => {
+      const arr = pool.filter(p => p.day === d);
+      return {
+        day: d, n: arr.length,
+        lat: arr.reduce((s,p) => s + p.lat, 0) / arr.length,
+        lng: arr.reduce((s,p) => s + p.lng, 0) / arr.length
+      };
+    });
+  }
+
+  /* ---------- 地圖繪製 ---------- */
+  function renderMap(){
+    if (!map) return;
+    mMarkers.clearLayers();
+    mLines.clearLayers();
+
+    /* 全覽：每日一個編號標記 */
+    if (curDay === null){
+      const cs = dayCentroids();
+      for (let i = 0; i < cs.length - 1; i++){
+        L.polyline([ll(cs[i]), ll(cs[i+1])], {
+          color:'#b9a888', weight:2, dashArray:'4 9', opacity:.6
+        }).addTo(mLines);
+      }
+      cs.forEach(c => {
+        const col = dayColor(c.day);
+        const html = `<div class="mpin" data-day="${c.day}" style="--mc:${col};width:32px;height:32px;font-size:13.5px">` +
+                     `${c.day}<span class="cnt">${c.n}</span></div>`;
+        const mk = L.marker([c.lat, c.lng], {icon: icon(html, 32)}).addTo(mMarkers);
+        mk.on('click', () => applyFilter(c.day));
+      });
+      fitTo(cs.map(c => [c.lat, c.lng]));
+      return;
+    }
+
+    /* 單日：POI pin + 路線 */
+    const vis = visible();
+    const g = {};
+    vis.forEach(p => { (g[p.day] = g[p.day] || []).push(p); });
+    Object.keys(g).forEach(d => {
+      const arr = g[d], col = dayColor(Number(d));
+      for (let i = 0; i < arr.length - 1; i++){
+        const a = arr[i], b = arr[i+1];
+        const alt = !!(a.alt || b.alt);
+        L.polyline([ll(a), ll(b)], {
+          color: col, weight: 3,
+          opacity: alt ? .55 : .85,
+          dashArray: alt ? '7 7' : null
+        }).addTo(mLines);
+      }
+    });
+    vis.forEach(p => {
+      const col = dayColor(p.day);
+      const html = `<div class="mpin" data-id="${p.id}" style="--mc:${col}">${p._n}</div>`;
+      const mk = L.marker(ll(p), {icon: icon(html, 26), title: p.name}).addTo(mMarkers);
+      mk.on('click', () => select(p.id, {scroll:true}));
+    });
+    fitTo(vis.map(ll));
+    updateMarkerStyles();
+  }
+
+  function fitTo(latlngs){
+    if (!map || !latlngs.length) return;
+    const b = L.latLngBounds(latlngs);
+    map.fitBounds(b, {padding:[36,36], maxZoom: curDay === null ? 11 : 14, animate:true});
+  }
+
+  function updateMarkerStyles(){
+    if (!map) return;
+    const sel = (idx >= 0 && list[idx]) ? list[idx].id : null;
+    mMarkers.eachLayer(mk => {
+      const el = mk.getElement && mk.getElement();
+      if (!el) return;
+      const pin = el.querySelector('.mpin');
+      if (!pin || !pin.dataset.id) return;
+      pin.classList.toggle('is-on', pin.dataset.id === sel);
+      pin.classList.toggle('is-off', !!sel && pin.dataset.id !== sel);
+    });
+  }
+
+  /* ---------- 圖例 / 膠囊 ---------- */
+  function renderLegend(){
+    const dayItems = days.map(d =>
+      `<span class="lg-item"><i style="--c:${DMETA[d].color}"></i>${DMETA[d].label.replace('（','(').replace('）',')')}</span>`
+    ).join('');
+    const catItems = Object.keys(PCAT).map(c =>
+      `<span class="lg-item"><i style="--c:${PCAT[c].c}"></i>${c}</span>`
+    ).join('');
+    elLegend.innerHTML =
+      `<div class="lgbox"><div class="lgbox__t">分區</div><div class="lgbox__b">${dayItems}</div></div>
+       <div class="lgbox"><div class="lgbox__t">類別</div><div class="lgbox__b">${catItems}<span class="lg-item dash"><i></i>備選／機動</span></div></div>`;
+  }
+
+  function renderPills(){
+    let h = `<button class="pill${curDay===null?' is-on':''}" data-day="all">全部</button>`;
+    days.forEach(d => {
+      const on = String(curDay) === String(d);
+      const col = DMETA[d].color;
+      h += `<button class="pill${on?' is-on':''}" data-day="${d}" style="${on
+        ? `background:${col};border-color:transparent;box-shadow:0 5px 14px ${col}55`
+        : `color:${col}`}">${DMETA[d].label.replace('（','(').replace('）',')')}</button>`;
+    });
+    elPills.innerHTML = h;
+  }
+
+  /* ---------- 時間線 ---------- */
+  function renderTimeline(){
+    const vis = visible();
+    const g = {};
+    vis.forEach(p => { (g[p.day] = g[p.day] || []).push(p); });
+    let html = '';
+    Object.keys(g).sort((a,b) => a-b).forEach(d => {
+      const meta = DMETA[d], col = meta.color;
+      html += `<div class="tl-card" data-day="${d}" style="--dc:${col}">
+        <div class="tl-head">
+          <div class="tl-num">${d}</div>
+          <div><div class="tl-h-t">${meta.title}</div><div class="tl-h-s">${meta.label} · ${meta.sub}</div></div>
+        </div>
+        <div class="tl-body">`;
+      g[d].forEach(p => {
+        const ci = catInfo(p.cat);
+        html += `<div class="tl-item${p.alt?' is-alt':''}" data-id="${p.id}" data-n="${p._n}" style="--dc:${col};--c:${ci.c}">
+          <div class="tl-time">${p.time}</div>
+          <div class="tl-main">
+            <div class="tl-name">${p.name}<i></i><span style="font-size:.7rem;color:${ci.c};font-weight:700">${p.cat}</span></div>
+            <div class="tl-desc">${p.desc}${p.alt?' <b style="color:#b34700">（備選）</b>':''}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+
+    if (city === 'melbourne' && curDay === null){
+      html += `<div class="tl-free"><b>後段彈性日</b><ul>` +
+        NOTE22.map(n => `<li><b>${n.d}</b> ${n.t}</li>`).join('') + `</ul></div>`;
+    }
+    elTL.innerHTML = html;
+  }
+
+  function applySelectionStyles(){
+    const sel = (idx >= 0 && list[idx]) ? list[idx].id : null;
+    elTL.querySelectorAll('.tl-item').forEach(el => {
+      el.classList.toggle('is-on', el.dataset.id === sel);
+    });
+    elTL.querySelectorAll('.tl-card').forEach(card => {
+      card.classList.toggle('is-dim', !!sel && !card.querySelector('.tl-item.is-on'));
+    });
+    updateMarkerStyles();
+  }
+
+  function updateDetail(){
+    const p = list[idx];
+    if (!p){ elEmpty.hidden = false; elOn.hidden = true; return; }
+    elEmpty.hidden = true; elOn.hidden = false;
+
+    const info = infoOf(p.name), ci = catInfo(p.cat);
+    elChip.textContent = DMETA[p.day].label;
+    elChip.style.background = dayColor(p.day);
+    elName.textContent = p.name;
+    elName.style.color = dayColor(p.day);
+    elZh.textContent = info.zh ? '（' + info.zh + '）' : '';
+    elDesc.textContent = info.d || p.desc;
+
+    elHours.innerHTML = '🕒 ' + (info.hours || (p.time + '　·　' + ci.i + ' ' + p.cat)) +
+      '　·　<a href="' + mapsUrl(p) + '" target="_blank" rel="noopener">📍 地圖</a>';
+
+    const cost = costOf(p.name);
+    elCost.textContent = cost ? '💰 ' + cost : '';
+    elCost.hidden = !cost;
+
+    const dish = dishOf(p.name);
+    elDish.textContent = dish ? '⭐ 招牌必試：' + dish : '';
+    elDish.hidden = !dish;
+
+    elBook.hidden = !info.book;
+
+    setPhoto(p);
+    elPos.textContent = `${idx + 1} / ${list.length}`;
+  }
+
+  /* 相片：img/<slug>.jpg，失敗依次試 jpeg → png → webp，全部失敗就收起 */
+  function setPhoto(p){
+    const slug = slugOf(p);
+    let i = 0;
+    elFig.hidden = false;
+    elPhoto.alt = p.name;
+    elPhoto.onerror = () => {
+      i++;
+      if (i >= IMG_EXTS.length){ elFig.hidden = true; elPhoto.onerror = null; return; }
+      elPhoto.src = 'img/' + slug + '.' + IMG_EXTS[i];
+    };
+    elPhoto.src = 'img/' + slug + '.' + IMG_EXTS[0];
+  }
+
+  function visible(){
+    return curDay === null ? pool : pool.filter(p => p.day === curDay);
+  }
+
+  /* ---------- 篩選 ---------- */
+  function applyFilter(day, opts){
+    const o = opts || {};
+    if (!o.keepTour) stopTour();
+    curDay = day;
+    list = visible();
+    idx = -1;
+    renderPills();
+    renderMap();
+    renderTimeline();
+    updateDetail();
+    mascot.hidden = true;
+    lastActive = api;
+  }
+
+  /* ---------- 選中 ---------- */
+  function select(id, opts){
+    const o = opts || {};
+    const p0 = byId[id];
+    if (!p0) return;
+    if (curDay === null) applyFilter(p0.day, {keepTour: !!o.keepTour});
+    const i = list.findIndex(x => x.id === id);
+    if (i < 0) return;
+    idx = i;
+    const p = list[i];
+    updateDetail();
+    applySelectionStyles();
+    lastActive = api;
+
+    if (map) map.panInside([p.lat, p.lng], {padding:[90,90], animate:true});
+
+    if (o.scroll !== false){
+      const el = elTL.querySelector(`.tl-item[data-id="${id}"]`);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    if (o.say){
+      mascotTxt.innerHTML = o.say;
+      mascot.hidden = false;
+    }
+  }
+
+  function step(dir){
+    if (!list.length) return;
+    if (curDay === null){
+      applyFilter(DMETA[dir > 0 ? 0 : days.length - 1]);
+      idx = dir > 0 ? -1 : 0;
+    }
+    idx = (idx + dir + list.length) % list.length;
+    select(list[idx].id, {scroll:true});
+  }
+
+  /* ---------- 自動導覽 ---------- */
+  function startTour(){
+    if (timer) return;
+    const seq = curDay === null ? days.slice() : [curDay];
+    let di = 0, pi = 0;
+    btnTour.classList.add('is-on');
+    tourTxt.textContent = '導覽中…（撳一下停止）';
+    tourIco.textContent = '⏸';
+
+    const next = () => {
+      if (di >= seq.length){ stopTour(true); return; }
+      if (pi === 0) applyFilter(seq[di], {keepTour:true});
+      if (pi >= list.length){ di++; pi = 0; next(); return; }
+      const p = list[pi];
+      idx = pi;
+      select(p.id, {scroll:true, keepTour:true,
+        say:`第 ${pi+1} 站：${p.name} — ${p.desc}`});
+      pi++;
+      timer = setTimeout(next, 3600);
+    };
+    next();
+  }
+
+  function stopTour(finished){
+    if (timer){ clearTimeout(timer); timer = null; }
+    btnTour.classList.remove('is-on');
+    tourTxt.textContent = '一鍵帶路';
+    tourIco.textContent = '🧭';
+    if (finished){
+      mascotTxt.innerHTML = '行完喇！呢個城市嘅站都帶你睇過一次 🎉 可以再撳一次重播。';
+      mascot.hidden = false;
+      setTimeout(() => { mascot.hidden = true; }, 4000);
+    }
+  }
+
+  /* ---------- 事件 ---------- */
+  elPills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if (!b) return;
+    applyFilter(b.dataset.day === 'all' ? null : Number(b.dataset.day));
+  });
+
+  elTL.addEventListener('click', e => {
+    const it = e.target.closest('.tl-item');
+    if (!it) return;
+    select(it.dataset.id, {scroll:false});
+  });
+
+  section.querySelector('.js-prev').addEventListener('click', () => step(-1));
+  section.querySelector('.js-next').addEventListener('click', () => step(1));
+  btnTour.addEventListener('click', () => { if (timer) stopTour(false); else startTour(); });
+
+  /* ---------- 初始化 ---------- */
+  renderLegend();
+  initMap();
+  list = pool;
+  renderPills();
+  renderMap();
+  renderTimeline();
+  updateDetail();
+  window.addEventListener('resize', () => { if (map) setTimeout(() => map.invalidateSize(), 120); }, {passive:true});
+
+  const api = {select, step, setFilter: applyFilter, startTour, stopTour};
+  return api;
+}
+
+let CITIES = [];
+function initV2(){
+  if (CITIES.length) return;
+  CITIES = [...document.querySelectorAll('.city-sec')].map(MakeCity);
+  setTimeout(() => window.dispatchEvent(new Event('resize')), 80);
+}
+
+document.addEventListener('keydown', e => {
+  if (!lastActive) return;
+  if (e.key === 'ArrowLeft') lastActive.step(-1);
+  if (e.key === 'ArrowRight') lastActive.step(1);
+});
+
+
+/* =========================================================
+   V1 / V2 切換
+   ========================================================= */
+(function(){
+  const KEY = 'aussie-view';
+  const btns = [...document.querySelectorAll('.vsw__b')];
+  const navS = document.getElementById('nav-sydney');
+  const navM = document.getElementById('nav-melbourne');
+
+  function apply(v, save){
+    const isV2 = v === '2';
+    document.body.classList.toggle('v2', isV2);
+    document.body.classList.toggle('v1', !isV2);
+    btns.forEach(b => b.classList.toggle('is-on', b.dataset.v === v));
+
+    if (navS) { navS.href = isV2 ? '#sydney-map' : '#sydney'; navS.textContent = isV2 ? '悉尼地圖' : '悉尼行程'; }
+    if (navM) { navM.href = isV2 ? '#melbourne-map' : '#melbourne'; navM.textContent = isV2 ? '墨爾本地圖' : '墨爾本行程'; }
+
+    if (isV2){ initV2(); setTimeout(() => window.dispatchEvent(new Event('resize')), 90); }
+    if (save){ try { localStorage.setItem(KEY, v); } catch(e){} }
+  }
+
+  btns.forEach(b => b.addEventListener('click', () => {
+    apply(b.dataset.v, true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }));
+
+  let saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e){}
+  apply(saved === '2' ? '2' : '1', false);
 })();
 </script>
 </body>

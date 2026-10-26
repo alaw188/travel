@@ -1,4 +1,4 @@
-# 2026 澳洲家庭之旅 — Sydney & Melbourne trip 網站
+﻿# 2026 澳洲家庭之旅 — Sydney & Melbourne trip 網站
 
 給父母了解及準備 2026 年 12 月澳洲行程嘅單頁式網站（Single-file static site），繁體中文（香港用法）為主，地點名稱保留英文。
 
@@ -11,14 +11,13 @@
 ```
 aussie/
 ├── index.html    # 主網站（HTML + CSS + JS 全部單一檔案）
-├── index_.html   # 地圖互動實驗版（POIS 資料驅動，見下）
 ├── index2.html   # ⚠️ 備份凍結（2026-10 起唔再更新，只作歷史參考）
 ├── booking.html  # 獨立酒莊團比較頁（唔同 index 互鏈）
 ├── README.md     # 本檔
 └── img/          # 61 張地點圖片（slug 命名，本地檔）
 ```
 
-## index_.html — 地圖驅動互動版（實驗）
+## 版本切換：經典版（V1）／ 地圖版（V2）
 
 - **資料層**：全部內容抽成 `POIS` 陣列（`id / day / name / time / desc / lat / lng / cat / alt`），
   列表、地圖 pin、連線、篩選器、詳情條全部由同一份資料渲染 → **加減內容只改 `POIS`**。
@@ -38,7 +37,10 @@ aussie/
 - **投影邏輯**：`reproject(list)` 會按「目前可見」嘅點重新 fit 到畫布，
   所以睇單一日會自動放大，唔會所有 pin 疊埋一齊。
 - **改內容**：只改 `POIS`（加一個 object）；分區標題／顏色改 `DAYS`；類別顏色改 `CATS`。
-- ⚠️ 未經批准前 `index.html` 保持不變；`index_.html` 確認 OK 後才覆蓋。
+- 右上角固定按鈕切換：**經典版**（相片卡片）／**地圖版**（Leaflet + OSM）；選擇會記入 localStorage，
+  下次開頁自動沿用。地圖版首次切換才初始化 Leaflet（避免隱藏容器量到 0 尺寸）。
+- 原本嘅 `index_.html` 已合併入 `index.html` 並刪除；V2 資料（`POIS`／`DMETA`／`PCAT`）同引擎
+  都喺 `index.html` 尾段，長描述／費用／招牌菜直接沿用 V1 嘅 `DAYS`／`COSTS`／`DISHES`（唔再重複）。
 
 ## index.html 內部結構（日後更新睇呢度）
 
