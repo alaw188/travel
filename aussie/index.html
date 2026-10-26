@@ -236,9 +236,9 @@
 
   /* 圖例（兩個框） */
   .legend{display:grid;grid-template-columns:1fr;gap:10px;margin:0 0 12px}
-  .lgbox{background:rgba(255,255,255,.72);border:1px solid #eadfcf;border-radius:12px;padding:8px 12px}
-  .lgbox__t{font-size:.68rem;letter-spacing:.12em;color:#6b6459;font-weight:700;margin-bottom:5px}
-  .lgbox__b{display:flex;flex-wrap:nowrap;gap:4px 9px;align-items:center;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lgbox{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid #eadfcf;border-radius:12px;padding:7px 12px}
+  .lgbox__t{font-size:.68rem;letter-spacing:.12em;color:#6b6459;font-weight:700;margin:0;flex:none;white-space:nowrap}
+  .lgbox__b{display:flex;flex-wrap:nowrap;gap:4px 9px;align-items:center;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;flex:1;min-width:0}
   .lgbox__b::-webkit-scrollbar{display:none}
   .lg-item{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;color:#5b5347;flex:none;white-space:nowrap}
   .lg-item i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;display:inline-block}
