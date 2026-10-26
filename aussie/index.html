@@ -321,6 +321,34 @@
   .tl-free b{color:var(--ocean-dark)}
   .tl-free li{margin-left:16px;margin-top:4px}
 
+  /* ---------- V2 內文字 +1px（標題除外） ---------- */
+  #v2 .pill{font-size:.88rem}
+  #v2 .tool-btn{font-size:.91rem}
+  #v2 .lgbox__t{font-size:.74rem}
+  #v2 .lg-item{font-size:.8rem}
+  #v2 .maphint{font-size:.72rem}
+  #v2 .mpin{font-size:13px}
+  #v2 .mpin .cnt{font-size:10px}
+  #v2 .dt-empty{font-size:.94rem}
+  #v2 .dt-chip{font-size:.78rem}
+  #v2 .dt-name{font-size:1.11rem}
+  #v2 .dt-zh{font-size:.86rem}
+  #v2 .dt-desc{font-size:.92rem}
+  #v2 .dt-line{font-size:.85rem}
+  #v2 .dt-pill{font-size:.84rem}
+  #v2 .dt-nav button{font-size:.86rem}
+  #v2 .dt-pos{font-size:.81rem}
+  #v2 .tl-num{font-size:1rem}
+  #v2 .tl-h-t{font-size:1rem}
+  #v2 .tl-h-s{font-size:.8rem}
+  #v2 .tl-time{font-size:.78rem}
+  #v2 .tl-name{font-size:.94rem}
+  #v2 .tl-desc{font-size:.84rem}
+  #v2 .tl-free{font-size:.9rem}
+  #v2 .tl-item::after{font-size:.72rem}
+  #v2 .mascot .bubble{font-size:.84rem}
+  #v2 .lead{font-size:1rem}
+
   @media(max-width:980px){
     .layout{grid-template-columns:1fr}
     .mapcol{position:static;top:auto}
@@ -1477,7 +1505,7 @@ function MakeCity(section){
         html += `<div class="tl-item${p.alt?' is-alt':''}" data-id="${p.id}" data-n="${p._n}" style="--dc:${col};--c:${ci.c}">
           <div class="tl-time">${p.time}</div>
           <div class="tl-main">
-            <div class="tl-name">${p.name}<i></i><span style="font-size:.7rem;color:${ci.c};font-weight:700">${p.cat}</span></div>
+            <div class="tl-name">${p.name}<i></i><span style="font-size:.76rem;color:${ci.c};font-weight:700">${p.cat}</span></div>
             <div class="tl-desc">${p.desc}${p.alt?' <b style="color:#b34700">（備選）</b>':''}</div>
           </div>
         </div>`;
