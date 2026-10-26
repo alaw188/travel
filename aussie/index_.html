@@ -60,9 +60,11 @@
   .tool-btn.is-on{background:linear-gradient(120deg,#b34700,#d98324);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(179,71,0,.35)}
 
   /* ---------- 圖例 ---------- */
-  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 12px;padding:9px 13px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-  .lg-grp{display:flex;flex-wrap:wrap;gap:5px 11px;align-items:center}
-  .lg-grp>span{font-size:.7rem;letter-spacing:.1em;color:var(--muted);font-weight:700}
+  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+  .lgbox{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:12px;padding:8px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .lgbox__t{font-size:.68rem;letter-spacing:.12em;color:var(--muted);font-weight:700;margin-bottom:5px}
+  .lgbox__b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+  @media(max-width:640px){ .legend{grid-template-columns:1fr} }
   .lg-item{display:inline-flex;align-items:center;gap:5px;font-size:.76rem;color:#5b5347}
   .lg-item i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none;display:inline-block}
   .lg-item.dash i{background:none;border:2px dashed #d98324;width:10px;height:7px;border-radius:2px}
@@ -829,9 +831,8 @@ function MakeCity(section){
       `<span class="lg-item"><i style="--c:${CATS[c].c}"></i>${c}</span>`
     ).join('');
     elLegend.innerHTML =
-      `<div class="lg-grp"><span>分區</span>${dayItems}</div>
-       <div class="lg-grp"><span>類別</span>${catItems}</div>
-       <div class="lg-grp"><span class="lg-item dash"><i></i>備選／機動</span></div>`;
+      `<div class="lgbox"><div class="lgbox__t">分區</div><div class="lgbox__b">${dayItems}</div></div>
+       <div class="lgbox"><div class="lgbox__t">類別</div><div class="lgbox__b">${catItems}<span class="lg-item dash"><i></i>備選／機動</span></div></div>`;
   }
 
   function renderPills(){
