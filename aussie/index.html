@@ -160,6 +160,9 @@
   .tip:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(43,43,43,.11)}
   .tip h4{color:var(--ocean-dark);margin-bottom:6px}
   .tip p{font-size:.93rem;color:#555}
+  .tip a{color:var(--ocean);font-weight:700;text-decoration:none}
+  .tip a:hover{text-decoration:underline}
+  .tip--link{background:linear-gradient(140deg,#fff,#fdf6ec);border-left-color:var(--gold)}
 
   /* ---------- 餐廳攻略 ---------- */
   .bk{background:var(--card);border-radius:16px;box-shadow:0 3px 14px rgba(43,43,43,.07);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
@@ -721,6 +724,7 @@
     <div class="tip"><h4>🎫 需要預約嘅活動</h4><p><b>Sydney Opera House</b> 導賞團、<b>Phillip Island 企鵝歸巢</b>、<b>Klook 獵人谷／雅拉河谷一日團</b> — 全部建議出發前上網訂定。</p></div>
     <div class="tip"><h4>🌉 Ben 的私藏路線</h4><p>可以由 <b>Milsons Point</b> 沿海港大橋行去 <b>The Rocks</b>（2.4km／約 30 分鐘），風景一流，係人少少知嘅散步路線。</p></div>
     <div class="tip"><h4>🌦️ 12 月天氣</h4><p>12 月係澳洲<b>夏天</b>，日間可達 25–30°C，陽光猛烈。記得帶防曬、太陽眼鏡同帽，晚上海邊會有風，帶件薄外套。</p></div>
+    <div class="tip tip--link"><h4>🍷 酒莊一日團比較</h4><p>亨特谷（12/15）同雅拉河谷（12/20）嘅中文團、拼團／私人團、取消政策同建議，整理咗喺另一頁：<br><a href="booking.html" target="_blank" rel="noopener"><b>開啟「酒莊團比較表」→</b></a></p></div>
   </div>
 </section>
 
@@ -1193,8 +1197,6 @@ const DMETA = {
   20:{label:"12/20（日）", title:"雅拉河谷品酒", sub:"酒莊導賞團", color:"#8a3b5c"},
   21:{label:"12/21（一）", title:"CBD 咖啡 + 購物巡禮", sub:"圖書館・拱廊・百貨", color:"#2f6fd8"}
 };
-/* 日期統一顯示為「12/12 (六)」 */
-Object.keys(DMETA).forEach(k => { DMETA[k].label = DMETA[k].label.replace('（', ' (').replace('）', ')'); });
 
 const POIS = [
   /* ---- 12/12 Circular Quay ---- */
