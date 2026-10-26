@@ -13,6 +13,15 @@ A single-file, self-contained interactive itinerary site for a 3-day couple's le
 
 ---
 
+## 檔案版本
+
+| 檔案 | 內容 |
+|---|---|
+| `index.html` | 行程結束後依**實際旅程中的重大變動**更新（餐廳與夜間地點、Day 2／Day 3 時序調整、免稅採購改期等）——僅反映主要偏差，**並未完整還原實際旅程** |
+| `index2.html` | **出發前的最終版本**——原始規劃的存檔，保留原貌、不再修改 |
+
+---
+
 ## 行程條件
 
 | 項目 | 內容 |
