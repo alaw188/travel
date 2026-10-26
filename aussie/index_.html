@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -43,6 +43,7 @@
 
   .wrap{max-width:1280px;margin:0 auto;padding:0 20px}
   section{padding:30px 0 16px}
+  #melbourne-map{margin-top:10px;padding-top:24px;border-top:1px dashed #e5d7bd}
   h2{font-size:clamp(1.32rem,3.2vw,1.75rem);color:var(--ocean-dark);margin-bottom:5px;display:flex;align-items:center;gap:10px}
   h2 .dot{width:11px;height:11px;border-radius:50%;background:var(--coral);flex:none}
   .lead{color:var(--muted);margin-bottom:14px;font-size:.95rem}
@@ -224,7 +225,8 @@
 
 <nav>
   <ul>
-    <li><a href="#explore">地圖行程</a></li>
+    <li><a href="#sydney-map">悉尼地圖</a></li>
+    <li><a href="#melbourne-map">墨爾本地圖</a></li>
     <li><a href="#flights">航班</a></li>
     <li><a href="#hotels">住宿</a></li>
     <li><a href="#tips">實用貼士</a></li>
@@ -234,62 +236,120 @@
 
 <div class="wrap">
 
-<!-- ================= MAP EXPLORE ================= -->
-<section id="explore">
-  <h2><span class="dot"></span>地圖行程</h2>
-  <p class="lead">左邊地圖、右邊時間線，兩邊同步：撳地圖編號或者卡片都會更新下面嘅詳情條；撳「一鍵帶路」會自動逐站導覽。</p>
+<!-- ================= MAP · SYDNEY ================= -->
+<section id="sydney-map" class="city-sec" data-city="sydney">
+  <h2><span class="dot"></span>悉尼 Sydney · 行程地圖</h2>
+  <p class="lead">12/11 – 12/17 · 歌劇院、海灘、藍山同獵人谷。左邊地圖、右邊時間線兩邊同步，撳「一鍵帶路」會自動逐站導覽。</p>
 
   <div class="toolbar">
-    <div class="pills" id="pills"></div>
-    <button class="tool-btn" id="tourBtn"><span id="tourIco">🧭</span><span id="tourTxt">一鍵帶路</span></button>
+    <div class="pills js-pills"></div>
+    <button class="tool-btn js-tour"><span class="js-tour-ico">🧭</span><span class="js-tour-txt">一鍵帶路</span></button>
   </div>
 
-  <div class="legend" id="legend"></div>
+  <div class="legend js-legend"></div>
 
   <div class="layout">
     <div class="mapcol">
       <div class="mapcard">
-        <svg id="map" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" aria-label="行程分區示意地圖">
+        <svg class="js-map" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" aria-label="悉尼行程示意地圖">
           <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <pattern id="grid-syd" width="40" height="40" patternUnits="userSpaceOnUse">
               <path d="M40 0H0v40" fill="none" stroke="#e9e0d0" stroke-width="1"/>
             </pattern>
-            <radialGradient id="paper" cx="50%" cy="42%" r="72%">
+            <radialGradient id="paper-syd" cx="50%" cy="42%" r="72%">
               <stop offset="0%" stop-color="#fffdf8"/><stop offset="100%" stop-color="#f6ecdb"/>
             </radialGradient>
           </defs>
-          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#paper)"/>
-          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#grid)" opacity=".55"/>
-          <g id="halos"></g>
-          <g id="routes"></g>
-          <g id="labels"></g>
-          <g id="pins"></g>
+          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#paper-syd)"/>
+          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#grid-syd)" opacity=".55"/>
+          <g class="js-halos"></g>
+          <g class="js-routes"></g>
+          <g class="js-labels"></g>
+          <g class="js-pins"></g>
         </svg>
         <div class="maphint">點地圖編號 / 右側卡片 → 詳情條更新</div>
-        <div class="mascot" id="mascot" hidden>
-          <span class="face">🧭</span><span class="bubble" id="mascotTxt"></span>
+        <div class="mascot js-mascot" hidden>
+          <span class="face">🧭</span><span class="bubble js-mascot-txt"></span>
         </div>
       </div>
-      <div class="detail" id="detail">
-        <div class="dt-empty" id="dtEmpty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
-        <div class="dt-on" id="dtOn" hidden>
+      <div class="detail js-detail">
+        <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
+        <div class="dt-on js-on" hidden>
           <div class="dt-top">
-            <span class="dt-chip" id="dtChip">12/12</span>
-            <span class="dt-name" id="dtName">—</span>
-            <span class="dt-time" id="dtTime"></span>
+            <span class="dt-chip js-chip"></span>
+            <span class="dt-name js-name"></span>
+            <span class="dt-time js-time"></span>
           </div>
-          <p class="dt-desc" id="dtDesc"></p>
+          <p class="dt-desc js-desc"></p>
           <div class="dt-nav">
-            <button id="prevBtn">‹ 上一站</button>
-            <span class="dt-pos" id="dtPos"></span>
-            <button id="nextBtn">下一站 ›</button>
+            <button class="js-prev">‹ 上一站</button>
+            <span class="dt-pos js-pos"></span>
+            <button class="js-next">下一站 ›</button>
           </div>
         </div>
       </div>
     </div>
-    <div class="tlcol" id="timeline"></div>
+    <div class="tlcol js-timeline"></div>
   </div>
 </section>
+
+<!-- ================= MAP · MELBOURNE ================= -->
+<section id="melbourne-map" class="city-sec" data-city="melbourne">
+  <h2><span class="dot"></span>墨爾本 Melbourne · 行程地圖</h2>
+  <p class="lead">12/17 – 12/24 · 咖啡之都、彩虹小屋、十二門徒石同企鵝島。用法同上面一樣：撳編號或卡片就更新詳情。</p>
+
+  <div class="toolbar">
+    <div class="pills js-pills"></div>
+    <button class="tool-btn js-tour"><span class="js-tour-ico">🧭</span><span class="js-tour-txt">一鍵帶路</span></button>
+  </div>
+
+  <div class="legend js-legend"></div>
+
+  <div class="layout">
+    <div class="mapcol">
+      <div class="mapcard">
+        <svg class="js-map" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" role="img" aria-label="墨爾本行程示意地圖">
+          <defs>
+            <pattern id="grid-mel" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0H0v40" fill="none" stroke="#e9e0d0" stroke-width="1"/>
+            </pattern>
+            <radialGradient id="paper-mel" cx="50%" cy="42%" r="72%">
+              <stop offset="0%" stop-color="#fffdf8"/><stop offset="100%" stop-color="#f6ecdb"/>
+            </radialGradient>
+          </defs>
+          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#paper-mel)"/>
+          <rect x="-2400" y="-2000" width="6400" height="5200" fill="url(#grid-mel)" opacity=".55"/>
+          <g class="js-halos"></g>
+          <g class="js-routes"></g>
+          <g class="js-labels"></g>
+          <g class="js-pins"></g>
+        </svg>
+        <div class="maphint">點地圖編號 / 右側卡片 → 詳情條更新</div>
+        <div class="mascot js-mascot" hidden>
+          <span class="face">🧭</span><span class="bubble js-mascot-txt"></span>
+        </div>
+      </div>
+      <div class="detail js-detail">
+        <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
+        <div class="dt-on js-on" hidden>
+          <div class="dt-top">
+            <span class="dt-chip js-chip"></span>
+            <span class="dt-name js-name"></span>
+            <span class="dt-time js-time"></span>
+          </div>
+          <p class="dt-desc js-desc"></p>
+          <div class="dt-nav">
+            <button class="js-prev">‹ 上一站</button>
+            <span class="dt-pos js-pos"></span>
+            <button class="js-next">下一站 ›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tlcol js-timeline"></div>
+  </div>
+</section>
+
 
 <!-- ================= FLIGHTS ================= -->
 <section id="flights">
@@ -569,437 +629,467 @@ const FREE_NOTE = [
 ];
 
 /* =========================================================
-   2. 工具：投影 / 顏色 / 索引
+   2. 引擎：每個城市一個獨立實例（地圖＋時間線＋詳情條）
    ========================================================= */
-const SVG = document.getElementById('map');
-const G_HALOS = document.getElementById('halos');
-const G_ROUTES = document.getElementById('routes');
-const G_PINS = document.getElementById('pins');
-const G_LABELS = document.getElementById('labels');
 const NS = 'http://www.w3.org/2000/svg';
 const W = 1200, H = 800, PAD = 46;
+const FULL_VIEW = {x:0, y:0, w:W, h:H};
 
-/* 依「目前可見」嘅 POI 重新投影到畫布（示意圖，非等比例）
-   — 只睇一日時會自動放大成當日範圍，唔會幾個 pin 疊埋一齊 */
-function reproject(list){
-  if (!list.length) return;
-  const la = list.map(p => p.lat), ln = list.map(p => p.lng);
-  const laMin = Math.min(...la), laMax = Math.max(...la);
-  const lnMin = Math.min(...ln), lnMax = Math.max(...ln);
-  const midLat = (laMin + laMax) / 2;
-  const cos = Math.max(.35, Math.cos(midLat * Math.PI / 180));   /* 經度換算比例 */
-  /* 最小跨度：避免單點／同點時除以 0 */
-  const spanLa = Math.max(laMax - laMin, 0.006);
-  const spanLn = Math.max(lnMax - lnMin, 0.006 * cos);
-  const cLa = (laMin + laMax) / 2, cLn = (lnMin + lnMax) / 2;
-  const s = Math.min((W - PAD*2) / (spanLn * cos), (H - PAD*2) / spanLa);
-  list.forEach(p => {
-    p._x = W/2 + (p.lng - cLn) * cos * s;
-    p._y = H/2 - (p.lat - cLa) * s;
-  });
-}
-
-const byId = {};
-POIS.forEach(p => { byId[p.id] = p; });
-/* 每日內嘅次序（用嚟做編號 1..n） */
-const daySeq = {};
-POIS.forEach(p => { daySeq[p.day] = daySeq[p.day] || []; daySeq[p.day].push(p); });
-Object.keys(daySeq).forEach(d => daySeq[d].forEach((p,i) => { p._n = i + 1; }));
+/* 城市分區：日 12–16 悉尼；日 17 起墨爾本（d17-1 起飛屬悉尼） */
+POIS.forEach(p => {
+  p._city = (p.id === 'd17-1') ? 'sydney' : (p.day <= 16 ? 'sydney' : 'melbourne');
+});
 
 const dayColor = d => (DAYS[d] ? DAYS[d].color : '#0e5a7a');
 const catInfo  = c => (CATS[c] || {c:'#8d8375', i:'•'});
+const byId = {};
+POIS.forEach(p => { byId[p.id] = p; });
 
-/* =========================================================
-   3. 篩選狀態 + 地圖視野
-   ========================================================= */
-let curDay = null;        // null = 全部
-let curList = [];         // 目前可見 POIS（依序）
-let curIndex = -1;        // 選中位置
-let tourTimer = null;
+/* 每日內次序（編號 1..n） */
+const dayOrder = {};
+POIS.forEach(p => { (dayOrder[p.day] = dayOrder[p.day] || []).push(p); });
+Object.keys(dayOrder).forEach(d => dayOrder[d].forEach((p,i) => { p._n = i + 1; }));
 
-function visiblePois(){
-  return curDay === null ? POIS : POIS.filter(p => p.day === curDay);
-}
-
-/* viewBox 補間動畫（有 timeout 保險，避免 rAF 被節流時卡喺中間值） */
-let vbRaf = null, vbFallback = null;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lastActive = null;   /* 鍵盤 ←/→ 操控最後互動嗰個城市 */
 
-function applyView(t){
-  SVG.setAttribute('viewBox', [t.x, t.y, t.w, t.h].map(v => (+v).toFixed(2)).join(' '));
-  scalePins();
-}
+function MakeCity(section){
+  const city = section.dataset.city;
+  const pool = POIS.filter(p => p._city === city);
+  const days = [...new Set(pool.map(p => p.day))].sort((a,b) => a-b);
 
-function tweenView(target, instant){
-  const vb = SVG.viewBox.baseVal;
-  if (vbRaf) { cancelAnimationFrame(vbRaf); vbRaf = null; }
-  if (vbFallback) { clearTimeout(vbFallback); vbFallback = null; }
-  if (instant || reducedMotion) { applyView(target); return; }
+  const svg     = section.querySelector('.js-map');
+  const gRoute  = section.querySelector('.js-routes');
+  const gPin    = section.querySelector('.js-pins');
+  const gLabel  = section.querySelector('.js-labels');
+  const elPills = section.querySelector('.js-pills');
+  const elLegend= section.querySelector('.js-legend');
+  const elTL    = section.querySelector('.js-timeline');
+  const elEmpty = section.querySelector('.js-empty');
+  const elOn    = section.querySelector('.js-on');
+  const elChip  = section.querySelector('.js-chip');
+  const elName  = section.querySelector('.js-name');
+  const elTime  = section.querySelector('.js-time');
+  const elDesc  = section.querySelector('.js-desc');
+  const elPos   = section.querySelector('.js-pos');
+  const btnTour = section.querySelector('.js-tour');
+  const tourIco = section.querySelector('.js-tour-ico');
+  const tourTxt = section.querySelector('.js-tour-txt');
+  const mascot  = section.querySelector('.js-mascot');
+  const mascotTxt = section.querySelector('.js-mascot-txt');
 
-  const from = {x:vb.x, y:vb.y, w:vb.width, h:vb.height};
-  const t0 = performance.now();
-  const step = now => {
-    const k = Math.min(1, (now - t0) / 420);
-    const e = 1 - Math.pow(1 - k, 3);   /* easeOutCubic */
-    applyView({
-      x: from.x + (target.x - from.x) * e,
-      y: from.y + (target.y - from.y) * e,
-      w: from.w + (target.w - from.w) * e,
-      h: from.h + (target.h - from.h) * e
+  let curDay = null, list = pool, idx = -1;
+  let timer = null, vbRaf = null, vbFallback = null;
+
+  /* ---------- 投影（fisheye 壓縮） ---------- */
+  function reproject(arr, pow){
+    if (!arr.length) return;
+    const la = arr.map(p => p.lat), ln = arr.map(p => p.lng);
+    const midLat = (Math.min(...la) + Math.max(...la)) / 2;
+    const cos = Math.max(.35, Math.cos(midLat * Math.PI / 180));
+    const xs = ln.map(v => v * cos), ys = la;
+    const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
+    const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+    let rMax = 0;
+    arr.forEach((p,i) => { rMax = Math.max(rMax, Math.hypot(xs[i]-cx, ys[i]-cy)); });
+    rMax = Math.max(rMax, .002);
+    const POW = pow || .56;
+    const pts = arr.map((p,i) => {
+      const dx = xs[i]-cx, dy = ys[i]-cy, r = Math.hypot(dx,dy);
+      if (r < 1e-9) return {x:0, y:0};
+      const k = Math.pow(r/rMax, POW) * rMax / r;
+      return {x: dx*k, y: dy*k};
     });
-    if (k < 1) vbRaf = requestAnimationFrame(step); else vbRaf = null;
-  };
-  vbRaf = requestAnimationFrame(step);
-  /* 保險：420ms 後一定落到終點 */
-  vbFallback = setTimeout(() => {
+    const rx = Math.max(...pts.map(q => Math.abs(q.x)), 1e-9);
+    const ry = Math.max(...pts.map(q => Math.abs(q.y)), 1e-9);
+    const s = Math.min((W/2 - PAD)/rx, (H/2 - PAD)/ry);
+    arr.forEach((p,i) => { p._x = W/2 + pts[i].x*s; p._y = H/2 - pts[i].y*s; });
+  }
+
+  /* ---------- viewBox 動畫 ---------- */
+  function applyView(t){
+    svg.setAttribute('viewBox', [t.x, t.y, t.w, t.h].map(v => (+v).toFixed(2)).join(' '));
+    scalePins();
+  }
+  function tweenView(target, instant){
+    const vb = svg.viewBox.baseVal;
     if (vbRaf) { cancelAnimationFrame(vbRaf); vbRaf = null; }
-    applyView(target);
-  }, 470);
-}
-
-/* 全畫布視野（投影已按可見範圍重新 fit，所以只需回到 0,0,W,H） */
-const FULL_VIEW = {x:0, y:0, w:W, h:H};
-function fitView(instant){
-  tweenView(FULL_VIEW, instant);
-}
-
-/* pin 大小隨視野縮放，保持螢幕上大小穩定
-   screen_px = r_user × (displayWidth / viewBoxWidth) → 令 r_user ∝ vb.width / displayWidth */
-function scalePins(){
-  const vb = SVG.viewBox.baseVal;
-  const px = SVG.getBoundingClientRect().width || 600;   /* 實際 CSS 像素闊度 */
-  const k = Math.max(.15, Math.min(4, vb.width / px));
-  SVG.style.setProperty('--ps', k.toFixed(4));
-  G_ROUTES.querySelectorAll('.route').forEach(el => {
-    el.setAttribute('stroke-width', (3 * k).toFixed(2));
-    el.setAttribute('stroke-dasharray', el.dataset.alt === '1' ? (7*k).toFixed(1) + ' ' + (6*k).toFixed(1) : '');
-  });
-}
-
-/* =========================================================
-   4. 渲染：圖例 / 篩選 / 地圖 / 時間線
-   ========================================================= */
-function renderLegend(){
-  const dayItems = Object.keys(DAYS).map(d =>
-    `<span class="lg-item"><i style="--c:${DAYS[d].color}"></i>${DAYS[d].label.replace('（','(').replace('）',')')}</span>`
-  ).join('');
-  const catItems = Object.keys(CATS).map(c =>
-    `<span class="lg-item"><i style="--c:${CATS[c].c}"></i>${c}</span>`
-  ).join('');
-  document.getElementById('legend').innerHTML =
-    `<div class="lg-grp"><span>分區</span>${dayItems}</div>
-     <div class="lg-grp"><span>類別</span>${catItems}</div>
-     <div class="lg-grp"><span class="lg-item dash"><i></i>備選／機動</span></div>`;
-}
-
-function renderPills(){
-  const items = [`<button class="pill${curDay===null?' is-on':''}" data-day="all" style="--pc:var(--ocean)">全部</button>`];
-  Object.keys(DAYS).forEach(d => {
-    const on = String(curDay) === d;
-    items.push(`<button class="pill${on?' is-on':''}" data-day="${d}" style="${on?`background:${DAYS[d].color};border-color:transparent;box-shadow:0 5px 14px ${DAYS[d].color}55`:`color:${DAYS[d].color}`}">${DAYS[d].label.replace('（','(').replace('）',')')}</button>`);
-  });
-  document.getElementById('pills').innerHTML = items.join('');
-}
-
-function renderMap(){
-  /* 只重畫可見嘅路線／pin */
-  const list = visiblePois();
-  G_ROUTES.innerHTML = '';
-  G_PINS.innerHTML = '';
-  G_HALOS.innerHTML = '';
-  G_LABELS.innerHTML = '';
-
-  /* 全覽：畫兩個城市群組光暈＋標籤＋內陸機虛線 */
-  if (curDay === null){
-    const regions = [
-      {name:'悉尼 Sydney', lat:-33.87, lng:151.21, list:list.filter(p => p.lng > 149)},
-      {name:'墨爾本 Melbourne', lat:-37.81, lng:144.96, list:list.filter(p => p.lng <= 149)}
-    ];
-    regions.forEach(rg => {
-      if (!rg.list.length) return;
-      const xs = rg.list.map(p => p._x), ys = rg.list.map(p => p._y);
-      const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
-      const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
-      const rx = (Math.max(...xs) - Math.min(...xs)) / 2 + 62;
-      const ry = (Math.max(...ys) - Math.min(...ys)) / 2 + 62;
-      const halo = document.createElementNS(NS, 'ellipse');
-      halo.setAttribute('cx', cx); halo.setAttribute('cy', cy);
-      halo.setAttribute('rx', rx); halo.setAttribute('ry', ry);
-      halo.setAttribute('fill', 'rgba(14,90,122,.045)');
-      halo.setAttribute('stroke', '#d3c4a8');
-      halo.setAttribute('stroke-width', '1.6');
-      halo.setAttribute('stroke-dasharray', '7 8');
-      G_HALOS.appendChild(halo);
-      const t = document.createElementNS(NS, 'text');
-      t.setAttribute('x', cx);
-      t.setAttribute('y', Math.max(34, cy - ry - 12));   /* 避免被畫布頂部切走 */
-      t.setAttribute('text-anchor', 'middle');
-      t.setAttribute('font-size', '22'); t.setAttribute('font-weight', '800');
-      t.setAttribute('letter-spacing', '3');
-      t.setAttribute('fill', '#b3a184');
-      t.textContent = rg.name;
-      G_LABELS.appendChild(t);
-    });
-
-    /* 內陸機虛線（悉尼機場 ↔ 墨爾本機場） */
-    const a = byId['d17-1'], b = byId['d17-2'];
-    if (a && b){
-      const line = document.createElementNS(NS, 'polyline');
-      line.setAttribute('points', `${a._x},${a._y} ${b._x},${b._y}`);
-      line.setAttribute('fill', 'none');
-      line.setAttribute('stroke', '#b9a888');
-      line.setAttribute('stroke-width', '2');
-      line.setAttribute('stroke-dasharray', '3 9');
-      line.setAttribute('opacity', '.8');
-      G_HALOS.appendChild(line);
-      const t = document.createElementNS(NS, 'text');
-      t.setAttribute('x', (a._x + b._x) / 2 + 14);
-      t.setAttribute('y', (a._y + b._y) / 2);
-      t.setAttribute('font-size', '17'); t.setAttribute('font-weight', '700');
-      t.setAttribute('fill', '#a3906f');
-      t.textContent = '✈ 內陸機約 1.5 小時';
-      G_LABELS.appendChild(t);
-    }
+    if (vbFallback) { clearTimeout(vbFallback); vbFallback = null; }
+    if (instant || reducedMotion) { applyView(target); return; }
+    const from = {x:vb.x, y:vb.y, w:vb.width, h:vb.height};
+    const t0 = performance.now();
+    const step = now => {
+      const k = Math.min(1, (now - t0) / 420);
+      const e = 1 - Math.pow(1 - k, 3);
+      applyView({
+        x: from.x + (target.x - from.x) * e,
+        y: from.y + (target.y - from.y) * e,
+        w: from.w + (target.w - from.w) * e,
+        h: from.h + (target.h - from.h) * e
+      });
+      if (k < 1) vbRaf = requestAnimationFrame(step); else vbRaf = null;
+    };
+    vbRaf = requestAnimationFrame(step);
+    vbFallback = setTimeout(() => {
+      if (vbRaf) { cancelAnimationFrame(vbRaf); vbRaf = null; }
+      applyView(target);
+    }, 470);
   }
 
-  /* 路線：逐段畫，alt 段用虛線 */
-  const byDay = {};
-  list.forEach(p => { byDay[p.day] = byDay[p.day] || []; byDay[p.day].push(p); });
-  Object.keys(byDay).forEach(d => {
-    const arr = byDay[d];
-    const col = dayColor(Number(d));
-    for (let i = 0; i < arr.length - 1; i++){
-      const a = arr[i], b = arr[i+1];
-      const alt = !!(a.alt || b.alt);
-      const line = document.createElementNS(NS, 'polyline');
-      line.setAttribute('points', `${a._x},${a._y} ${b._x},${b._y}`);
-      line.setAttribute('class', 'route');
-      line.setAttribute('stroke', col);
-      line.dataset.alt = alt ? '1' : '0';
-      if (alt) line.setAttribute('opacity', '.55');
-      G_ROUTES.appendChild(line);
+  function scalePins(){
+    const vb = svg.viewBox.baseVal;
+    const px = svg.getBoundingClientRect().width || 600;
+    const k = Math.max(.15, Math.min(4, vb.width / px));
+    svg.style.setProperty('--ps', k.toFixed(4));
+    gRoute.querySelectorAll('.route').forEach(el => {
+      el.setAttribute('stroke-width', (3 * k).toFixed(2));
+      el.setAttribute('stroke-dasharray', el.dataset.alt === '1'
+        ? (7*k).toFixed(1) + ' ' + (6*k).toFixed(1) : '');
+    });
+  }
+
+  /* ---------- 圖例 / 膠囊 ---------- */
+  function renderLegend(){
+    const dayItems = days.map(d =>
+      `<span class="lg-item"><i style="--c:${DAYS[d].color}"></i>${DAYS[d].label.replace('（','(').replace('）',')')}</span>`
+    ).join('');
+    const catItems = Object.keys(CATS).map(c =>
+      `<span class="lg-item"><i style="--c:${CATS[c].c}"></i>${c}</span>`
+    ).join('');
+    elLegend.innerHTML =
+      `<div class="lg-grp"><span>分區</span>${dayItems}</div>
+       <div class="lg-grp"><span>類別</span>${catItems}</div>
+       <div class="lg-grp"><span class="lg-item dash"><i></i>備選／機動</span></div>`;
+  }
+
+  function renderPills(){
+    let h = `<button class="pill${curDay===null?' is-on':''}" data-day="all">全部</button>`;
+    days.forEach(d => {
+      const on = String(curDay) === String(d);
+      const col = DAYS[d].color;
+      h += `<button class="pill${on?' is-on':''}" data-day="${d}" style="${on
+        ? `background:${col};border-color:transparent;box-shadow:0 5px 14px ${col}55`
+        : `color:${col}`}">${DAYS[d].label.replace('（','(').replace('）',')')}</button>`;
+    });
+    elPills.innerHTML = h;
+  }
+
+  /* ---------- 每日中心點（全覽用） ---------- */
+  function dayCentroids(){
+    return days.map(d => {
+      const arr = pool.filter(p => p.day === d);
+      return {
+        day: d, n: arr.length,
+        lat: arr.reduce((s,p) => s + p.lat, 0) / arr.length,
+        lng: arr.reduce((s,p) => s + p.lng, 0) / arr.length
+      };
+    });
+  }
+
+  /* ---------- 地圖 ---------- */
+  function renderMap(){
+    gRoute.innerHTML = '';
+    gPin.innerHTML = '';
+    if (gLabel) gLabel.innerHTML = '';
+
+    /* 全覽：每日一個編號標記 */
+    if (curDay === null){
+      const cs = dayCentroids();
+      reproject(cs, .40);
+      /* 標記防重疊：互相推開，最少 54 單位 */
+      for (let it = 0; it < 8; it++) {
+        for (let i = 0; i < cs.length; i++) {
+          for (let j = i + 1; j < cs.length; j++) {
+            let dx = cs[j]._x - cs[i]._x, dy = cs[j]._y - cs[i]._y;
+            const d = Math.hypot(dx, dy) || 1, minD = 54;
+            if (d < minD) {
+              const push = (minD - d) / 2, ux = dx / d, uy = dy / d;
+              cs[i]._x -= ux * push; cs[i]._y -= uy * push;
+              cs[j]._x += ux * push; cs[j]._y += uy * push;
+            }
+          }
+        }
+      }
+      cs.forEach(c => {
+        c._x = Math.max(PAD, Math.min(W - PAD, c._x));
+        c._y = Math.max(PAD, Math.min(H - PAD, c._y));
+      });
+      /* 連線（日與日之間，虛線） */
+      for (let i = 0; i < cs.length - 1; i++){
+        const line = document.createElementNS(NS, 'polyline');
+        line.setAttribute('points', `${cs[i]._x},${cs[i]._y} ${cs[i+1]._x},${cs[i+1]._y}`);
+        line.setAttribute('class', 'route');
+        line.setAttribute('stroke', '#b9a888');
+        line.dataset.alt = '1';
+        line.setAttribute('opacity', '.5');
+        gRoute.appendChild(line);
+      }
+      cs.forEach(c => {
+        const col = dayColor(c.day);
+        const el = document.createElementNS(NS, 'g');
+        el.setAttribute('class', 'pin');
+        el.setAttribute('data-day', c.day);
+        el.setAttribute('transform', `translate(${c._x},${c._y})`);
+        el.innerHTML =
+          `<circle class="ring" r="26" fill="none" stroke="${col}" stroke-width="2.5"></circle>
+           <g class="pin-in">
+             <circle r="17" fill="${col}" stroke="#123038" stroke-width="2"></circle>
+             <text y="5" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">${c.day}</text>
+             <circle cx="15" cy="-15" r="7" fill="#fff" stroke="${col}" stroke-width="1.6"></circle>
+             <text x="15" y="-12" text-anchor="middle" font-size="7.5" font-weight="800" fill="${col}">${c.n}</text>
+           </g>`;
+        gPin.appendChild(el);
+      });
+      scalePins();
+      return;
     }
-  });
 
-  /* Pins */
-  list.forEach(p => {
-    const col = dayColor(p.day);
-    const g = document.createElementNS(NS, 'g');
-    g.setAttribute('class', 'pin');
-    g.setAttribute('data-id', p.id);
-    g.setAttribute('transform', `translate(${p._x},${p._y})`);
-    g.innerHTML =
-      `<circle class="ring" r="21" fill="none" stroke="${col}" stroke-width="2.5" opacity="0"></circle>
-       <g class="pin-in">
-         <circle r="13" fill="${col}" stroke="#123038" stroke-width="2"></circle>
-         <text y="4.6" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">${p._n}</text>
-       </g>`;
-    G_PINS.appendChild(g);
-  });
+    /* 單日：POI pin + 路線 */
+    const vis = visible();
+    reproject(vis);
+    const g = {};
+    vis.forEach(p => { (g[p.day] = g[p.day] || []).push(p); });
+    Object.keys(g).forEach(d => {
+      const arr = g[d], col = dayColor(Number(d));
+      for (let i = 0; i < arr.length - 1; i++){
+        const a = arr[i], b = arr[i+1];
+        const alt = !!(a.alt || b.alt);
+        const line = document.createElementNS(NS, 'polyline');
+        line.setAttribute('points', `${a._x},${a._y} ${b._x},${b._y}`);
+        line.setAttribute('class', 'route');
+        line.setAttribute('stroke', col);
+        line.dataset.alt = alt ? '1' : '0';
+        if (alt) line.setAttribute('opacity', '.55');
+        gRoute.appendChild(line);
+      }
+    });
+    vis.forEach(p => {
+      const col = dayColor(p.day);
+      const el = document.createElementNS(NS, 'g');
+      el.setAttribute('class', 'pin');
+      el.setAttribute('data-id', p.id);
+      el.setAttribute('transform', `translate(${p._x},${p._y})`);
+      el.innerHTML =
+        `<circle class="ring" r="21" fill="none" stroke="${col}" stroke-width="2.5"></circle>
+         <g class="pin-in">
+           <circle r="13" fill="${col}" stroke="#123038" stroke-width="2"></circle>
+           <text y="4.6" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">${p._n}</text>
+         </g>`;
+      gPin.appendChild(el);
+    });
+    scalePins();
+    applySelectionStyles();
+  }
 
-  scalePins();
-  applySelectionStyles();
-}
-
-function renderTimeline(){
-  const groups = {};
-  visiblePois().forEach(p => { groups[p.day] = groups[p.day] || []; groups[p.day].push(p); });
-  let html = '';
-  Object.keys(groups).sort((a,b) => a-b).forEach(d => {
-    const meta = DAYS[d], col = meta.color;
-    html += `<div class="tl-card" data-day="${d}" style="--dc:${col}">
-      <div class="tl-head">
-        <div class="tl-num">${d}</div>
-        <div><div class="tl-h-t">${meta.title}</div><div class="tl-h-s">${meta.label} · ${meta.sub}</div></div>
-      </div>
-      <div class="tl-body">`;
-    groups[d].forEach(p => {
-      const ci = catInfo(p.cat);
-      html += `<div class="tl-item${p.alt?' is-alt':''}" data-id="${p.id}" data-n="${p._n}" style="--dc:${col};--c:${ci.c}">
-        <div class="tl-time">${p.time}</div>
-        <div class="tl-main">
-          <div class="tl-name">${p.name}<i></i><span style="font-size:.7rem;color:${ci.c};font-weight:700">${p.cat}</span></div>
-          <div class="tl-desc">${p.desc}${p.alt?' <b style="color:#b34700">（備選）</b>':''}</div>
+  /* ---------- 時間線 ---------- */
+  function renderTimeline(){
+    const vis = visible();
+    const g = {};
+    vis.forEach(p => { (g[p.day] = g[p.day] || []).push(p); });
+    let html = '';
+    Object.keys(g).sort((a,b) => a-b).forEach(d => {
+      const meta = DAYS[d], col = meta.color;
+      html += `<div class="tl-card" data-day="${d}" style="--dc:${col}">
+        <div class="tl-head">
+          <div class="tl-num">${d}</div>
+          <div><div class="tl-h-t">${meta.title}</div><div class="tl-h-s">${meta.label} · ${meta.sub}</div></div>
         </div>
-      </div>`;
+        <div class="tl-body">`;
+      g[d].forEach(p => {
+        const ci = catInfo(p.cat);
+        html += `<div class="tl-item${p.alt?' is-alt':''}" data-id="${p.id}" data-n="${p._n}" style="--dc:${col};--c:${ci.c}">
+          <div class="tl-time">${p.time}</div>
+          <div class="tl-main">
+            <div class="tl-name">${p.name}<i></i><span style="font-size:.7rem;color:${ci.c};font-weight:700">${p.cat}</span></div>
+            <div class="tl-desc">${p.desc}${p.alt?' <b style="color:#b34700">（備選）</b>':''}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
     });
-    html += `</div></div>`;
-  });
 
-  if (curDay === null){
-    html += `<div class="tl-free"><b>後段彈性日</b><ul>` +
-      FREE_NOTE.map(n => `<li><b>${n.d}</b> ${n.t}</li>`).join('') + `</ul></div>`;
-  }
-  document.getElementById('timeline').innerHTML = html;
-}
-
-/* =========================================================
-   5. 選中聯動
-   ========================================================= */
-function applySelectionStyles(){
-  const selId = curIndex >= 0 && curList[curIndex] ? curList[curIndex].id : null;
-  G_PINS.querySelectorAll('.pin').forEach(g => {
-    g.classList.toggle('is-on', g.dataset.id === selId);
-    g.classList.toggle('is-off', !!selId && g.dataset.id !== selId);
-  });
-  document.querySelectorAll('.tl-item').forEach(el => {
-    el.classList.toggle('is-on', el.dataset.id === selId);
-  });
-  document.querySelectorAll('.tl-card').forEach(card => {
-    const has = !!card.querySelector('.tl-item.is-on');
-    card.classList.toggle('is-dim', !!selId && !has);
-  });
-}
-
-function updateDetail(){
-  const p = curList[curIndex];
-  const empty = document.getElementById('dtEmpty');
-  const on = document.getElementById('dtOn');
-  if (!p){ empty.hidden = false; on.hidden = true; return; }
-  empty.hidden = true; on.hidden = false;
-  const col = dayColor(p.day), ci = catInfo(p.cat);
-  document.getElementById('dtChip').textContent = DAYS[p.day].label;
-  document.getElementById('dtChip').style.background = col;
-  document.getElementById('dtName').textContent = p.name;
-  document.getElementById('dtName').style.color = col;
-  document.getElementById('dtTime').textContent = `${p.time}　·　${ci.i} ${p.cat}${p.alt ? '　·　備選' : ''}`;
-  document.getElementById('dtDesc').textContent = p.desc;
-  document.getElementById('dtPos').textContent = `${curIndex + 1} / ${curList.length}`;
-}
-
-function select(id, opts){
-  const o = opts || {};
-  const idx = curList.findIndex(p => p.id === id);
-  if (idx < 0) return;
-  curIndex = idx;
-  const p = curList[idx];
-  updateDetail();
-  applySelectionStyles();
-
-  /* 地圖：只喺 pin 走出安全區先 pan 過去（保持縮放，唔會推走其他站） */
-  const vb0 = SVG.viewBox.baseVal;
-  const sx = (p._x - vb0.x) / vb0.width;
-  const sy = (p._y - vb0.y) / vb0.height;
-  if (sx < .14 || sx > .86 || sy < .14 || sy > .86){
-    const pad = 40;
-    const x = Math.max(-pad, Math.min(W - vb0.width + pad, p._x - vb0.width/2));
-    const y = Math.max(-pad, Math.min(H - vb0.height + pad, p._y - vb0.height/2));
-    tweenView({x, y, w: vb0.width, h: vb0.height});
+    if (city === 'melbourne' && curDay === null){
+      html += `<div class="tl-free"><b>後段彈性日</b><ul>` +
+        FREE_NOTE.map(n => `<li><b>${n.d}</b> ${n.t}</li>`).join('') + `</ul></div>`;
+    }
+    elTL.innerHTML = html;
   }
 
-  /* 時間線跟隨 */
-  if (o.scroll !== false){
-    const el = document.querySelector(`.tl-item[data-id="${id}"]`);
-    if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+  /* ---------- 選中樣式 ---------- */
+  function applySelectionStyles(){
+    const sel = (idx >= 0 && list[idx]) ? list[idx].id : null;
+    gPin.querySelectorAll('.pin').forEach(el => {
+      el.classList.toggle('is-on', el.dataset.id === sel);
+      el.classList.toggle('is-off', !!sel && el.dataset.id !== sel);
+    });
+    elTL.querySelectorAll('.tl-item').forEach(el => {
+      el.classList.toggle('is-on', el.dataset.id === sel);
+    });
+    elTL.querySelectorAll('.tl-card').forEach(card => {
+      card.classList.toggle('is-dim', !!sel && !card.querySelector('.tl-item.is-on'));
+    });
   }
-  /* mascot 講一句（導覽模式先顯示） */
-  if (o.say){
-    const m = document.getElementById('mascot');
-    document.getElementById('mascotTxt').innerHTML = o.say;
-    m.hidden = false;
+
+  function updateDetail(){
+    const p = list[idx];
+    if (!p){ elEmpty.hidden = false; elOn.hidden = true; return; }
+    elEmpty.hidden = true; elOn.hidden = false;
+    const ci = catInfo(p.cat);
+    elChip.textContent = DAYS[p.day].label;
+    elChip.style.background = dayColor(p.day);
+    elName.textContent = p.name;
+    elName.style.color = dayColor(p.day);
+    elTime.textContent = `${p.time}　·　${ci.i} ${p.cat}${p.alt ? '　·　備選' : ''}`;
+    elDesc.textContent = p.desc;
+    elPos.textContent = `${idx + 1} / ${list.length}`;
   }
-}
 
-function step(dir){
-  if (!curList.length) return;
-  curIndex = (curIndex + dir + curList.length) % curList.length;
-  select(curList[curIndex].id, {scroll:true});
-}
+  function visible(){
+    return curDay === null ? pool : pool.filter(p => p.day === curDay);
+  }
 
-/* =========================================================
-   6. 篩選 / 自動導覽
-   ========================================================= */
-function setFilter(day){
-  stopTour();
-  curDay = day;
-  curList = visiblePois();
-  curIndex = -1;
-  reproject(curList);       /* 按新範圍重新投影（單日會放大） */
+  /* ---------- 套用篩選 ---------- */
+  function applyFilter(day, opts){
+    const o = opts || {};
+    if (!o.keepTour) stopTour();
+    curDay = day;
+    list = visible();
+    idx = -1;
+    renderPills();
+    renderMap();
+    renderTimeline();
+    updateDetail();
+    tweenView(FULL_VIEW, true);
+    mascot.hidden = true;
+    lastActive = api;
+  }
+
+  /* ---------- 點選一站 ---------- */
+  function select(id, opts){
+    const o = opts || {};
+    const p0 = byId[id];
+    if (!p0) return;
+    if (curDay === null) applyFilter(p0.day, {keepTour: !!o.keepTour});
+    const i = list.findIndex(x => x.id === id);
+    if (i < 0) return;
+    idx = i;
+    const p = list[i];
+    updateDetail();
+    applySelectionStyles();
+    lastActive = api;
+
+    const vb = svg.viewBox.baseVal;
+    const sx = (p._x - vb.x) / vb.width;
+    const sy = (p._y - vb.y) / vb.height;
+    if (sx < .14 || sx > .86 || sy < .14 || sy > .86){
+      const pad = 40;
+      tweenView({
+        x: Math.max(-pad, Math.min(W - vb.width + pad, p._x - vb.width/2)),
+        y: Math.max(-pad, Math.min(H - vb.height + pad, p._y - vb.height/2)),
+        w: vb.width, h: vb.height
+      });
+    }
+
+    if (o.scroll !== false){
+      const el = elTL.querySelector(`.tl-item[data-id="${id}"]`);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    if (o.say){
+      mascotTxt.innerHTML = o.say;
+      mascot.hidden = false;
+    }
+  }
+
+  function step(dir){
+    if (!list.length) return;
+    if (curDay === null){   /* 全覽：由第一日開始 */
+      applyFilter(days[dir > 0 ? 0 : days.length - 1]);
+      idx = dir > 0 ? -1 : 0;
+    }
+    idx = (idx + dir + list.length) % list.length;
+    select(list[idx].id, {scroll:true});
+  }
+
+  /* ---------- 自動導覽（逐日行） ---------- */
+  function startTour(){
+    if (timer) return;
+    const seq = curDay === null ? days.slice() : [curDay];
+    let di = 0, pi = 0;
+    btnTour.classList.add('is-on');
+    tourTxt.textContent = '導覽中…（撳一下停止）';
+    tourIco.textContent = '⏸';
+
+    const next = () => {
+      if (di >= seq.length){ stopTour(true); return; }
+      if (pi === 0) applyFilter(seq[di], {keepTour:true});
+      if (pi >= list.length){ di++; pi = 0; next(); return; }
+      const p = list[pi];
+      idx = pi;
+      select(p.id, {scroll:true, keepTour:true,
+        say:`第 ${pi+1} 站：${p.name} — ${p.desc}`});
+      pi++;
+      timer = setTimeout(next, 3600);
+    };
+    next();
+  }
+
+  function stopTour(finished){
+    if (timer){ clearTimeout(timer); timer = null; }
+    btnTour.classList.remove('is-on');
+    tourTxt.textContent = '一鍵帶路';
+    tourIco.textContent = '🧭';
+    if (finished){
+      mascotTxt.innerHTML = '行完喇！呢個城市嘅站都帶你睇過一次 🎉 可以再撳一次重播。';
+      mascot.hidden = false;
+      setTimeout(() => { mascot.hidden = true; }, 4000);
+    }
+  }
+
+  /* ---------- 事件 ---------- */
+  elPills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if (!b) return;
+    applyFilter(b.dataset.day === 'all' ? null : Number(b.dataset.day));
+  });
+
+  gPin.addEventListener('click', e => {
+    const el = e.target.closest('.pin');
+    if (!el) return;
+    if (el.dataset.day){ applyFilter(Number(el.dataset.day)); return; }
+    select(el.dataset.id, {scroll:true});
+  });
+
+  elTL.addEventListener('click', e => {
+    const it = e.target.closest('.tl-item');
+    if (!it) return;
+    select(it.dataset.id, {scroll:false});
+  });
+
+  section.querySelector('.js-prev').addEventListener('click', () => step(-1));
+  section.querySelector('.js-next').addEventListener('click', () => step(1));
+  btnTour.addEventListener('click', () => { if (timer) stopTour(false); else startTour(); });
+
+  /* ---------- 初始化 ---------- */
+  renderLegend();
+  list = pool;
   renderPills();
   renderMap();
   renderTimeline();
+  tweenView(FULL_VIEW, true);
   updateDetail();
-  fitView(true);
-  document.getElementById('mascot').hidden = true;
+  window.addEventListener('resize', scalePins, {passive:true});
+
+  const api = {select, step, setFilter: applyFilter, startTour, stopTour};
+  return api;
 }
 
-function startTour(){
-  if (tourTimer) return;
-  curList = visiblePois();
-  if (!curList.length) return;
-  curIndex = -1;
-  document.getElementById('tourBtn').classList.add('is-on');
-  document.getElementById('tourTxt').textContent = '導覽中…（撳一下停止）';
-  document.getElementById('tourIco').textContent = '⏸';
-  const next = () => {
-    curIndex++;
-    if (curIndex >= curList.length){ stopTour(true); return; }
-    const p = curList[curIndex];
-    select(p.id, {say:`第 ${curIndex+1} 站：${p.name} — ${p.desc}`});
-    tourTimer = setTimeout(next, 3600);
-  };
-  next();
-}
+const CITIES = [...document.querySelectorAll('.city-sec')].map(MakeCity);
 
-function stopTour(finished){
-  if (tourTimer){ clearTimeout(tourTimer); tourTimer = null; }
-  document.getElementById('tourBtn').classList.remove('is-on');
-  document.getElementById('tourTxt').textContent = '一鍵帶路';
-  document.getElementById('tourIco').textContent = '🧭';
-  if (finished){
-    const m = document.getElementById('mascot');
-    document.getElementById('mascotTxt').innerHTML = '行完喇！全部站都帶你睇過一次 🎉 可以再撳一次重播。';
-    m.hidden = false;
-    setTimeout(() => { m.hidden = true; }, 4000);
-  }
-}
-
-/* =========================================================
-   7. 事件綁定
-   ========================================================= */
-document.getElementById('pills').addEventListener('click', e => {
-  const b = e.target.closest('.pill');
-  if (!b) return;
-  setFilter(b.dataset.day === 'all' ? null : Number(b.dataset.day));
-});
-
-G_PINS.addEventListener('click', e => {
-  const g = e.target.closest('.pin');
-  if (g) select(g.dataset.id, {scroll:true});
-});
-
-document.getElementById('timeline').addEventListener('click', e => {
-  const it = e.target.closest('.tl-item');
-  if (it) select(it.dataset.id, {scroll:false});
-});
-
-document.getElementById('prevBtn').addEventListener('click', () => step(-1));
-document.getElementById('nextBtn').addEventListener('click', () => step(1));
-
-document.getElementById('tourBtn').addEventListener('click', () => {
-  if (tourTimer) stopTour(false); else startTour();
-});
-
-/* 鍵盤左右切換 */
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft') step(-1);
-  if (e.key === 'ArrowRight') step(1);
+  if (!lastActive) return;
+  if (e.key === 'ArrowLeft') lastActive.step(-1);
+  if (e.key === 'ArrowRight') lastActive.step(1);
 });
-
-/* =========================================================
-   8. 初始化
-   ========================================================= */
-renderLegend();
-curList = visiblePois();
-reproject(curList);
-renderPills();
-renderMap();
-renderTimeline();
-fitView(true);            /* 首次顯示：直接定位，唔做動畫 */
-updateDetail();
-
-/* 視窗尺寸變動：重算 pin 大小（SVG 比例已固定，只重繪縮放） */
-window.addEventListener('resize', scalePins, {passive:true});
 
 /* =========================================================
    9. 倒數橫幅（原有功能）
