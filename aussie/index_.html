@@ -99,7 +99,21 @@
   .dt-chip{font-size:.72rem;font-weight:800;color:#fff;background:var(--dc,#0e5a7a);padding:1px 9px;border-radius:999px}
   .dt-name{font-size:1.05rem;font-weight:800;color:var(--ocean-dark)}
   .dt-time{font-size:.78rem;color:#8d8375;font-variant-numeric:tabular-nums}
-  .dt-desc{font-size:.88rem;color:#555;margin-top:5px}
+  .dt-on{display:flex;gap:12px;align-items:flex-start}
+  .dt-figure{flex:none;width:140px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:linear-gradient(130deg,#dfe9e2,#c8d9dd);display:flex;align-items:center;justify-content:center}
+  .dt-figure img{width:100%;height:100%;object-fit:cover;display:block}
+  .dt-figure[hidden]{display:none}
+  .dt-body{flex:1;min-width:0}
+  .dt-zh{font-size:.8rem;color:var(--muted);font-weight:500}
+  .dt-desc{font-size:.86rem;color:#555;margin-top:6px;line-height:1.75}
+  .dt-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+  .dt-line{width:100%;font-size:.79rem;color:var(--muted)}
+  .dt-line a{color:var(--ocean);font-weight:600;text-decoration:none}
+  .dt-line a:hover{text-decoration:underline}
+  .dt-pill{font-size:.78rem;font-weight:700;padding:2px 11px;border-radius:999px;background:var(--sand2);color:#9a6b1f}
+  .dt-pill[hidden]{display:none!important}
+  .dt-pill.dish{background:#fdf1e6;color:#b34700;border:1px solid #f5d9c9}
+  .dt-pill.book{background:var(--coral);color:#fff}
   .dt-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;border-top:1px dashed #eee3d2;padding-top:9px}
   .dt-nav button{font-size:.8rem;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid #dcd0bb;background:#fff;color:var(--ocean-dark);cursor:pointer;transition:all .18s}
   .dt-nav button:hover{background:var(--sand2);transform:translateY(-1px)}
@@ -182,6 +196,9 @@
   footer{text-align:center;padding:22px 20px 30px;color:var(--muted);font-size:.84rem;line-height:1.8}
 
   /* ---------- RWD ---------- */
+  @media(min-width:981px){
+    .detail{max-height:56vh;overflow-y:auto}
+  }
   @media(max-width:980px){
     .layout{grid-template-columns:1fr}
     .mapcol{position:static;top:auto}
@@ -198,7 +215,10 @@
     .cdbar__txt{font-size:11.5px;letter-spacing:.03em}
     .cdbar__txt b{font-size:13px}
     .flight{padding:12px 14px}
-    .maphint{font-size:.64rem;left:auto;right:8px;bottom:auto;top:8px;transform:none}
+    .maphint{font-size:.64rem}
+    .dt-on{flex-direction:column}
+    .dt-figure{width:100%;aspect-ratio:16/10}
+    .dt-desc{font-size:.84rem}
   }
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
@@ -262,16 +282,25 @@
       <div class="detail js-detail">
         <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
         <div class="dt-on js-on" hidden>
-          <div class="dt-top">
-            <span class="dt-chip js-chip"></span>
-            <span class="dt-name js-name"></span>
-            <span class="dt-time js-time"></span>
-          </div>
-          <p class="dt-desc js-desc"></p>
-          <div class="dt-nav">
-            <button class="js-prev">‹ 上一站</button>
-            <span class="dt-pos js-pos"></span>
-            <button class="js-next">下一站 ›</button>
+          <div class="dt-figure"><img class="js-photo" alt=""></div>
+          <div class="dt-body">
+            <div class="dt-top">
+              <span class="dt-chip js-chip"></span>
+              <span class="dt-name js-name"></span>
+              <span class="dt-zh js-zh"></span>
+            </div>
+            <p class="dt-desc js-desc"></p>
+            <div class="dt-meta">
+              <div class="dt-line js-hours"></div>
+              <span class="dt-pill js-cost" hidden></span>
+              <span class="dt-pill dish js-dish" hidden></span>
+              <span class="dt-pill book js-book" hidden>📌 需訂位／預約</span>
+            </div>
+            <div class="dt-nav">
+              <button class="js-prev">‹ 上一站</button>
+              <span class="dt-pos js-pos"></span>
+              <button class="js-next">下一站 ›</button>
+            </div>
           </div>
         </div>
       </div>
@@ -304,16 +333,25 @@
       <div class="detail js-detail">
         <div class="dt-empty js-empty"><span>👆</span>未揀站 — 撳地圖上嘅編號或者右邊時間線，詳情會顯示喺呢度。</div>
         <div class="dt-on js-on" hidden>
-          <div class="dt-top">
-            <span class="dt-chip js-chip"></span>
-            <span class="dt-name js-name"></span>
-            <span class="dt-time js-time"></span>
-          </div>
-          <p class="dt-desc js-desc"></p>
-          <div class="dt-nav">
-            <button class="js-prev">‹ 上一站</button>
-            <span class="dt-pos js-pos"></span>
-            <button class="js-next">下一站 ›</button>
+          <div class="dt-figure"><img class="js-photo" alt=""></div>
+          <div class="dt-body">
+            <div class="dt-top">
+              <span class="dt-chip js-chip"></span>
+              <span class="dt-name js-name"></span>
+              <span class="dt-zh js-zh"></span>
+            </div>
+            <p class="dt-desc js-desc"></p>
+            <div class="dt-meta">
+              <div class="dt-line js-hours"></div>
+              <span class="dt-pill js-cost" hidden></span>
+              <span class="dt-pill dish js-dish" hidden></span>
+              <span class="dt-pill book js-book" hidden>📌 需訂位／預約</span>
+            </div>
+            <div class="dt-nav">
+              <button class="js-prev">‹ 上一站</button>
+              <span class="dt-pos js-pos"></span>
+              <button class="js-next">下一站 ›</button>
+            </div>
           </div>
         </div>
       </div>
@@ -601,6 +639,10 @@ const FREE_NOTE = [
   {d:"12/24（四）", t:"00:35 SQ218 起飛 = <b>12/23 晚上</b>要到機場（21:30 前）；轉 SQ874 07:30–11:20 返港。"}
 ];
 
+/* ---------- ç”± index.html åŒæ­¥éŽåšŸå˜…å®Œæ•´è³‡æ–™ï¼ˆé•·æè¿°ï¼æ™‚é–“ï¼è²»ç”¨ï¼æ‹›ç‰Œèœï¼‰ ---------- */
+const INFO   = {"Pho Thin Chatswood":{"n":"Pho Thin Chatswood","zh":"越南河粉店","type":"food","hours":"落機後午餐 · 距酒店步行 9 分鐘","d":"抵達後第一站！熱騰騰嘅越南河，補充體力先再出發觀光。"},"Sydney Opera House":{"n":"Sydney Opera House","zh":"悉尼歌劇院","type":"scenic","wiki":"Sydney Opera House","book":true,"hours":"導賞團建議提前預約 · Google Maps","d":"世界級地標，1973 年落成，由丹麥建築師 Utzon 設計 — 標誌性嘅「貝殼」屋頂其實係切球體嘅計算結果，全屋舖逾百萬塊瑞典製瓷磚。2007 年列入世界文化遺產，係悉尼天際線嘅靈魂；內裏有 5 個表演場地，一年過千場歌劇、管弦樂同芭蕾。想深入參觀可報導賞團，睇睇歌劇廳同劇院內部。"},"Mrs Macquarie\u0027s Chair":{"n":"Mrs Macquarie\u0027s Chair","zh":"麥奎里夫人石椅","type":"historic","wiki":"Mrs Macquarie\u0027s Chair","hours":"24 小時開放 · Google Maps","d":"1811 年由囚犯手工開鑿嘅砂岩長椅，相傳係當時總督麥奎里（Macquarie）夫人 Elizabeth 最鍾意嘅觀海點，因而得名。呢度係悉尼經典明信片角度：歌劇院、海港大橋、大樹山一次過入鏡，難怪長年排長龍。24 小時開放、免費，建議日落時分去，海港會染成金黃色。"},"Sydney Harbour Bridge":{"n":"Sydney Harbour Bridge","zh":"悉尼海港大橋","type":"historic","wiki":"Sydney Harbour Bridge","hours":"Google Maps","d":"1932 年通車嘅巨型鋼拱橋，拱跨 503 米，因外形酷似衣架而被暱稱「The Coathanger」。當年動用逾千工人、前後約 8 年先至完工，開幕禮仲發生過騎兵斬斷紅絲帶嘅經典趣聞。可以挑戰 BridgeClimb 登頂，或者上 Pylon Lookout 睇展覽同景；行橋同搭車都免費。"},"The Rocks":{"n":"The Rocks","zh":"岩石區","type":"historic","wiki":"The Rocks, New South Wales","hours":"Google Maps","d":"悉尼最古老嘅歐洲人聚居地，由 1788 年第一艦隊登陸開始，囚犯、水手同商人最早落脚嘅地方。小巷入面保存大量 19 世紀砂岩建築，包括全悉尼最古老石屋 Cadman\u0027s Cottage（1815 年）；週末有戶外 Rocks Markets，街頭小食、手作同街頭表演，仲有全城最古老嘅酒吧。1970 年代居民發起保育運動，先至令呢片街區免於清拆。"},"6HEAD Sydney":{"n":"6HEAD Sydney","zh":"牛排海鮮餐廳","type":"food","book":true,"hours":"12:00 – 22:30 · 晚餐 · Google Maps","d":"工業風格餐廳，主打牛排同海鮮，酒單豐富，仲有悉尼海港景。記得提早訂位！"},"Cafe Margaret Double Bay":{"n":"Cafe Margaret Double Bay","zh":"人氣 Cafe","type":"cafe","book":true,"hours":"Brunch · Google Maps","d":"Double Bay 人氣咖啡店，招牌漢堡必試！食完直接去海灘，好順路。"},"Bondi Surf Seafoods":{"n":"Bondi Surf Seafoods","zh":"炸魚薯條","type":"food","hours":"Google Maps","d":"Bondi 本地人最愛嘅海鮮外賣店，炸魚薯條喺海邊食特別好味。"},"Bondi Beach":{"n":"Bondi Beach","zh":"邦迪海灘","type":"beach","wiki":"Bondi Beach","hours":"全日開放 · Google Maps","d":"「Bondi」係原住民語「石上碎浪」嘅意思，1851 年開放做悉尼第一個公眾泳灘。呢度係澳洲衝浪同陽光文化嘅發源地：1907 年成立全球第一個衝浪救生會，1929 年建咗出名嘅 Icebergs 海景泳池。全長約 1 公里嘅半月形沙灘，可以行海濱步道、去 Icebergs 歎日落，每年 10-11 月仲有海邊雕塑展 Sculpture by the Sea。"},"mimi\u0027s":{"n":"mimi\u0027s","zh":"海景晚餐","type":"food","hours":"晚餐 · 喺 Bondi 海邊 · Google Maps","d":"喺 Bondi 海邊歎晚餐，一邊睇住海景一邊食飯，之後先返回 Chatswood（車程約 20–30 分鐘）。"},"Paramount Coffee Project":{"n":"Paramount Coffee Project","zh":"工業風咖啡店","type":"cafe","hours":"7:00 – 16:00 · Google Maps","d":"高樓底工業風咖啡店，出品有創意嘅 diner 式菜式，炸雞係招牌之一。"},"Single O Surry Hills":{"n":"Single O Surry Hills","zh":"精品咖啡","type":"cafe","hours":"7:00 – 15:30 · Google Maps","d":"熱鬧嘅街邊咖啡店，自家新鮮烘焙咖啡配時令小食，環境有型。"},"Beta Coffee":{"n":"Beta Coffee","zh":"咖啡店","type":"cafe","hours":"Google Maps","d":"行程中另一個咖啡補給站，順路一試。"},"Sydney Fish Market":{"n":"Sydney Fish Market","zh":"悉尼魚市場","type":"market","wiki":"Sydney Fish Market","hours":"7:00 – 22:00 · Google Maps","d":"南半球最大嘅魚市場，歷史可追溯至 19 世紀悉尼市區魚市場，1969 年遷到 Blackwattle Bay 現址，其後多次擴建。海產零售、批發、餐廳同熟食檔一應俱全：生蠔、龍蝦、壽司、即食檔任揀。想食平靚正海鮮、睇市場運作，或者幫屋企人買手信，呢度係首選；免費入場，按消費計。"},"St Mary\u0027s Cathedral":{"n":"St Mary\u0027s Cathedral","zh":"聖瑪利大教堂","type":"historic","wiki":"St Mary\u0027s Cathedral, Sydney","hours":"6:30 – 18:30 · Google Maps","d":"悉尼最大、亦係澳洲第一座天主教主教座堂。現存教堂 1868 年動土，由英國哥德復興式建築師 Wardell 設計，用本地砂岩起咗 60 年至 1928 年先完成主體，雙塔高 74.6 米。內部彩繪玻璃同管風琴非常華麗，靜靜坐低或者聽詩班都幾心靈平靜；自由入場（歡迎捐獻），記得衣著莊重。"},"Bar Totti\u0027s":{"n":"Bar Totti\u0027s","zh":"意式小酒館","type":"food","book":true,"hours":"12:00 – 00:00 · 晚餐 · Google Maps","d":"輕鬆嘅鄰里餐廳，意大利式小食配酒同雞尾酒，氣氛熱鬧。記得提早訂位！"},"Blue Mountains":{"n":"Blue Mountains","zh":"藍山","type":"scenic","wiki":"Blue Mountains (Australia)","hours":"車程約 1.5 小時 · Google Maps","d":"世界自然遺產「大藍山區」嘅核心，2000 年列入 UNESCO。三姊妹峰（Three Sisters）背後有原住民 Gundungurra 族傳說；1813 年 Blaxland、Lawson 同 Wentworth 三人成功越山，打開澳洲西部發展之路。可以去 Echo Point 望三姊妹峰、搭 Scenic World 登山鐵路，或者去 Leura 小鎮行下；聞名嘅藍色山嵐其實係尤加利樹油揮發形成。"},"Hunter Valley Wine Tours":{"n":"Hunter Valley Wine Tours","zh":"獵人谷品酒團","type":"wine","wiki":"Hunter Valley wine","book":true,"hours":"Klook 中文團 11:15 – 17:15 · $1,275／位 含午餐","d":"澳洲最古老嘅葡萄酒產區，1820 年代由「澳洲葡萄酒之父」James Busby 開始種植，而家有超過 150 間酒莊，以 Semillon 白酒聞名全球。團會去 2-3 間酒莊品酒，兼歎芝士、朱古力同酒莊午餐；長輩唔飲酒都可以打卡葡萄園風光，節奏輕鬆。"},"The Gidley":{"n":"The Gidley","zh":"經典牛排館","type":"food","book":true,"hours":"12:00 – 00:00 · 晚餐 · Google Maps","d":"老派高級牛排館，配豐富酒單，有素食選擇 — 適合媽媽！記得訂位。"},"BISTECCA":{"n":"BISTECCA","zh":"意式牛排館","type":"food","book":true,"hours":"12:00 – 00:00 · 備選 · Google Maps","d":"僅限成人嘅意大利風格牛排館，雞尾酒單豐富，鄉村風情。"},"Toby\u0027s Estate Coffee Roasters":{"n":"Toby\u0027s Estate Coffee Roasters","zh":"咖啡烘焙名家","type":"cafe","hours":"7:30 – 15:00 · Google Maps","d":"單一產區濃縮咖啡、冷萃樣樣齊，空間明亮時尚。"},"The Grounds of Alexandria":{"n":"The Grounds of Alexandria","zh":"文青庭院咖啡園","type":"cafe","book":true,"hours":"7:30 – 21:00 · Google Maps","d":"前身係 1950 年代糕餅廠，2012 年活化做文青熱點：紅磚牆、噴泉花園、有機香草園同市集檔攤，室內室外座位任揀。出名到要訂位，場內多間舖頭加 The Potting Shed 餐廳，行完可以順手買手信；附近仲有 lululemon outlet！"},"The Grounds Coffee Factory":{"n":"The Grounds Coffee Factory","zh":"咖啡工場","type":"cafe","hours":"Google Maps","d":"同場嘅咖啡工場，不過 Ben 評價係「麻麻」— 可以順路睇下，唔使特登。"},"The Grumpy Barista":{"n":"The Grumpy Barista","zh":"咖啡店","type":"cafe","hours":"Google Maps","d":"名字有趣嘅咖啡店，行完 Alexandria 可以再補一杯。"},"Sydney Park":{"n":"Sydney Park","zh":"悉尼公園","type":"scenic","wiki":"Sydney Park","hours":"24 小時開放 · Google Maps","d":"40 公頃市區公園，前身係 19 世紀末至 1983 年運作嘅磚廠（brickworks），廠區嘅磚窯同煙囪而家成為歷史遺跡。公園有濕地、單車徑同大片草地，居民嚟跑步、踩單車同野餐；冇咁遊客化，想體驗本地人日常生活嘅話啱晒。"},"Pizza Bros":{"n":"Pizza Bros","zh":"薄餅店","type":"food","hours":"晚餐 · Google Maps","d":"輕鬆嘅 Pizza 晚餐，為 Hea 遊日收尾。"},"SYD → MEL 內陸機":{"n":"SYD → MEL 內陸機","zh":"飛往墨爾本","type":"info","hours":"11:00 – 12:30 到達 · 票價 HK$700–1,500／位","d":"全家飛墨爾本；Andy 搭 CX105 中午 12:30 抵達墨爾本會合，之後一齊入住 Swanston Central。"},"Seven Seeds Coffee Roasters":{"n":"Seven Seeds Coffee Roasters","zh":"咖啡 micro-roaster","type":"cafe","wiki":"Seven Seeds","hours":"7:00 – 17:00 · Google Maps","d":"通透嘅工業風咖啡店兼自家烘焙工場，brunch、三文治同精品茶都出色。"},"Baguette Studios":{"n":"Baguette Studios","zh":"法包店","type":"cafe","hours":"Google Maps","d":"手工法包店，順路買個包做下午小食。"},"Queen Victoria Market":{"n":"Queen Victoria Market","zh":"維多利亞女皇市場","type":"market","wiki":"Queen Victoria Market","book":true,"hours":"6:00 – 15:00 · 週二/四/五/六/日開放","d":"1878 年開市、墨爾本最大嘅露天市場，歷史可追溯至 1850 年代；場地橫跨兩街區，肉檔大廳、熟食檔同手作攤檔數以百計，係全球最大規模嘅 19 世紀市場之一。想買手信、試地道小食，或者感受墨爾本市井文化，呢度係必到；行到攰可以截免費電車。"},"Lune Croissanterie":{"n":"Lune Croissanterie","zh":"世界級可頌","type":"dessert","hours":"Google Maps","d":"被譽為全球最好嘅可頌之一，酥脆層次無得輸，好多人專登排隊。"},"Hareruya Pantry CBD":{"n":"Hareruya Pantry CBD","zh":"日式小食店","type":"food","hours":"Google Maps","d":"日式風味小食店，順路一試。"},"Chinatown Melbourne":{"n":"Chinatown Melbourne","zh":"墨爾本唐人街","type":"scenic","wiki":"Chinatown, Melbourne","hours":"24 小時 · Google Maps","d":"1851 年淘金熱時期由華工建立，係全澳洲最古老、西方世界持續最久嘅唐人街。Russell St 同 Little Bourke St 一帶有中式牌樓、燒腊檔、茶餐廳同唐餐館，逢農曆新年有舞獅同花市，附近仲有 Chinese Museum。想食返啱口味、飲杯靚茶，嚟呢度就啱。"},"Bourke Street Mall":{"n":"Bourke Street Mall","zh":"卜克街購物大道","type":"shopping","wiki":"Bourke Street, Melbourne","hours":"24 小時 · 商店約 10:00 – 19:00","d":"19 世紀由零售大街演變而成嘅購物步行街，其後全面禁止車輛，只準行人同行駛電車。兩旁係 Myer、David Jones 等老牌百貨、連鎖店、餐廳同街頭音樂人表演；聖誕節加燈飾同櫥窗佈置，係墨爾本嘅節日心臟地帶。"},"Market Lane Coffee":{"n":"Market Lane Coffee","zh":"精品咖啡","type":"cafe","hours":"South Melbourne · Google Maps","d":"墨爾本咖啡界名店，簡潔專注於咖啡本身。"},"South Melbourne Market":{"n":"South Melbourne Market","zh":"南墨爾本市場","type":"market","hours":"8:00 – 17:00 · 週三/五/六/日開放","d":"1867 年開市嘅維多利亞時期紅磚市場，係墨爾本最古老嘅市集之一。而家分乾濕兩區：海鮮肉檔、麵包甜品同環球小食檔並存，逢週六最熱鬧。出名嘢有手工薄餅、生蠔、即製咖啡，想買本地芝士同醬料當手信都啱。"},"ST. ALi Coffee Roasters":{"n":"ST. ALi Coffee Roasters","zh":"倉庫風咖啡","type":"cafe","hours":"7:00 – 17:00 · Google Maps","d":"潮人倉庫空間，藝術感咖啡配創意 brunch。"},"Brighton Beach Bathing Boxes":{"n":"Brighton Beach Bathing Boxes","zh":"彩虹小屋海灘","type":"beach","wiki":"Brighton Bathing Boxes","book":true,"hours":"建議下午 3:00 – 黃昏 · 光線最美","d":"一排 82 間維多利亞時代彩色小屋，1860 年代已經存在，當年供換泳衣同存放沙灘用品。每間由業主各自油漆，鮮紅、嫩黃、湖水藍撞色，成為墨爾本最經典嘅明信片畫面；海邊有木棧道，配上海景日落一流。海邊潮濕多鹽，記得保護相機同鏡頭。"},"Twelve Apostles":{"n":"Twelve Apostles","zh":"十二門徒石","type":"scenic","wiki":"Twelve Apostles (Victoria)","hours":"沿 Great Ocean Road 車程約 3 小時","d":"大洋路終點嘅石灰岩奇觀：2,000 萬年來海浪沖刷離岸峭壁，逐漸雕出一支支巨柱。雖名叫「十二門徒」，其實只有 7-8 支仍然企穩，以前叫 Sow and Pigs，1920 年代先至改用聖經典故改名。附近有 1878 年 Loch Ard 號沉船遺址同 1990 年坍塌嘅 London Arch，一次過睇曬。"},"Proud Mary Coffee":{"n":"Proud Mary Coffee","zh":"咖啡店","type":"cafe","hours":"8:00 – 15:00 · 回程途中 · Google Maps","d":"紅磚牆潮店，單一產區咖啡配豐富早餐。"},"Lulu \u0026 me Cheesecakes":{"n":"Lulu \u0026 me Cheesecakes","zh":"芝士蛋糕","type":"dessert","hours":"Google Maps","d":"人氣芝士蛋糕店，去 Phillip Island 前補充能量！"},"Phillip Island · Penguin Parade":{"n":"Phillip Island · Penguin Parade","zh":"菲利普島 · 企鵝歸巢","type":"scenic","wiki":"Phillip Island (Victoria)","book":true,"hours":"黃昏時段 · 需預約","d":"菲利普島住咗約 4 萬隻世上最小嘅企鵝 — 神仙小企鵝（只有 33 厘米高）。每晚日落後，出海搵食嘅小企鵝會分批上岸返巢，遊客喺專用木棧道上近距離觀賞，成為全球知名自然奇觀。當地自然公園由 1968 年起負責保育同研究，門票收入資助保護工作；場內不准閃光燈，要遵守導賞員指示。"},"Terror Twilight":{"n":"Terror Twilight","zh":"晚餐","type":"food","hours":"晚餐 · Google Maps","d":"看畢企鵝返程食晚餐，之後返回酒店（車程約 2 小時）。"},"雅拉河谷史詩葡萄酒導賞團":{"n":"雅拉河谷史詩葡萄酒導賞團","zh":"Klook 選項 1","type":"tour","hours":"8:45 出發 · 墨爾本出發","d":"維州最古老嘅酒區：1838 年開始種植葡萄，而家有逾 85 間酒莊，以 Chardonnay、Pinot Noir 同氣泡酒聞名。團會去多間酒莊品酒，含午餐，可加嘆朱古力同氈酒，節奏輕鬆。"},"雅拉河谷酒莊導覽一日遊":{"n":"雅拉河谷酒莊導覽一日遊","zh":"Klook 選項 2","type":"tour","hours":"9:30 出發 · 墨爾本出發","d":"同為雅拉河谷酒莊一日遊，9:30 出發時間較鬆動。深入百年酒莊參觀釀酒過程，在葡萄園之間嘆世界，適合想輕鬆行一日嘅長輩。"},"State Library Victoria":{"n":"State Library Victoria","zh":"維多利亞州立圖書館","type":"historic","wiki":"State Library Victoria","hours":"10:00 – 18:00 · Google Maps","d":"1854 年創立、1856 年開放，澳洲第一間免費公共圖書館。最出名係 1913 年落成嘅 La Trobe 圓頂閱覽室：八邊形分層書架包住穹頂，氣勢磅礴，被譽為全球最美圖書館之一。館藏超過 200 萬冊，仲有亡命牛仔 Ned Kelly 嘅盔甲同 Burke and Wills 探險隊遺物；免費參觀。"},"Bakemono Bakers":{"n":"Bakemono Bakers","zh":"日式麵包店","type":"cafe","hours":"Google Maps","d":"日式手工麵包店，出品精緻。"},"Patricia Coffee Brewers":{"n":"Patricia Coffee Brewers","zh":"站立式咖啡吧","type":"cafe","hours":"7:00 – 16:00 · Google Maps","d":"冇位坐嘅「極簡」咖啡吧，只賣咖啡 — 但係好多人心目中全墨爾本最好嘅一杯。"},"Dukes Coffee Roasters":{"n":"Dukes Coffee Roasters","zh":"精品咖啡","type":"cafe","hours":"7:00 – 16:30 · Google Maps","d":"木系明亮店內嘅精品咖啡店，出品穩定。"},"Industry Beans":{"n":"Industry Beans","zh":"咖啡店","type":"cafe","hours":"Little Collins St · Google Maps","d":"Little Collins 街上嘅人氣咖啡店，brunch 都唔錯。"},"Higher Ground":{"n":"Higher Ground","zh":"前發電站餐廳","type":"food","book":true,"hours":"7:00 – 17:00 · Google Maps","d":"由百年發電站改建嘅華麗餐廳，紅磚工業風配精緻菜式，好多人嚟影相。建議訂位。"},"Pidapipó":{"n":"Pidapipó","zh":"意式雪糕","type":"dessert","hours":"12:00 – 22:30 · Google Maps","d":"墨爾本人氣手工 gelato，經典同季節限定口味一應俱全。"},"Vacation Coffee":{"n":"Vacation Coffee","zh":"咖啡店","type":"cafe","hours":"Google Maps","d":"CBD 咖啡巡禮嘅其中一站。"},"Grain Store":{"n":"Grain Store","zh":"餐廳","type":"food","book":true,"hours":"7:00 – 15:00 · Google Maps","d":"明亮工業風空間，精品咖啡加住家風味菜式。建議訂位。"},"The Hardware Société":{"n":"The Hardware Société","zh":"人氣早餐店","type":"cafe","hours":"7:30 – 15:00 · Google Maps","d":"法蘭西多士同焗蛋係招牌，細小但溫馨嘅人氣早餐店。"},"Hector\u0027s Deli":{"n":"Hector\u0027s Deli","zh":"熟食店","type":"cafe","hours":"Google Maps","d":"本地人至愛嘅 deli，三文治一流。"},"Melbourne Central":{"n":"Melbourne Central","zh":"購物中心","type":"shopping","wiki":"Melbourne Central Shopping Centre","hours":"10:00 – 19:00 · Google Maps","d":"1991 年開幕嘅大型商場，最特別係保留咗 1888 年建嘅 Coop\u0027s Shot Tower（子彈製造塔）：九層樓高、當年係全墨爾本最高建築物之一，而家係商場中庭嘅玻璃錐保護遺跡。商場連接 Flinders Street 車站同週邊商場，行街、搵食同嘆冷氣一次過搞掂。"},"Emporium Melbourne":{"n":"Emporium Melbourne","zh":"商場","type":"shopping","wiki":"Emporium Melbourne","hours":"10:00 – 19:00 · Google Maps","d":"2014 年開幕嘅現代化商場，由舊 Lonsdale Street 地段活化而成，走國際時裝、美妝同精品路線，頂層係大型美食廣場；連接 Myer 同 Melbourne Central 形成一大片購物區。想搵大牌、嘆個靚景午餐，可以順路行吓。"},"The Block Arcade":{"n":"The Block Arcade","zh":"19 世紀華麗拱廊","type":"historic","wiki":"Block Arcade, Melbourne","hours":"8:00 – 18:00 · Google Maps","d":"1892 年開幕、墨爾本最華麗嘅維多利亞時代拱廊，出名係馬賽克地板、玻璃天棚同鑄鐵欄河，名稱來自「The Block」地段。入面有 1893 年開業嘅 Hopetoun 茶室，法式多士同茶點伴住街頭藝人豎琴聲。鐘意歷史建築同打卡影相，一定要行。"},"Federation Square":{"n":"Federation Square","zh":"聯邦廣場","type":"scenic","wiki":"Federation Square","hours":"24 小時 · Google Maps","d":"2002 年為慶祝澳洲聯邦 100 周年而建，幾何「風車」式建築群由本地事務所設計，當年爭議唔細，而家係墨爾本市中心客廳。廣場經常有免費活動、大屏幕直播澳網同澳式足球；入面有 ACMI 電影博物館同 NGV Australia。由呢度行去 Flinders Street 車站只係 2 分鐘。"},"Myer Melbourne":{"n":"Myer Melbourne","zh":"百年百貨","type":"shopping","wiki":"Myer","hours":"Google Maps","d":"澳洲標誌性百貨公司，由 Sidney Myer 於 1900 年創立，Bourke Street 旗艦店 1914 年開業。最出名係 1956 年開始嘅聖誕櫥窗傳統：每年 11-12 月櫥窗會變成會郁動嘅童話故事，聖誕老人巡遊都係年度盛事。行樓上望一望市中心天際，夜間仲靚。"}};
+const COSTS  = {"Pho Thin Chatswood":"約 A$15–20／位","Sydney Opera House":"外圍免費 · 導賞團約 A$43–90／人","Mrs Macquarie\u0027s Chair":"免費","Sydney Harbour Bridge":"行橋免費 · BridgeClimb 約 A$220–388／人 · Pylon Lookout 約 A$30","The Rocks":"免費 · 市集消費自便","6HEAD Sydney":"約 A$100–150／位","Cafe Margaret Double Bay":"約 A$25–35／位","Bondi Surf Seafoods":"約 A$15–25／位","Bondi Beach":"免費","mimi\u0027s":"約 A$80–120／位","Paramount Coffee Project":"約 A$20–30／位","Single O Surry Hills":"約 A$15–25／位","Beta Coffee":"約 A$5–10／杯","Sydney Fish Market":"免費入場 · 海鮮按消費 約 A$20–50／位","St Mary\u0027s Cathedral":"免費（歡迎自由捐獻）","Bar Totti\u0027s":"約 A$50–70／位","Blue Mountains":"免費入園 · Scenic World 纜車約 A$50–70／人","Hunter Valley Wine Tours":"Klook 團費 約 $1,275／位（含午餐）","The Gidley":"約 A$100–140／位","BISTECCA":"約 A$100–150／位","Toby\u0027s Estate Coffee Roasters":"約 A$15–25／位","The Grounds of Alexandria":"約 A$25–40／位","The Grounds Coffee Factory":"約 A$10–20／位","The Grumpy Barista":"約 A$8–15／位","Sydney Park":"免費","Pizza Bros":"約 A$20–30／位","SYD → MEL 內陸機":"票價 HK$700–1,500／位","Seven Seeds Coffee Roasters":"約 A$20–30／位","Baguette Studios":"約 A$10–15／位","Queen Victoria Market":"免費入場 · 購物消費自便","Lune Croissanterie":"約 A$8–15／位","Hareruya Pantry CBD":"約 A$10–20／位","Chinatown Melbourne":"免費","Bourke Street Mall":"免費","Market Lane Coffee":"約 A$6–10／杯","South Melbourne Market":"免費入場 · 消費自便","ST. ALi Coffee Roasters":"約 A$20–30／位","Brighton Beach Bathing Boxes":"免費","Twelve Apostles":"免費","Proud Mary Coffee":"約 A$20–30／位","Lulu \u0026 me Cheesecakes":"約 A$8–15／位","Phillip Island · Penguin Parade":"門票約 A$30–80／人（視乎座位等級）· 需預約","Terror Twilight":"約 A$40–60／位","雅拉河谷史詩葡萄酒導賞團":"團費另計 · 視乎 Klook 價格","雅拉河谷酒莊導覽一日遊":"團費另計 · 視乎 Klook 價格","State Library Victoria":"免費","Bakemono Bakers":"約 A$8–15／位","Patricia Coffee Brewers":"約 A$5–8／杯","Dukes Coffee Roasters":"約 A$5–8／杯","Industry Beans":"約 A$20–30／位","Higher Ground":"約 A$35–50／位","Pidapipó":"約 A$6–10／杯","Vacation Coffee":"約 A$5–8／杯","Grain Store":"約 A$30–45／位","The Hardware Société":"約 A$25–35／位","Hector\u0027s Deli":"約 A$15–20／位","Melbourne Central":"免費","Emporium Melbourne":"免費","The Block Arcade":"免費","Federation Square":"免費","Myer Melbourne":"免費"};
+const DISHES = {"Pho Thin Chatswood":"生牛牛肉粉（phở tái）、牛腩河","Cafe Margaret Double Bay":"招牌漢堡、木火燒烤菜式","Bondi Surf Seafoods":"炸魚薯條、海鮮拼盤","mimi\u0027s":"生蠔、海鮮拼盤","6HEAD Sydney":"乾式熟成牛排、海鮮拼盤、生蠔","Bar Totti\u0027s":"木火烤包、劍蝦、意式小食","The Gidley":"乾式熟成牛排、黑安格斯牛扒（有素食選擇）","BISTECCA":"Bistecca alla Fiorentina 佛羅倫斯 T 骨牛扒","Toby\u0027s Estate Coffee Roasters":"單一產區咖啡、Batch Brew","The Grounds of Alexandria":"精品咖啡、Brunch 全日早餐","The Grounds Coffee Factory":"咖啡、甜點","The Grumpy Barista":"咖啡、Batch Brew","Pizza Bros":"手工薄餅、意式小食","Seven Seeds Coffee Roasters":"咖啡、Brunch 全日早餐","Baguette Studios":"法包、酥皮牛角包","Lune Croissanterie":"世界級可頌（Croissant）","Hareruya Pantry CBD":"日式菠蘿包（Melon Pan）","Market Lane Coffee":"單一產區咖啡、Brunch","South Melbourne Market":"即開生蠔、手工薄餅","ST. ALi Coffee Roasters":"精品咖啡、Brunch 全日早餐","Proud Mary Coffee":"單一產區咖啡、全日早餐","Lulu \u0026 me Cheesecakes":"芝士蛋糕、日式芝士撻","Terror Twilight":"雞尾酒、小食拼盤","Bakemono Bakers":"日式菠蘿包、手工麵包","Patricia Coffee Brewers":"Picolo 濃縮咖啡、Batch Brew","Dukes Coffee Roasters":"精品咖啡、Batch Brew","Industry Beans":"單一產區咖啡、Brunch","Higher Ground":"全日早餐、咖啡、烤肉菜式","Pidapipó":"手工 Gelato 雪糕","Vacation Coffee":"單一產區咖啡","Grain Store":"Brunch 全日早餐、季節性菜式","The Hardware Société":"法蘭西多士、焗蛋","Hector\u0027s Deli":"煙燻肉三文治、Deli 拼盤"};
 /* =========================================================
    2. 引擎：每個城市一個獨立實例（Leaflet 真地圖＋時間線＋詳情條）
    底圖：OpenStreetMap（免費、無需 key）
@@ -621,6 +663,30 @@ Object.keys(dayOrder).forEach(d => dayOrder[d].forEach((p,i) => { p._n = i + 1; 
 let lastActive = null;
 const MAP_OK = (typeof L !== 'undefined');
 
+/* ---------- 對應 index.html 嘅完整資料（名稱可能有少許差異） ---------- */
+const IMG_EXTS = ['jpg','jpeg','png','webp'];
+const ALIAS = { 'Hunter Valley 獵人谷':'Hunter Valley Wine Tours' };
+const normKey = s => String(s).replace(/[・·\s]+/g, '');
+const canon = n => ALIAS[n] || n;
+const INFO_N = {}, COSTS_N = {}, DISHES_N = {};
+Object.keys(INFO).forEach(k => { INFO_N[normKey(k)] = INFO[k]; });
+Object.keys(COSTS).forEach(k => { COSTS_N[normKey(k)] = COSTS[k]; });
+Object.keys(DISHES).forEach(k => { DISHES_N[normKey(k)] = DISHES[k]; });
+const infoOf = n => INFO[canon(n)] || INFO_N[normKey(canon(n))] || {};
+const costOf = n => COSTS[canon(n)] || COSTS_N[normKey(canon(n))] || '';
+const dishOf = n => DISHES[canon(n)] || DISHES_N[normKey(canon(n))] || '';
+
+function slugOf(p){
+  const nm = canon(p.name);
+  const s = nm.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  if (s) return s;
+  const arr = POIS.filter(x => x.day === p.day);   /* 純中文名 → d<day>_<index> */
+  return 'd' + p.day + '_' + arr.indexOf(p);
+}
+function mapsUrl(p){
+  return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.name + ' Australia');
+}
+
 function MakeCity(section){
   const city = section.dataset.city;
   const pool = POIS.filter(p => p._city === city);
@@ -634,8 +700,14 @@ function MakeCity(section){
   const elOn    = section.querySelector('.js-on');
   const elChip  = section.querySelector('.js-chip');
   const elName  = section.querySelector('.js-name');
-  const elTime  = section.querySelector('.js-time');
+  const elZh    = section.querySelector('.js-zh');
   const elDesc  = section.querySelector('.js-desc');
+  const elHours = section.querySelector('.js-hours');
+  const elCost  = section.querySelector('.js-cost');
+  const elDish  = section.querySelector('.js-dish');
+  const elBook  = section.querySelector('.js-book');
+  const elFig   = section.querySelector('.dt-figure');
+  const elPhoto = section.querySelector('.js-photo');
   const elPos   = section.querySelector('.js-pos');
   const btnTour = section.querySelector('.js-tour');
   const tourIco = section.querySelector('.js-tour-ico');
@@ -823,14 +895,44 @@ function MakeCity(section){
     const p = list[idx];
     if (!p){ elEmpty.hidden = false; elOn.hidden = true; return; }
     elEmpty.hidden = true; elOn.hidden = false;
-    const ci = catInfo(p.cat);
+
+    const info = infoOf(p.name), ci = catInfo(p.cat);
     elChip.textContent = DAYS[p.day].label;
     elChip.style.background = dayColor(p.day);
     elName.textContent = p.name;
     elName.style.color = dayColor(p.day);
-    elTime.textContent = `${p.time}　·　${ci.i} ${p.cat}${p.alt ? '　·　備選' : ''}`;
-    elDesc.textContent = p.desc;
+    elZh.textContent = info.zh ? '（' + info.zh + '）' : '';
+    elDesc.textContent = info.d || p.desc;
+
+    elHours.innerHTML = '🕒 ' + (info.hours || (p.time + '　·　' + ci.i + ' ' + p.cat)) +
+      '　·　<a href="' + mapsUrl(p) + '" target="_blank" rel="noopener">📍 地圖</a>';
+
+    const cost = costOf(p.name);
+    elCost.textContent = cost ? '💰 ' + cost : '';
+    elCost.hidden = !cost;
+
+    const dish = dishOf(p.name);
+    elDish.textContent = dish ? '⭐ 招牌必試：' + dish : '';
+    elDish.hidden = !dish;
+
+    elBook.hidden = !info.book;
+
+    setPhoto(p);
     elPos.textContent = `${idx + 1} / ${list.length}`;
+  }
+
+  /* 相片：img/<slug>.jpg，失敗依次試 jpeg → png → webp，全部失敗就收起 */
+  function setPhoto(p){
+    const slug = slugOf(p);
+    let i = 0;
+    elFig.hidden = false;
+    elPhoto.alt = p.name;
+    elPhoto.onerror = () => {
+      i++;
+      if (i >= IMG_EXTS.length){ elFig.hidden = true; elPhoto.onerror = null; return; }
+      elPhoto.src = 'img/' + slug + '.' + IMG_EXTS[i];
+    };
+    elPhoto.src = 'img/' + slug + '.' + IMG_EXTS[0];
   }
 
   function visible(){
