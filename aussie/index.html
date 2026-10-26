@@ -323,6 +323,7 @@
 
   /* ---------- V2 內文字 +1px（標題除外） ---------- */
   #v2 .pill{font-size:.88rem}
+  #v2 .pill--day{min-width:106px;justify-content:center;padding:6px 15px}
   #v2 .tool-btn{font-size:.91rem}
   #v2 .lgbox__t{font-size:.74rem}
   #v2 .lg-item{font-size:.8rem}
@@ -1192,6 +1193,8 @@ const DMETA = {
   20:{label:"12/20（日）", title:"雅拉河谷品酒", sub:"酒莊導賞團", color:"#8a3b5c"},
   21:{label:"12/21（一）", title:"CBD 咖啡 + 購物巡禮", sub:"圖書館・拱廊・百貨", color:"#2f6fd8"}
 };
+/* 日期統一顯示為「12/12 (六)」 */
+Object.keys(DMETA).forEach(k => { DMETA[k].label = DMETA[k].label.replace('（', ' (').replace('）', ')'); });
 
 const POIS = [
   /* ---- 12/12 Circular Quay ---- */
@@ -1479,9 +1482,10 @@ function MakeCity(section){
     days.forEach(d => {
       const on = String(curDay) === String(d);
       const col = DMETA[d].color;
-      h += `<button class="pill${on?' is-on':''}" data-day="${d}" style="${on
+      const label = DMETA[d].label.replace('（', ' (').replace('）', ')');   /* 12/12 (六) */
+      h += `<button class="pill pill--day${on?' is-on':''}" data-day="${d}" style="${on
         ? `background:${col};border-color:transparent;box-shadow:0 5px 14px ${col}55`
-        : `color:${col}`}"><i style="${on ? 'background:#fff' : ''}"></i>${DMETA[d].label.replace('（','(').replace('）',')')}</button>`;
+        : `color:${col}`}"><i style="${on ? 'background:#fff' : ''}"></i>${label}</button>`;
     });
     elPills.innerHTML = h;
   }
