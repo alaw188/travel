@@ -226,7 +226,8 @@
   /* 工具列 */
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
   .pills{display:flex;flex-wrap:wrap;gap:6px}
-  .pill{font-size:.82rem;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid var(--line,#eadfcf);background:#fff;color:#5b5347;cursor:pointer;transition:all .18s;white-space:nowrap}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:.82rem;font-weight:700;padding:5px 13px;border-radius:999px;border:1px solid var(--line,#eadfcf);background:#fff;color:#5b5347;cursor:pointer;transition:all .18s;white-space:nowrap}
+  .pill i{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none;display:inline-block}
   .pill:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(43,43,43,.1)}
   .pill.is-on{background:var(--ocean);color:#fff;border-color:transparent;box-shadow:0 5px 14px rgba(14,90,122,.28)}
   .tool-btn{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;padding:7px 16px;border-radius:999px;border:1px solid #d8cbb4;background:linear-gradient(120deg,#fff,#fdf6ec);color:#7a4a2b;cursor:pointer;transition:all .18s;box-shadow:0 3px 10px rgba(43,43,43,.07)}
@@ -234,7 +235,7 @@
   .tool-btn.is-on{background:linear-gradient(120deg,#b34700,#d98324);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(179,71,0,.35)}
 
   /* 圖例（兩個框） */
-  .legend{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}
+  .legend{display:grid;grid-template-columns:1fr;gap:10px;margin:0 0 12px}
   .lgbox{background:rgba(255,255,255,.72);border:1px solid #eadfcf;border-radius:12px;padding:8px 12px}
   .lgbox__t{font-size:.68rem;letter-spacing:.12em;color:#6b6459;font-weight:700;margin-bottom:5px}
   .lgbox__b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
@@ -1434,15 +1435,12 @@ function MakeCity(section){
 
   /* ---------- 圖例 / 膠囊 ---------- */
   function renderLegend(){
-    const dayItems = days.map(d =>
-      `<span class="lg-item"><i style="--c:${DMETA[d].color}"></i>${DMETA[d].label.replace('（','(').replace('）',')')}</span>`
-    ).join('');
+    /* 分區色已融入篩選按鈕（每個日期掣左邊有同色圓點），圖例只保留類別 */
     const catItems = Object.keys(PCAT).map(c =>
       `<span class="lg-item"><i style="--c:${PCAT[c].c}"></i>${c}</span>`
     ).join('');
     elLegend.innerHTML =
-      `<div class="lgbox"><div class="lgbox__t">分區</div><div class="lgbox__b">${dayItems}</div></div>
-       <div class="lgbox"><div class="lgbox__t">類別</div><div class="lgbox__b">${catItems}<span class="lg-item dash"><i></i>備選／機動</span></div></div>`;
+      `<div class="lgbox"><div class="lgbox__t">類別</div><div class="lgbox__b">${catItems}<span class="lg-item dash"><i></i>備選／機動</span></div></div>`;
   }
 
   function renderPills(){
@@ -1452,7 +1450,7 @@ function MakeCity(section){
       const col = DMETA[d].color;
       h += `<button class="pill${on?' is-on':''}" data-day="${d}" style="${on
         ? `background:${col};border-color:transparent;box-shadow:0 5px 14px ${col}55`
-        : `color:${col}`}">${DMETA[d].label.replace('（','(').replace('）',')')}</button>`;
+        : `color:${col}`}"><i style="${on ? 'background:#fff' : ''}"></i>${DMETA[d].label.replace('（','(').replace('）',')')}</button>`;
     });
     elPills.innerHTML = h;
   }
