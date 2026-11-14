@@ -36,6 +36,7 @@
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:.85;transform:none}}
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
   @keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
   /* 飛越嘅飛機 */
   .plane{position:absolute;top:22%;left:-8%;font-size:1.6rem;opacity:.9;animation:fly 11s linear infinite;pointer-events:none}
@@ -243,6 +244,30 @@
   .vsw__b:hover{color:var(--ocean-dark)}
   .vsw__b.is-on{background:var(--ocean);color:#fff;box-shadow:0 3px 9px rgba(14,90,122,.32)}
 
+  /* ---------- ETA 提醒浮層 ---------- */
+  .eta{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(10,45,62,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:fadeIn .22s ease both}
+  .eta[hidden]{display:none!important}
+  .eta__card{background:var(--card);border-radius:20px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.38);animation:popIn .26s ease both}
+  .eta__head{background:linear-gradient(120deg,var(--ocean-dark),var(--ocean),#2e8fae);color:#fff;padding:16px 20px}
+  .eta__head h3{font-size:1.12rem;font-weight:800}
+  .eta__head p{font-size:.82rem;opacity:.85;margin-top:2px}
+  .eta__body{padding:15px 20px 4px;font-size:.92rem;color:#4a443c;line-height:1.75}
+  .eta__body ul{margin:0 0 0 18px}
+  .eta__body li{margin-bottom:6px}
+  .eta__body li b{color:var(--ocean-dark)}
+  .eta__foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:6px 20px 18px}
+  .eta__link{font-size:.85rem;color:var(--ocean);font-weight:700;text-decoration:none}
+  .eta__link:hover{text-decoration:underline}
+  .eta__btn{background:var(--ocean);color:#fff;border:0;border-radius:999px;padding:10px 24px;font-family:inherit;font-size:.94rem;font-weight:800;cursor:pointer;transition:all .18s;box-shadow:0 6px 16px rgba(14,90,122,.32)}
+  .eta__btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(14,90,122,.42)}
+  body.eta-open{overflow:hidden}
+  @media(max-width:640px){
+    .eta{padding:12px}
+    .eta__body{font-size:.88rem}
+    .eta__foot{justify-content:space-between;padding-bottom:16px}
+    .eta__btn{padding:9px 18px;font-size:.9rem}
+  }
+
   /* 工具列 */
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
   .pills{display:flex;flex-wrap:wrap;gap:6px}
@@ -402,6 +427,29 @@
 <div class="vsw" role="group" aria-label="版本切換">
   <button class="vsw__b is-on" data-v="1">經典版</button>
   <button class="vsw__b" data-v="2">地圖版</button>
+</div>
+
+<!-- 澳洲 ETA 提醒（網頁浮層，唔係開新視窗）；出發前每次開頁都會彈 -->
+<div class="eta" id="etaModal" hidden role="dialog" aria-modal="true" aria-labelledby="etaTitle">
+  <div class="eta__card">
+    <div class="eta__head">
+      <h3 id="etaTitle">🛂 澳洲 ETA（出發前必辦）</h3>
+      <p>所有家人持 HKSAR 護照都須申請</p>
+    </div>
+    <div class="eta__body">
+      <ul>
+        <li>只可經「<b>Australian ETA</b>」手機 App 申請（<b>subclass 601</b>），網頁同中介都唔收。</li>
+        <li>費用 <b>A$20／人</b>，多數<b>即時獲批</b>；有效期 <b>12 個月</b>，可多次入境、每次最多留 3 個月。</li>
+        <li>App 要<b>逐本護照</b>申請（5 位家人 = 5 次），並需掃描<b>護照晶片（NFC）</b>。</li>
+        <li>建議 <b>11 月內辦妥</b>，並核對護照號碼同英文姓名。</li>
+      </ul>
+      <p style="margin-top:10px;font-size:.86rem;color:#6b6459">批出後係電子連結護照，冇實體簽證紙；過關帶同一本護照就得。</p>
+    </div>
+    <div class="eta__foot">
+      <a class="eta__link" href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601" target="_blank" rel="noopener">官方資料 ↗</a>
+      <button class="eta__btn js-eta-ok">我明白 ✓</button>
+    </div>
+  </div>
 </div>
 
 <header class="hero">
@@ -734,7 +782,6 @@
   <p class="lead">出發前睇一睇，玩得更安心。</p>
   <div class="day-notes" style="margin-bottom:20px"><b>💰 費用說明：</b>每個地點卡都標示咗<b>大約費用</b> — 餐廳／咖啡店以每位計、景點則標明門票或收費項目。全部只係<b>預算參考</b>（澳洲元 A$，匯率約 1 AUD ≈ 5 HKD），實際價格以店家為準。</div>
   <div class="grid c3">
-    <div class="tip"><h4>🛂 澳洲 ETA（出發前必辦）</h4><p>所有家人持 <b>HKSAR 護照</b>，均須申請澳洲<b>電子旅行許可（ETA · subclass 601）</b>：只可經「<b>Australian ETA</b>」手機 App 申請（每人一個，免費下載），費用 <b>A$20</b>，多數即時獲批；12 個月內可多次入境、每次最多留 3 個月。建議 <b>11 月內辦妥</b>並核對護照號碼——<a href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601" target="_blank" rel="noopener">官方資料</a>。</p></div>
     <div class="tip"><h4>📞 餐廳要提早訂位</h4><p><b>Cafe Margaret、6HEAD、Bar Totti's 同 The Gidley</b> 都係熱門人氣餐廳，務必<b>提早網上訂位</b>！The Grounds of Alexandria、Higher Ground、Grain Store 亦建議預約。</p></div>
     <div class="tip"><h4>🚋 墨爾本 Free Tram Zone</h4><p>墨爾本市中心有<b>免費電車區</b>，長輩行到攰可以隨時上車，唔使全程行路。⚠️ <b>上落車如果喺 Free Tram Zone 範圍內，唔使拍卡（myki）</b>；只有離開 Free Tram Zone 嘅行程先需要 tap on／off — <a href="https://transport.vic.gov.au/tickets-and-payments/myki/tap-on-and-off-with-myki" target="_blank" rel="noopener">官方說明</a>。</p></div>
     <div class="tip"><h4>🧳 行李限額</h4><p>新航寄艙 <b>35kg</b>（只計總重量）；悉尼→墨爾本內陸機手提 <b>8–10kg</b> ＋ 寄艙 <b>23/25kg</b>。買手信前諗定點分。</p></div>
@@ -1197,6 +1244,7 @@ Object.keys(DAYS).forEach(renderDay);
   const bar = document.getElementById('cdbar');
   if (!bar) return;
   const target = Date.parse(bar.getAttribute('data-depart'));
+  window.__DEPART = target;   /* 供 ETA 提醒判斷（即使橫幅已被移除） */
   const dEl = document.getElementById('cdD'), hEl = document.getElementById('cdH'),
         mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
   let timer = null;
@@ -1798,6 +1846,24 @@ document.addEventListener('keydown', e => {
   try { saved = localStorage.getItem(KEY); } catch(e){}
   /* 預設：地圖版（V2）；用戶撳過「經典版」就記住佢嘅選擇 */
   apply(saved === '1' ? '1' : '2', false);
+})();
+
+/* ---------- 澳洲 ETA 提醒浮層：出發前每次開頁都彈一次，撳「我明白」關閉 ---------- */
+(function(){
+  const modal = document.getElementById('etaModal');
+  if (!modal) return;
+  const bar = document.getElementById('cdbar');
+  const depart = window.__DEPART ||
+    Date.parse((bar && bar.getAttribute('data-depart')) || '2026-12-11T19:05:00+08:00');
+  if (!isNaN(depart) && Date.now() >= depart) return;   /* 出發後唔再彈 */
+
+  const open = () => { modal.hidden = false; document.body.classList.add('eta-open'); };
+  const close = () => { modal.hidden = true; document.body.classList.remove('eta-open'); };
+
+  setTimeout(open, 600);
+  modal.querySelector('.js-eta-ok').addEventListener('click', close);
+  modal.addEventListener('click', e => { if (e.target === modal) close(); });   /* 撳背景關閉 */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
 })();
 </script>
 </body>
