@@ -1796,7 +1796,8 @@ document.addEventListener('keydown', e => {
 
   let saved = null;
   try { saved = localStorage.getItem(KEY); } catch(e){}
-  apply(saved === '2' ? '2' : '1', false);
+  /* 預設：地圖版（V2）；用戶撳過「經典版」就記住佢嘅選擇 */
+  apply(saved === '1' ? '1' : '2', false);
 })();
 </script>
 </body>
