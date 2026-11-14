@@ -163,6 +163,20 @@
   .tip a{color:var(--ocean);font-weight:700;text-decoration:none}
   .tip a:hover{text-decoration:underline}
   .tip--link{background:linear-gradient(140deg,#fff,#fdf6ec);border-left-color:var(--gold)}
+  .tip--wide{grid-column:1/-1}
+  .tip--wide .tscroll{overflow-x:auto;margin-top:6px}
+  .tip--wide table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:620px}
+  .tip--wide th,.tip--wide td{text-align:left;padding:7px 9px;border-bottom:1px dashed #eee3d2;vertical-align:top;line-height:1.55}
+  .tip--wide th{font-size:.72rem;letter-spacing:.06em;color:#8a8175;font-weight:800;background:#faf6ef}
+  .tip--wide td b{color:var(--ocean-dark)}
+  .tip--wide tr.warnrow td{background:#fdf6ec}
+  .tip--wide td a{color:var(--ocean);font-weight:700;text-decoration:none;white-space:nowrap}
+  .tip--wide td a:hover{text-decoration:underline}
+  @media(max-width:640px){
+    .tip--wide table{font-size:.78rem;min-width:0}
+    .tip--wide th,.tip--wide td{padding:6px 5px}
+    .tip--wide th:nth-child(3),.tip--wide td:nth-child(3){white-space:normal}
+  }
 
   /* ---------- 餐廳攻略 ---------- */
   .bk{background:var(--card);border-radius:16px;box-shadow:0 3px 14px rgba(43,43,43,.07);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
@@ -725,6 +739,55 @@
     <div class="tip"><h4>🌉 Ben 的私藏路線</h4><p>可以由 <b>Milsons Point</b> 沿海港大橋行去 <b>The Rocks</b>（2.4km／約 30 分鐘），風景一流，係人少少知嘅散步路線。</p></div>
     <div class="tip"><h4>🌦️ 12 月天氣</h4><p>12 月係澳洲<b>夏天</b>，日間可達 25–30°C，陽光猛烈。記得帶防曬、太陽眼鏡同帽，晚上海邊會有風，帶件薄外套。</p></div>
     <div class="tip tip--link"><h4>🍷 酒莊一日團比較</h4><p>亨特谷（12/15）同雅拉河谷（12/20）嘅中文團、拼團／私人團、取消政策同建議，整理咗喺另一頁：<br><a href="booking.html" target="_blank" rel="noopener"><b>開啟「酒莊團比較表」→</b></a></p></div>
+    <div class="tip tip--wide">
+      <h4>🧳 行李寄存（市區 ＋ 住宿附近）</h4>
+      <p>退房後或者上機前想兩手空空行街，可以用以下選擇。<b>留意 12/23 退房日</b>：我哋航班係 <b>00:35 起飛（即 12/24 深夜）</b>，要揀<b>開到夜晚</b>嘅寄存點。</p>
+      <div class="tscroll">
+        <table>
+          <thead><tr><th>服務／位置</th><th>收費</th><th>時間</th><th>備註</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Travellers Aid</b><br>墨爾本 Flinders St 站（9／10 月台扶手電梯旁）</td>
+              <td>A$8／件／日<br>2 件 A$14、3 件 A$20<br>優惠 A$6.50／件</td>
+              <td>08:00–19:00<br><b>18:45 前必須取回</b></td>
+              <td>只做即日、免預約 · 電話 (03) 9068 8187 · <a href="https://www.travellersaid.org.au/our-services/luggage-storage/" target="_blank" rel="noopener">官網</a></td>
+            </tr>
+            <tr>
+              <td><b>Southern Cross 站儲物櫃</b><br>墨爾本（SkyBus 機場巴士總站）</td>
+              <td>約 A$14／日起（按大小）</td>
+              <td>車站開放時間</td>
+              <td>自助式、即放即取；喺機場巴士落車層附近，去機場最順路</td>
+            </tr>
+            <tr class="warnrow">
+              <td><b>Bounce</b><br>墨爾本 Southern Cross 附近便利店</td>
+              <td>由 A$6.50／件／日</td>
+              <td>約 07:00–23:00</td>
+              <td>網上預約、免費取消、有保障額 — <b>夜機推薦</b> · <a href="https://www.bounce.com/stores/melbourne/0kmrn9" target="_blank" rel="noopener">查位置</a></td>
+            </tr>
+            <tr>
+              <td><b>酒店／Airbnb 行李房</b><br>Meriton Chatswood、Swanston Central</td>
+              <td>通常免費（住客）</td>
+              <td>前台時間</td>
+              <td>退房後可暫存；Airbnb 要先問房東，未必有寄存室</td>
+            </tr>
+            <tr>
+              <td><b>LuggageHero</b><br>悉尼 Chatswood</td>
+              <td>由 A$1.49／小時</td>
+              <td>按店舖而定</td>
+              <td>按小時計，適合只寄存 2–3 小時</td>
+            </tr>
+            <tr>
+              <td><b>Bounce</b><br>悉尼 CBD ／ Martin Place</td>
+              <td>由 A$5.75–6.25／件／日</td>
+              <td>約 07:00–22:00</td>
+              <td>悉尼段其實用酒店行李房就夠，以備不時之需</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px">⚠️ <b>12/23（三）建議流程</b>：早上退房 → 行李寄存 <b>Bounce（開到 23:00）</b> 或 <b>Southern Cross 儲物櫃</b> → 市區輕鬆行 → 約 21:00–21:30 取回 → 22:00 前到 MEL 機場。<b>唔好用 Travellers Aid</b>（18:45 前要取回，趕唔切夜機）。</p>
+      <p style="margin-top:8px;font-size:.84rem;color:#8a8175">價格為 2026 年 11 月官網／公開資料，實際以現場為準；Travellers Aid 旺季（學校假期、公眾假期）可能因為滿額而暫停收件。</p>
+    </div>
   </div>
 </section>
 
