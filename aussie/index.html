@@ -1309,6 +1309,7 @@ const POIS = [
   {id:"d12-4", day:12, name:"Sydney Opera House", time:"14:00", cat:"景點", lat:-33.8568, lng:151.2153, desc:"貝殼屋頂地標，可加導賞團入場（建議預約）。"},
   {id:"d12-5", day:12, name:"Mrs Macquarie's Chair", time:"15:30", cat:"文化", lat:-33.8596, lng:151.2155, desc:"1811 年石椅，影歌劇院＋大橋同框嘅最佳位置。"},
   {id:"d12-6", day:12, name:"Sydney Harbour Bridge", time:"16:15", cat:"文化", lat:-33.8523, lng:151.2108, desc:"行橋免費；想刺激可上 BridgeClimb 或 Pylon Lookout。"},
+  {id:"d12-6b", day:12, name:"🌉 Ben 私藏路線 · Milsons Point → The Rocks", time:"彈性", cat:"景點", lat:-33.8486, lng:151.2117, img:"The_Rocks", desc:"由北岸 Milsons Point 沿海港大橋步行去 The Rocks，全程 2.4km／約 30 分鐘 — 一路行一路睇海港景，風景一流，係好多人唔知嘅散步路線。"},
   {id:"d12-7", day:12, name:"The Rocks", time:"17:00", cat:"文化", lat:-33.8599, lng:151.2089, desc:"悉尼最古老街區，週末有 Rocks Markets 市集。"},
   {id:"d12-8", day:12, name:"6HEAD Sydney", time:"18:30", cat:"美食", lat:-33.8583, lng:151.2088, desc:"牛排＋海鮮，記得提早訂位（官網有中文菜單）。"},
 
@@ -1429,6 +1430,7 @@ const costOf = n => COSTS[canon(n)] || COSTS_N[normKey(canon(n))] || '';
 const dishOf = n => DISHES[canon(n)] || DISHES_N[normKey(canon(n))] || '';
 
 function slugOf(p){
+  if (p.img) return p.img;
   const nm = canon(p.name);
   const s = nm.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
   if (s) return s;
