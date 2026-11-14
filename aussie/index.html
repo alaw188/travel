@@ -172,10 +172,13 @@
   .tip--wide tr.warnrow td{background:#fdf6ec}
   .tip--wide td a{color:var(--ocean);font-weight:700;text-decoration:none;white-space:nowrap}
   .tip--wide td a:hover{text-decoration:underline}
+  .tip--wide .rk{width:46px;text-align:center;font-size:1.05rem;font-weight:800;color:var(--gold)}
+  .tip--wide tr.top td{background:#fdf8ef}
   @media(max-width:640px){
-    .tip--wide table{font-size:.78rem;min-width:0}
-    .tip--wide th,.tip--wide td{padding:6px 5px}
-    .tip--wide th:nth-child(3),.tip--wide td:nth-child(3){white-space:normal}
+    .tip--wide table{font-size:.76rem;min-width:520px}
+    .tip--wide th,.tip--wide td{padding:6px 6px}
+    .tip--wide .rk{width:26px;font-size:.92rem}
+    .tip--wide .tscroll{position:relative}
   }
 
   /* ---------- 餐廳攻略 ---------- */
@@ -741,39 +744,36 @@
     <div class="tip tip--link"><h4>🍷 酒莊一日團比較</h4><p>亨特谷（12/15）同雅拉河谷（12/20）嘅中文團、拼團／私人團、取消政策同建議，整理咗喺另一頁：<br><a href="booking.html" target="_blank" rel="noopener"><b>開啟「酒莊團比較表」→</b></a></p></div>
     <div class="tip tip--wide">
       <h4>🧳 行李寄存（市區 ＋ 住宿附近）</h4>
-      <p>墨爾本最後一日（12/23）退房後想兩手空空行街，可以用以下選擇。<b>留意當晚航班係 00:35 起飛（即 12/24 深夜）</b>，要揀<b>開到夜晚</b>嘅寄存點。</p>
+      <p>墨爾本最後一日（12/23）退房後想兩手空空行街，可以用以下選擇（<b>按建議度排序</b>）。<b>留意當晚航班係 00:35 起飛（即 12/24 深夜）</b>，要揀<b>開到夜晚</b>嘅寄存點。⚠️ Airbnb 冇行李寄存，唔好預佢。</p>
       <div class="tscroll">
         <table>
-          <thead><tr><th>服務／位置</th><th>收費</th><th>時間</th><th>備註</th></tr></thead>
+          <thead><tr><th>建議</th><th>服務／位置</th><th>收費</th><th>時間</th><th>備註</th></tr></thead>
           <tbody>
-            <tr>
-              <td><b>Travellers Aid</b><br>墨爾本 Flinders St 站（9／10 月台扶手電梯旁）</td>
-              <td>A$8／件／日<br>2 件 A$14、3 件 A$20<br>優惠 A$6.50／件</td>
-              <td>08:00–19:00<br><b>18:45 前必須取回</b></td>
-              <td>只做即日、免預約 · 電話 (03) 9068 8187 · <a href="https://www.travellersaid.org.au/our-services/luggage-storage/" target="_blank" rel="noopener">官網</a></td>
-            </tr>
-            <tr>
+            <tr class="top">
+              <td class="rk">①</td>
               <td><b>Southern Cross 站儲物櫃</b><br>墨爾本（SkyBus 機場巴士總站）</td>
               <td>每 3 小時：細 A$7／中 A$8／大 A$9<br>1 日：細 A$14／中 A$16／大 A$18</td>
               <td>車站開放時間<br>（可租 3–72 小時）</td>
-              <td>自助式、即放即取；分佈全站，去機場最順路 · <a href="https://southerncrossstation.com.au/luggage-services" target="_blank" rel="noopener">官方價目＋尺寸</a></td>
+              <td><b>首選</b>：自助、即放即取、<b>冇取回時間限制</b>（夜機最安全），而且就喺 SkyBus 上車點，攞完行李直接上機場巴士 · <a href="https://southerncrossstation.com.au/luggage-services" target="_blank" rel="noopener">官方價目＋尺寸</a></td>
             </tr>
-            <tr class="warnrow">
+            <tr class="top">
+              <td class="rk">②</td>
               <td><b>Bounce</b><br>墨爾本 Southern Cross 附近便利店</td>
               <td>由 A$6.50／件／日</td>
               <td>約 07:00–23:00</td>
-              <td>網上預約、免費取消、有保障額 — <b>夜機推薦</b> · <a href="https://www.bounce.com/stores/melbourne/0kmrn9" target="_blank" rel="noopener">查位置</a></td>
+              <td><b>次選</b>：最便宜、網上預約免排隊、有保障額；但要喺 <b>23:00 前</b>返去攞行李 · <a href="https://www.bounce.com/stores/melbourne/0kmrn9" target="_blank" rel="noopener">查位置</a></td>
             </tr>
             <tr>
-              <td><b>Airbnb 行李房</b><br>墨爾本 Swanston Central</td>
-              <td>通常免費（住客）</td>
-              <td>前台／房東安排</td>
-              <td>退房後可暫存；要用 <a href="https://www.airbnb.com.au/" target="_blank" rel="noopener">Airbnb App</a> 訊息房東確認，未必有寄存室</td>
+              <td class="rk">③</td>
+              <td><b>Travellers Aid</b><br>Flinders St 站（9／10 月台扶手電梯旁）</td>
+              <td>A$8／件／日<br>2 件 A$14、3 件 A$20<br>優惠 A$6.50／件</td>
+              <td>08:00–19:00<br><b>18:45 前必須取回</b></td>
+              <td>多件行李最抵（3 件 A$20），但<b>只做到 18:45</b> — 只適合當日早收工嘅行程，<b>唔啱夜機</b> · 免預約 · (03) 9068 8187 · <a href="https://www.travellersaid.org.au/our-services/luggage-storage/" target="_blank" rel="noopener">官網</a></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:10px">⚠️ <b>12/23（三）建議流程</b>：早上退房 → 行李寄存 <b>Bounce（開到 23:00）</b> 或 <b>Southern Cross 儲物櫃</b> → 市區輕鬆行 → 約 21:00–21:30 取回 → 22:00 前到 MEL 機場。<b>唔好用 Travellers Aid</b>（18:45 前要取回，趕唔切夜機）。</p>
+      <p style="margin-top:10px">⚠️ <b>12/23（三）建議流程</b>：早上退房 → 行李放 <b>① Southern Cross 儲物櫃</b>（大櫃 A$18／日）→ 市區輕鬆行 → 約 21:00 取回 → 行去 SkyBus 站上車 → 22:00 前到 MEL 機場。<b>想慳錢</b>就用 <b>② Bounce</b>（A$6.50／件），但記住 23:00 前要返去攞。<b>③ Travellers Aid 唔啱夜機</b>。</p>
       <p style="margin-top:8px;font-size:.84rem;color:#8a8175">價格為 2026 年 11 月官網／公開資料，實際以現場為準；Travellers Aid 旺季（學校假期、公眾假期）可能因為滿額而暫停收件。</p>
     </div>
   </div>
