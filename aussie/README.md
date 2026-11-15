@@ -6,18 +6,25 @@
 - **行程日期**：2026/12/11（五）– 12/24（四）
 - **資料來源**：Wanderlog 行程 PDF（`2026 Family Trip to Sydney & Mel – Wanderlog.pdf`）
 
+## 現況（2026-11-15 起）
+
+- **`index.html` 已換成新版長頁版式**：單一視圖、每日一行一站、地圖降為每日模組、可切換「全部／悉尼／墨爾本」。
+- **舊版（經典圖文卡 + 地圖雙版本切換）已封存為 `index3.html`**，只作對照，不再更新。
+- 本文件下方「版本切換 V1/V2」「index.html 內部結構」兩節寫的是**舊版（即現在的 `index3.html`）**，閱讀時請自行對應；新版結構見文件末段說明。
+
 ## 檔案結構
 
 ```
 aussie/
-├── index.html    # 主網站（HTML + CSS + JS 全部單一檔案）
-├── index2.html   # ⚠️ 備份凍結（2026-10 起唔再更新，只作歷史參考）
+├── index.html    # 主網站（新版長頁版式，HTML + CSS + JS 全部單一檔案）
+├── index3.html   # ⚠️ 舊版封存（經典圖文卡 + 地圖雙版本，2026-11 起唔再更新）
 ├── booking.html  # 獨立酒莊團比較頁（唔同 index 互鏈）
+├── vendor/       # Leaflet 1.9.4 本地檔（無外鏈 CDN）
 ├── README.md     # 本檔
 └── img/          # 61 張地點圖片（slug 命名，本地檔）
 ```
 
-## 版本切換：經典版（V1）／ 地圖版（V2）
+## 版本切換：經典版（V1）／ 地圖版（V2）　※歷史，現只存在於 index3.html
 
 - **資料層**：全部內容抽成 `POIS` 陣列（`id / day / name / time / desc / lat / lng / cat / alt`），
   列表、地圖 pin、連線、篩選器、詳情條全部由同一份資料渲染 → **加減內容只改 `POIS`**。
@@ -42,7 +49,7 @@ aussie/
 - 原本嘅 `index_.html` 已合併入 `index.html` 並刪除；V2 資料（`POIS`／`DMETA`／`PCAT`）同引擎
   都喺 `index.html` 尾段，長描述／費用／招牌菜直接沿用 V1 嘅 `DAYS`／`COSTS`／`DISHES`（唔再重複）。
 
-## index.html 內部結構（日後更新睇呢度）
+## 內部結構（下方寫的是舊版 index3.html；新版 index.html 已無 V1/V2 雙版本）
 
 | 區塊 | 位置 | 用途 |
 |------|------|------|
@@ -123,7 +130,7 @@ aussie/
 - `p.cost` 改寫共享資料 → 改用局部變數
 - scroll handler 加 `requestAnimationFrame` 節流（每個事件只讀一次 layout）
 - 倒數器用 `bar.isConnected` 取代重複 DOM 查詢
-- 成效：index.html 76KB → 54KB，index2.html 66KB → 45KB
+- 成效：index.html 76KB → 54KB（index2.html 66KB → 45KB，該檔已於 2026-11-15 移除）
 
 ## 待辦 / 後續跟進（Follow-ups）
 
@@ -139,4 +146,4 @@ aussie/
 
 - 費用為預算參考（非實時匯率／價格），匯率以約 1 AUD ≈ 5 HKD 計
 - 8 間餐廳／小店暫時用代表性相片（見上表），旅程影相後可替換
-- `index.html` 同 `index2.html` 內容會重複（兩個獨立單檔，無共用 JS）；改行程要記住**兩邊都要改**
+- （歷史備註）新版已合併為單一 `index.html`，不再有需要同步的雙檔問題
