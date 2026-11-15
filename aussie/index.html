@@ -281,6 +281,8 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
   display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex:0 0 auto;
 }
 .stop__ph img{width:100%;height:100%;object-fit:cover}
+.stop__ph .ico{font-style:normal;line-height:1}
+.stop__ph.has-img .ico{display:none}
 .stop__b{min-width:0}
 .stop__n{display:block;font-size:.95rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
 .stop__z{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
@@ -1191,7 +1193,12 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
 
   window.__fb = function (img) {
     var i = (parseInt(img.dataset.ei, 10) || 0) + 1;
-    if (i >= EXTS.length) { img.remove(); return; }
+    if (i >= EXTS.length) {
+      var ph = img.parentNode;
+      img.remove();
+      if (ph && ph.classList) ph.classList.remove('has-img');
+      return;
+    }
     img.dataset.ei = String(i);
     img.src = 'img/' + img.dataset.slug + '.' + EXTS[i];
   };
@@ -1242,7 +1249,8 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
       'aria-expanded="false" aria-controls="pan-' + p.id + '">' +
       '<span class="stop__t' + (/<br\s*\/?>/i.test(p.time) ? ' stop__t--2' : '') + '">' +
         esc(p.time).replace(/&lt;br\s*\/?&gt;/gi, '<br>') + '</span>' +
-      '<span class="stop__ph" style="color:' + (c.c || '#8d8375') + '">' + icon(p) + photo(p) + '</span>' +
+      '<span class="stop__ph' + (p.img ? ' has-img' : '') + '" style="color:' + (c.c || '#8d8375') + '">' +
+        '<i class="ico" aria-hidden="true">' + icon(p) + '</i>' + photo(p) + '</span>' +
       '<span class="stop__b"><span class="stop__n">' + esc(p.name) + '</span>' +
       (p.zh ? '<span class="stop__z">' + esc(p.zh) + '</span>' : '') + '</span>' +
       '<span class="stop__cat' + (p.alt ? ' is-alt' : '') + '">' + esc(catLabel(p)) + (p.alt ? ' · 備選' : '') + '</span>' +
