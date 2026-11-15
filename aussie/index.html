@@ -284,6 +284,13 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
 .stop__ph .ico{font-style:normal;line-height:1}
 .stop__ph.has-img .ico{display:none}
 .stop__b{min-width:0}
+.stop__i{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:17px;height:17px;border-radius:50%;margin-right:7px;vertical-align:1px;
+  background:var(--gold);color:#fff;font-size:.62rem;font-weight:700;font-style:normal;
+  font-variant-numeric:tabular-nums;
+}
+.stop__i.is-alt{background:var(--sage)}
 .stop__n{display:block;font-size:.95rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
 .stop__z{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
 .stop__cat{
@@ -1252,7 +1259,7 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
   }
 
   /* ---------------- 单站 ---------------- */
-  function stopHTML(p, i) {
+  function stopHTML(p, i, num) {
     var c = PCAT[p.cat] || {};
     return '<li>' +
       '<button class="stop' + (p.alt ? ' is-alt' : '') + '" data-id="' + p.id + '" ' +
@@ -1261,7 +1268,9 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
         esc(p.time).replace(/&lt;br\s*\/?&gt;/gi, '<br>') + '</span>' +
       '<span class="stop__ph' + (p.img ? ' has-img' : '') + '" style="color:' + (c.c || '#8d8375') + '">' +
         '<i class="ico" aria-hidden="true">' + icon(p) + '</i>' + photo(p) + '</span>' +
-      '<span class="stop__b"><span class="stop__n">' + esc(p.name) + '</span>' +
+      '<span class="stop__b"><span class="stop__n">' +
+        (num ? '<i class="stop__i' + (p.alt ? ' is-alt' : '') + '">' + num + '</i>' : '') +
+        esc(p.name) + '</span>' +
       (p.zh ? '<span class="stop__z">' + esc(p.zh) + '</span>' : '') + '</span>' +
       '<span class="stop__cat' + (p.alt ? ' is-alt' : '') + '">' + esc(catLabel(p)) + (p.alt ? ' · 備選' : '') + '</span>' +
       '<span class="stop__c" aria-hidden="true"></span>' +
@@ -1315,6 +1324,9 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
     var dateStr = label.replace(/（.*?）/, '');
     var wd = (label.match(/（(.*?)）/) || [])[1] || '';
     var list;
+    /* 與地圖標記一致的編號：只計有座標的站，次序同 BY[day] 一樣 */
+    var mNum = {};
+    stops.filter(function (p) { return p.lat && p.lng; }).forEach(function (p, i) { mNum[p.id] = i + 1; });
 
     if (stops.length >= 12) {
       var buckets = [[], [], []];
@@ -1326,10 +1338,10 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
           '<button class="grp__h" aria-expanded="true">' +
           '<span>' + GLABEL[gi] + '</span><small>' + arr.length + ' 站</small>' +
           '<i>' + esc(first) + ' – ' + esc(last) + '</i></button>' +
-          '<ul class="stops">' + arr.map(stopHTML).join('') + '</ul></div>';
+          '<ul class="stops">' + arr.map(function (p, i) { return stopHTML(p, i, mNum[p.id]); }).join('') + '</ul></div>';
       }).join('');
     } else {
-      list = '<ul class="stops">' + stops.map(stopHTML).join('') + '</ul>';
+      list = '<ul class="stops">' + stops.map(function (p, i) { return stopHTML(p, i, mNum[p.id]); }).join('') + '</ul>';
     }
 
     return '<article class="day" id="d' + day + '" data-day="' + day + '" data-city="' + (CITY[day] || 'all') + '">' +
