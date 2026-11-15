@@ -649,6 +649,7 @@
     <div class="day-head"><span class="dnum">12 月 21 日（一）</span><span class="dtheme">☕ CBD 咖啡 + 歷史建築 + 購物大巡禮</span></div>
     <div class="day-body">
       <div class="places" id="d21"></div>
+      <div class="day-notes"><b>💡 12/21（一）路線：</b>由北行到南，唔走回頭路 —— <b>10:00 州立圖書館</b>（10:00 開）→ 10:40 <b>Melbourne Central</b> → 11:15 <b>Emporium</b> → 11:50 <b>Myer</b>（Bourke St Mall）→ 12:30 <b>Block Arcade</b>（Hopetoun 茶室）→ <b>13:00 Higher Ground 午餐</b>（建議訂位）→ 14:15 <b>Patricia</b> → 14:45 <b>Dukes</b> → 15:15 <b>Pidapipó</b> 雪糕 → 15:45 <b>Federation Square</b>。Bakemono、Industry Beans、Grain Store（15:00 收）、Vacation、Hector's Deli（東邊 2.5 km）列備選。</div>
     </div>
   </div>
 
@@ -1390,20 +1391,20 @@ const POIS = [
 
   /* ---- 12/21 CBD ---- */
   {id:"d21-1", day:21, name:"State Library Victoria", time:"10:00", cat:"文化", lat:-37.8098, lng:144.9646, desc:"1856 年開放，La Trobe 圓頂閱覽室必睇（免費）。"},
-  {id:"d21-2", day:21, name:"Bakemono Bakers", time:"10:40", cat:"咖啡", lat:-37.8132, lng:144.9630, desc:"日式手工麵包店，出品精緻。"},
-  {id:"d21-3", day:21, name:"Melbourne Central", time:"11:15", cat:"購物", lat:-37.8100, lng:144.9620, desc:"商場中庭保留 1888 年子彈製造塔。"},
-  {id:"d21-4", day:21, name:"Emporium Melbourne", time:"11:45", cat:"購物", lat:-37.8115, lng:144.9630, desc:"國際品牌商場，頂層有大型美食廣場。"},
-  {id:"d21-5", day:21, name:"The Block Arcade", time:"12:15", cat:"文化", lat:-37.8158, lng:144.9644, desc:"1892 年華麗拱廊，Hopetoun 茶室喺入面。"},
-  {id:"d21-6", day:21, name:"Patricia Coffee Brewers", time:"12:45", cat:"咖啡", lat:-37.8160, lng:144.9570, desc:"冇位坐嘅極簡咖啡吧，全墨爾本最好一杯之一。"},
-  {id:"d21-7", day:21, name:"Dukes Coffee Roasters", time:"13:15", cat:"咖啡", lat:-37.8168, lng:144.9650, desc:"木系明亮店面，出品穩定。"},
+  {id:"d21-3", day:21, name:"Melbourne Central", time:"10:40", cat:"購物", lat:-37.8100, lng:144.9620, desc:"商場中庭保留 1888 年子彈製造塔。"},
+  {id:"d21-4", day:21, name:"Emporium Melbourne", time:"11:15", cat:"購物", lat:-37.8115, lng:144.9630, desc:"國際品牌商場，頂層有大型美食廣場。"},
+  {id:"d21-15", day:21, name:"Myer Melbourne", time:"11:50", cat:"購物", lat:-37.8120, lng:144.9620, desc:"聖誕櫥窗傳統，12 月氣氛一流。"}
+  {id:"d21-5", day:21, name:"The Block Arcade", time:"12:30", cat:"文化", lat:-37.8158, lng:144.9644, desc:"1892 年華麗拱廊，Hopetoun 茶室喺入面。"},
+  {id:"d21-8", day:21, name:"Higher Ground", time:"13:00", cat:"美食", lat:-37.8163, lng:144.9560, desc:"百年發電站改建，紅磚工業風（建議訂位）。"},
+  {id:"d21-6", day:21, name:"Patricia Coffee Brewers", time:"14:15", cat:"咖啡", lat:-37.8160, lng:144.9570, desc:"冇位坐嘅極簡咖啡吧，全墨爾本最好一杯之一。"},
+  {id:"d21-7", day:21, name:"Dukes Coffee Roasters", time:"14:45", cat:"咖啡", lat:-37.8168, lng:144.9650, desc:"木系明亮店面，出品穩定。"},
+  {id:"d21-10", day:21, name:"Pidapipó", time:"15:15", cat:"美食", lat:-37.8170, lng:144.9650, desc:"人氣手工 gelato，經典同季節限定口味。"},
+  {id:"d21-14", day:21, name:"Federation Square", time:"15:45", cat:"景點", lat:-37.8180, lng:144.9690, desc:"墨爾本城市客廳，對面就係 Flinders Street 車站。"},
+  {id:"d21-2", day:21, name:"Bakemono Bakers", time:"彈性", alt:true, cat:"咖啡", lat:-37.8132, lng:144.9630, desc:"日式手工麵包店，出品精緻。"},
   {id:"d21-7b", day:21, name:"Industry Beans", time:"彈性", cat:"咖啡", alt:true, lat:-37.8148, lng:144.9598, hours:"Little Collins St · Google Maps", desc:"Little Collins 街上嘅人氣咖啡店，brunch 都唔錯。同 Dukes 二揀一，飲唔晒可以跳過。"},
-  {id:"d21-8", day:21, name:"Higher Ground", time:"13:30", cat:"美食", lat:-37.8163, lng:144.9560, desc:"百年發電站改建，紅磚工業風（建議訂位）。"},
-  {id:"d21-9", day:21, name:"Grain Store", time:"13:40", cat:"美食", alt:true, lat:-37.8195, lng:144.9560, desc:"明亮工業風 Brunch — 同 Higher Ground 二揀一。"},
-  {id:"d21-10", day:21, name:"Pidapipó", time:"14:30", cat:"美食", lat:-37.8170, lng:144.9650, desc:"人氣手工 gelato，經典同季節限定口味。"},
-  {id:"d21-11", day:21, name:"Vacation Coffee", time:"15:00", cat:"咖啡", alt:true, lat:-37.8150, lng:144.9640, desc:"CBD 咖啡巡禮其中一站 — 飲唔晒可以跳過。"},
-  {id:"d21-13", day:21, name:"Hector's Deli", time:"16:00", cat:"美食", alt:true, lat:-37.8180, lng:144.9930, desc:"Richmond 人氣 deli，三文治一流 — 備選。"},
-  {id:"d21-14", day:21, name:"Federation Square", time:"17:00", cat:"景點", lat:-37.8180, lng:144.9690, desc:"墨爾本城市客廳，對面就係 Flinders Street 車站。"},
-  {id:"d21-15", day:21, name:"Myer Melbourne", time:"17:30", cat:"購物", lat:-37.8120, lng:144.9620, desc:"聖誕櫥窗傳統，12 月氣氛一流。"}
+  {id:"d21-9", day:21, name:"Grain Store", time:"彈性", cat:"美食", alt:true, lat:-37.8195, lng:144.9560, desc:"明亮工業風 Brunch — 同 Higher Ground 二揀一。"},
+  {id:"d21-11", day:21, name:"Vacation Coffee", time:"彈性", cat:"咖啡", alt:true, lat:-37.8150, lng:144.9640, desc:"CBD 咖啡巡禮其中一站 — 飲唔晒可以跳過。"},
+  {id:"d21-13", day:21, name:"Hector's Deli", time:"彈性", cat:"美食", alt:true, lat:-37.8180, lng:144.9930, desc:"Richmond 人氣 deli，三文治一流 — 備選。"},
 ];
 
 const NOTE22 = [
