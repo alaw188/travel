@@ -142,6 +142,11 @@
   }
   .wlink:hover{color:var(--ocean-dark);border-bottom-color:var(--ocean-dark)}
 
+  /* 表內／時間軸內的餐廳連結 */
+  .t-drive a,.steps a{color:var(--ocean);font-weight:600;text-decoration:none;border-bottom:1px solid #cfe0e8}
+  .t-drive a:hover,.steps a:hover{color:var(--ocean-dark);border-bottom-color:var(--ocean-dark)}
+  .closed{color:#b23b2e;font-weight:700}
+
   /* ---------- 相簿 ---------- */
   .album{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:14px 0 6px}
   .alb{margin:0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(43,43,43,.07)}
@@ -324,7 +329,7 @@
             <td data-l="地址">673–675 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">47.2 km<br>50 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">買任何一瓶可免</span></td>
-            <td data-l="餐飲">Garden Terrace 輕食 11:30–14:30；餐廳</td>
+            <td data-l="餐飲">Garden Terrace 輕食 11:30–14:30；<a href="https://coombeyarravalley.com.au/restaurant" target="_blank" rel="noopener">餐廳</a></td>
             <td data-l="體驗">Melba 故居；花園導賞 A$15、小屋導賞 A$45。週三至日</td>
           </tr>
           <tr>
@@ -332,7 +337,7 @@
             <td data-l="地址">38 Melba Hwy, Yering VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">52.4 km<br>54 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15 / $20 / $35</span><span class="sub">Village／Yering+Yarrabank／Single Vineyard；買酒可抵</span></td>
-            <td data-l="餐飲">餐廳每日午餐（單點）</td>
+            <td data-l="餐飲"><a href="https://www.yering.com/pages/visit-us-restaurant#menu" target="_blank" rel="noopener">餐廳</a>每日午餐（單點）</td>
             <td data-l="體驗">Museum Collection 導賞 A$95／90 分鐘（6 人起）；週日 +10%</td>
           </tr>
           <tr>
@@ -340,7 +345,7 @@
             <td data-l="地址">727 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">54.2 km<br>58 min</span></td>
             <td data-l="品酒費"><span class="fee">A$22 / $25</span><span class="sub">官網兩版並存：30 分鐘／45 分鐘，以預訂頁為準</span></td>
-            <td data-l="餐飲">餐廳（平日單點、週末套餐 A$79 起）；Lounge Bar</td>
+            <td data-l="餐飲"><a href="https://www.chandon.com/en-au/experiences/restaurant" target="_blank" rel="noopener">餐廳</a>（平日單點、週末套餐 A$79 起）；Lounge Bar</td>
             <td data-l="體驗">Behind the Bubbles A$90；Étoile 私人品酒 A$59；Sparkling Brunch A$75</td>
           </tr>
           <tr>
@@ -356,7 +361,7 @@
             <td data-l="地址">864 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">56.7 km<br>61 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">Top Rated Flight A$40；Chardonnay Masterclass A$50</span></td>
-            <td data-l="餐飲">酒莊餐廳（需訂）</td>
+            <td data-l="餐飲"><span class="closed">餐廳 2025/6/30 已結業</span>，現時只做品酒、無供餐（<a href="https://oakridgewines.com.au/news/oakridge-restaurant-closure/" target="_blank" rel="noopener">官方通告</a>）；要食飯去 Chandon／Yering（10–13 分鐘）</td>
             <td data-l="體驗">A$15 可 walk-in；山谷景觀；864 單一區塊系列</td>
           </tr>
           <tr>
@@ -372,7 +377,7 @@
             <td data-l="地址">311 Healesville-Yarra Glen Rd, Yarra Glen VIC 3775</td>
             <td data-l="距 CBD"><span class="dist">63.2 km<br>66 min</span></td>
             <td data-l="品酒費"><span class="fee">A$20 / $40</span><span class="sub">Estate 5 款／Premium 6 款</span></td>
-            <td data-l="餐飲">餐廳（週三至日午餐）</td>
+            <td data-l="餐飲"><a href="https://www.tarrawarra.com.au/restaurant" target="_blank" rel="noopener">餐廳</a>（週三至日午餐）</td>
             <td data-l="體驗">地下酒窖；TarraWarra 美術館；UWEA 導賞 A$200、Land, Vine &amp; Vision A$450</td>
           </tr>
           <tr>
@@ -414,7 +419,7 @@
         <li><b>09:15</b><span>CBD 取車出發</span><em>避開 8:00–9:00 上班車流</em></li>
         <li><b>10:05</b><span><b>Coombe</b>　47 km／50 min</span><em>導賞品酒 A$15，逛 Melba 花園（30–40 分鐘）</em></li>
         <li><b>11:15</b><span><b>Yering Station</b>　6.2 km／7 min</span><em>Village 品酒 A$15＋1859 年酒窖</em></li>
-        <li><b>12:30</b><span><b>Chandon</b>　8.6 km／10 min</span><em>餐廳午餐（週末套餐 A$79 起）——全程最長一站</em></li>
+        <li><b>12:30</b><span><b>Chandon</b>　8.6 km／10 min</span><em><a href="https://www.chandon.com/en-au/experiences/restaurant" target="_blank" rel="noopener">餐廳</a>午餐（週末套餐 A$79 起）——全程最長一站</em></li>
         <li><b>14:45</b><span><b>Oakridge</b>　3.4 km／7 min</span><em>A$15 品酒，露台看山谷</em></li>
         <li><b>16:15</b><span>回程　56 km／60 min</span><em>17:15 前回到 CBD，仲趕得及晚飯</em></li>
       </ol>
@@ -1001,7 +1006,7 @@
       { n: 'Yering Station', k: 'A$15–35', a: '38 Melba Hwy, Yering', f: 'Village <b>A$15</b>／Yering+Yarrabank $20／Single Vineyard $35（買酒可抵）', u: 'https://www.yering.com/', c: [-37.67336, 145.38389] },
       { n: 'Domaine Chandon', k: 'A$22–25', a: '727 Maroondah Hwy, Coldstream', f: '導賞品酒 <b>A$22</b>（30 分鐘）／$25（45 分鐘）；餐廳週末套餐 $79 起', u: 'https://www.chandon.com/en-au', c: [-37.67975, 145.42995] },
       { n: 'Coldstream Hills', k: 'A$5–15', a: '29–31 Maddens Ln, Gruyere', f: '品酒 <b>A$5／$10／$15</b> 逐級；Masterclass $40', u: 'https://www.coldstreamhills.com.au/', c: [-37.72291, 145.46861] },
-      { n: 'Oakridge Wines', k: 'A$15–50', a: '864 Maroondah Hwy, Coldstream', f: 'Oakridge Experience <b>A$15</b>（可 walk-in）／Top Rated Flight A$40；餐廳需訂', u: 'https://oakridgewines.com.au/', c: [-37.68767, 145.45730] },
+      { n: 'Oakridge Wines', k: 'A$15–50', a: '864 Maroondah Hwy, Coldstream', f: 'Oakridge Experience <b>A$15</b>（可 walk-in）／Top Rated Flight A$40；<b>餐廳已於 2025/6/30 結業</b>，只品酒', u: 'https://oakridgewines.com.au/', c: [-37.68767, 145.45730] },
       { n: 'Levantine Hill', k: '需查詢', a: '882 Maroondah Hwy, Coldstream', f: '散客價<b>需電話／網上查詢</b>；5 人以上套餐 A$210 含品酒＋三道菜', u: 'https://www.levantinehill.com.au/', c: [-37.68571, 145.47809] },
       { n: 'TarraWarra Estate', k: 'A$20–40', a: '311 Healesville–Yarra Glen Rd, Yarra Glen', f: 'Estate Tasting <b>A$20</b>（5 款）／Premium $40；TarraWarra 美術館', u: 'https://tarrawarra.com.au/', c: [-37.65963, 145.46919] },
       { n: 'De Bortoli', k: 'A$10–25', a: '58 Pinnacle Ln, Dixons Creek', f: 'Discover <b>A$10–15</b>（15 分鐘）／Indulge $25（45 分鐘）；Locale 餐廳', u: 'https://www.debortoli.com.au/', c: [-37.59813, 145.41085] },
