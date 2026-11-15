@@ -127,10 +127,32 @@
     display:block;width:76px;height:54px;object-fit:cover;
     border-radius:6px;border:1px solid #e8dfcd;background:#f3ece0;
   }
-  .wtag{
-    position:absolute;left:3px;bottom:3px;background:rgba(10,61,84,.85);color:#fff;
-    font-size:.56rem;line-height:1.45;border-radius:3px;padding:0 3px;letter-spacing:.05em;
+  .wthumb--none{
+    display:grid;place-items:center;background:#f1ece2;color:#9a9284;
+    font-size:.72rem;font-weight:700;letter-spacing:.08em;
   }
+  .alb--none .alb__ph{
+    display:grid;place-items:center;aspect-ratio:4/3;background:#f1ece2;
+    color:#a39a8b;font-size:1.6rem;font-weight:800;letter-spacing:.1em;
+  }
+  .wlink{
+    display:inline-block;margin-top:5px;font-size:.72rem;font-weight:700;
+    color:var(--ocean);text-decoration:none;border-bottom:1px solid #cfe0e8;
+    white-space:nowrap;
+  }
+  .wlink:hover{color:var(--ocean-dark);border-bottom-color:var(--ocean-dark)}
+
+  /* ---------- 相簿 ---------- */
+  .album{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin:14px 0 6px}
+  .alb{margin:0;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(43,43,43,.07)}
+  .alb > a{display:block;overflow:hidden}
+  .alb img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .4s ease}
+  .alb > a:hover img{transform:scale(1.04)}
+  .alb figcaption{padding:9px 12px 11px;font-size:.82rem;line-height:1.5}
+  .alb figcaption b{display:block;color:var(--ocean-dark);font-size:.88rem}
+  .alb figcaption span{display:block;color:var(--muted);font-size:.74rem;margin-top:1px}
+  .alb__site{display:inline-block;margin-top:5px;font-size:.73rem;font-weight:700;color:var(--ocean);text-decoration:none;border-bottom:1px solid #cfe0e8}
+  .alb__site:hover{color:var(--ocean-dark);border-bottom-color:var(--ocean-dark)}
 
   /* ---------- 圖片來源 ---------- */
   .credits{margin:14px 0 0;font-size:.75rem;color:var(--muted);line-height:1.75}
@@ -262,7 +284,7 @@
         <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
         <tbody>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yarra_region.jpg" alt="亞拉河谷葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Coombe</b><span class="sub">Melba Estate</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/coombe.jpg" alt="Coombe Melba Estate 品酒室" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Coombe</b><span class="sub">Melba Estate</span><a class="wlink" href="https://coombeyarravalley.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">673–675 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">47.2 km<br>50 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">買任何一瓶可免</span></td>
@@ -270,7 +292,7 @@
             <td data-l="體驗">Melba 故居；花園導賞 A$15、小屋導賞 A$45。週三至日</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yering.jpg" alt="Yering Station 酒莊" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Yering Station</b><span class="sub">1859 年歷史酒窖</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yering.jpg" alt="Yering Station 酒窖" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Yering Station</b><span class="sub">1859 年歷史酒窖</span><a class="wlink" href="https://www.yering.com/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">38 Melba Hwy, Yering VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">52.4 km<br>54 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15 / $20 / $35</span><span class="sub">Village／Yering+Yarrabank／Single Vineyard；買酒可抵</span></td>
@@ -278,7 +300,7 @@
             <td data-l="體驗">Museum Collection 導賞 A$95／90 分鐘（6 人起）；週日 +10%</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/chandon.jpg" alt="Domaine Chandon 葡萄園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Domaine Chandon</b><span class="sub">氣泡酒</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/chandon.jpg" alt="Domaine Chandon 試酒" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Domaine Chandon</b><span class="sub">氣泡酒</span><a class="wlink" href="https://www.chandon.com/en-au" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">727 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">54.2 km<br>58 min</span></td>
             <td data-l="品酒費"><span class="fee">A$22 / $25</span><span class="sub">官網兩版並存：30 分鐘／45 分鐘，以預訂頁為準</span></td>
@@ -286,7 +308,7 @@
             <td data-l="體驗">Behind the Bubbles A$90；Étoile 私人品酒 A$59；Sparkling Brunch A$75</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yarra_region.jpg" alt="亞拉河谷葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Coldstream Hills</b><span class="sub">James Halliday 創立</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/coldstream.jpg" alt="Coldstream Hills 酒與葡萄園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Coldstream Hills</b><span class="sub">James Halliday 創立</span><a class="wlink" href="https://www.coldstreamhills.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">29 Maddens Ln, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">54.8 km<br>63 min</span></td>
             <td data-l="品酒費"><span class="fee">A$5 / $10 / $15</span><span class="sub">Masterclass A$40</span></td>
@@ -294,7 +316,7 @@
             <td data-l="體驗">全區最平；山頂景觀。價格以官網為準（分級沿用多年）</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yarra_region.jpg" alt="亞拉河谷葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Oakridge</b><span class="sub">餐廳＋菜園</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/oakridge.jpg" alt="Oakridge 葡萄園鳥瞰" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Oakridge</b><span class="sub">餐廳＋菜園</span><a class="wlink" href="https://oakridgewines.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">864 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">56.7 km<br>61 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">Top Rated Flight A$40；Chardonnay Masterclass A$50</span></td>
@@ -302,7 +324,7 @@
             <td data-l="體驗">A$15 可 walk-in；山谷景觀；864 單一區塊系列</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/levantine.jpg" alt="Levantine Hill 莊園鳥瞰" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Levantine Hill</b><span class="sub">高端餐酒</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/levantine.jpg" alt="Levantine Hill 品酒" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Levantine Hill</b><span class="sub">高端餐酒</span><a class="wlink" href="https://www.levantinehill.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">882 Maroondah Hwy, Coldstream VIC 3770</td>
             <td data-l="距 CBD"><span class="dist">57.8 km<br>60 min</span></td>
             <td data-l="品酒費"><span class="fee fee--q">需查詢</span><span class="sub">官網未公布散客價</span></td>
@@ -310,7 +332,7 @@
             <td data-l="體驗">架構與藝術收藏；5 人以上套餐 A$210 含品酒＋三道菜＋接送</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/tarrawarra.jpg" alt="TarraWarra 葡萄園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>TarraWarra</b><span class="sub">酒＋美術館</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/tarrawarra.jpg" alt="TarraWarra 葡萄園鳥瞰" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>TarraWarra</b><span class="sub">酒＋美術館</span><a class="wlink" href="https://tarrawarra.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">311 Healesville-Yarra Glen Rd, Yarra Glen VIC 3775</td>
             <td data-l="距 CBD"><span class="dist">63.2 km<br>66 min</span></td>
             <td data-l="品酒費"><span class="fee">A$20 / $40</span><span class="sub">Estate 5 款／Premium 6 款</span></td>
@@ -318,7 +340,7 @@
             <td data-l="體驗">地下酒窖；TarraWarra 美術館；UWEA 導賞 A$200、Land, Vine &amp; Vision A$450</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/debortoli.jpg" alt="De Bortoli 葡萄園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>De Bortoli</b><span class="sub">意大利菜</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/debortoli.jpg" alt="De Bortoli 試酒" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>De Bortoli</b><span class="sub">意大利菜</span><a class="wlink" href="https://www.debortoli.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">58 Pinnacle Ln, Dixons Creek VIC 3775</td>
             <td data-l="距 CBD"><span class="dist">63.3 km<br>65 min</span></td>
             <td data-l="品酒費"><span class="fee">A$10–15 / $25</span><span class="sub">Discover 15 分鐘／Indulge 45 分鐘</span></td>
@@ -326,7 +348,7 @@
             <td data-l="體驗">酒窖導賞；Luxury Picnic A$50；芝士房；兒童遊樂場</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/yarra_region.jpg" alt="亞拉河谷葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Giant Steps</b><span class="sub">Halliday 2025 年度酒莊</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><span class="wthumb wthumb--none" aria-hidden="true">GS</span></span><span class="wtxt"><b>Giant Steps</b><span class="sub">Halliday 2025 年度酒莊</span><a class="wlink" href="https://www.giantsteps.net.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">314 Maroondah Hwy, Healesville VIC 3777</td>
             <td data-l="距 CBD"><span class="dist">64.3 km<br>67 min</span></td>
             <td data-l="品酒費"><span class="fee">A$12 / $30 / $40 / $60</span><span class="sub">By the Glass／Essential／Single Vineyard</span></td>
@@ -381,7 +403,7 @@
         <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
         <tbody>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/ptleo.jpg" alt="Pt. Leo 雕塑公園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Pt. Leo Estate</b><span class="sub">雕塑公園</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/ptleo.jpg" alt="Pt. Leo Estate 雕塑公園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Pt. Leo Estate</b><span class="sub">雕塑公園</span><a class="wlink" href="https://www.ptleoestate.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">3649 Frankston-Flinders Rd, Merricks VIC 3916</td>
             <td data-l="距 CBD"><span class="dist">86.6 km<br>77 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15 / $25 / $30</span><span class="sub">Estate／Red・White／Premium；每買一瓶退 A$10</span></td>
@@ -389,7 +411,7 @@
             <td data-l="體驗"><b>雕塑公園 A$15</b>（餐廳客人 A$5）；60+ 件作品含 KAWS；上限 6 人</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/peninsula_region.jpg" alt="莫寧頓半島葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Port Phillip Estate</b><span class="sub">建築與海景</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/portphillip.jpg" alt="Port Phillip Estate 餐廳望葡萄園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Port Phillip Estate</b><span class="sub">建築與海景</span><a class="wlink" href="https://www.portphillipestate.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">263 Red Hill Rd, Red Hill South VIC 3937</td>
             <td data-l="距 CBD"><span class="dist">86.9 km<br>72 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">不退；Wine &amp; Cheese A$40、Single Vineyard A$25</span></td>
@@ -397,7 +419,7 @@
             <td data-l="體驗">Kooyong 單一園；Western Port 海景</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/peninsula_region.jpg" alt="莫寧頓半島葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Ten Minutes by Tractor</b><span class="sub">頂級酒單</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/tenminutes.jpg" alt="Ten Minutes by Tractor 酒窖" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Ten Minutes by Tractor</b><span class="sub">頂級酒單</span><a class="wlink" href="https://www.tenminutesbytractor.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">1333 Mornington-Flinders Rd, Main Ridge VIC 3928</td>
             <td data-l="距 CBD"><span class="dist">89.5 km<br>73 min</span></td>
             <td data-l="品酒費"><span class="fee">A$15 / $50</span><span class="sub">10X &amp; Estate／Single Vineyard；Masterclass A$120</span></td>
@@ -405,7 +427,7 @@
             <td data-l="體驗">兩帽；Star Wine List 2021–2026 澳洲前列；Masterclass 每日 11:00</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/peninsula_region.jpg" alt="莫寧頓半島葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Montalto</b><span class="sub">雕塑步道</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/montalto.jpg" alt="Montalto 餐廳" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Montalto</b><span class="sub">雕塑步道</span><a class="wlink" href="https://montalto.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">33 Shoreham Rd, Red Hill South VIC 3937</td>
             <td data-l="距 CBD"><span class="dist">90.1 km<br>75 min</span></td>
             <td data-l="品酒費"><span class="fee">A$20</span><span class="sub">買滿 A$45 可免；Wine &amp; Cheese A$40（14:00 起）</span></td>
@@ -413,7 +435,7 @@
             <td data-l="體驗"><b>1 km 雕塑步道免費</b>；上限 6 人；公眾假期 +15%</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/peninsula_region.jpg" alt="莫寧頓半島葡萄園" loading="lazy" width="96" height="64"><span class="wtag">同區</span></span><span class="wtxt"><b>Paringa Estate</b><span class="sub">十頂廚師帽</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/paringa.jpg" alt="Paringa Estate 品酒吧" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Paringa Estate</b><span class="sub">十頂廚師帽</span><a class="wlink" href="https://paringaestate.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">44 Paringa Rd, Red Hill South VIC 3937</td>
             <td data-l="距 CBD"><span class="dist">90.4 km<br>76 min</span></td>
             <td data-l="品酒費"><span class="fee">A$10</span><span class="sub">全區最平</span></td>
@@ -421,12 +443,12 @@
             <td data-l="體驗">單一園 Pinot Noir；餐廳連續十年 Chef Hats</td>
           </tr>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/mainridge.jpg" alt="Main Ridge Estate 葡萄" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Main Ridge Estate</b><span class="sub">半島第一家</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/mainridge.jpg" alt="Main Ridge Estate 酒窖" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Main Ridge Estate</b><span class="sub">半島第一家</span><a class="wlink" href="https://mre.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">80 William Rd, Red Hill VIC 3930</td>
             <td data-l="距 CBD"><span class="dist">約 92 km<br>78 min</span></td>
-            <td data-l="品酒費"><span class="fee">A$10</span><span class="sub">酒農親自招呼</span></td>
+            <td data-l="品酒費"><span class="fee">A$15 / $25</span><span class="sub">4 款單一園／加 2 款 Estate；酒農親自招呼</span></td>
             <td data-l="餐飲">The Larder（週末午餐）</td>
-            <td data-l="體驗">1975 年開業；只開週六日 11:30–17:00，要訂</td>
+            <td data-l="體驗">1975 年開業；週五至日 11:00–17:00，必須預約</td>
           </tr>
         </tbody>
       </table>
@@ -455,7 +477,7 @@
         <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
         <tbody>
           <tr>
-            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/hangingrock_region.jpg" alt="Hanging Rock 岩石" loading="lazy" width="96" height="64"><span class="wtag">地標</span></span><span class="wtxt"><b>Hanging Rock Winery</b><span class="sub">20+ 款酒</span></span></div></td>
+            <td data-l="酒莊"><div class="wcell"><span class="wph"><img class="wthumb" src="img/winery/hangingrock.jpg" alt="Hanging Rock Winery 莊園" loading="lazy" width="96" height="64"></span><span class="wtxt"><b>Hanging Rock Winery</b><span class="sub">20+ 款酒</span><a class="wlink" href="https://www.hangingrock.com.au/" target="_blank" rel="noopener">官網 ↗</a></span></div></td>
             <td data-l="地址">88 Jim Rd, Newham VIC 3442</td>
             <td data-l="距 CBD"><span class="dist">78.2 km<br>67 min</span></td>
             <td data-l="品酒費"><span class="free">免費</span><span class="sub">7 人以下；8 人以上導賞 A$15</span></td>
@@ -491,21 +513,96 @@
       ⚠️ <b>與現有行程的衝突要留意：</b>12/20（日）已訂<b>雅拉河谷史詩葡萄酒導賞團（08:45 出發）</b>，與上面路線 A 完全重疊——<b>兩者只能揀一個</b>。自駕的好處是節奏自由、五人分攤更平；跟團的好處是不用擔心司機飲酒。12/18、12/19 已經係長途自駕日（菲利普島、大洋路），12/21 係 CBD 購物日，所以真正可以放自駕酒莊的，只有 12/20 或 12/22。
     </div>
 
+    <h3 class="tsub drive">📷 相簿 · Photo album<span class="h3note">15 張 · 全部取自各酒莊官網 · 點圖可放大</span></h3>
+    <div class="album">
+      <figure class="alb">
+        <a href="img/winery/coombe.jpg" target="_blank" rel="noopener"><img src="img/winery/coombe.jpg" alt="Coombe · Melba Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Coombe · Melba Estate</b><span>亞拉河谷 · Coldstream</span><a class="alb__site" href="https://coombeyarravalley.com.au/" target="_blank" rel="noopener">coombeyarravalley.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/yering.jpg" target="_blank" rel="noopener"><img src="img/winery/yering.jpg" alt="Yering Station" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Yering Station</b><span>亞拉河谷 · Yering（1859 年酒窖）</span><a class="alb__site" href="https://www.yering.com/" target="_blank" rel="noopener">yering.com ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/chandon.jpg" target="_blank" rel="noopener"><img src="img/winery/chandon.jpg" alt="Domaine Chandon" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Domaine Chandon</b><span>亞拉河谷 · Coldstream</span><a class="alb__site" href="https://www.chandon.com/en-au" target="_blank" rel="noopener">chandon.com ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/coldstream.jpg" target="_blank" rel="noopener"><img src="img/winery/coldstream.jpg" alt="Coldstream Hills" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Coldstream Hills</b><span>亞拉河谷 · Coldstream</span><a class="alb__site" href="https://www.coldstreamhills.com.au/" target="_blank" rel="noopener">coldstreamhills.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/oakridge.jpg" target="_blank" rel="noopener"><img src="img/winery/oakridge.jpg" alt="Oakridge" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Oakridge</b><span>亞拉河谷 · Coldstream（葡萄園鳥瞰）</span><a class="alb__site" href="https://oakridgewines.com.au/" target="_blank" rel="noopener">oakridgewines.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/levantine.jpg" target="_blank" rel="noopener"><img src="img/winery/levantine.jpg" alt="Levantine Hill" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Levantine Hill</b><span>亞拉河谷 · Coldstream（品酒）</span><a class="alb__site" href="https://www.levantinehill.com.au/" target="_blank" rel="noopener">levantinehill.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/tarrawarra.jpg" target="_blank" rel="noopener"><img src="img/winery/tarrawarra.jpg" alt="TarraWarra Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>TarraWarra Estate</b><span>亞拉河谷 · Yarra Glen（葡萄園鳥瞰）</span><a class="alb__site" href="https://tarrawarra.com.au/" target="_blank" rel="noopener">tarrawarra.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/debortoli.jpg" target="_blank" rel="noopener"><img src="img/winery/debortoli.jpg" alt="De Bortoli" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>De Bortoli</b><span>亞拉河谷 · Dixons Creek</span><a class="alb__site" href="https://www.debortoli.com.au/" target="_blank" rel="noopener">debortoli.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/ptleo.jpg" target="_blank" rel="noopener"><img src="img/winery/ptleo.jpg" alt="Pt. Leo Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Pt. Leo Estate</b><span>莫寧頓半島 · Merricks（雕塑公園）</span><a class="alb__site" href="https://www.ptleoestate.com.au/" target="_blank" rel="noopener">ptleoestate.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/portphillip.jpg" target="_blank" rel="noopener"><img src="img/winery/portphillip.jpg" alt="Port Phillip Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Port Phillip Estate</b><span>莫寧頓半島 · Red Hill South</span><a class="alb__site" href="https://www.portphillipestate.com.au/" target="_blank" rel="noopener">portphillipestate.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/tenminutes.jpg" target="_blank" rel="noopener"><img src="img/winery/tenminutes.jpg" alt="Ten Minutes by Tractor" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Ten Minutes by Tractor</b><span>莫寧頓半島 · Main Ridge</span><a class="alb__site" href="https://www.tenminutesbytractor.com.au/" target="_blank" rel="noopener">tenminutesbytractor.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/montalto.jpg" target="_blank" rel="noopener"><img src="img/winery/montalto.jpg" alt="Montalto" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Montalto</b><span>莫寧頓半島 · Red Hill South</span><a class="alb__site" href="https://montalto.com.au/" target="_blank" rel="noopener">montalto.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/paringa.jpg" target="_blank" rel="noopener"><img src="img/winery/paringa.jpg" alt="Paringa Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Paringa Estate</b><span>莫寧頓半島 · Red Hill South</span><a class="alb__site" href="https://paringaestate.com.au/" target="_blank" rel="noopener">paringaestate.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/mainridge.jpg" target="_blank" rel="noopener"><img src="img/winery/mainridge.jpg" alt="Main Ridge Estate" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Main Ridge Estate</b><span>莫寧頓半島 · Red Hill（酒窖）</span><a class="alb__site" href="https://mre.com.au/" target="_blank" rel="noopener">mre.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb">
+        <a href="img/winery/hangingrock.jpg" target="_blank" rel="noopener"><img src="img/winery/hangingrock.jpg" alt="Hanging Rock Winery" loading="lazy" width="500" height="375"></a>
+        <figcaption><b>Hanging Rock Winery</b><span>馬其頓山脈 · Newham</span><a class="alb__site" href="https://www.hangingrock.com.au/" target="_blank" rel="noopener">hangingrock.com.au ↗</a></figcaption>
+      </figure>
+      <figure class="alb alb--none">
+        <span class="alb__ph" aria-hidden="true">GS</span>
+        <figcaption><b>Giant Steps</b><span>亞拉河谷 · Healesville（官網未提供可用實景相片）</span><a class="alb__site" href="https://www.giantsteps.net.au/" target="_blank" rel="noopener">giantsteps.net.au ↗</a></figcaption>
+      </figure>
+    </div>
+
     <div class="credits">
-      <b>相片來源與授權</b>（除註明外均為該酒莊或莊園實景；標「同區」者為同產區葡萄園資料圖，非該酒莊本身）
+      <b>相片來源</b>（全部取自各酒莊官方網站，僅供本行程內部參考；版權屬各酒莊所有，不作商業用途）
       <ul>
-        <li>Domaine Chandon 葡萄園 — Henry Burrows — CC BY-SA 2.0 — <a href="https://commons.wikimedia.org/wiki/File:Domaine_Chandon_Australia_vineyard.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>Yering Station 酒莊 — TravelingOtter — CC BY-SA 2.0 — <a href="https://commons.wikimedia.org/wiki/File:Yering_Station_Winery_-_Yarra_Valley,_Australia.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>Levantine Hill 莊園（鳥瞰） — Bob Tan — CC BY 4.0 — <a href="https://commons.wikimedia.org/wiki/File:Levantine_Hill_estate_from_above.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>TarraWarra 葡萄園 — John Vandenberg — CC BY-SA 3.0 — <a href="https://commons.wikimedia.org/wiki/File:TarraWarra_Estate_vineyard.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>De Bortoli 葡萄園 — Stefano — CC BY-SA 3.0 — <a href="https://commons.wikimedia.org/wiki/File:YarraValley---De-Bortoli.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>Pt. Leo 雕塑公園 — BrooksieG — CC BY-SA 4.0 — <a href="https://commons.wikimedia.org/wiki/File:Pt_Leo_sculpture.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>Main Ridge Estate 葡萄（Chardonnay） — CSIRO — CC BY 3.0 — <a href="https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_1961_Chardonnay_grapes_at_the_Main_Ridge_Estate.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>亞拉河谷葡萄園（同區資料圖） — DearEdward — CC BY 2.0 — <a href="https://commons.wikimedia.org/wiki/File:Yarra_Valley_vines_(12740490444).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>莫寧頓半島葡萄園（同區資料圖） — faVori rouge — CC BY-SA 2.0 — <a href="https://commons.wikimedia.org/wiki/File:Mornington_Peninsula_vineyard.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
-        <li>Hanging Rock 岩石（酒莊旁地標） — Anne-Marie Steenbergen — CC BY-SA 4.0 — <a href="https://commons.wikimedia.org/wiki/File:Hanging_Rock_2001-11-16_D1020009.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></li>
+        <li>Coombe Yarra Valley — <a href="https://coombeyarravalley.com.au/" target="_blank" rel="noopener">coombeyarravalley.com.au</a></li>
+        <li>Yering Station — <a href="https://www.yering.com/" target="_blank" rel="noopener">yering.com</a></li>
+        <li>Domaine Chandon — <a href="https://www.chandon.com/en-au" target="_blank" rel="noopener">chandon.com</a></li>
+        <li>Coldstream Hills — <a href="https://www.coldstreamhills.com.au/" target="_blank" rel="noopener">coldstreamhills.com.au</a></li>
+        <li>Oakridge — <a href="https://oakridgewines.com.au/" target="_blank" rel="noopener">oakridgewines.com.au</a></li>
+        <li>Levantine Hill — <a href="https://www.levantinehill.com.au/" target="_blank" rel="noopener">levantinehill.com.au</a></li>
+        <li>TarraWarra Estate — <a href="https://tarrawarra.com.au/" target="_blank" rel="noopener">tarrawarra.com.au</a></li>
+        <li>De Bortoli — <a href="https://www.debortoli.com.au/" target="_blank" rel="noopener">debortoli.com.au</a></li>
+        <li>Pt. Leo Estate — <a href="https://www.ptleoestate.com.au/" target="_blank" rel="noopener">ptleoestate.com.au</a></li>
+        <li>Port Phillip Estate — <a href="https://www.portphillipestate.com.au/" target="_blank" rel="noopener">portphillipestate.com.au</a></li>
+        <li>Ten Minutes by Tractor — <a href="https://www.tenminutesbytractor.com.au/" target="_blank" rel="noopener">tenminutesbytractor.com.au</a></li>
+        <li>Montalto — <a href="https://montalto.com.au/" target="_blank" rel="noopener">montalto.com.au</a></li>
+        <li>Paringa Estate — <a href="https://paringaestate.com.au/" target="_blank" rel="noopener">paringaestate.com.au</a></li>
+        <li>Main Ridge Estate — <a href="https://mre.com.au/" target="_blank" rel="noopener">mre.com.au</a></li>
+        <li>Hanging Rock Winery — <a href="https://www.hangingrock.com.au/" target="_blank" rel="noopener">hangingrock.com.au</a></li>
+        <li>Giant Steps — 官網未提供可用實景相片，故未附圖；見 <a href="https://www.giantsteps.net.au/" target="_blank" rel="noopener">giantsteps.net.au</a></li>
       </ul>
-      Wikimedia Commons 內容依 CC BY／CC BY-SA 授權使用；如需轉載請保留上列署名與授權連結。
+      如本頁日後對外公開，請先向各酒莊取得圖片授權，或改用自行拍攝的照片。
+
     </div>
 
     <p class="src">車程與里程以 OSRM 路網計算（free-flow，即不塞車）；實際請預留 +15–20%，週末上午出城另加 20–30 分鐘。收費為各酒莊官網 2026 年公布，酒莊通常每年 1 月與 7 月調整，出發前請再核對。</p>
