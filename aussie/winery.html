@@ -247,7 +247,8 @@
   .mapbox__ft{padding:0 13px 11px;font-size:.76rem;color:var(--muted);line-height:1.7}
   .mapbox__ft b{color:#5d594f}
   .mapbox__ft .dash{display:inline-block;width:22px;height:0;border-top:3px dashed var(--coral);vertical-align:middle;margin:0 3px}
-  .mapbox__ft .dots{display:inline-block;width:22px;height:0;border-top:5px dotted var(--ocean);vertical-align:middle;margin:0 3px}
+  .mapbox__ft .dd{display:inline-block;width:26px;height:4px;vertical-align:middle;margin:0 3px;background:repeating-linear-gradient(90deg,var(--gold) 0 7px,transparent 7px 11px,var(--gold) 11px 13px,transparent 13px 17px)}
+  .mapbox__ft .solid{display:inline-block;width:22px;height:3px;vertical-align:middle;margin:0 3px;background:var(--ocean);border-radius:2px}
   .wpin{width:27px;height:27px;border-radius:50%;background:var(--gold);border:2px solid #fff;color:#2b2317;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.35)}
   .wpin.is-on{background:var(--coral);color:#fff}
   .leaflet-container{font-family:inherit;font-size:.8rem}
@@ -407,7 +408,7 @@
       <div class="mapbox__hd"><b>🗺️ 亞拉河谷 · 九間酒莊位置</b><span>點標記或下面編號睇地址／品酒費</span></div>
       <div class="wmap" id="mapYarra" role="application" aria-label="亞拉河谷九間酒莊位置地圖"></div>
       <div class="mapleg" id="legYarra"></div>
-      <p class="mapbox__ft"><span class="dash"></span><b>虛線＝路線 A</b>（Coombe → Yering Station → Chandon → Oakridge）　<span class="dots"></span><b>點線＝★ 建議走法</b>（Coombe → Yering → TarraWarra → Giant Steps）；兩者都只是示意連線，不代表實際道路走線。Coombe、Chandon、Oakridge 都在 <b>Maroondah Highway</b> 一條線上；Giant Steps 最東，在 Healesville 大街。<b>Hanging Rock 在墨爾本以北 67 分鐘，不在此圖範圍</b>，另見下面馬其頓山脈一節。</p>
+      <p class="mapbox__ft"><span class="dash"></span><b>虛線＝路線 A</b>（Coombe → Yering → Chandon → Oakridge）　<span class="dd"></span><b>點劃線＝路線 B</b>（Oakridge 或 Coombe → TarraWarra → Giant Steps → De Bortoli）　<span class="solid"></span><b>實線＝★ 建議走法</b>（Coombe → Yering → TarraWarra → Giant Steps）；三條都只是示意連線，不代表實際道路走線。Coombe、Chandon、Oakridge 都在 <b>Maroondah Highway</b> 一條線上；Giant Steps 最東，在 Healesville 大街。<b>Hanging Rock 在墨爾本以北 67 分鐘，不在此圖範圍</b>，另見下面馬其頓山脈一節。</p>
     </div>
 
     <div class="routes2">
@@ -1026,6 +1027,7 @@
   var YARRA = {
     name: '亞拉河谷',
     route: [0, 1, 2, 4],
+    routeB: [4, 6, 8, 7],
     route2: [0, 1, 6, 8],
     list: [
       { n: 'Coombe Yarra Valley', k: 'A$15', a: '673–675 Maroondah Hwy, Coldstream', f: '品酒 <b>A$15</b>（買任何一瓶可免）· 花園導賞 A$15', u: 'https://coombeyarravalley.com.au/', c: [-37.71963, 145.38155] },
@@ -1097,9 +1099,14 @@
         color: '#e07a5f', weight: 3, opacity: .9, dashArray: '8 7', lineCap: 'round'
       }).addTo(map);
     }
+    if (cfg.routeB && cfg.routeB.length > 1) {
+      L.polyline(cfg.routeB.map(function (k) { return cfg.list[k].c; }), {
+        color: '#c9a227', weight: 3.5, opacity: .95, dashArray: '12 5 3 5', lineCap: 'butt'
+      }).addTo(map);
+    }
     if (cfg.route2 && cfg.route2.length > 1) {
       L.polyline(cfg.route2.map(function (k) { return cfg.list[k].c; }), {
-        color: '#0e5a7a', weight: 4, opacity: .8, dashArray: '1 7', lineCap: 'round'
+        color: '#0e5a7a', weight: 4, opacity: .9
       }).addTo(map);
     }
 
