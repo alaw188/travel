@@ -639,7 +639,7 @@
   <div class="day melb">
     <div class="day-head"><span class="dnum">12 月 20 日（日）</span><span class="dtheme">🍷 Yarra Valley 雅拉河谷品酒一日遊</span></div>
     <div class="day-body">
-      <p style="margin-bottom:12px">輕鬆一天，參加酒莊導賞團，浸淫喺葡萄園同美酒之間。由酒店出發接團，兩個 Klook 選擇：</p>
+      <div class="day-notes"><b>💡 12/20（日）：</b>全日留喺 <b>雅拉河谷</b> —— 一間間酒莊品酒，中間食一餐午餐，唔趕。酒莊選擇、車程、收費同預約需要，見「<a href="winery.html">酒莊頁</a>」；自駕或跟一日團都可以。</div>
       <div class="places" id="d20"></div>
     </div>
   </div>
@@ -1016,8 +1016,7 @@ const DAYS = {
     {n:"Terror Twilight", zh:"晚餐", type:"food", hours:"19:30 · 離住宿約 15 分鐘", d:"市區輕鬆一晚；第二日 12/20 有酒莊行程，唔好飲太夜。"}
   ],
   d20: [
-    {n:"雅拉河谷史詩葡萄酒導賞團", zh:"Klook 選項 1", type:"tour", hours:"8:45 出發 · 墨爾本出發", d:"維州最古老嘅酒區：1838 年開始種植葡萄，而家有逾 85 間酒莊，以 Chardonnay、Pinot Noir 同氣泡酒聞名。團會去多間酒莊品酒，含午餐，可加嘆朱古力同氈酒，節奏輕鬆。"},
-    {n:"雅拉河谷酒莊導覽一日遊", zh:"Klook 選項 2", type:"tour", hours:"9:30 出發 · 墨爾本出發", d:"同為雅拉河谷酒莊一日遊，9:30 出發時間較鬆動。深入百年酒莊參觀釀酒過程，在葡萄園之間嘆世界，適合想輕鬆行一日嘅長輩。"}
+    {n:"Yarra Valley 全日品酒＋午餐", zh:"雅拉河谷", type:"tour", hours:"全日 · 酒莊大多 10:00–17:00，最後一輪品酒 16:15–16:30", d:"全日留在雅拉河谷：一間間酒莊慢慢品酒，中間安排一餐午餐，唔趕。實際去邊幾間、車程、收費同需唔需要預約，見「酒莊」頁的整理（可自駕或跟一日團）。"}
   ],
   d21: [
     {n:"State Library Victoria", zh:"維多利亞州立圖書館", type:"historic", wiki:"State Library Victoria", hours:"10:00 – 18:00 · Google Maps", d:"1854 年創立、1856 年開放，澳洲第一間免費公共圖書館。最出名係 1913 年落成嘅 La Trobe 圓頂閱覽室：八邊形分層書架包住穹頂，氣勢磅礴，被譽為全球最美圖書館之一。館藏超過 200 萬冊，仲有亡命牛仔 Ned Kelly 嘅盔甲同 Burke and Wills 探險隊遺物；免費參觀。"},
@@ -1386,8 +1385,7 @@ const POIS = [
   {id:"d22-6", day:22, name:"ST. ALi Coffee Roasters", time:"彈性", cat:"咖啡", alt:true, lat:-37.8288, lng:144.9548, desc:"12/18 讓位給蒸汽火車，移到自由日備選；工業風大店，brunch 出名。"},
 
   /* ---- 12/20 Yarra Valley ---- */
-  {id:"d20-1", day:20, name:"雅拉河谷・史詩葡萄酒導賞團", time:"08:45", cat:"酒莊", lat:-37.7000, lng:145.3500, desc:"5.0★ 小團，包午餐；可加朱古力、氈酒品嚐。"},
-  {id:"d20-2", day:20, name:"雅拉河谷・酒莊導覽一日遊", time:"09:30", cat:"酒莊", alt:true, lat:-37.7150, lng:145.3300, desc:"較鬆動嘅備選，深入百年酒莊睇釀酒過程。"},
+  {id:"d20-1", day:20, name:"Yarra Valley 全日品酒＋午餐", time:"全日", cat:"酒莊", lat:-37.7000, lng:145.3500, desc:"全日留在雅拉河谷品酒＋午餐，節奏輕鬆。去邊幾間、車程與收費見酒莊頁（winery.html）。"}
 
   /* ---- 12/21 CBD ---- */
   {id:"d21-1", day:21, name:"State Library Victoria", time:"10:00", cat:"文化", lat:-37.8098, lng:144.9646, desc:"1856 年開放，La Trobe 圓頂閱覽室必睇（免費）。"},
