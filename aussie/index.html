@@ -205,6 +205,13 @@ body[data-f="sydney"] .city[data-city="melbourne"],
 body[data-f="melbourne"] .city[data-city="sydney"],
 body[data-f="sydney"] .citycard[data-city="melbourne"],
 body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
+/* 回程日（12/24）不屬任何一城：悉尼／墨爾本視圖都隱藏 */
+body[data-f="sydney"] .day[data-city="home"],
+body[data-f="melbourne"] .day[data-city="home"],
+body[data-f="sydney"] a[data-city="home"],
+body[data-f="melbourne"] a[data-city="home"],
+body[data-f="sydney"] .rail__grp[data-city="home"],
+body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
 
 
 /* ---------- OVERVIEW ---------- */
@@ -1172,7 +1179,7 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
     .sort(function (a, b) { return a - b; });
   var BY = {};
   DAYS.forEach(function (d) { BY[d] = TRIP.filter(function (p) { return p.day === d; }); });
-  var CITY = { 12: 'sydney', 13: 'sydney', 14: 'sydney', 15: 'sydney', 16: 'sydney', 17: 'link', 18: 'melbourne', 19: 'melbourne', 20: 'melbourne', 21: 'melbourne', 22: 'melbourne', 23: 'melbourne', 24: 'link' };
+  var CITY = { 12: 'sydney', 13: 'sydney', 14: 'sydney', 15: 'sydney', 16: 'sydney', 17: 'link', 18: 'melbourne', 19: 'melbourne', 20: 'melbourne', 21: 'melbourne', 22: 'melbourne', 23: 'melbourne', 24: 'home' };
 
   var esc = function (s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
@@ -1212,14 +1219,15 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
     var groups = [
       ['悉尼 SYDNEY', 'sydney', DAYS.filter(function (d) { return CITY[d] === 'sydney'; })],
       ['轉場', 'link', DAYS.filter(function (d) { return CITY[d] === 'link'; })],
-      ['墨爾本 MELBOURNE', 'melbourne', DAYS.filter(function (d) { return CITY[d] === 'melbourne'; })]
+      ['墨爾本 MELBOURNE', 'melbourne', DAYS.filter(function (d) { return CITY[d] === 'melbourne'; })],
+      ['回程', 'home', DAYS.filter(function (d) { return CITY[d] === 'home'; })]
     ];
     return groups.map(function (g) {
       if (!g[2].length) return '';
       var links = g[2].map(function (d) {
         var m = DMETA[d] || {};
         var label = (m.label || ('12/' + d)).replace(/（.*?）/, '');
-        return '<a href="#d' + d + '" data-rail="' + d + '">' + esc(label) +
+        return '<a href="#d' + d + '" data-rail="' + d + '" data-city="' + (CITY[d] || 'all') + '">' + esc(label) +
           '<i>' + BY[d].length + ' 站</i></a>';
       }).join('');
       return '<div class="rail__grp" data-city="' + g[1] + '"><p class="rail__lbl">' + esc(g[0]) + '</p><div>' + links + '</div></div>';
