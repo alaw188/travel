@@ -119,6 +119,8 @@ ul{margin:0;padding:0;list-style:none}
   color:#fff;font-weight:500;font-size:1.02rem;font-variant-numeric:tabular-nums;
   min-width:1.5em;text-align:right;
 }
+/* 秒數每秒變動，固定兩位寬度，否則右側「秒」字會左右跳 */
+.cdbar #cdS{min-width:2.1ch}
 
 /* ---------- 首屏图片轮播 ---------- */
 .hero__slides{position:absolute;inset:0}
@@ -772,7 +774,7 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
 <div class="cdbar" id="cd" hidden>
   <div class="cdbar__in">
     <span class="cdbar__k">距離出發</span>
-    <span class="cdbar__t"><b id="cdD">0</b> 天 <b id="cdH">0</b> 時 <b id="cdM">0</b> 分</span>
+    <span class="cdbar__t"><b id="cdD">0</b> 天 <b id="cdH">0</b> 時 <b id="cdM">0</b> 分 <b id="cdS">0</b> 秒</span>
   </div>
 </div>
 
@@ -826,7 +828,7 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
     </div>
     <div class="citycard" data-city="melbourne">
       <h3>墨爾本 <small>MELBOURNE</small></h3>
-      <p>12 月 17 – 24 日 · 住宿 <b>6 晚</b>（12/17 入住 Carlton）<br>咖啡之都、彩虹小屋、十二門徒石、企鵝島。</p>
+      <p>12 月 17 – 23 日 · 住宿 <b>6 晚</b>（12/17 入住 Carlton；12/24 00:35 起飛）<br>咖啡之都、彩虹小屋、十二門徒石、企鵝島。</p>
     </div>
   </div>
 </section>
@@ -1509,7 +1511,9 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
     var bar = document.getElementById('cd');
     if (!bar) return;
     var target = new Date('2026-12-11T19:05:00+08:00').getTime();
-    var d = document.getElementById('cdD'), h = document.getElementById('cdH'), mi = document.getElementById('cdM');
+    var d = document.getElementById('cdD'), h = document.getElementById('cdH'),
+        mi = document.getElementById('cdM'), se = document.getElementById('cdS');
+    var timer = null;
     function tick() {
       var diff = target - Date.now();
       if (diff <= 0) { bar.hidden = true; clearInterval(timer); return; }
@@ -1517,9 +1521,14 @@ body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
       d.textContent = Math.floor(diff / 864e5);
       h.textContent = Math.floor(diff % 864e5 / 36e5);
       mi.textContent = Math.floor(diff % 36e5 / 6e4);
+      if (se) se.textContent = Math.floor(diff % 6e4 / 1000);
     }
     tick();
-    var timer = setInterval(tick, 30000);
+    timer = setInterval(tick, 1000);   /* 有秒，必須每秒刷新 */
+    /* 背景分頁的計時器會被節流，切回來即刻校正一次，避免秒數看起來卡住 */
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) tick();
+    });
   })();
 
   /* ---------------- ETA 弹层 ---------------- */
