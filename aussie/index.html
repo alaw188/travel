@@ -1233,7 +1233,7 @@ body[data-f="melbourne"] .rail__grp[data-city="home"]{display:none}
       if (!g[2].length) return '';
       var links = g[2].map(function (d) {
         var m = DMETA[d] || {};
-        var label = (m.label || ('12/' + d)).replace(/（.*?）/, '');
+        var label = m.label || ('12/' + d);
         return '<a href="#d' + d + '" data-rail="' + d + '" data-city="' + (CITY[d] || 'all') + '">' + esc(label) +
           '<i>' + BY[d].length + ' 站</i></a>';
       }).join('');
