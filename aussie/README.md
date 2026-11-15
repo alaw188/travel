@@ -18,7 +18,8 @@
 aussie/
 ├── index.html    # 主網站（新版長頁版式，HTML + CSS + JS 全部單一檔案）
 ├── index3.html   # ⚠️ 舊版封存（經典圖文卡 + 地圖雙版本，2026-11 起唔再更新）
-├── booking.html  # 獨立酒莊團比較頁（唔同 index 互鏈）
+├── winery.html   # 酒莊頁：01 自駕遊（16 間酒莊車程／收費／路線）＋ 02 一日團比較
+├── booking.html  # ⚠️ 舊網址轉址頁（開啟即跳去 winery.html，唔要刪）
 ├── vendor/       # Leaflet 1.9.4 本地檔（無外鏈 CDN）
 ├── README.md     # 本檔
 └── img/          # 61 張地點圖片（slug 命名，本地檔）

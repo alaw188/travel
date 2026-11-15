@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>酒莊團訂購建議 — Hunter Valley &amp; Yarra Valley</title>
+<title>酒莊一日遊 — 自駕路線與一日團比較</title>
+<meta name="description" content="墨爾本近郊 16 間酒莊自駕資料：實際車程、品酒收費、餐飲與建議路線，另附 12/15 獵人谷與 12/20 雅拉河谷一日團比較。">
 <style>
   :root{
     --ocean:#0e5a7a; --ocean-dark:#0a3d54; --sand:#fdf6ec; --sand2:#f7ead7;
@@ -63,26 +64,412 @@
     td.lk,td.rem{min-width:0}
     .wrap{padding:18px 13px 28px}
   }
+  .hero .back{
+    display:inline-block;margin-top:10px;font-size:.82rem;color:#cfe3ec;
+    text-decoration:none;border-bottom:1px solid rgba(207,227,236,.4);padding-bottom:1px;
+  }
+  .hero .back:hover{color:#fff;border-bottom-color:#fff}
+
+  /* ---------- 分區導覽 ---------- */
+  .pnav{
+    position:sticky;top:0;z-index:20;display:flex;gap:8px;flex-wrap:wrap;
+    padding:10px 0 12px;margin:-4px 0 18px;
+    background:linear-gradient(to bottom,rgba(253,246,236,.97) 70%,rgba(253,246,236,0));
+  }
+  .pnav a{
+    display:inline-flex;align-items:baseline;gap:7px;
+    border:1px solid #e3d7c3;border-radius:999px;padding:7px 16px;
+    font-size:.9rem;color:var(--ocean-dark);text-decoration:none;background:#fff;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  .pnav a b{font-size:.74rem;letter-spacing:.1em;color:var(--gold)}
+  .pnav a:hover,.pnav a.is-on{background:var(--ocean-dark);border-color:var(--ocean-dark);color:#fff}
+  .pnav a:hover b,.pnav a.is-on b{color:#f3d98b}
+
+  /* ---------- 分區標頭 ---------- */
+  .part{padding-top:6px;scroll-margin-top:64px}
+  .part + .part{margin-top:34px;border-top:2px solid #e6dac6;padding-top:22px}
+  .part__hd{display:flex;gap:16px;align-items:flex-start;margin:0 0 14px}
+  .part__no{
+    font-size:2.4rem;line-height:1;font-weight:800;color:transparent;
+    -webkit-text-stroke:2px var(--ocean);flex:none;letter-spacing:-.02em;
+  }
+  .part__hd h2{margin:0;font-size:1.42rem}
+  .part__sub{margin:3px 0 0;color:var(--muted);font-size:.9rem}
+
+  /* ---------- 重點框 ---------- */
+  .keybox{background:#fff;border-radius:12px;border-left:5px solid var(--coral);padding:13px 17px;margin:0 0 16px;box-shadow:0 3px 12px rgba(43,43,43,.06)}
+  .keybox>b{display:block;color:var(--ocean-dark);margin-bottom:6px;font-size:.95rem}
+  .keybox ol{margin:0 0 0 1.15em;font-size:.9rem;color:#4a4740;display:grid;gap:5px}
+  .keybox li::marker{color:var(--coral);font-weight:700}
+
+  /* ---------- 自駕區小標 ---------- */
+  h3.tsub.drive{color:var(--ocean-dark);font-size:1.06rem;margin:24px 0 8px;border-bottom:1px solid #eadfcd;padding-bottom:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .h3note{font-size:.76rem;font-weight:400;color:var(--muted);letter-spacing:.02em}
+
+  /* ---------- 酒莊表 ---------- */
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table.t-drive{min-width:760px;font-size:.84rem}
+  table.t-drive th{background:linear-gradient(120deg,var(--ocean-dark),#2e6f86);font-size:.8rem;white-space:nowrap}
+  table.t-drive td{padding:9px 11px}
+  table.t-drive td:first-child{white-space:nowrap}
+  table.t-drive .sub{display:block;font-weight:400;color:var(--muted);font-size:.75rem;margin-top:2px;line-height:1.45;white-space:normal}
+  .dist{display:inline-block;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ocean-dark);line-height:1.3;white-space:nowrap}
+  .fee{display:inline-block;background:#eef6f2;border:1px solid #c9dfd6;color:#2c5d47;border-radius:7px;padding:0 7px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:2px}
+  .fee--q{background:#fdf1e6;border-color:#f0d9c5;color:#a05a3c}
+  .free{display:inline-block;background:#e8f4ea;border:1px solid #bfdcc6;color:#256b3a;border-radius:7px;padding:0 8px;font-weight:700}
+
+  /* ---------- 路線卡 ---------- */
+  .route{background:#fff;border-radius:14px;box-shadow:0 3px 14px rgba(43,43,43,.07);margin:16px 0 6px;overflow:hidden}
+  .route__hd{display:flex;align-items:center;gap:14px;padding:13px 17px;background:linear-gradient(120deg,#0a3d54,#1d6b85);color:#fff;flex-wrap:wrap}
+  .route__no{
+    width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);font-weight:800;
+  }
+  .route__t h4{margin:0;font-size:1rem}
+  .route__t p{margin:2px 0 0;font-size:.8rem;opacity:.82}
+  .route__cost{margin-left:auto;text-align:right;font-weight:700;font-size:.95rem;white-space:nowrap}
+  .route__cost small{display:block;font-weight:400;font-size:.72rem;opacity:.8}
+  .steps{list-style:none;margin:0;padding:6px 17px 4px}
+  .steps li{display:grid;grid-template-columns:58px minmax(0,1fr);gap:2px 12px;padding:8px 0;border-bottom:1px dashed #eee6d8}
+  .steps li:last-child{border-bottom:0}
+  .steps b{font-variant-numeric:tabular-nums;color:var(--ocean-dark)}
+  .steps span{font-size:.9rem}
+  .steps em{grid-column:2;font-style:normal;font-size:.8rem;color:var(--muted)}
+  .route__note{margin:0;padding:10px 17px 14px;font-size:.83rem;color:var(--muted);border-top:1px solid #f2ebdc}
+
+  /* ---------- 其他 ---------- */
+  .notes.warn{border-left-color:var(--coral);background:#fdf1e6;color:#8a4a2f}
+  .src{margin:16px 0 0;font-size:.78rem;color:var(--muted);line-height:1.7;border-top:1px solid #eadfcd;padding-top:10px}
+
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+
+  @media(max-width:760px){
+    .tscroll table{min-width:660px}
+    .part__no{font-size:1.9rem}
+    .part__hd{gap:12px}
+    .route__cost{margin-left:0;text-align:left;width:100%;border-top:1px solid rgba(255,255,255,.2);padding-top:8px}
+    /* 表格轉卡片，避免左右滑 */
+    .tw{overflow:visible}
+    table.t-drive{display:block;min-width:0;border-radius:0;box-shadow:none;background:none;font-size:.86rem}
+    table.t-drive thead{display:none}
+    table.t-drive tbody{display:block}
+    table.t-drive tr{display:block;background:var(--card);border-radius:12px;box-shadow:0 3px 12px rgba(43,43,43,.07);padding:11px 13px;margin-bottom:10px}
+    table.t-drive td{display:block;padding:5px 0;border:0;width:auto!important;white-space:normal!important}
+    table.t-drive td::before{content:attr(data-l);display:block;font-size:.7rem;letter-spacing:.1em;color:var(--muted);margin-bottom:1px}
+    table.t-drive td:first-child{display:block;border-bottom:1px solid #f0e7d8;padding-bottom:6px;margin-bottom:5px;font-size:.98rem}
+    table.t-drive td:first-child::before{display:none}
+    table.t-drive.t-2col td:nth-child(2){display:block;padding-top:2px}
+    table.t-drive.t-2col td:nth-child(2)::before{display:none}
+    .steps{padding:4px 14px}
+    .steps li{grid-template-columns:52px minmax(0,1fr)}
+  }
+
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="kicker">Wine Tour Booking Guide</div>
-  <h1>酒莊團訂購建議</h1>
-  <div class="sub">Hunter Valley（12/15 二 · 悉尼出發）＋ Yarra Valley（12/20 日 · 墨爾本出發）</div>
+  <div class="kicker">Wine Day · Self-drive &amp; Tours</div>
+  <h1>酒莊一日遊 · 自駕與跟團</h1>
+  <div class="sub">亞拉河谷 ｜ 莫寧頓半島 ｜ 馬其頓山脈　—　16 間酒莊收費與實際車程，另附 12/15、12/20 團隊比較</div>
+  <a class="back" href="index.html">← 返回行程主頁</a>
 </div>
 
 <div class="wrap">
 
-  <p class="legend">🏷️ <b>點睇呢頁</b>：每個地方分兩張表 — <b>綠色表 = 中文導遊團（優先考慮，長輩啱用）</b>、<b>灰色表 = 英文導遊團（後生仔參考）</b>。選項有編號，建議卡會用編號稱呼。<b>團型</b>：<span class="tp-p">私人團</span> 自訂節奏上門接 ｜ <span class="tp-g">拼團</span> 併團固定行程 ｜ <span class="tp-m">拼團／私人</span> 兩種可揀。<span class="new">新增</span> 標籤＝今次補上嘅選項。實際價錢請撳入各活動頁睇平台實價。</p>
+  <nav class="pnav" aria-label="頁面分區">
+    <a href="#selfdrive" class="is-on"><b>01</b> 自駕遊</a>
+    <a href="#tours"><b>02</b> Tours · 一日團</a>
+  </nav>
+
+  <!-- ================= PART 01 · 自駕遊 ================= -->
+  <section class="part" id="selfdrive">
+    <header class="part__hd">
+      <span class="part__no">01</span>
+      <div>
+        <h2>自駕遊 · Self-drive</h2>
+        <p class="part__sub">三個產區、16 間酒莊：實際車程、品酒收費、餐飲與建議路線</p>
+      </div>
+    </header>
+
+    <div class="keybox">
+      <b>三句話講完</b>
+      <ol>
+        <li><b>亞拉河谷最適合自駕</b>——單程 47–64 分鐘，Maroondah Highway 一條路串起四間，多數品酒費可抵酒錢。</li>
+        <li><b>莫寧頓半島風景與餐廳最強，但單程 75 分鐘</b>，酒莊之間分散，一日最多三間；適合「重午餐、輕品酒」。</li>
+        <li><b>司機全程不能飲</b>——維州全牌 BAC 須 &lt; 0.05，P 牌／學牌 0.00，鄉郊一樣有隨機呼氣測試。</li>
+      </ol>
+    </div>
+
+    <h3 class="tsub drive">🚗 先講實務：法規、時間與預約</h3>
+    <div class="tw">
+      <table class="t-drive t-2col">
+        <thead><tr><th>項目</th><th>內容</th></tr></thead>
+        <tbody>
+          <tr><td data-l="項目"><b>酒後駕駛</b></td><td data-l="內容">全牌 &lt; 0.05 g/100mL；P1／P2、學牌、巴士／的士／貨車司機 <b>0.00</b>。隨機呼氣測試在私人地方一樣適用。五個人去，最好指定一位司機全程不飲。</td></tr>
+          <tr><td data-l="項目"><b>品酒禮儀</b></td><td data-l="內容">吐酒桶（spittoon）是標準配置，試六杯不必全吞；酒莊都有飲用水，開口問就有。</td></tr>
+          <tr><td data-l="項目"><b>酒莊時間</b></td><td data-l="內容">Cellar door 一般 <b>10:00–17:00</b>（週末部分到 18:00），最後一輪品酒通常 16:15–16:30。太遲到會食閉門羹。</td></tr>
+          <tr><td data-l="項目"><b>預約</b></td><td data-l="內容">2–6 人大多可 walk-in；<b>8 人以上</b>多數要事先預約。部分酒莊上限 6 人（Pt. Leo、Montalto）——五個人剛好，加人就要分兩組。</td></tr>
+          <tr><td data-l="項目"><b>附加費</b></td><td data-l="內容">星期日／公眾假期部分酒莊加價：Yering Station 週日 <b>+10%</b>、公眾假期 +15%；Montalto 公眾假期 +15%。<b>12/20 係星期日</b>，計預算要預埋。</td></tr>
+          <tr><td data-l="項目"><b>帶小朋友</b></td><td data-l="內容">大部分酒莊歡迎小朋友（不供酒）。Montalto 有 1 km 雕塑步道、Pt. Leo 有雕塑公園、Chandon 有大草坪，較適合放電。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ---------- 亞拉河谷 ---------- -->
+    <h3 class="tsub drive">🍇 亞拉河谷 Yarra Valley<span class="h3note">單程 47–64 分鐘 · 密度最高</span></h3>
+    <div class="tw">
+      <table class="t-drive">
+        <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="酒莊"><b>Coombe</b><span class="sub">Melba Estate</span></td>
+            <td data-l="地址">673–675 Maroondah Hwy, Coldstream VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">47.2 km<br>50 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">買任何一瓶可免</span></td>
+            <td data-l="餐飲">Garden Terrace 輕食 11:30–14:30；餐廳</td>
+            <td data-l="體驗">Melba 故居；花園導賞 A$15、小屋導賞 A$45。週三至日</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Yering Station</b><span class="sub">1859 年歷史酒窖</span></td>
+            <td data-l="地址">38 Melba Hwy, Yering VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">52.4 km<br>54 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15 / $20 / $35</span><span class="sub">Village／Yering+Yarrabank／Single Vineyard；買酒可抵</span></td>
+            <td data-l="餐飲">餐廳每日午餐（單點）</td>
+            <td data-l="體驗">Museum Collection 導賞 A$95／90 分鐘（6 人起）；週日 +10%</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Domaine Chandon</b><span class="sub">氣泡酒</span></td>
+            <td data-l="地址">727 Maroondah Hwy, Coldstream VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">54.2 km<br>58 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$22 / $25</span><span class="sub">官網兩版並存：30 分鐘／45 分鐘，以預訂頁為準</span></td>
+            <td data-l="餐飲">餐廳（平日單點、週末套餐 A$79 起）；Lounge Bar</td>
+            <td data-l="體驗">Behind the Bubbles A$90；Étoile 私人品酒 A$59；Sparkling Brunch A$75</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Coldstream Hills</b><span class="sub">James Halliday 創立</span></td>
+            <td data-l="地址">29 Maddens Ln, Coldstream VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">54.8 km<br>63 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$5 / $10 / $15</span><span class="sub">Masterclass A$40</span></td>
+            <td data-l="餐飲">只輕食</td>
+            <td data-l="體驗">全區最平；山頂景觀。價格以官網為準（分級沿用多年）</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Oakridge</b><span class="sub">餐廳＋菜園</span></td>
+            <td data-l="地址">864 Maroondah Hwy, Coldstream VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">56.7 km<br>61 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">Top Rated Flight A$40；Chardonnay Masterclass A$50</span></td>
+            <td data-l="餐飲">酒莊餐廳（需訂）</td>
+            <td data-l="體驗">A$15 可 walk-in；山谷景觀；864 單一區塊系列</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Levantine Hill</b><span class="sub">高端餐酒</span></td>
+            <td data-l="地址">882 Maroondah Hwy, Coldstream VIC 3770</td>
+            <td data-l="距 CBD"><span class="dist">57.8 km<br>60 min</span></td>
+            <td data-l="品酒費"><span class="fee fee--q">需查詢</span><span class="sub">官網未公布散客價</span></td>
+            <td data-l="餐飲">All Day Dining；節慶套餐 A$145–250</td>
+            <td data-l="體驗">架構與藝術收藏；5 人以上套餐 A$210 含品酒＋三道菜＋接送</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>TarraWarra</b><span class="sub">酒＋美術館</span></td>
+            <td data-l="地址">311 Healesville-Yarra Glen Rd, Yarra Glen VIC 3775</td>
+            <td data-l="距 CBD"><span class="dist">63.2 km<br>66 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$20 / $40</span><span class="sub">Estate 5 款／Premium 6 款</span></td>
+            <td data-l="餐飲">餐廳（週三至日午餐）</td>
+            <td data-l="體驗">地下酒窖；TarraWarra 美術館；UWEA 導賞 A$200、Land, Vine &amp; Vision A$450</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>De Bortoli</b><span class="sub">意大利菜</span></td>
+            <td data-l="地址">58 Pinnacle Ln, Dixons Creek VIC 3775</td>
+            <td data-l="距 CBD"><span class="dist">63.3 km<br>65 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$10–15 / $25</span><span class="sub">Discover 15 分鐘／Indulge 45 分鐘</span></td>
+            <td data-l="餐飲">Locale 餐廳（週四至一午餐）</td>
+            <td data-l="體驗">酒窖導賞；Luxury Picnic A$50；芝士房；兒童遊樂場</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Giant Steps</b><span class="sub">Halliday 2025 年度酒莊</span></td>
+            <td data-l="地址">314 Maroondah Hwy, Healesville VIC 3777</td>
+            <td data-l="距 CBD"><span class="dist">64.3 km<br>67 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$12 / $30 / $40 / $60</span><span class="sub">By the Glass／Essential／Single Vineyard</span></td>
+            <td data-l="餐飲">附設餐廳；隔鄰 Innocent Bystander</td>
+            <td data-l="體驗">單一園 Chardonnay、Pinot Noir；Healesville 大街</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="route">
+      <div class="route__hd">
+        <span class="route__no">A</span>
+        <div class="route__t"><h4>經典四站 · 不趕</h4><p>亞拉河谷東段一條線，全程 80 km 以內</p></div>
+        <span class="route__cost">人均 A$130–150<small>含午餐、不含租車</small></span>
+      </div>
+      <ol class="steps">
+        <li><b>09:15</b><span>CBD 取車出發</span><em>避開 8:00–9:00 上班車流</em></li>
+        <li><b>10:05</b><span><b>Coombe</b>　47 km／50 min</span><em>導賞品酒 A$15，逛 Melba 花園（30–40 分鐘）</em></li>
+        <li><b>11:15</b><span><b>Yering Station</b>　6.2 km／7 min</span><em>Village 品酒 A$15＋1859 年酒窖</em></li>
+        <li><b>12:30</b><span><b>Chandon</b>　8.6 km／10 min</span><em>餐廳午餐（週末套餐 A$79 起）——全程最長一站</em></li>
+        <li><b>14:45</b><span><b>Oakridge</b>　3.4 km／7 min</span><em>A$15 品酒，露台看山谷</em></li>
+        <li><b>16:15</b><span>回程　56 km／60 min</span><em>17:15 前回到 CBD，仲趕得及晚飯</em></li>
+      </ol>
+      <p class="route__note">四間都在 Maroondah Highway 一條線上，不用繞路；品酒費三站共 A$45／人，買酒可再抵一部分。</p>
+    </div>
+
+    <div class="route">
+      <div class="route__hd">
+        <span class="route__no">B</span>
+        <div class="route__t"><h4>酒＋藝術＋午餐</h4><p>想睇美術館、飲單一園，走 Melba Hwy 一圈</p></div>
+        <span class="route__cost">人均 A$120–160<small>含午餐、不含租車</small></span>
+      </div>
+      <ol class="steps">
+        <li><b>10:00</b><span><b>Oakridge</b> 或 <b>Coombe</b> 開場</span><em>A$15 品酒</em></li>
+        <li><b>11:30</b><span><b>TarraWarra</b>　12.7 km／16 min</span><em>A$20 品酒＋美術館</em></li>
+        <li><b>13:00</b><span><b>Giant Steps</b>　5.7 km／8 min</span><em>Essential A$30；Healesville 大街午餐</em></li>
+        <li><b>15:00</b><span><b>De Bortoli</b>　18.6 km／19 min</span><em>Indulge A$25；Locale 有開就食</em></li>
+        <li><b>16:30</b><span>回程　約 65 km／70 min</span><em>17:40 前到 CBD</em></li>
+      </ol>
+      <p class="route__note">全程約 110 km，比路線 A 多 30 km；好處是美術館、單一園與意大利菜一次過。</p>
+    </div>
+
+    <!-- ---------- 莫寧頓半島 ---------- -->
+    <h3 class="tsub drive">🌊 莫寧頓半島 Mornington Peninsula<span class="h3note">單程 72–77 分鐘 · 餐廳最強</span></h3>
+    <div class="tw">
+      <table class="t-drive">
+        <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="酒莊"><b>Pt. Leo Estate</b><span class="sub">雕塑公園</span></td>
+            <td data-l="地址">3649 Frankston-Flinders Rd, Merricks VIC 3916</td>
+            <td data-l="距 CBD"><span class="dist">86.6 km<br>77 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15 / $25 / $30</span><span class="sub">Estate／Red・White／Premium；每買一瓶退 A$10</span></td>
+            <td data-l="餐飲">Laura（兩帽）、Pt Leo Restaurant（一帽）、Wine Terrace</td>
+            <td data-l="體驗"><b>雕塑公園 A$15</b>（餐廳客人 A$5）；60+ 件作品含 KAWS；上限 6 人</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Port Phillip Estate</b><span class="sub">建築與海景</span></td>
+            <td data-l="地址">263 Red Hill Rd, Red Hill South VIC 3937</td>
+            <td data-l="距 CBD"><span class="dist">86.9 km<br>72 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15</span><span class="sub">不退；Wine &amp; Cheese A$40、Single Vineyard A$25</span></td>
+            <td data-l="餐飲">餐廳：兩道 A$68、三道 A$85</td>
+            <td data-l="體驗">Kooyong 單一園；Western Port 海景</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Ten Minutes by Tractor</b><span class="sub">頂級酒單</span></td>
+            <td data-l="地址">1333 Mornington-Flinders Rd, Main Ridge VIC 3928</td>
+            <td data-l="距 CBD"><span class="dist">89.5 km<br>73 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$15 / $50</span><span class="sub">10X &amp; Estate／Single Vineyard；Masterclass A$120</span></td>
+            <td data-l="餐飲">餐廳 tasting menu 約 A$150–250</td>
+            <td data-l="體驗">兩帽；Star Wine List 2021–2026 澳洲前列；Masterclass 每日 11:00</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Montalto</b><span class="sub">雕塑步道</span></td>
+            <td data-l="地址">33 Shoreham Rd, Red Hill South VIC 3937</td>
+            <td data-l="距 CBD"><span class="dist">90.1 km<br>75 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$20</span><span class="sub">買滿 A$45 可免；Wine &amp; Cheese A$40（14:00 起）</span></td>
+            <td data-l="餐飲">The Restaurant（週五至一午餐）；Piazza 輕食每日</td>
+            <td data-l="體驗"><b>1 km 雕塑步道免費</b>；上限 6 人；公眾假期 +15%</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Paringa Estate</b><span class="sub">十頂廚師帽</span></td>
+            <td data-l="地址">44 Paringa Rd, Red Hill South VIC 3937</td>
+            <td data-l="距 CBD"><span class="dist">90.4 km<br>76 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$10</span><span class="sub">全區最平</span></td>
+            <td data-l="餐飲">餐廳套餐約 A$135–450；Garden Dining 週三至日</td>
+            <td data-l="體驗">單一園 Pinot Noir；餐廳連續十年 Chef Hats</td>
+          </tr>
+          <tr>
+            <td data-l="酒莊"><b>Main Ridge Estate</b><span class="sub">半島第一家</span></td>
+            <td data-l="地址">80 William Rd, Red Hill VIC 3930</td>
+            <td data-l="距 CBD"><span class="dist">約 92 km<br>78 min</span></td>
+            <td data-l="品酒費"><span class="fee">A$10</span><span class="sub">酒農親自招呼</span></td>
+            <td data-l="餐飲">The Larder（週末午餐）</td>
+            <td data-l="體驗">1975 年開業；只開週六日 11:30–17:00，要訂</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="route">
+      <div class="route__hd">
+        <span class="route__no">C</span>
+        <div class="route__t"><h4>半島「一莊一餐」</h4><p>重午餐、輕品酒；三間剛好，四間太趕</p></div>
+        <span class="route__cost">人均 A$110–140<small>含午餐、不含租車</small></span>
+      </div>
+      <ol class="steps">
+        <li><b>10:00</b><span>CBD 取車出發</span><em>行 Peninsula Link，比走市區快 15 分鐘</em></li>
+        <li><b>11:20</b><span><b>Pt. Leo Estate</b>　87 km／77 min</span><em>A$15 品酒＋雕塑公園 A$15，預 2 小時</em></li>
+        <li><b>13:45</b><span><b>Montalto</b>　7.5 km／7 min</span><em>Piazza 輕食或 The Restaurant 午餐</em></li>
+        <li><b>15:30</b><span><b>Port Phillip Estate</b>　5.5 km／6 min</span><em>A$15 品酒，看 Western Port 海景</em></li>
+        <li><b>16:45</b><span>回程　87 km／75 min</span><em>18:00 到 CBD</em></li>
+      </ol>
+      <p class="route__note">半島酒莊之間只有 5–10 分鐘車程，但單程進出各 75 分鐘；一日三間是上限，想加 Ten Minutes by Tractor 就要放棄午餐。</p>
+    </div>
+
+    <!-- ---------- 馬其頓山脈 ---------- -->
+    <h3 class="tsub drive">🪨 馬其頓山脈 Macedon Ranges<span class="h3note">單程 67 分鐘 · 品酒免費</span></h3>
+    <div class="tw">
+      <table class="t-drive">
+        <thead><tr><th>酒莊</th><th>地址</th><th>距 CBD</th><th>品酒費／人</th><th>餐飲</th><th>體驗 · 備註</th></tr></thead>
+        <tbody>
+          <tr>
+            <td data-l="酒莊"><b>Hanging Rock Winery</b><span class="sub">20+ 款酒</span></td>
+            <td data-l="地址">88 Jim Rd, Newham VIC 3442</td>
+            <td data-l="距 CBD"><span class="dist">78.2 km<br>67 min</span></td>
+            <td data-l="品酒費"><span class="free">免費</span><span class="sub">7 人以下；8 人以上導賞 A$15</span></td>
+            <td data-l="餐飲">無正式餐廳；本地食材拼盤 <b>A$30 起</b>（2 人）</td>
+            <td data-l="體驗">Art in the Vines 雕塑展（至 2027 年 4 月，免費）；草地野餐；dog-friendly</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lead">適合「不想趕、想省、帶小朋友與長輩」：免費品酒、大草地、雕塑展、免預約。缺點是只有一站、餐廳弱——建議配 <b>Hanging Rock Reserve</b> 行山（來回約 1 小時）或 Woodend 小鎮午餐。</p>
+
+    <!-- ---------- 租車與成本 ---------- -->
+    <h3 class="tsub drive">💳 租車與一日成本</h3>
+    <div class="tw">
+      <table class="t-drive">
+        <thead><tr><th>車型</th><th>12 月旺季日租</th><th>適合情況</th></tr></thead>
+        <tbody>
+          <tr><td data-l="車型">經濟／小型車<span class="sub">Corolla、MG3</span></td><td data-l="日租"><span class="fee">A$55–85</span></td><td data-l="適合">五人坐得落但行李勉強；只適合單日來回</td></tr>
+          <tr><td data-l="車型">緊湊 SUV<span class="sub">CX-3、Qashqai、RAV4</span></td><td data-l="日租"><span class="fee">A$90–130</span></td><td data-l="適合">五人＋少量行李，最平衡；視野好，長輩上落方便</td></tr>
+          <tr><td data-l="車型">七人車<span class="sub">Carnival、Odyssey</span></td><td data-l="日租"><span class="fee">A$110–160</span></td><td data-l="適合">第三排可放戰利品；長輩上落最舒服，但市區泊車較難</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="tips">
+      <li>油費：150 km 約 <b>A$18–25</b>（95 無鉛）</li>
+      <li>泊車：CBD 日泊 <b>A$15–30</b>；酒莊全部免費泊車</li>
+      <li>全保（降低自負額）約 <b>A$25–40／日</b>——鄉郊路窄、袋鼠出沒，值得加</li>
+      <li>五人一日總成本（SUV）：租車 110 + 油 25 + 泊車 20 + 全保 30 ≈ <b>A$185</b>，攤五人每人 <b>A$37</b>，比自己搭車或跟團平</li>
+      <li>持有香港車牌可直接租車駕駛（有效期內、英文或附國際駕照）</li>
+    </ul>
+
+    <div class="notes warn">
+      ⚠️ <b>與現有行程的衝突要留意：</b>12/20（日）已訂<b>雅拉河谷史詩葡萄酒導賞團（08:45 出發）</b>，與上面路線 A 完全重疊——<b>兩者只能揀一個</b>。自駕的好處是節奏自由、五人分攤更平；跟團的好處是不用擔心司機飲酒。12/18、12/19 已經係長途自駕日（菲利普島、大洋路），12/21 係 CBD 購物日，所以真正可以放自駕酒莊的，只有 12/20 或 12/22。
+    </div>
+
+    <p class="src">車程與里程以 OSRM 路網計算（free-flow，即不塞車）；實際請預留 +15–20%，週末上午出城另加 20–30 分鐘。收費為各酒莊官網 2026 年公布，酒莊通常每年 1 月與 7 月調整，出發前請再核對。</p>
+  </section>
+
+  <!-- ================= PART 02 · TOURS ================= -->
+  <section class="part" id="tours">
+    <header class="part__hd">
+      <span class="part__no">02</span>
+      <div>
+        <h2>Tours · 酒莊一日團</h2>
+        <p class="part__sub">Hunter Valley（12/15 二 · 悉尼出發）＋ Yarra Valley（12/20 日 · 墨爾本出發）</p>
+      </div>
+    </header>
+
+  <p class="legend">🏷️ <b>點睇呢頁</b>：每個地方分兩張表 — <b>綠色表 = 中文導遊團（優先考慮，長輩啱用）</b>、<b>灰色表 = 英文導遊團（後生仔參考）</b>。選項有編號，建議卡會用編號稱呼。<b>團型</b>：<span class="tp-p">私人團</span> 自訂節奏上門接 ｜ <span class="tp-g">拼團</span> 併團固定行程 ｜ <span class="tp-m">拼團／私人</span> 兩種可揀。<span class="new">新增</span> 標籤＝今次補上嘅選項。實際價錢請撳入各活動頁睇平台實價。<b>手機上表格可左右滑動。</b></p>
 
   <!-- ================= HUNTER VALLEY ================= -->
   <h2><span class="dot"></span>Hunter Valley 獵人谷 · 12 月 15 日（二）</h2>
   <p class="lead">悉尼出發，單程車程約 2.5 小時。</p>
 
   <h3 class="tsub zh">🇭🇰 中文導遊團（優先考慮）</h3>
-  <table class="t-zh">
+  <div class="tscroll"><table class="t-zh">
     <tr><th>選項</th><th>團型</th><th>連結</th><th>內容 · 短評 · 取消政策</th></tr>
     <tr>
       <td class="opt"><span class="num">①</span>Trip.com 獵人谷酒莊＋芝士＋朱古力廠私人團<span class="sub">獨立包團 · 酒店接送</span><span class="pick">長輩首選</span></td>
@@ -156,10 +543,10 @@
       <td class="lk"><a href="https://huaxiacar.com/sydney-to-hunter-valley-private-car-service" target="_blank" rel="noopener">華夏包車價目頁</a></td>
       <td class="rem">10 小時包車，<b>公開價目</b>：4 座 AUD850／Alphard 6 座 AUD950／奔馳 V 7 座 AUD1,000／海獅 11 座 AUD1,100，超時 AUD70–100／鐘 · 已包油費、高速、停車、悉尼市區酒店接送<br><span class="pros">✓ 全網少有公開價目，方便同 ⑦ ⑫ 比價 ✓ 彈性最大，可加酒莊／花園</span><span class="sep">|</span><span class="cons">✗ 頁面寫「可安排英文司機，<b>如需中文司機請提前確認</b>」→ 中文唔係包有 ✗ 品酒費、門票、餐費、專業導遊費全部另計</span></td>
     </tr>
-  </table>
+  </table></div>
 
   <h3 class="tsub en">🎧 英文導遊團（如需比較）</h3>
-  <table class="t-en">
+  <div class="tscroll"><table class="t-en">
     <tr><th>選項</th><th>團型</th><th>連結</th><th>內容 · 短評 · 取消政策</th></tr>
     <tr class="enrow">
       <td class="opt"><span class="num">E1</span>Klook「Wine, Gin &amp; Cheese Tasting Tour」</td>
@@ -191,7 +578,7 @@
       <td class="lk"><a href="https://www.getyourguide.com/en-au/sydney-l200/from-sydney-hunter-valley-wine-tasting-day-tour-t767334/" target="_blank" rel="noopener">GetYourGuide 活動頁</a></td>
       <td class="rem">2 道菜午餐＋朱古力品嚐 · 免費取消<br><span class="pros">✓ 多平台比價</span><span class="sep">|</span><span class="cons">✗ 英文導遊 · 取消一般 48–72 小時前</span></td>
     </tr>
-  </table>
+  </table></div>
 
   <div class="notes">⚠️ <b>訂中文團前必查：</b>有啲團要<b>自行去集合點</b>（② Trip.com＝帕茲角、③ 永安＝達令港富麗華、⑤ 途風＝指定地點、⑧ 澳中國旅＝唐人街 78 Harbour St、⑨⑩⑪＝中央車站 8 號巴士位／富麗華酒店），長輩多嘅話優先揀 <b>① 私人團</b>（酒店接送）、<b>⑧</b>（市區酒店可接送）或 <b>⑦ ⑫ 包車</b>。</div>
 
@@ -200,7 +587,7 @@
   <p class="lead">墨爾本出發，單程車程約 1–1.5 小時。12/20 係星期日酒莊最旺，早啲訂。</p>
 
   <h3 class="tsub zh">🇭🇰 中文導遊團（優先考慮）</h3>
-  <table class="t-zh">
+  <div class="tscroll"><table class="t-zh">
     <tr><th>選項</th><th>團型</th><th>連結</th><th>內容 · 短評 · 取消政策</th></tr>
     <tr>
       <td class="opt"><span class="num">①</span>Trip.com 亞拉河谷＋普芬比利蒸汽小火車<span class="sub">市區酒店接駁可選</span><span class="pick">長輩首選</span></td>
@@ -274,10 +661,10 @@
       <td class="lk"><a href="https://touch.piao.qunar.com/touch/product/spu/onedaytour.htm?spuId=3585985" target="_blank" rel="noopener">去哪兒活動頁</a></td>
       <td class="rem">賣點寫「<b>上門接送、華人司導、10 小時服務</b>」· 10:00 墨爾本市區上門接 → Rochford 酒莊酒窖 → Coldstream Dairy 芝士 → 17:40 返 · 含車費、司機講解、小費、兒童安全座椅<br><span class="pros">✓ 車型好（埃爾法／奔馳 V），長輩上落舒服 ✓ 已包小費＋兒童座椅</span><span class="sep">|</span><span class="cons">✗ 酒莊門票、午餐自費 ✗ 車型頁面前後寫法有出入（一時 12 座中巴），落單要問實 ✗ 5 天前取消已收 80%、3 天內不可退</span></td>
     </tr>
-  </table>
+  </table></div>
 
   <h3 class="tsub en">🎧 英文導遊團（如需比較）</h3>
-  <table class="t-en">
+  <div class="tscroll"><table class="t-en">
     <tr><th>選項</th><th>團型</th><th>連結</th><th>內容 · 短評 · 取消政策</th></tr>
     <tr class="enrow">
       <td class="opt"><span class="num">E1</span>史詩葡萄酒導賞團（Epic）<span class="sub">8:45 出發 · 原選項 1</span></td>
@@ -321,7 +708,7 @@
       <td class="lk"><a href="https://www.kkday.com/zh-cn/product/711893" target="_blank" rel="noopener">KKday 活動頁</a></td>
       <td class="rem">4 酒莊＋兩道菜午餐＋朱古力（Epic 同款行程）<br><span class="cons">⚠️ Epic 本團以英文導遊為主；KKday 頁面核實唔到，落單前必須問客服導遊語言</span></td>
     </tr>
-  </table>
+  </table></div>
 
   <!-- ================= 建議 ================= -->
   <h2><span class="dot"></span>我嘅建議（中文導遊為先）</h2>
@@ -351,9 +738,28 @@
     <li>實際價錢請撳入各活動頁睇平台實價，12 月檔期可能有上落</li>
   </ul>
 
+  </section>
+
 </div>
 
 <footer>獨立參考頁 · 2026 Family Trip · Australia</footer>
+
+<script>
+  /* 分區導覽：滾動時高亮當前分區 */
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.pnav a'));
+    var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    if (!links.length || secs.some(function (s) { return !s; })) return;
+    function sync() {
+      var y = window.scrollY + 120, idx = 0;
+      secs.forEach(function (s, i) { if (s.offsetTop <= y) idx = i; });
+      links.forEach(function (a, i) { a.classList.toggle('is-on', i === idx); });
+    }
+    window.addEventListener('scroll', sync, { passive: true });
+    links.forEach(function (a) { a.addEventListener('click', function () { a.blur(); }); });
+    sync();
+  })();
+</script>
 
 </body>
 </html>
