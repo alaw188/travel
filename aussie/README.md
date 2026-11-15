@@ -22,7 +22,8 @@ aussie/
 ├── booking.html  # ⚠️ 舊網址轉址頁（開啟即跳去 winery.html，唔要刪）
 ├── vendor/       # Leaflet 1.9.4 本地檔（無外鏈 CDN）
 ├── README.md     # 本檔
-└── img/          # 61 張地點圖片（slug 命名，本地檔）
+├── img/          # 61 張地點圖片（slug 命名，本地檔）
+│   └── winery/  # 10 張酒莊相片（Wikimedia Commons，CC BY／CC BY-SA，見 winery.html 頁尾署名）
 ```
 
 ## 版本切換：經典版（V1）／ 地圖版（V2）　※歷史，現只存在於 index3.html
