@@ -225,7 +225,42 @@
     .steps li{grid-template-columns:52px minmax(0,1fr)}
   }
 
+  /* ---------- 酒莊地圖 ---------- */
+  .mapbox{margin:14px 0 6px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 3px 14px rgba(43,43,43,.07)}
+  .mapbox__hd{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:10px 14px;background:linear-gradient(120deg,var(--ocean-dark),#1d6b85);color:#fff}
+  .mapbox__hd b{font-size:.95rem}
+  .mapbox__hd span{margin-left:auto;font-size:.74rem;opacity:.85}
+  .wmap{height:400px;width:100%;background:#e9e7e0;z-index:0}
+  .wmap:focus{outline:none}
+  .mapleg{display:flex;flex-wrap:wrap;gap:6px;padding:9px 13px}
+  .mapleg button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:.76rem;color:var(--ink);background:#f8f3e8;border:1px solid #ebdfc8;border-radius:999px;padding:2px 10px 2px 3px;cursor:pointer;line-height:1.5}
+  .mapleg button:hover,.mapleg button:focus-visible{background:var(--sand2);border-color:var(--gold)}
+  .mapleg i{width:18px;height:18px;border-radius:50%;background:var(--gold);color:#2b2317;font-style:normal;font-size:.64rem;display:grid;place-items:center;font-weight:700;flex:none}
+  .mapleg em{font-style:normal;color:var(--muted);font-size:.71rem}
+  .mapbox__ft{padding:0 13px 11px;font-size:.76rem;color:var(--muted);line-height:1.7}
+  .mapbox__ft b{color:#5d594f}
+  .mapbox__ft .dash{display:inline-block;width:22px;height:0;border-top:3px dashed var(--coral);vertical-align:middle;margin:0 3px}
+  .wpin{width:27px;height:27px;border-radius:50%;background:var(--gold);border:2px solid #fff;color:#2b2317;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.35)}
+  .wpin.is-on{background:var(--coral);color:#fff}
+  .leaflet-container{font-family:inherit;font-size:.8rem}
+  .leaflet-popup-content{margin:9px 13px;font-size:.82rem;line-height:1.65}
+  .leaflet-popup-content b{color:var(--ocean-dark)}
+  .leaflet-popup-content .pp-sub{color:var(--muted);font-size:.78rem}
+  .leaflet-popup-content a{color:var(--ocean);font-weight:600}
+  .leaflet-control-attribution{font-size:.62rem!important}
+
+  @media (max-width:700px){
+    .wmap{height:330px}
+    .mapbox__hd span{display:none}
+  }
+  @media print{
+    .mapbox{break-inside:avoid;page-break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+    .wmap{height:280px}
+    .leaflet-control-container{display:none}
+  }
+
 </style>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 </head>
 <body>
 
@@ -359,6 +394,13 @@
       </table>
     </div>
 
+    <div class="mapbox">
+      <div class="mapbox__hd"><b>🗺️ 亞拉河谷 · 九間酒莊位置</b><span>點標記或下面編號睇地址／品酒費</span></div>
+      <div class="wmap" id="mapYarra" role="application" aria-label="亞拉河谷九間酒莊位置地圖"></div>
+      <div class="mapleg" id="legYarra"></div>
+      <p class="mapbox__ft"><span class="dash"></span><b>虛線＝路線 A 的停留次序</b>（Coombe → Yering Station → Chandon → Oakridge）；只是示意連線，不代表實際道路走線。Coombe、Chandon、Oakridge 都在 <b>Maroondah Highway</b> 一條線上；Giant Steps 最東，在 Healesville 大街。<b>Hanging Rock 在墨爾本以北 67 分鐘，不在此圖範圍</b>，另見下面馬其頓山脈一節。</p>
+    </div>
+
     <div class="routes2">
 
     <div class="route">
@@ -452,6 +494,13 @@
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="mapbox">
+      <div class="mapbox__hd"><b>🗺️ 莫寧頓半島 · 六間酒莊位置</b><span>點標記或下面編號睇地址／品酒費</span></div>
+      <div class="wmap" id="mapMp" role="application" aria-label="莫寧頓半島六間酒莊位置地圖"></div>
+      <div class="mapleg" id="legMp"></div>
+      <p class="mapbox__ft"><span class="dash"></span><b>虛線＝路線 C 的停留次序</b>（Pt. Leo → Montalto → Port Phillip）；只是示意連線，不代表實際道路走線。Red Hill 一帶四間互相只 5–10 分鐘車程，Pt. Leo 在西邊 Merricks，離其餘五間約 7–9 分鐘。</p>
     </div>
 
     <div class="route">
@@ -919,5 +968,114 @@
   })();
 </script>
 
+<script src="vendor/leaflet/leaflet.js"></script>
+<script>
+/* 酒莊位置地圖：亞拉河谷 9 間、莫寧頓半島 6 間
+   座標以 OpenStreetMap Nominatim 對地址／酒莊名稱查得（2026-11）；
+   酒莊座標多為門口或 cellar door，泊車位請以官網指示為準。 */
+(function () {
+  var YARRA = {
+    name: '亞拉河谷',
+    route: [0, 1, 2, 4],
+    list: [
+      { n: 'Coombe Yarra Valley', k: 'A$15', a: '673–675 Maroondah Hwy, Coldstream', f: '品酒 <b>A$15</b>（買任何一瓶可免）· 花園導賞 A$15', u: 'https://coombeyarravalley.com.au/', c: [-37.71963, 145.38155] },
+      { n: 'Yering Station', k: 'A$15–35', a: '38 Melba Hwy, Yering', f: 'Village <b>A$15</b>／Yering+Yarrabank $20／Single Vineyard $35（買酒可抵）', u: 'https://www.yering.com/', c: [-37.67336, 145.38389] },
+      { n: 'Domaine Chandon', k: 'A$22–25', a: '727 Maroondah Hwy, Coldstream', f: '導賞品酒 <b>A$22</b>（30 分鐘）／$25（45 分鐘）；餐廳週末套餐 $79 起', u: 'https://www.chandon.com/en-au', c: [-37.67975, 145.42995] },
+      { n: 'Coldstream Hills', k: 'A$5–15', a: '29–31 Maddens Ln, Gruyere', f: '品酒 <b>A$5／$10／$15</b> 逐級；Masterclass $40', u: 'https://www.coldstreamhills.com.au/', c: [-37.72291, 145.46861] },
+      { n: 'Oakridge Wines', k: 'A$15–50', a: '864 Maroondah Hwy, Coldstream', f: 'Oakridge Experience <b>A$15</b>（可 walk-in）／Top Rated Flight A$40；餐廳需訂', u: 'https://oakridgewines.com.au/', c: [-37.68767, 145.45730] },
+      { n: 'Levantine Hill', k: '需查詢', a: '882 Maroondah Hwy, Coldstream', f: '散客價<b>需電話／網上查詢</b>；5 人以上套餐 A$210 含品酒＋三道菜', u: 'https://www.levantinehill.com.au/', c: [-37.68571, 145.47809] },
+      { n: 'TarraWarra Estate', k: 'A$20–40', a: '311 Healesville–Yarra Glen Rd, Yarra Glen', f: 'Estate Tasting <b>A$20</b>（5 款）／Premium $40；TarraWarra 美術館', u: 'https://tarrawarra.com.au/', c: [-37.65963, 145.46919] },
+      { n: 'De Bortoli', k: 'A$10–25', a: '58 Pinnacle Ln, Dixons Creek', f: 'Discover <b>A$10–15</b>（15 分鐘）／Indulge $25（45 分鐘）；Locale 餐廳', u: 'https://www.debortoli.com.au/', c: [-37.59813, 145.41085] },
+      { n: 'Giant Steps', k: 'A$12–60', a: '314 Maroondah Hwy, Healesville', f: 'By the Glass <b>A$12</b>／Essential $30／Single Vineyard $40–60', u: 'https://www.giantsteps.net.au/', c: [-37.65326, 145.51927] }
+    ]
+  };
+
+  var MP = {
+    name: '莫寧頓半島',
+    route: [0, 3, 1],
+    list: [
+      { n: 'Pt. Leo Estate', k: 'A$15–30', a: '3649 Frankston–Flinders Rd, Merricks', f: 'Estate <b>A$15</b>／Red・White $25／Premium $30（每瓶退 $10）；雕塑公園 A$15', u: 'https://www.ptleoestate.com.au/', c: [-38.40606, 145.07426] },
+      { n: 'Port Phillip Estate', k: 'A$15–40', a: '263 Red Hill Rd, Red Hill South', f: '品酒 <b>A$15</b>（不退）／Wine & Cheese $40；餐廳兩道 $68、三道 $85', u: 'https://www.portphillipestate.com.au/', c: [-38.36280, 145.05073] },
+      { n: 'Ten Minutes by Tractor', k: 'A$15–50', a: '1333 Mornington–Flinders Rd, Main Ridge', f: '10X & Estate <b>A$15</b>／Single Vineyard $50／Masterclass $120（每日 11:00）', u: 'https://www.tenminutesbytractor.com.au/', c: [-38.39465, 144.99456] },
+      { n: 'Montalto', k: 'A$20', a: '33 Shoreham Rd, Red Hill South', f: 'Current Release <b>A$20</b>（買滿 $45 可免）／Wine & Cheese $40；1 km 雕塑步道免費', u: 'https://montalto.com.au/', c: [-38.40784, 145.02645] },
+      { n: 'Paringa Estate', k: 'A$10', a: '44 Paringa Rd, Red Hill South', f: '品酒 <b>A$10</b>（全區最平）；餐廳套餐約 $135–450', u: 'https://paringaestate.com.au/', c: [-38.38777, 145.03819] },
+      { n: 'Main Ridge Estate', k: 'A$15–25', a: '80 William Rd, Red Hill', f: '4 款單一園 <b>A$15</b>／加 2 款 Estate $25；週六日 11:30–17:00，須預約', u: 'https://mre.com.au/', c: [-38.36960, 144.98600] }
+    ]
+  };
+
+  function popup(d) {
+    return '<b>' + d.n + '</b><br><span class="pp-sub">' + d.a + '</span><br>' + d.f +
+      '<br><a href="' + d.u + '" target="_blank" rel="noopener">官網 ↗</a>';
+  }
+
+  function build(mapId, legId, cfg) {
+    var el = document.getElementById(mapId);
+    if (!el) return;
+    if (!window.L) {
+      el.innerHTML = '<p style="padding:16px;font-size:.85rem;color:#6b6459;margin:0">地圖需要瀏覽器載入 Leaflet 及網絡連線才能顯示；下面表格已有齊地址。</p>';
+      return;
+    }
+    var map = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var markers = [], pts = [];
+    cfg.list.forEach(function (d, i) {
+      var mk = L.marker(d.c, {
+        icon: L.divIcon({
+          className: '', html: '<span class="wpin">' + (i + 1) + '</span>',
+          iconSize: [27, 27], iconAnchor: [13, 13], popupAnchor: [0, -15]
+        }),
+        title: d.n, alt: d.n + ' 位置', keyboard: true
+      }).addTo(map);
+      mk.bindPopup(popup(d), { maxWidth: 270 });
+      mk.on('popupopen', function () { mark(i, true); });
+      mk.on('popupclose', function () { mark(i, false); });
+      markers.push(mk); pts.push(d.c);
+    });
+
+    function mark(i, on) {
+      var pin = markers[i].getElement();
+      if (pin) { var s = pin.querySelector('.wpin'); if (s) s.classList.toggle('is-on', on); }
+      var btn = document.querySelector('#' + legId + ' button[data-i="' + i + '"]');
+      if (btn) btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+
+    if (cfg.route && cfg.route.length > 1) {
+      L.polyline(cfg.route.map(function (k) { return cfg.list[k].c; }), {
+        color: '#e07a5f', weight: 3, opacity: .9, dashArray: '8 7', lineCap: 'round'
+      }).addTo(map);
+    }
+
+    map.fitBounds(L.latLngBounds(pts).pad(0.12), { maxZoom: 14 });
+
+    var leg = document.getElementById(legId);
+    if (leg) {
+      cfg.list.forEach(function (d, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.dataset.i = i;
+        b.setAttribute('aria-pressed', 'false');
+        b.innerHTML = '<i>' + (i + 1) + '</i>' + d.n + '<em>' + d.k + '</em>';
+        b.addEventListener('click', function () {
+          map.flyTo(d.c, 14, { duration: .55 });
+          markers[i].openPopup();
+        });
+        leg.appendChild(b);
+      });
+    }
+
+    window.addEventListener('resize', function () { map.invalidateSize(); }, { passive: true });
+    return map;
+  }
+
+  function init() { build('mapYarra', 'legYarra', YARRA); build('mapMp', 'legMp', MP); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
 </body>
 </html>
+
