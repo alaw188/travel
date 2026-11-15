@@ -631,7 +631,7 @@
     <div class="day-head"><span class="dnum">12 月 19 日（六）</span><span class="dtheme">🌅 還車 · Brighton 彩虹小屋 · 市區</span></div>
     <div class="day-body">
       <div class="places" id="d19"></div>
-      <div class="day-notes"><b>💡 貼士：</b><b>09:00 前交車</b>，之後全程公共交通：Flinders St 搭火車去 <b>Brighton Beach</b> 只需約 20 分鐘，10:10–11:20 影彩虹小屋（上午光線最靚）→ 12:15 South Melbourne 午餐 → 晚上 19:30 市區晚飯。<b>⚠️ 大洋路十二門徒石已改列後備行程</b>：今日無車，要成行須續租一日車或報市區一日團（約 A$120–150／位）。</div>
+      <div class="day-notes"><b>💡 12/19（六）：</b><b>09:00 前交車</b>後全程公共交通；上午彈性（執行李／South Melbourne Market／Royal Botanic Gardens）。<b>12:00 去 Hardware Lane 的 The Hardware Société 食午餐</b>（7:30–15:00，焗蛋同法蘭西多士招牌，可能要排 10–20 分鐘）→ 13:30 Flinders St 搭火車 → <b>14:00–15:30 Brighton 彩虹小屋</b>（下午側光最好）→ 19:30 市區晚飯。<b>⚠️ 大洋路十二門徒石已列後備</b>：要成行須續租一日車或報市區一日團（約 A$120–150／位）。</div>
     </div>
   </div>
 
@@ -1007,10 +1007,11 @@ const DAYS = {
   ],
   d19: [
     {n:"還車", zh:"09:00 前交車", type:"info", hours:"09:00 前交車 · 遲交按日計租", d:"24 小時租期屆滿，交車前加滿油、清走垃圾。之後全程公共交通，唔使再擔心泊車同酒駕。"},
-    {n:"火車往 Brighton Beach", zh:"Flinders St 出發", type:"info", hours:"09:40 · Sandringham 線約 20 分鐘 · 用 myki", d:"由 Flinders St 搭 Sandringham 線直達，班次約 10 分鐘一班；落車行 8 分鐘就到彩虹小屋。"},
-    {n:"Brighton Beach Bathing Boxes", zh:"彩虹小屋海灘", type:"beach", wiki:"Brighton Bathing Boxes", book:true, hours:"10:10 – 11:20 · 上午光線正面", d:"一排 82 間維多利亞時代彩色小屋，1860 年代已經存在，當年供換泳衣同存放沙灘用品。每間由業主各自油漆，鮮紅、嫩黃、湖水藍撞色，成為墨爾本最經典嘅明信片畫面。上午順光，顏色最實淨；11:20 前離開搭火車返市區。"},
-    {n:"South Melbourne 午餐", zh:"Clarendon St", type:"food", hours:"12:15 – 13:30 · Google Maps", d:"Clarendon St 餐廳密集，由市中心搭 96／12 電車約 10 分鐘。食完可以行 South Melbourne Market 買手信（週六開到 15:00）。"},
-    {n:"Twelve Apostles", zh:"十二門徒石（後備行程）", type:"scenic", wiki:"Twelve Apostles (Victoria)", hours:"後備行程 · 07:00 出發、約 20:00 返（自駕 230 km 或市區一日團）", d:"<b>後備行程 — 今日無車，去唔到。</b>租車 12/19 09:00 已還，十二門徒石離市區 230 km，即日來回要 6 小時車程。想成行只有兩個方法：① 續租一日車（約 A$90–130／日＋油費 A$18–25）；② 報市區大洋路一日團（約 A$120–150／位，07:00 出發、約 20:00 返酒店）。以下為自駕版資料：大洋路終點嘅石灰岩奇觀，2,000 萬年來海浪沖刷離岸峭壁，雕出一支支巨柱；雖名叫「十二門徒」，其實只有 7-8 支仍然企穩。附近有 1878 年 Loch Ard 號沉船遺址同 1990 年坍塌嘅 London Arch。"},
+    {n:"上午自由（可選）", zh:"還車後至午餐前", type:"info", hours:"09:00 – 11:45 · 三個彈性選擇", d:"還車後到 12:00 午餐前有近三小時。① 留喺住宿慢慢執行李；② South Melbourne Market（週六開到 15:00）；③ Royal Botanic Gardens 行一圈。"},
+    {n:"The Hardware Société", zh:"Hardware Lane 法式午餐", type:"food", hours:"12:00 – 13:15 · 7:30 – 15:00 · 20 Hardware Ln", d:"Hardware Lane 上嘅法式小館，招牌係焗蛋（baked eggs）同法蘭西多士。店面細、位少，12:00 到通常要排 10–20 分鐘，早少少去排。食完行 8 分鐘到 Flinders St 搭火車。"},
+    {n:"火車往 Brighton Beach", zh:"Flinders St 出發", type:"info", hours:"13:30 · Sandringham 線約 20 分鐘 · 用 myki", d:"由 Flinders St 搭 Sandringham 線直達，班次約 10 分鐘一班；落車行 8 分鐘就到彩虹小屋。"},
+    {n:"Brighton Beach Bathing Boxes", zh:"彩虹小屋海灘", type:"beach", wiki:"Brighton Bathing Boxes", book:true, hours:"14:00 – 15:30 · 下午側光", d:"一排 82 間維多利亞時代彩色小屋，1860 年代已經存在，當年供換泳衣同存放沙灘用品。每間由業主各自油漆，鮮紅、嫩黃、湖水藍撞色，成為墨爾本最經典嘅明信片畫面。下午光線側照，顏色層次最好；15:30 前離開搭火車返市區。"},
+    {n:"Twelve Apostles", zh:"十二門徒石（後備行程）", type:"scenic", wiki:"Twelve Apostles (Victoria)", hours:"後備行程 · 07:00 出發、約 20:00 返（自駕 230 km 或市區一日團）", d:"<b>後備行程 — 今日無車，去唔到。</b>租車 12/19 09:00 已還，十二門徒石離市區 230 km，即日來回要 6 小時車程。想成行只有兩個方法：① 續租一日車（約 A$90–130／日＋油費 A$18–25）；② 報市區大洋路一日團（約 A$120–150／位，07:00 出發、約 20:00 返酒店）。"},
     {n:"Terror Twilight", zh:"晚餐", type:"food", hours:"19:30 · 離住宿約 15 分鐘", d:"市區輕鬆一晚；第二日 12/20 有酒莊行程，唔好飲太夜。"}
   ],
   d20: [
@@ -1027,7 +1028,6 @@ const DAYS = {
     {n:"Pidapipó", zh:"意式雪糕", type:"dessert", hours:"12:00 – 22:30 · Google Maps", d:"墨爾本人氣手工 gelato，經典同季節限定口味一應俱全。"},
     {n:"Vacation Coffee", zh:"咖啡店", type:"cafe", hours:"Google Maps", d:"CBD 咖啡巡禮嘅其中一站。"},
     {n:"Grain Store", zh:"餐廳", type:"food", book:true, hours:"7:00 – 15:00 · Google Maps", d:"明亮工業風空間，精品咖啡加住家風味菜式。建議訂位。"},
-    {n:"The Hardware Société", zh:"人氣早餐店", type:"cafe", hours:"7:30 – 15:00 · Google Maps", d:"法蘭西多士同焗蛋係招牌，細小但溫馨嘅人氣早餐店。"},
     {n:"Hector's Deli", zh:"熟食店", type:"cafe", hours:"Google Maps", d:"本地人至愛嘅 deli，三文治一流。"},
     {n:"Melbourne Central", zh:"購物中心", type:"shopping", wiki:"Melbourne Central Shopping Centre", hours:"10:00 – 19:00 · Google Maps", d:"1991 年開幕嘅大型商場，最特別係保留咗 1888 年建嘅 Coop's Shot Tower（子彈製造塔）：九層樓高、當年係全墨爾本最高建築物之一，而家係商場中庭嘅玻璃錐保護遺跡。商場連接 Flinders Street 車站同週邊商場，行街、搵食同嘆冷氣一次過搞掂。"},
     {n:"Emporium Melbourne", zh:"商場", type:"shopping", wiki:"Emporium Melbourne", hours:"10:00 – 19:00 · Google Maps", d:"2014 年開幕嘅現代化商場，由舊 Lonsdale Street 地段活化而成，走國際時裝、美妝同精品路線，頂層係大型美食廣場；連接 Myer 同 Melbourne Central 形成一大片購物區。想搵大牌、嘆個靚景午餐，可以順路行吓。"},
@@ -1374,9 +1374,10 @@ const POIS = [
 
   /* ---- 12/19 還車 + 彩虹小屋 + 市區（大洋路列後備） ---- */
   {id:"d19-a", day:19, name:"還車", time:"09:00", cat:"交通", lat:-37.8120, lng:144.9630, desc:"24 小時租期屆滿，09:00 前交車（遲交按日計租）。交車前加滿油。"},
-  {id:"d19-b", day:19, name:"火車往 Brighton Beach", time:"09:40", cat:"交通", lat:-37.8183, lng:144.9670, desc:"Flinders St 搭 Sandringham 線約 20 分鐘，落車行 8 分鐘到彩虹小屋。"},
-  {id:"d18-4", day:19, name:"Brighton Bathing Boxes", time:"10:10", cat:"海灘", lat:-37.9180, lng:144.9860, desc:"82 間彩色小屋，上午光線正面最靚；11:20 前離開搭火車返市區。"},
-  {id:"d19-c", day:19, name:"South Melbourne 午餐", time:"12:15", cat:"美食", lat:-37.8330, lng:144.9570, desc:"Clarendon St 餐廳密集，順便行 South Melbourne Market 買手信（週六開到 15:00）。"},
+  {id:"d19-b", day:19, name:"火車往 Brighton Beach", time:"13:30", cat:"交通", lat:-37.8183, lng:144.9670, desc:"Flinders St 搭 Sandringham 線約 20 分鐘，落車行 8 分鐘到彩虹小屋。"},
+  {id:"d19-d", day:19, name:"上午自由（可選）", time:"彈性", cat:"景點", alt:true, lat:-37.8183, lng:144.9670, desc:"三個彈性選擇：留喺住宿執行李 / South Melbourne Market（週六開到 15:00）/ Royal Botanic Gardens。"},
+  {id:"d19-hw", day:19, name:"The Hardware Société", time:"12:00", cat:"美食", lat:-37.8150, lng:144.9560, desc:"Hardware Lane 法式小館，招牌焗蛋同法蘭西多士；12:00 到通常要排 10–20 分鐘。", hours:"7:30 – 15:00 · 20 Hardware Ln"},
+  {id:"d18-4", day:19, name:"Brighton Bathing Boxes", time:"14:00", cat:"海灘", lat:-37.9180, lng:144.9860, desc:"82 間彩色小屋，下午側光顏色層次最好；15:30 前離開搭火車返市區。"},
   {id:"d19-1", day:19, name:"Twelve Apostles", time:"備選", cat:"景點", alt:true, lat:-38.6650, lng:143.1050, desc:"後備行程 — 今日無車去唔到。要成行須續租一日車（約 A$90–130＋油費）或報市區一日團（約 A$120–150／位，07:00 出發、約 20:00 返）。自駕 230 km／3 小時，10:30 到，沿路有 Loch Ard 峽谷同 Port Campbell 午餐。"},
   {id:"d19-3", day:19, name:"Terror Twilight", time:"19:30", cat:"夜生活", lat:-37.7985, lng:144.9840, desc:"市區晚飯，離住宿約 15 分鐘；第二日 12/20 有酒莊行程，唔好飲太夜。"},
   {id:"d22-4", day:22, name:"Proud Mary Coffee", time:"彈性", cat:"咖啡", alt:true, lat:-37.7995, lng:144.9840, desc:"自由日備選；咖啡店 8:00–15:00，去就 11:30 前到。"},
@@ -1400,7 +1401,6 @@ const POIS = [
   {id:"d21-9", day:21, name:"Grain Store", time:"13:40", cat:"美食", alt:true, lat:-37.8195, lng:144.9560, desc:"明亮工業風 Brunch — 同 Higher Ground 二揀一。"},
   {id:"d21-10", day:21, name:"Pidapipó", time:"14:30", cat:"美食", lat:-37.8170, lng:144.9650, desc:"人氣手工 gelato，經典同季節限定口味。"},
   {id:"d21-11", day:21, name:"Vacation Coffee", time:"15:00", cat:"咖啡", alt:true, lat:-37.8150, lng:144.9640, desc:"CBD 咖啡巡禮其中一站 — 飲唔晒可以跳過。"},
-  {id:"d21-12", day:21, name:"The Hardware Société", time:"15:30", cat:"美食", alt:true, lat:-37.8150, lng:144.9560, desc:"法蘭西多士同焗蛋係招牌 — 備選。"},
   {id:"d21-13", day:21, name:"Hector's Deli", time:"16:00", cat:"美食", alt:true, lat:-37.8180, lng:144.9930, desc:"Richmond 人氣 deli，三文治一流 — 備選。"},
   {id:"d21-14", day:21, name:"Federation Square", time:"17:00", cat:"景點", lat:-37.8180, lng:144.9690, desc:"墨爾本城市客廳，對面就係 Flinders Street 車站。"},
   {id:"d21-15", day:21, name:"Myer Melbourne", time:"17:30", cat:"購物", lat:-37.8120, lng:144.9620, desc:"聖誕櫥窗傳統，12 月氣氛一流。"}
