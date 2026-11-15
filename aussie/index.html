@@ -1,0 +1,1665 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 澳洲 14 天之旅 — 悉尼 + 墨爾本</title>
+<meta name="theme-color" content="#171915">
+<meta name="description" content="2026 年 12 月 11–24 日，澳洲兩城十四天：悉尼與墨爾本的逐日行程、66 個地點、航班住宿與餐廳訂位情報。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026 澳洲 14 天之旅 — 悉尼 + 墨爾本">
+<meta property="og:description" content="十四天、兩座城市：逐日行程、咖啡與酒莊、航班住宿與餐廳訂位，一頁看完。">
+<meta property="og:image" content="img/Sydney_Opera_House.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2026 澳洲 14 天之旅">
+<meta name="twitter:description" content="悉尼與墨爾本，十四天逐日行程。">
+<meta name="twitter:image" content="img/Sydney_Opera_House.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23171915'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ad8956'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+/* =========================================================================
+   澳洲 14 天 — 夜色 / 香槟金 / 纸感
+   ========================================================================= */
+:root{
+  --night:#171915;
+  --night-2:#20241d;
+  --paper:#f2efe8;
+  --card:#fffdf8;
+  --gold:#ad8956;
+  --gold-l:#c9a978;
+  --sage:#728071;
+  --ink:#23261f;
+  --muted:#78746a;
+  --line:#ded7c7;
+  --line-2:#cfc6b3;
+  /* 全站统一 Noto Sans TC（系统已装可变字重版）。层级不再靠衬线，改由字重＋字号承担 */
+  --sans:"Noto Sans TC","Noto Sans CJK TC","PingFang TC","Microsoft JhengHei","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:var(--sans);
+  --maxw:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+/* 全站字号 +1：root 由 16 → 17px。本表 rem 只用于 font-size，不会牵连间距。
+   例外：首屏大标题与区块标题保持原尺寸，改用 px 锁定。 */
+html{font-size:17px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:1rem;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(rgba(23,25,21,.028) .5px,transparent .5px);
+  background-size:3px 3px;
+}
+img{max-width:100%;display:block}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;margin:0;line-height:1.25;letter-spacing:.01em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
+
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:999;
+  background:var(--night);color:#fff;padding:12px 20px;border-radius:0 0 8px 0;
+}
+.skip:focus{left:0}
+
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
+  background:linear-gradient(90deg,var(--gold),var(--gold-l));
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;background:var(--night);color:var(--paper);
+  overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 78% 12%,rgba(173,137,86,.18),transparent 58%);
+}
+.hero__in{
+  position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;
+  padding:clamp(26px,3.4vw,54px) 28px clamp(22px,2.6vw,40px);
+  display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,4vw,64px);align-items:center;
+}
+.kicker{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-l);margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(33.6px,4.6vw,62.4px);line-height:1.14;color:#fff;letter-spacing:.02em;
+}
+.hero h1 em{
+  font-style:normal;color:var(--gold-l);
+  font-size:1.14em;padding:0 .06em;
+}
+.hero__dates{
+  margin-top:20px;font-size:.9rem;letter-spacing:.16em;color:var(--gold-l);
+  font-variant-numeric:tabular-nums;
+}
+.hero__lead{
+  margin-top:16px;max-width:30em;color:#c9c6bb;font-size:.96rem;line-height:1.85;text-wrap:pretty;
+}
+/* ---------- 出發倒數橫幅（首班機起飛後自動消失） ---------- */
+.cdbar{
+  background:var(--night);color:#cfcabd;border-bottom:1px solid rgba(173,137,86,.3);
+  font-size:.8rem;letter-spacing:.1em;
+}
+.cdbar[hidden]{display:none}
+.cdbar__in{
+  max-width:var(--maxw);margin:0 auto;padding:9px 28px;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+}
+.cdbar__k{color:var(--gold-l)}
+.cdbar__t{display:inline-flex;align-items:baseline;gap:5px}
+.cdbar b{
+  color:#fff;font-weight:500;font-size:1.02rem;font-variant-numeric:tabular-nums;
+  min-width:1.5em;text-align:right;
+}
+
+/* ---------- 首屏图片轮播 ---------- */
+.hero__slides{position:absolute;inset:0}
+.hero__slides img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1s var(--ease);
+}
+.hero__slides img.is-on{opacity:1}
+.hero__dots{position:absolute;right:14px;bottom:12px;z-index:3;display:flex;gap:8px}
+.hero__dot{
+  width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.45);transition:background .25s,transform .25s;
+}
+.hero__dot.is-on{background:var(--gold-l);transform:scale(1.3)}
+.hero__dot:hover{background:#fff}
+.hero__fig{
+  position:relative;margin:0;border-radius:4px;overflow:hidden;
+  aspect-ratio:16/10;background:#2b2f27;
+  box-shadow:0 32px 64px -28px rgba(0,0,0,.7);
+}
+.hero__fig img{width:100%;height:100%;object-fit:cover}
+.hero__fig figcaption{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:44px 18px 14px;
+  font-size:.74rem;letter-spacing:.1em;color:#e9e3d6;
+  background:linear-gradient(transparent,rgba(15,16,14,.82));
+}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(242,239,232,.94);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav__in{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;gap:24px;height:56px;
+}
+.nav__brand{
+  font-family:var(--serif);font-size:.86rem;letter-spacing:.2em;color:var(--ink);
+  white-space:nowrap;
+}
+.nav ul{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{
+  display:block;padding:7px 13px;border-radius:999px;font-size:.83rem;color:#5d594f;
+  white-space:nowrap;transition:background .2s,color .2s;
+}
+.nav a:hover{background:rgba(173,137,86,.12);color:var(--ink);text-decoration:none}
+.nav a.is-on{background:var(--night);color:#fff}
+
+/* ---------- SECTION ---------- */
+.sec{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:clamp(26px,3.2vw,46px) 28px}
+.sec--tight{padding-top:0}
+.sec__head{
+  display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+  border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:clamp(22px,2.8vw,32px);
+}
+.sec__no{
+  font-family:var(--serif);font-size:.8rem;letter-spacing:.2em;color:var(--gold);
+  padding-top:.3em;
+}
+.sec__h{font-size:clamp(23.2px,2.6vw,32px)}
+.sec__lead{margin-left:auto;font-size:.85rem;color:var(--muted);max-width:34em;text-wrap:balance}
+
+/* ---------- 行程範圍切換 ---------- */
+.seg{
+  display:inline-flex;gap:2px;padding:3px;margin:-6px 0 30px;
+  background:rgba(23,25,21,.06);border-radius:999px;
+}
+.seg__b{
+  border:0;background:none;border-radius:999px;padding:8px 20px;cursor:pointer;
+  font:inherit;font-size:.84rem;color:#5d594f;letter-spacing:.02em;
+  transition:background .2s,color .2s;
+}
+.seg__b:hover{color:var(--ink)}
+.seg__b.is-on{background:var(--night);color:#fff}
+body[data-f="sydney"] .day[data-city="melbourne"],
+body[data-f="melbourne"] .day[data-city="sydney"],
+body[data-f="sydney"] .rail__grp[data-city="melbourne"],
+body[data-f="melbourne"] .rail__grp[data-city="sydney"],
+body[data-f="sydney"] .city[data-city="melbourne"],
+body[data-f="melbourne"] .city[data-city="sydney"],
+body[data-f="sydney"] .citycard[data-city="melbourne"],
+body[data-f="melbourne"] .citycard[data-city="sydney"]{display:none}
+
+
+/* ---------- OVERVIEW ---------- */
+.cityrow{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(24px,4vw,56px);
+}
+.citycard{min-width:0;border-top:1px solid var(--line-2);padding-top:20px}
+.citycard h3{font-size:1.22rem;display:flex;align-items:baseline;gap:10px}
+.citycard h3 small{font-family:var(--sans);font-size:.7rem;letter-spacing:.2em;color:var(--gold)}
+.citycard p{margin-top:10px;font-size:.88rem;color:#55524a;line-height:1.8}
+
+/* ---------- ITINERARY ---------- */
+.itin{display:grid;grid-template-columns:184px minmax(0,1fr);min-width:0;gap:clamp(28px,4vw,60px)}
+.rail{align-self:start;position:sticky;top:76px;min-width:0}
+.rail__grp{margin-bottom:22px;min-width:0}
+.rail__lbl{
+  font-size:.66rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+  padding:0 10px 8px;border-bottom:1px solid var(--line);margin-bottom:8px;
+}
+.rail a{
+  display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+  padding:6px 10px;border-radius:6px;font-size:.81rem;color:#5d594f;
+  font-variant-numeric:tabular-nums;transition:background .18s,color .18s;
+}
+.rail a:hover{background:rgba(173,137,86,.12);color:var(--ink);text-decoration:none}
+.rail a i{font-style:normal;font-size:.68rem;color:var(--muted)}
+.rail a.is-on{background:var(--night);color:#fff}
+.rail a.is-on i{color:var(--gold-l)}
+
+.days{min-width:0}
+.day{min-width:0}
+.day{padding-top:8px;margin-bottom:clamp(48px,7vw,84px);scroll-margin-top:72px}
+.day__head{
+  display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:start;
+  border-top:1px solid var(--line-2);padding-top:18px;
+}
+.day__no{
+  font-weight:500;font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);line-height:1;
+  color:var(--gold);font-variant-numeric:tabular-nums;padding-top:.1em;
+}
+.day__t{font-size:clamp(1.05rem,1.8vw,1.34rem);color:var(--ink)}
+.day__sub{margin-top:6px;font-size:.8rem;letter-spacing:.06em;color:var(--muted)}
+.day__n{
+  font-size:.72rem;letter-spacing:.1em;color:var(--gold);border:1px solid rgba(173,137,86,.4);
+  border-radius:999px;padding:3px 11px;white-space:nowrap;align-self:center;
+}
+
+.stops{margin-top:22px;border-top:1px solid var(--line)}
+.stop__pd{display:none}
+.stop{
+  display:grid;grid-template-columns:62px 52px minmax(0,1fr) auto 18px;
+  gap:14px;align-items:center;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  padding:11px 6px 11px 0;cursor:pointer;color:inherit;font:inherit;
+  transition:background .18s;
+}
+.stop:hover{background:rgba(173,137,86,.07)}
+.stop__t{
+  font-size:.79rem;color:var(--gold);font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;white-space:nowrap;
+}
+.stop__ph{
+  width:52px;height:52px;border-radius:6px;overflow:hidden;background:#e7e1d3;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex:0 0 auto;
+}
+.stop__ph img{width:100%;height:100%;object-fit:cover}
+.stop__b{min-width:0}
+.stop__n{display:block;font-size:.95rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis}
+.stop__z{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
+.stop__cat{
+  font-size:.68rem;letter-spacing:.08em;color:#6d6859;
+  border:1px solid var(--line-2);border-radius:999px;padding:2px 9px;white-space:nowrap;
+}
+.stop__cat.is-alt{color:var(--muted);border-style:dashed}
+.stop__c{
+  width:9px;height:9px;border-radius:50%;background:var(--line-2);
+  transition:transform .25s var(--ease);
+}
+.stop[aria-expanded="true"] .stop__c{transform:rotate(180deg);background:var(--gold)}
+.stop[aria-expanded="true"]{background:rgba(173,137,86,.07)}
+.stop.is-alt .stop__n{color:#6e6a5f}
+
+.pan{
+  display:grid;grid-template-columns:236px minmax(0,1fr);gap:26px;
+  padding:22px 6px 26px 0;border-bottom:1px solid var(--line);
+  background:rgba(173,137,86,.035);
+  animation:panIn .28s var(--ease);
+}
+.pan[hidden]{display:none}
+.pan--noimg{grid-template-columns:minmax(0,1fr)}
+@keyframes panIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.pan__fig{margin:0;border-radius:8px;overflow:hidden;background:#e7e1d3;aspect-ratio:4/3}
+.pan__fig img{width:100%;height:100%;object-fit:cover}
+.pan__fig.is-empty{display:flex;align-items:center;justify-content:center;font-size:2rem;color:#b6ae9c}
+.pan__body{min-width:0}
+.pan__d{font-size:.9rem;line-height:1.85;color:#4a473f}
+.pan__meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:.79rem;color:var(--muted)}
+.pan__meta b{font-weight:500;color:var(--ink)}
+.pan__row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.pan__tag{
+  font-size:.76rem;background:var(--gold);color:#fff;border-radius:4px;padding:3px 10px;
+}
+.pan__tag--soft{background:rgba(114,128,113,.14);color:#4c5a4a}
+.pan__a{
+  font-size:.79rem;border:1px solid var(--gold);color:var(--gold);
+  border-radius:999px;padding:5px 14px;display:inline-block;
+}
+.pan__a:hover{background:var(--gold);color:#fff;text-decoration:none}
+.pan__a--alt{border-color:var(--line-2);color:#5d594f}
+.pan__a--alt:hover{background:var(--night);border-color:var(--night);color:#fff}
+
+/* 面板内的资讯区块（如航空公司的值机时限） */
+.pan__info{
+  margin-top:15px;padding:14px 16px;border:1px solid var(--line-2);border-radius:8px;
+  background:rgba(255,253,248,.85);font-size:.82rem;line-height:1.75;color:#4a473f;
+}
+.pan__info h5{
+  margin:0 0 9px;font-family:var(--sans);font-weight:500;
+  font-size:.74rem;letter-spacing:.12em;color:var(--gold);
+}
+.pan__info ul{display:grid;gap:5px;padding-left:1.15em;list-style:disc}
+.pan__info li::marker{color:var(--gold)}
+.pan__info .warn{margin-top:9px;color:#a2442f}
+.pan__info .src{margin-top:6px;font-size:.76rem;color:var(--muted)}
+
+.grp{margin-top:26px}
+.grp__h{
+  display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;
+  border-bottom:1px solid var(--line-2);padding:0 0 9px;cursor:pointer;color:inherit;font:inherit;
+}
+.grp__h span{font-family:var(--serif);font-size:.96rem}
+.grp__h small{font-size:.72rem;letter-spacing:.14em;color:var(--gold)}
+.grp__h i{margin-left:auto;font-style:normal;font-size:.72rem;color:var(--muted)}
+.grp__h::after{
+  content:"";width:7px;height:7px;border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);
+  transform:rotate(45deg);margin-left:8px;transition:transform .24s var(--ease);
+}
+.grp.is-closed .grp__h::after{transform:rotate(-45deg)}
+.grp.is-closed .stops{display:none}
+
+.mapbank{margin-top:22px}
+.map{
+  height:250px;border-radius:10px;overflow:hidden;background:#e7e1d3;
+  border:1px solid var(--line-2);
+}
+.map__note{font-size:.72rem;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+.leaflet-container{font-family:var(--sans)!important;background:#e7e1d3}
+.mpin{
+  display:flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:50%;background:var(--gold);color:#fff;
+  font-size:.68rem;font-family:var(--sans);font-weight:500;
+  border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.3);font-variant-numeric:tabular-nums;
+}
+.mpin.is-alt{background:var(--sage)}
+.mpin.is-on{background:var(--night);transform:scale(1.22)}
+
+.tails{margin-top:6px;border-top:1px solid var(--line-2)}
+.tail{
+  display:grid;grid-template-columns:104px 1fr;gap:18px;
+  padding:16px 0;border-bottom:1px solid var(--line);font-size:.86rem;color:#4a473f;
+}
+.tail b{font-family:var(--serif);font-weight:500;color:var(--gold);font-size:.88rem}
+
+/* ---------- CITIES ---------- */
+.city + .city{margin-top:clamp(48px,6vw,80px)}
+.city__head{
+  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+  border-bottom:1px solid var(--line);padding-bottom:14px;
+}
+.city__head h3{font-size:clamp(1.3rem,2.3vw,1.75rem)}
+.city__head h3 small{font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;color:var(--gold);margin-left:10px}
+.city__head p{margin-left:auto;font-size:.84rem;color:var(--muted);max-width:36em;text-align:right}
+.gal{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:148px;
+  gap:10px;margin-top:20px;
+}
+.gal figure{
+  position:relative;margin:0;overflow:hidden;border-radius:8px;background:#e7e1d3;
+}
+.gal figure:first-child{grid-column:span 2;grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:30px 12px 9px;
+  font-size:.73rem;color:#fff;letter-spacing:.06em;
+  background:linear-gradient(transparent,rgba(12,13,11,.74));
+}
+
+/* ---------- LOGISTICS ---------- */
+.logi{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(28px,4vw,52px);align-items:start}
+.block__h{
+  font-size:.7rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+  padding-bottom:9px;border-bottom:1px solid var(--line-2);margin-bottom:16px;
+}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ftable{width:100%;border-collapse:collapse;font-size:.83rem;min-width:520px}
+.ftable th{
+  text-align:left;font-weight:400;font-size:.7rem;letter-spacing:.1em;color:var(--muted);
+  padding:0 12px 9px 0;border-bottom:1px solid var(--line-2);white-space:nowrap;
+}
+.ftable td{padding:13px 12px 13px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.ftable td:nth-child(5),.ftable td:nth-child(6){white-space:nowrap}
+.ftable td:first-child{font-weight:500;white-space:nowrap}
+.ftable .tm{font-variant-numeric:tabular-nums;color:#4a473f;white-space:nowrap}
+.tag{
+  display:inline-block;font-size:.72rem;border-radius:4px;padding:2px 8px;
+  background:rgba(114,128,113,.16);color:#4c5a4a;white-space:nowrap;
+}
+.tag--gold{background:rgba(173,137,86,.18);color:#7d6034}
+.hint{font-size:.72rem;color:var(--muted);margin-top:10px}
+.note{
+  margin-top:16px;font-size:.83rem;color:#4a473f;line-height:1.8;
+  border-left:2px solid var(--gold);padding:2px 0 2px 14px;
+}
+
+.hotel{
+  min-width:0;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:20px 22px;
+}
+.hotel + .hotel{margin-top:14px}
+.hotel h4{font-size:1.04rem}
+.hotel__en{font-size:.75rem;color:var(--muted);margin-top:4px;letter-spacing:.03em}
+.hotel dl{margin:14px 0 0;font-size:.83rem;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.hotel dt{color:var(--muted);white-space:nowrap}
+.hotel dd{margin:0;color:#3f3d36}
+.hotel .conf{font-variant-numeric:tabular-nums;letter-spacing:.06em}
+
+/* ---------- DINING ---------- */
+.dine{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bk{
+  min-width:0;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;
+  display:flex;flex-direction:column;
+}
+.bk__h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.bk__h h4{font-size:1rem}
+.bk__when{font-size:.72rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.bk dl{margin:14px 0 0;font-size:.81rem;display:grid;gap:9px}
+.bk dt{font-size:.7rem;letter-spacing:.1em;color:var(--gold);margin-bottom:1px}
+.bk dd{margin:0;color:#46433c;line-height:1.72}
+.bk dd a{word-break:break-all}
+.badge{
+  display:inline-block;font-size:.74rem;border-radius:4px;padding:2px 8px;
+  background:rgba(120,116,106,.12);color:#5c584f;
+}
+.badge--hot{background:rgba(199,86,66,.13);color:#a2442f}
+.badge--warn{background:rgba(173,137,86,.16);color:#7d6034}
+
+/* ---------- TIPS ---------- */
+.tips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tip{
+  min-width:0;
+  background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:20px 22px;font-size:.85rem;line-height:1.8;color:#46433c;
+}
+.tip h4{font-size:.98rem;margin-bottom:9px;color:var(--ink)}
+.tip--wide{grid-column:1/-1}
+.tip--dark{background:var(--night);border-color:var(--night);color:#cfcabd}
+.tip--dark h4{color:#fff}
+.tip--dark a{color:var(--gold-l)}
+.tip table{width:100%;border-collapse:collapse;font-size:.79rem;min-width:640px}
+.tip th{
+  text-align:left;font-weight:400;font-size:.68rem;letter-spacing:.1em;color:var(--muted);
+  padding:0 12px 8px 0;border-bottom:1px solid var(--line-2);white-space:nowrap;
+}
+.tip td{padding:11px 12px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tip tr.is-top td{background:rgba(173,137,86,.07)}
+.tip .rk{font-family:var(--serif);color:var(--gold);font-size:1rem;width:26px}
+
+/* ---------- FOOTER ---------- */
+.foot{
+  position:relative;z-index:1;background:var(--night);color:#b9b5a9;
+  padding:clamp(56px,7vw,92px) 28px clamp(36px,4vw,52px);margin-top:20px;
+}
+.foot__in{max-width:var(--maxw);margin:0 auto}
+.foot h2{
+  font-weight:500;font-size:clamp(1.5rem,3.4vw,2.5rem);color:#fff;line-height:1.35;
+  max-width:22em;
+}
+.foot h2 em{font-style:normal;color:var(--gold-l)}
+.foot__route{
+  margin-top:26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  font-size:.8rem;letter-spacing:.12em;color:var(--gold-l);
+}
+.foot__route i{font-style:normal;flex:1;min-width:40px;height:1px;background:rgba(173,137,86,.4)}
+.foot__meta{
+  margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.75rem;color:#8d897e;
+}
+
+.totop{
+  position:fixed;right:20px;bottom:20px;z-index:70;
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line-2);
+  background:rgba(255,253,248,.92);color:var(--ink);cursor:pointer;
+  font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;
+  backdrop-filter:blur(6px);
+}
+.totop.is-on{opacity:1;pointer-events:auto}
+.totop:hover{transform:translateY(-2px)}
+
+/* ---------- ETA MODAL ---------- */
+.eta{
+  position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
+  padding:20px;background:rgba(18,20,17,.62);backdrop-filter:blur(4px);
+}
+.eta[hidden]{display:none}
+.eta__card:focus{outline:none}
+.eta__card{
+  background:var(--card);border-radius:14px;max-width:480px;width:100%;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.6);overflow:hidden;
+}
+.eta__hd{background:var(--night);color:#fff;padding:22px 26px}
+.eta__hd h3{font-size:1.12rem;color:#fff}
+.eta__hd p{margin-top:5px;font-size:.79rem;color:var(--gold-l);letter-spacing:.05em}
+.eta__bd{padding:22px 26px;font-size:.86rem;color:#46433c;line-height:1.85}
+.eta__bd ul{display:grid;gap:9px;list-style:disc;padding-left:1.1em}
+.eta__ft{
+  display:flex;align-items:center;gap:14px;justify-content:flex-end;
+  padding:0 26px 22px;
+}
+.eta__a{font-size:.8rem}
+.eta__btn{
+  background:var(--night);color:#fff;border:0;border-radius:999px;
+  padding:10px 22px;font:inherit;font-size:.86rem;cursor:pointer;white-space:nowrap;
+}
+.eta__btn:hover{background:#2b3026}
+.eta__btn--ghost{
+  background:none;color:#5d594f;border:1px solid var(--line-2);
+}
+.eta__btn--ghost:hover{background:rgba(23,25,21,.06);color:var(--ink);border-color:var(--ink)}
+
+@media screen and (max-width:640px){
+  .eta__ft{flex-wrap:wrap;padding:0 20px 20px;gap:10px}
+  .eta__a{flex:1 0 100%;margin-bottom:2px}
+  .eta__btn{flex:1 1 auto;text-align:center;padding:11px 14px}
+  .eta__hd{padding:20px 22px}
+  .eta__bd{padding:20px 22px}
+}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.is-in{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media screen and (max-width:1080px){
+  .itin{grid-template-columns:minmax(0,1fr)}
+  .rail{
+    position:sticky;top:56px;z-index:40;background:var(--paper);
+    margin:0 -28px 8px;padding:10px 28px 8px;border-bottom:1px solid var(--line);
+  }
+  .rail__grp{margin-bottom:0;display:flex;align-items:center;gap:10px;min-width:0}
+  .rail__grp + .rail__grp{margin-top:6px}
+  .rail__lbl{padding:0;border:0;margin:0;white-space:nowrap;font-size:.62rem}
+  .rail__grp div{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;min-width:0;flex:1 1 auto}
+  .rail__grp div::-webkit-scrollbar{display:none}
+  .rail a{padding:5px 11px;border:1px solid var(--line-2);white-space:nowrap;font-size:.78rem}
+  .rail a i{display:none}
+  .logi{grid-template-columns:minmax(0,1fr)}
+  .dine{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cityrow{grid-template-columns:minmax(0,1fr);gap:26px}
+}
+@media screen and (max-width:860px){
+  .hero__in{grid-template-columns:minmax(0,1fr);gap:34px}
+  .hero__fig{aspect-ratio:4/3;order:-1}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:132px}
+  .gal figure:first-child{grid-column:span 2;grid-row:span 1}
+  .tips{grid-template-columns:minmax(0,1fr)}
+  .dine{grid-template-columns:minmax(0,1fr)}
+  .pan{grid-template-columns:minmax(0,1fr);gap:16px}
+  .pan__fig{aspect-ratio:16/9;max-height:230px}
+}
+@media screen and (max-width:640px){
+  body{font-size:15px}
+  .sec{padding:22px 18px}
+  .nav__in{padding:0 18px;gap:12px}
+  .nav ul{margin-left:0}
+  .rail{margin:0 -18px 8px;padding:9px 18px 8px}
+  .hero__in{padding:22px 18px 28px}
+  .hero h1{font-size:clamp(28px,8.2vw,38.4px)}
+  .stop{grid-template-columns:52px 44px minmax(0,1fr) 16px;gap:10px}
+  .stop__ph{width:44px;height:44px}
+  .stop__cat{display:none}
+  .stop__n{font-size:.9rem}
+  .day__head{grid-template-columns:auto 1fr;gap:14px}
+  .day__n{grid-column:2;justify-self:start;margin-top:2px}
+  .day__no{font-size:1.55rem}
+  .tail{grid-template-columns:minmax(0,1fr);gap:4px}
+  .foot{padding:48px 18px 40px}
+  .map{height:210px}
+  .pan{padding-right:0}
+}
+
+/* ---------- PRINT ---------- */
+@media print{
+  @page{margin:12mm 11mm}
+  :root{--paper:#fff;--card:#fff}
+  body{font-size:10.5pt}
+  body::before,.progress,.nav,.rail,.totop,.eta,.cdbar,.seg,.mapbank,.hint,.hint--scroll{display:none!important}
+  .sec{padding:12px 0 4px}
+  .sec__head{padding-bottom:8px;margin-bottom:14px}
+
+  .hero{background:#fff;color:#111;border-bottom:1.5px solid #111}
+  .hero::after{display:none}
+  .hero__in{padding:0 0 12px;grid-template-columns:1fr 42mm;gap:9mm}
+  /* 打印时侧栏隐藏，行程区回到单栏块流，避免空轨道挤压正文 */
+  .itin{display:block}
+  .days{width:auto!important}
+  .hero h1{font-size:19pt;color:#111}
+  .hero h1 em{color:#111}
+  .hero__lead,.hero__dates,.kicker{color:#333}
+  .kicker{font-size:7.5pt;margin-bottom:6px}
+  .hero__fig{box-shadow:none;max-height:48mm;aspect-ratio:auto}
+  .hero__fig figcaption{position:static;color:#444;background:none;padding:4px 0 0;font-size:7.5pt}
+
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .grp.is-closed .stops{display:block!important}
+
+  .day{break-inside:auto;margin-bottom:15px;min-width:0}
+  .day__head{border-top:1px solid #bbb;padding-top:8px;gap:10px}
+  .day__no{font-size:14pt}
+  .day__t{font-size:11pt}
+  .day__sub{font-size:8pt}
+
+  .stop{break-inside:avoid;padding:4px 0;grid-template-columns:36px 34px minmax(0,1fr) auto;gap:9px}
+  .stop__ph{width:34px;height:34px}
+  .stop__n{font-size:9.5pt}
+  .stop__z{font-size:7.8pt;margin-top:0}
+  .stop__c{display:none}
+  .stop__cat{font-size:7pt;border-color:#bbb;padding:0 6px}
+
+  .pan{break-inside:avoid;grid-template-columns:minmax(0,1fr);padding:5px 0 9px;background:none;border-bottom:1px dotted #ccc}
+  .pan__fig{display:none}
+  .pan__d{font-size:8.4pt;line-height:1.55;color:#222}
+  .pan__meta{font-size:7.4pt;margin-top:5px;gap:3px 12px;color:#555}
+  .pan__row{margin-top:5px;gap:5px}
+  .pan__tag{background:none;border:.5px solid #999;color:#333;font-size:6.8pt;padding:0 5px}
+  .pan__a{display:none}
+
+  .gal{grid-auto-rows:33mm;gap:3mm}
+  .gal figcaption{font-size:7pt;padding:14px 8px 5px}
+  .city__head h3{font-size:12pt}
+  .city__head p{font-size:8pt}
+
+  .bk,.tip,.hotel{break-inside:avoid;border:.5px solid #bbb}
+  .dine{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .tips{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .tip--cta{grid-column:1/-1}
+  .tip--dark{background:#fff;border:.5px solid #bbb;color:#222}
+  .tip--dark h4{color:#111}
+  .logi{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:8mm}
+
+  .ftable{min-width:0!important;font-size:7.8pt}
+  .tip table{min-width:0!important;font-size:7.4pt;table-layout:auto!important}
+  .tscroll{overflow:visible}
+  .ftable td,.tip table td{padding:5px 8px 5px 0}
+  .rk-inline{display:none}
+
+  .foot{background:#fff;color:#222;border-top:1.5px solid #111;padding:16px 0 0;margin-top:0}
+  .foot h2{font-size:13pt;color:#111}
+  .foot h2 em{color:#111}
+  .foot__route{font-size:7.5pt;color:#333}
+  .foot__meta{font-size:6.8pt;color:#555;margin-top:10px}
+
+  /* 特异度修正：.pan__fig.is-empty 会压过单类名，必须用双类名 */
+  .pan,.pan[hidden]{display:none!important}
+  .stop{border-bottom:0;padding-bottom:2px}
+  .stops>li{border-bottom:1px solid #d8d8d8;break-inside:avoid;padding-bottom:4px}
+  .stop__pd{
+    display:block;margin:1px 0 0 88px;font-size:8.2pt;line-height:1.55;color:#222;
+  }
+  .stop__pd--meta{font-size:7.2pt;color:#555;margin-top:2px}
+  /* 打印按桌面栅格排版 */
+  .cityrow{grid-template-columns:1fr 1fr;gap:8mm}
+  .gal{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:33mm}
+  .gal figure:first-child{grid-column:span 2;grid-row:span 2}
+  .stop__cat{display:inline-block}
+  .day__head{grid-template-columns:auto minmax(0,1fr) auto}
+  .day__n{grid-column:auto;justify-self:end}
+  /* 表格回到真正的 table 布局 */
+  .ftable,.tip table{display:table}
+  .ftable thead,.tip table thead{display:table-header-group}
+  .ftable tbody,.tip table tbody{display:table-row-group}
+  .ftable tr,.tip table tr{display:table-row;padding:0;border:0}
+  .ftable td,.tip table td{display:table-cell;padding:5px 8px 5px 0}
+  .ftable td:first-child{display:table-cell;font-size:7.8pt;padding-bottom:5px}
+  .tip table td:first-child{display:table-cell}
+  .tip table td:nth-child(2){display:table-cell;padding-bottom:5px}
+  .ftable td::before,.tip table td::before{content:none}
+  .rk-inline{display:none}
+  .tip table.lugg{table-layout:auto}
+  .tscroll{overflow:visible}
+  .dine,.tips{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .logi{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+  a{color:#111!important;text-decoration:none}
+  .grp__h::after{display:none}
+  .grp__h{border-bottom:.5px solid #bbb;padding-bottom:4px;margin-top:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+}
+
+/* 訂位步驟 */
+.steps{margin:10px 0 0;padding-left:1.35em;display:grid;gap:6px;font-size:.9rem}
+.steps li{line-height:1.75}
+.steps li::marker{color:var(--gold);font-family:var(--serif)}
+
+/* 行李表列寬（桌面） */
+.tip table.lugg{table-layout:fixed}
+.tip table.lugg th:nth-child(1),.tip table.lugg td:nth-child(1){width:42px}
+.tip table.lugg th:nth-child(2),.tip table.lugg td:nth-child(2){width:23%}
+.tip table.lugg th:nth-child(3),.tip table.lugg td:nth-child(3){width:24%}
+.tip table.lugg th:nth-child(4),.tip table.lugg td:nth-child(4){width:17%}
+.rk-inline{display:none}
+
+/* 酒莊 CTA */
+.tip--cta{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.tip--cta h4{margin-bottom:6px}
+.tip--cta a{
+  flex:0 0 auto;border:1px solid var(--gold);border-radius:999px;padding:9px 20px;
+  font-size:.84rem;white-space:nowrap;
+}
+.tip--cta a:hover{background:var(--gold);color:#fff;text-decoration:none}
+
+/* 移动端：表格转卡片，不再横向滚动 */
+@media screen and (max-width:640px){
+  .ftable,.tip table{display:block;table-layout:auto;min-width:0;width:100%;font-size:.83rem}
+  .tip table.lugg{table-layout:auto}
+  .ftable thead,.tip table thead{display:none}
+  .ftable tbody,.tip table tbody{display:block}
+  .ftable tr,.tip table tr{
+    display:block;padding:13px 0;border-bottom:1px solid var(--line);
+    break-inside:avoid;
+  }
+  .ftable tr:last-child,.tip table tr:last-child{border-bottom:0}
+  .ftable td,.tip table td{
+    display:grid;grid-template-columns:58px minmax(0,1fr);gap:10px;
+    padding:3px 0;border:0;width:auto!important;
+  }
+  .ftable td::before,.tip table td::before{
+    content:attr(data-l);font-size:.68rem;letter-spacing:.1em;
+    color:var(--muted);padding-top:.28em;
+  }
+  .ftable td:first-child{
+    display:block;font-size:.98rem;padding:0 0 7px;white-space:normal;
+  }
+  .ftable td:first-child::before{display:none}
+  .tip table td:first-child{display:none}
+  .tip table td:nth-child(2){display:block;padding-bottom:7px}
+  .tip table td:nth-child(2)::before{display:none}
+  .rk-inline{display:inline;font-family:var(--serif);color:var(--gold);margin-right:6px;font-size:1rem}
+  .tip table tr.is-top{background:none}
+  .tscroll{overflow:visible}
+  .tip--cta a{width:100%;text-align:center}
+  .hint--scroll{display:none}
+}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳至主內容</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<div class="cdbar" id="cd" hidden>
+  <div class="cdbar__in">
+    <span class="cdbar__k">距離出發</span>
+    <span class="cdbar__t"><b id="cdD">0</b> 天 <b id="cdH">0</b> 時 <b id="cdM">0</b> 分</span>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero__in">
+    <div>
+      <p class="kicker">2026 Family Trip · Australia</p>
+      <h1>澳洲 <em>14</em> 天之旅<br>悉尼 · 墨爾本</h1>
+      <p class="hero__dates">2026.12.11 — 12.24　聖誕前夕回港</p>
+      <p class="hero__lead">兩座城市、十四天：海港與咖啡，酒莊與企鵝。行程按日排好，每一站都附上時間、費用與地圖。</p>
+    </div>
+    <figure class="hero__fig">
+      <div class="hero__slides" id="heroSlides">
+        <img class="is-on" src="img/Sydney_Opera_House.jpg" alt="悉尼歌劇院的貝殼屋頂" width="960" height="589" fetchpriority="high" data-cap="Circular Quay · 貝殼屋頂與海港大橋">
+        <img src="img/Twelve_Apostles.jpg" alt="大洋路十二門徒石" width="960" height="639" loading="lazy" data-cap="大洋路 · 十二門徒石">
+      </div>
+      <figcaption id="heroCap">Circular Quay · 貝殼屋頂與海港大橋</figcaption>
+      <div class="hero__dots" role="group" aria-label="首屏圖片切換">
+        <button type="button" class="hero__dot is-on" data-i="0" aria-label="悉尼歌劇院"></button>
+        <button type="button" class="hero__dot" data-i="1" aria-label="十二門徒石"></button>
+      </div>
+    </figure>
+  </div>
+</header>
+
+<nav class="nav" id="nav" aria-label="頁面導覽">
+  <div class="nav__in">
+    <ul>
+      <li><a href="#overview">概覽</a></li>
+      <li><a href="#itin">逐日行程</a></li>
+      <li><a href="#cities">城市</a></li>
+      <li><a href="#logi">交通住宿</a></li>
+      <li><a href="#dine">訂位</a></li>
+      <li><a href="#tips">貼士</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="sec" id="overview">
+  <div class="sec__head">
+    <span class="sec__no">01</span>
+    <h2 class="sec__h">行程概覽</h2>
+    <p class="sec__lead">十四天裡真正在走的只有十天，其餘是轉場、緩衝與夜機。</p>
+  </div>
+  <div class="cityrow">
+    <div class="citycard" data-city="sydney">
+      <h3>悉尼 <small>SYDNEY</small></h3>
+      <p>12 月 11 – 17 日 · 住宿 <b>5 晚</b>（12/12 入住 Chatswood）<br>歌劇院、海港大橋、Bondi 海灘、藍山與獵人谷。</p>
+    </div>
+    <div class="citycard" data-city="melbourne">
+      <h3>墨爾本 <small>MELBOURNE</small></h3>
+      <p>12 月 17 – 24 日 · 住宿 <b>6 晚</b>（12/17 入住 Carlton）<br>咖啡之都、彩虹小屋、十二門徒石、企鵝島。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="itin">
+  <div class="sec__head">
+    <span class="sec__no">02</span>
+    <h2 class="sec__h">逐日行程</h2>
+    <p class="sec__lead">點任何一站就地展開：費用、招牌、營業時間與地圖連結。</p>
+  </div>
+  <div class="seg" role="group" aria-label="行程範圍">
+    <button type="button" class="seg__b is-on" data-f="all" aria-pressed="true">全部行程</button>
+    <button type="button" class="seg__b" data-f="sydney" aria-pressed="false">悉尼</button>
+    <button type="button" class="seg__b" data-f="melbourne" aria-pressed="false">墨爾本</button>
+  </div>
+  <div class="itin">
+    <aside class="rail" id="rail" aria-label="日期導覽"></aside>
+    <div class="days" id="days"></div>
+  </div>
+</section>
+
+<section class="sec" id="cities">
+  <div class="sec__head">
+    <span class="sec__no">03</span>
+    <h2 class="sec__h">兩座城市</h2>
+    <p class="sec__lead">如果只有一天，這兩組畫面大概是各自最該留下的印象。</p>
+  </div>
+
+  <div class="city" data-city="sydney">
+    <div class="city__head">
+      <h3>悉尼 <small>SYDNEY</small></h3>
+      <p>景點沿水岸一字排開；藍山與獵人谷在城西，各需一整天。</p>
+    </div>
+    <div class="gal">
+      <figure><img src="img/Blue_Mountains.jpg" alt="藍山三姊妹峰" loading="lazy"><figcaption>藍山 · 世界自然遺產</figcaption></figure>
+      <figure><img src="img/Sydney_Opera_House.jpg" alt="悉尼歌劇院" loading="lazy"><figcaption>悉尼歌劇院</figcaption></figure>
+      <figure><img src="img/Sydney_Harbour_Bridge.jpg" alt="悉尼海港大橋" loading="lazy"><figcaption>海港大橋</figcaption></figure>
+      <figure><img src="img/Bondi_Beach.jpg" alt="邦迪海灘" loading="lazy"><figcaption>Bondi 海灘</figcaption></figure>
+      <figure><img src="img/The_Rocks.jpg" alt="岩石區" loading="lazy"><figcaption>岩石區 The Rocks</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="city" data-city="melbourne">
+    <div class="city__head">
+      <h3>墨爾本 <small>MELBOURNE</small></h3>
+      <p>巷弄與拱廊組成的咖啡之城；大洋路與企鵝島在城南，各需一整天。</p>
+    </div>
+    <div class="gal">
+      <figure><img src="img/The_Block_Arcade.jpg" alt="布洛克拱廊" loading="lazy"><figcaption>Block Arcade · 1892</figcaption></figure>
+      <figure><img src="img/Twelve_Apostles.jpg" alt="十二門徒石" loading="lazy"><figcaption>十二門徒石</figcaption></figure>
+      <figure><img src="img/Brighton_Beach_Bathing_Boxes.jpg" alt="彩虹小屋" loading="lazy"><figcaption>Brighton 彩虹小屋</figcaption></figure>
+      <figure><img src="img/State_Library_Victoria.jpg" alt="維多利亞州立圖書館" loading="lazy"><figcaption>州立圖書館</figcaption></figure>
+      <figure><img src="img/Higher_Ground.jpg" alt="Higher Ground 餐廳" loading="lazy"><figcaption>Higher Ground</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="logi">
+  <div class="sec__head">
+    <span class="sec__no">04</span>
+    <h2 class="sec__h">交通與住宿</h2>
+    <p class="sec__lead">四段航班、兩處住宿；確認號碼已遮蔽中間位。</p>
+  </div>
+  <div class="logi">
+    <div>
+      <p class="block__h">航班 FLIGHTS</p>
+      <div class="tscroll">
+        <table class="ftable">
+          <thead><tr><th>航段</th><th>日期</th><th>時間</th><th>航班</th><th>寄艙</th><th>手提</th></tr></thead>
+          <tbody>
+            <tr><td>香港 T1 → 悉尼 T2</td><td class="tm" data-l="日期">12/11 五</td><td class="tm" data-l="時間">19:05 → 07:15（翌日）</td><td data-l="航班"><span class="tag tag--gold">CX111 商務</span></td><td data-l="寄艙">40kg</td><td data-l="手提">7kg</td></tr>
+            <tr><td>悉尼 T2 → 墨爾本 T3</td><td class="tm" data-l="日期">12/17 四</td><td class="tm" data-l="時間">13:00 → 14:35（1h35m）</td><td data-l="航班"><span class="tag">VA842 經濟</span></td><td data-l="寄艙">23kg</td><td data-l="手提">7kg</td></tr>
+            <tr><td>墨爾本 T2 → 新加坡</td><td class="tm" data-l="日期">12/24 四</td><td class="tm" data-l="時間">00:35 → 05:15</td><td data-l="航班"><span class="tag tag--gold">SQ218 特選經濟</span></td><td data-l="寄艙">35kg 合共</td><td data-l="手提">7kg</td></tr>
+            <tr><td>新加坡 → 香港</td><td class="tm" data-l="日期">12/24 四</td><td class="tm" data-l="時間">07:30 → 11:20</td><td data-l="航班"><span class="tag tag--gold">SQ874 特選經濟</span></td><td data-l="寄艙">35kg 合共</td><td data-l="手提">7kg</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note"><b>備註</b>：Andy 搭國泰 CX105 香港 → 墨爾本，12/17（四）中午 12:30 抵達墨爾本。</p>
+      <p class="note"><b>VA842 值機</b>：寄艙最遲 <b>12:00</b> 完成，值機 <b>12:30</b> 關閉；行李最早 <b>10:00</b> 才收。完整時限見 <a href="#d17">12/17 行程</a>。</p>
+      <p class="note"><b>SQ218 值機</b>：墨爾本 <b>T2</b>，起飛前 <b>3 小時</b>開櫃（12/23 <b>21:35</b>），起飛前 <b>40 分鐘</b>關櫃（<b>23:55</b>）。</p>
+    </div>
+    <div>
+      <p class="block__h">住宿 STAYS</p>
+      <div class="hotel">
+        <h4>Meriton Suites Chatswood</h4>
+        <p class="hotel__en">悉尼 · 79 Albert Ave, Chatswood NSW 2067</p>
+        <dl>
+          <dt>區域</dt><dd>Chatswood 車士活：寧靜方便、餐廳多，就近火車／地鐵站，樓下有商場</dd>
+          <dt>入住</dt><dd>12 月 12 日（六）</dd>
+          <dt>退房</dt><dd>12 月 17 日（四）· 共 5 晚</dd>
+          <dt>價格</dt><dd>A$1,796（BOC 信用卡支付）</dd>
+          <dt>確認號</dt><dd class="conf" title="完整號碼請見 Trip.com 訂單電郵">Trip.com 1359 •••• •••• 0997</dd>
+        </dl>
+      </div>
+      <div class="hotel">
+        <h4>Swanston Central（Airbnb）</h4>
+        <p class="hotel__en">墨爾本 · 160 Victoria St, Carlton VIC 3053</p>
+        <dl>
+          <dt>區域</dt><dd>Carlton 卡爾頓：近 CBD 同市場，出入市中心方便</dd>
+          <dt>入住</dt><dd>12 月 17 日（四）</dd>
+          <dt>退房</dt><dd>12 月 23 日（三）· 共 6 晚</dd>
+          <dt>價格</dt><dd>HK$19,636（AE 卡支付）</dd>
+          <dt>確認號</dt><dd class="conf" title="完整號碼請見 Airbnb 訂單頁">HM35 •••• BK</dd>
+          <dt>取消</dt><dd>11/17 15:00 前免費取消；12/10 15:00 前部分退款</dd>
+        </dl>
+      </div>
+      <p class="hint">確認號碼已遮蔽中間位；完整號碼見 Trip.com／Airbnb 訂單電郵。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="dine">
+  <div class="sec__head">
+    <span class="sec__no">05</span>
+    <h2 class="sec__h">餐廳訂位</h2>
+    <p class="sec__lead">七間需要預約的餐廳：官網、訂位連結、開放窗口與重點情報。</p>
+  </div>
+
+  <div class="note" style="margin-bottom:24px">
+    <b>訂位時間表</b>
+    <ol class="steps">
+      <li><b>11 月 1–10 日</b>　每日 check 各間訂位頁，12 月日期一開放即刻訂（12 月係 Christmas party season，五六日晚市搶得好快）。</li>
+      <li><b>11 月 15 日 07:00</b>　The Gidley 開搶（官方確認 30 日窗口，每日朝 7 點放新日期，遲一日好位就冇）。</li>
+      <li><b>後備</b>　網上滿咗就直接打電話，好多店會留少量電話位。</li>
+    </ol>
+  </div>
+
+  <div class="dine">
+    <div class="bk">
+      <div class="bk__h"><h4>6HEAD Sydney</h4><span class="bk__when">12/12 六 · 晚餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://6head.com.au" target="_blank" rel="noopener">6head.com.au</a></dd>
+        <dt>訂位</dt><dd><a href="https://6head.com.au/bookings/sydney/" target="_blank" rel="noopener">6head.com.au/bookings/sydney</a></dd>
+        <dt>窗口</dt><dd><span class="badge badge--warn">未公開</span> 估計 11 月初開放 12 月檔</dd>
+        <dt>情報</dt><dd>Campbell's Stores 1839 歷史建築（The Rocks）· 牛排＋海鮮 · 12:00–22:30 · <b>官網有中文菜單</b></dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>Margaret（Double Bay）</h4><span class="bk__when">12/13 日 · 晚餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://www.margaretdoublebay.com" target="_blank" rel="noopener">margaretdoublebay.com</a></dd>
+        <dt>訂位</dt><dd>官網「Book Now」（Margaret Family Group）</dd>
+        <dt>窗口</dt><dd><span class="badge badge--warn">未公開</span></dd>
+        <dt>注意</dt><dd>正式係 <b>Neil Perry 旗艦餐廳 Margaret</b>，唔係 cafe。晚餐逢三至日、午餐逢四至日 · 木火燒烤 · 招牌漢堡係午餐時段出品 · 2026 世界最佳牛排榜澳洲 No.1</dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>Bar Totti's（Bondi）</h4><span class="bk__when">12/14 一 · 晚餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://bartottis.com.au" target="_blank" rel="noopener">bartottis.com.au</a></dd>
+        <dt>訂位</dt><dd>官網「Book Now」</dd>
+        <dt>窗口</dt><dd><span class="badge badge--warn">未公開</span> 與 6HEAD 同集團（Applejack）</dd>
+        <dt>情報</dt><dd>木火烤包必試 · 意式小食＋酒 · Bondi 分店有陽光庭院；Wynyard 另有城市分店，唔好去錯</dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>The Gidley</h4><span class="bk__when">12/15 二 · 晚餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://www.thegidley.com" target="_blank" rel="noopener">thegidley.com</a></dd>
+        <dt>訂位</dt><dd>官網「Book Now」（Liquid &amp; Larder）</dd>
+        <dt>窗口</dt><dd><span class="badge badge--hot">30 日窗口</span> 每日 07:00 放新日期 → 11/15 開搶</dd>
+        <dt>情報</dt><dd>老派牛排館 · <b>有素食選擇（適合媽媽）</b> · 訂位時記得表明</dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>The Grounds of Alexandria</h4><span class="bk__when">12/16 三 · 午餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://thegrounds.com.au" target="_blank" rel="noopener">thegrounds.com.au</a></dd>
+        <dt>訂位</dt><dd>官網「BOOK TABLE」（The Cafe / The Potting Shed）</dd>
+        <dt>窗口</dt><dd><span class="badge badge--warn">未公開</span></dd>
+        <dt>情報</dt><dd>The Cafe 週一至五 7:00–15:30、六日 7:00–16:00 · 舊派餅廠改建＋有機花園 · 附近有 lululemon outlet</dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>Higher Ground</h4><span class="bk__when">12/21 一 · 午餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://highergroundmelbourne.com.au" target="_blank" rel="noopener">highergroundmelbourne.com.au</a></dd>
+        <dt>訂位</dt><dd><a href="https://www.onlinedining.com.au/venue/higher-ground" target="_blank" rel="noopener">onlinedining.com.au</a></dd>
+        <dt>窗口</dt><dd><span class="badge badge--warn">未公開</span> Online Dining 一般 30–90 日</dd>
+        <dt>情報</dt><dd>650 Little Bourke St · 週一至五 7:00–17:00、六日 7:30–17:00（12/21 週一有開）· 百年發電站改建</dd>
+      </dl>
+    </div>
+
+    <div class="bk">
+      <div class="bk__h"><h4>Grain Store</h4><span class="bk__when">12/21 一 · 早／午餐</span></div>
+      <dl>
+        <dt>官網</dt><dd><a href="https://www.grainstore.com.au" target="_blank" rel="noopener">grainstore.com.au</a></dd>
+        <dt>訂位</dt><dd><a href="https://www.grainstore.com.au/bookings" target="_blank" rel="noopener">grainstore.com.au/bookings</a></dd>
+        <dt>窗口</dt><dd><span class="badge">電話最快</span> 03 9972 6993</dd>
+        <dt>情報</dt><dd>週一至五 7:00–15:00、六日 8:00–15:00（12/21 週一有開）· 明亮工業風 · 建議訂位</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="tips">
+  <div class="sec__head">
+    <span class="sec__no">06</span>
+    <h2 class="sec__h">實用貼士</h2>
+    <p class="sec__lead">出發前睇一睇，玩得更安心。</p>
+  </div>
+
+  <div class="tips">
+    <div class="tip tip--dark">
+      <h4>費用說明</h4>
+      每個地點都標示<b>大約費用</b> — 餐廳／咖啡店以每位計，景點則標明門票或收費項目。全部只係<b>預算參考</b>（澳洲元 A$，匯率約 1 AUD ≈ 5.5 HKD），實際價格以店家為準。
+    </div>
+    <div class="tip">
+      <h4>餐廳要提早訂位</h4>
+      <b>Cafe Margaret、6HEAD、Bar Totti's 同 The Gidley</b> 都係熱門人氣餐廳，務必<b>提早網上訂位</b>。The Grounds of Alexandria、Higher Ground、Grain Store 亦建議預約。
+    </div>
+    <div class="tip">
+      <h4>墨爾本 Free Tram Zone</h4>
+      市中心有<b>免費電車區</b>，長輩行到攰可以隨時上車。⚠️ 上落車如果喺 Free Tram Zone 範圍內，<b>唔使拍卡（myki）</b>；只有離開範圍嘅行程先需要 tap on／off — <a href="https://transport.vic.gov.au/tickets-and-payments/myki/tap-on-and-off-with-myki" target="_blank" rel="noopener">官方說明</a>。
+    </div>
+    <div class="tip">
+      <h4>行李限額</h4>
+      新航寄艙 <b>35kg</b>（只計總重量）；悉尼→墨爾本內陸機手提 <b>8–10kg</b> ＋ 寄艙 <b>23/25kg</b>。買手信前諗定點分。
+    </div>
+    <div class="tip">
+      <h4>需要預約嘅活動</h4>
+      <b>Sydney Opera House</b> 導賞團、<b>Phillip Island 企鵝歸巢</b>、<b>Klook 獵人谷／雅拉河谷一日團</b> — 全部建議出發前上網訂定。
+    </div>
+    <div class="tip">
+      <h4>12 月天氣</h4>
+      12 月係澳洲<b>夏天</b>，日間可達 25–30°C，陽光猛烈。記得帶防曬、太陽眼鏡同帽；晚上海邊有風，帶件薄外套。
+    </div>
+    <div class="tip tip--cta">
+      <div>
+        <h4>酒莊一日團比較</h4>
+        亨特谷（12/15）同雅拉河谷（12/20）嘅中文團、拼團／私人團、取消政策同建議，整理咗喺另一頁。
+      </div>
+      <a href="booking.html" target="_blank" rel="noopener">開啟「酒莊團比較表」→</a>
+    </div>
+
+    <div class="tip tip--wide">
+      <h4>行李寄存（市區 ＋ 住宿附近）</h4>
+      墨爾本最後一日（12/23）退房後想兩手空空行街，可以用以下選擇（<b>按建議度排序</b>）。留意當晚航班係 <b>00:35 起飛（即 12/24 深夜）</b>，要揀<b>開到夜晚</b>嘅寄存點。⚠️ Airbnb 冇行李寄存，唔好預佢。
+      <div class="tscroll" style="margin-top:14px">
+        <table class="lugg">
+          <thead><tr><th>建議</th><th>服務／位置</th><th>收費</th><th>時間</th><th>備註</th></tr></thead>
+          <tbody>
+            <tr class="is-top">
+              <td class="rk">①</td>
+              <td data-l="服務"><span class="rk-inline">①</span><b>Southern Cross 站儲物櫃</b><br>墨爾本（SkyBus 機場巴士總站）</td>
+              <td data-l="收費">每 3 小時：細 A$7／中 A$8／大 A$9<br>1 日：細 A$14／中 A$16／大 A$18</td>
+              <td data-l="時間">車站開放時間（可租 3–72 小時）</td>
+              <td data-l="備註"><b>首選</b>：自助、即放即取、<b>冇取回時間限制</b>（夜機最安全），就喺 SkyBus 上車點 · <a href="https://southerncrossstation.com.au/luggage-services" target="_blank" rel="noopener">官方價目</a></td>
+            </tr>
+            <tr class="is-top">
+              <td class="rk">②</td>
+              <td data-l="服務"><span class="rk-inline">②</span><b>Bounce</b><br>Southern Cross 附近便利店</td>
+              <td data-l="收費">由 A$6.50／件／日</td>
+              <td data-l="時間">約 07:00–23:00</td>
+              <td data-l="備註"><b>次選</b>：最便宜、網上預約免排隊；但要喺 <b>23:00 前</b>返去攞行李 · <a href="https://www.bounce.com/stores/melbourne/0kmrn9" target="_blank" rel="noopener">查位置</a></td>
+            </tr>
+            <tr>
+              <td class="rk">③</td>
+              <td data-l="服務"><span class="rk-inline">③</span><b>Travellers Aid</b><br>Flinders St 站（9／10 月台扶手電梯旁）</td>
+              <td data-l="收費">A$8／件／日<br>2 件 A$14、3 件 A$20</td>
+              <td data-l="時間">08:00–19:00<br><b>18:45 前必須取回</b></td>
+              <td data-l="備註">多件最抵，但<b>只做到 18:45</b> — <b>唔啱夜機</b> · 免預約 · (03) 9068 8187 · <a href="https://www.travellersaid.org.au/our-services/luggage-storage/" target="_blank" rel="noopener">官網</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px">⚠️ <b>12/23（三）建議流程</b>：早上退房 → 行李放 <b>① Southern Cross 儲物櫃</b>（大櫃 A$18／日）→ 市區輕鬆行 → 約 21:00 取回 → 行去 SkyBus 站上車 → 22:00 前到 MEL 機場。<b>想慳錢</b>就用 <b>② Bounce</b>（A$6.50／件），但記住 23:00 前要返去攞。<b>③ Travellers Aid 唔啱夜機</b>。</p>
+      <p class="hint" style="margin-top:8px">價格為 2026 年 11 月官網／公開資料，實際以現場為準；Travellers Aid 旺季可能因滿額而暫停收件。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <h2>從海港走到咖啡巷，<br>十四天，兩座城，<em>一個聖誕</em>。</h2>
+    <div class="foot__route">
+      <span>香港 HKG</span><i></i><span>悉尼 SYD</span><i></i><span>墨爾本 MEL</span><i></i><span>香港 HKG</span>
+    </div>
+    <div class="foot__meta">
+      <span>2026 Family Trip · 12/11 – 12/24 · 祝旅途愉快，聖誕快樂</span>
+      <span id="footStamp">更新於 2026.11</span>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="回到頂部">↑</button>
+
+<div class="eta" id="etaModal" hidden role="dialog" aria-modal="true" aria-labelledby="etaTitle" aria-describedby="etaDesc">
+  <div class="eta__card" tabindex="-1">
+    <div class="eta__hd">
+      <h3 id="etaTitle">澳洲 ETA（出發前必辦）</h3>
+      <p>所有家人持 HKSAR 護照都須申請</p>
+    </div>
+    <div class="eta__bd" id="etaDesc">
+      <ul>
+        <li>只可經「<b>Australian ETA</b>」手機 App 申請（<b>subclass 601</b>），網頁同中介都唔收。</li>
+        <li>費用 <b>A$20／人</b>，多數<b>即時獲批</b>；有效期 <b>12 個月</b>，可多次入境、每次最多留 3 個月。</li>
+        <li>App 要<b>逐本護照</b>申請（5 位家人 = 5 次），並需掃描<b>護照晶片（NFC）</b>。</li>
+        <li>建議 <b>11 月內辦妥</b>，並核對護照號碼同英文姓名。</li>
+      </ul>
+      <p style="margin-top:12px;font-size:.8rem;color:#78746a">批出後係電子連結護照，冇實體簽證紙；過關帶同一本護照就得。</p>
+    </div>
+    <div class="eta__ft">
+      <a class="eta__a" href="https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/electronic-travel-authority-601" target="_blank" rel="noopener">官方資料 ↗</a>
+      <button class="eta__btn eta__btn--ghost" id="etaToday">今日不再提醒</button>
+      <button class="eta__btn" id="etaOk">我明白</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script id="trip" type="application/json">{"meta":{"days":14,"cities":2,"stops":67,"photos":61,"title":"澳洲 14 天之旅","dates":"2026 年 12 月 11 日 — 12 月 24 日","generated":"2026-11-15"},"dmeta":{"12":{"label":"12/12（六）","title":"Circular Quay 海港經典","sub":"落機・歌劇院・大橋・岩石區","color":"#0e5a7a"},"13":{"label":"12/13（日）","title":"Bondi 海灘輕鬆日","sub":"Double Bay・Bondi・海鮮","color":"#128b96"},"14":{"label":"12/14（一）","title":"咖啡 + 魚市場 + 大教堂","sub":"Surry Hills 咖啡巡禮","color":"#6a4c93"},"15":{"label":"12/15（二）","title":"藍山／獵人谷一日遊","sub":"酒莊中文團・牛排晚餐","color":"#2f7d4f"},"16":{"label":"12/16（三）","title":"Alexandria 文青區","sub":"Hea 遊日・咖啡・公園","color":"#a9743f"},"17":{"label":"12/17（四）","title":"悉尼 → 墨爾本","sub":"退房・內陸機・咖啡・唐人街","color":"#c0483a"},"18":{"label":"12/18（五）","title":"南市場 + Brighton","sub":"Brunch・彩虹小屋日落","color":"#c9a227"},"19":{"label":"12/19（六）","title":"十二門徒石 + 企鵝島","sub":"大自然長途日","color":"#7a6a2f"},"20":{"label":"12/20（日）","title":"雅拉河谷品酒","sub":"酒莊導賞團","color":"#8a3b5c"},"21":{"label":"12/21（一）","title":"CBD 咖啡 + 購物巡禮","sub":"圖書館・拱廊・百貨","color":"#2f6fd8"}},"pcat":{"交通":{"c":"#6b7280","i":"✈"},"住宿":{"c":"#0e5a7a","i":"🏨"},"景點":{"c":"#2f7d4f","i":"🏞"},"文化":{"c":"#8a6d1f","i":"🏛"},"海灘":{"c":"#128b96","i":"🏖"},"咖啡":{"c":"#a0522d","i":"☕"},"美食":{"c":"#c0483a","i":"🍽"},"市場":{"c":"#b07b45","i":"🏪"},"購物":{"c":"#6a4c93","i":"🛍"},"酒莊":{"c":"#8a3b5c","i":"🍷"},"夜生活":{"c":"#4a4a8a","i":"🌙"}},"cats":{"scenic":{"label":"景點","icon":"🏞️"},"beach":{"label":"海灘","icon":"🏖️"},"historic":{"label":"古蹟","icon":"🏛️"},"market":{"label":"市場","icon":"🏪"},"cafe":{"label":"咖啡","icon":"☕"},"food":{"label":"餐廳","icon":"🍽️"},"dessert":{"label":"甜點","icon":"🍦"},"shopping":{"label":"購物","icon":"🛍️"},"wine":{"label":"酒莊","icon":"🍷"},"tour":{"label":"一日遊","icon":"🚌"},"info":{"label":"資訊","icon":"📌"}},"note22":[{"d":"12/22（二）","t":"自由日 — 返去未行完嘅咖啡店、補買手信，或喺 Carlton 附近 hea。<br>亦可去 <b>Queen Victoria Market</b>（週二 6:00–15:00 開市）—— 12/17 落機 14:35 趕唔切，順延到今日。"},{"d":"12/23（三）","t":"收拾行李 — 留意 35kg 寄艙限額；退房後可寄存行李再行最後一轉。"},{"d":"12/24（四）","t":"00:35 SQ218 起飛 = <b>12/23 晚上</b>到機場。墨爾本 <b>T2</b> 新航櫃檯 <b>21:35</b> 開（起飛前 3 小時）、<b>23:55</b> 關（起飛前 40 分鐘），建議 21:15 前到場排隊；轉 SQ874 07:30–11:20 返港。"}],"trip":[{"id":"d12-1","day":12,"name":"Sydney Airport 抵達","zh":"","time":"07:15","cat":"交通","type":"","lat":-33.9399,"lng":151.1753,"hours":"T1 國際線入境 · 07:15 抵達","desc":"落機後 T1 入境，Uber／機場接送／火車三個方案。","book":false,"alt":false,"url":"","urlLabel":"","img":null,"cost":"","dish":"","note":""},{"id":"d12-2","day":12,"name":"Meriton Suites Chatswood","zh":"","time":"09:30","cat":"住宿","type":"","lat":-33.7969,"lng":151.1833,"hours":"入住 12/12 · 退房 12/17（5 晚）","desc":"先寄存行李，一般下午兩三點先有房。","book":false,"alt":false,"url":"","urlLabel":"","img":null,"cost":"","dish":"","note":""},{"id":"d12-3","day":12,"name":"Pho Thin Chatswood","zh":"越南河粉店","time":"11:30","cat":"美食","type":"food","lat":-33.796,"lng":151.1828,"hours":"落機後午餐 · 距酒店步行 9 分鐘","desc":"抵達後第一站！熱騰騰嘅越南河，補充體力先再出發觀光。","book":false,"alt":false,"url":"","urlLabel":"","img":"Pho_Thin_Chatswood","cost":"約 A$15–20／位","dish":"生牛牛肉粉（phở tái）、牛腩河","note":""},{"id":"d12-4","day":12,"name":"Sydney Opera House","zh":"悉尼歌劇院","time":"14:00","cat":"景點","type":"scenic","lat":-33.8568,"lng":151.2153,"hours":"導賞團建議提前預約 · Google Maps","desc":"世界級地標，1973 年落成，由丹麥建築師 Utzon 設計 — 標誌性嘅「貝殼」屋頂其實係切球體嘅計算結果，全屋舖逾百萬塊瑞典製瓷磚。2007 年列入世界文化遺產，係悉尼天際線嘅靈魂；內裏有 5 個表演場地，一年過千場歌劇、管弦樂同芭蕾。想深入參觀可報導賞團，睇睇歌劇廳同劇院內部。","book":true,"alt":false,"url":"","urlLabel":"","img":"Sydney_Opera_House","cost":"外圍免費 · 導賞團約 A$43–90／人","dish":"","note":""},{"id":"d12-5","day":12,"name":"Mrs Macquarie's Chair","zh":"麥奎里夫人石椅","time":"15:30","cat":"文化","type":"historic","lat":-33.8596,"lng":151.2155,"hours":"24 小時開放 · Google Maps","desc":"1811 年由囚犯手工開鑿嘅砂岩長椅，相傳係當時總督麥奎里（Macquarie）夫人 Elizabeth 最鍾意嘅觀海點，因而得名。呢度係悉尼經典明信片角度：歌劇院、海港大橋、大樹山一次過入鏡，難怪長年排長龍。24 小時開放、免費，建議日落時分去，海港會染成金黃色。","book":false,"alt":false,"url":"","urlLabel":"","img":"Mrs_Macquarie_s_Chair","cost":"免費","dish":"","note":""},{"id":"d12-6","day":12,"name":"Sydney Harbour Bridge","zh":"悉尼海港大橋","time":"16:15","cat":"文化","type":"historic","lat":-33.8523,"lng":151.2108,"hours":"Google Maps","desc":"1932 年通車嘅巨型鋼拱橋，拱跨 503 米，因外形酷似衣架而被暱稱「The Coathanger」。當年動用逾千工人、前後約 8 年先至完工，開幕禮仲發生過騎兵斬斷紅絲帶嘅經典趣聞。可以挑戰 BridgeClimb 登頂，或者上 Pylon Lookout 睇展覽同景；行橋同搭車都免費。","book":false,"alt":false,"url":"","urlLabel":"","img":"Sydney_Harbour_Bridge","cost":"行橋免費 · BridgeClimb 約 A$220–388／人 · Pylon Lookout 約 A$30","dish":"","note":""},{"id":"d12-6b","day":12,"name":"Ben 私藏路線 · Milsons Point → The Rocks","zh":"","time":"彈性","cat":"景點","type":"","lat":-33.8486,"lng":151.2117,"hours":"2.4km · 約 30 分鐘","desc":"由北岸 Milsons Point 沿海港大橋步行去 The Rocks，全程 2.4km／約 30 分鐘 — 一路行一路睇海港景，風景一流，係好多人唔知嘅散步路線。","book":false,"alt":false,"url":"","urlLabel":"","img":"The_Rocks","cost":"","dish":"","note":"Ben 私藏"},{"id":"d12-7","day":12,"name":"The Rocks","zh":"岩石區","time":"17:00","cat":"文化","type":"historic","lat":-33.8599,"lng":151.2089,"hours":"Google Maps","desc":"悉尼最古老嘅歐洲人聚居地，由 1788 年第一艦隊登陸開始，囚犯、水手同商人最早落脚嘅地方。小巷入面保存大量 19 世紀砂岩建築，包括全悉尼最古老石屋 Cadman's Cottage（1815 年）；週末有戶外 Rocks Markets，街頭小食、手作同街頭表演，仲有全城最古老嘅酒吧。1970 年代居民發起保育運動，先至令呢片街區免於清拆。","book":false,"alt":false,"url":"","urlLabel":"","img":"The_Rocks","cost":"免費 · 市集消費自便","dish":"","note":""},{"id":"d12-8","day":12,"name":"6HEAD Sydney","zh":"牛排海鮮餐廳","time":"18:30","cat":"美食","type":"food","lat":-33.8583,"lng":151.2088,"hours":"12:00 – 22:30 · 晚餐 · Google Maps","desc":"工業風格餐廳，主打牛排同海鮮，酒單豐富，仲有悉尼海港景。記得提早訂位！","book":true,"alt":false,"url":"","urlLabel":"","img":"6HEAD_Sydney","cost":"約 A$100–150／位","dish":"乾式熟成牛排、海鮮拼盤、生蠔","note":""},{"id":"d13-1","day":13,"name":"Cafe Margaret Double Bay","zh":"人氣 Cafe","time":"10:30","cat":"咖啡","type":"cafe","lat":-33.8775,"lng":151.243,"hours":"Brunch · Google Maps","desc":"Double Bay 人氣咖啡店，招牌漢堡必試！食完直接去海灘，好順路。","book":true,"alt":false,"url":"","urlLabel":"","img":"Cafe_Margaret_Double_Bay","cost":"約 A$25–35／位","dish":"招牌漢堡、木火燒烤菜式","note":""},{"id":"d13-2","day":13,"name":"Bondi Beach","zh":"邦迪海灘","time":"12:30","cat":"海灘","type":"beach","lat":-33.8908,"lng":151.2743,"hours":"全日開放 · Google Maps","desc":"「Bondi」係原住民語「石上碎浪」嘅意思，1851 年開放做悉尼第一個公眾泳灘。呢度係澳洲衝浪同陽光文化嘅發源地：1907 年成立全球第一個衝浪救生會，1929 年建咗出名嘅 Icebergs 海景泳池。全長約 1 公里嘅半月形沙灘，可以行海濱步道、去 Icebergs 歎日落，每年 10-11 月仲有海邊雕塑展 Sculpture by the Sea。","book":false,"alt":false,"url":"","urlLabel":"","img":"Bondi_Beach","cost":"免費","dish":"","note":""},{"id":"d13-3","day":13,"name":"Bondi Surf Seafoods","zh":"炸魚薯條","time":"13:30","cat":"美食","type":"food","lat":-33.8915,"lng":151.2767,"hours":"Google Maps","desc":"Bondi 本地人最愛嘅海鮮外賣店，炸魚薯條喺海邊食特別好味。","book":false,"alt":false,"url":"","urlLabel":"","img":"Bondi_Surf_Seafoods","cost":"約 A$15–25／位","dish":"炸魚薯條、海鮮拼盤","note":""},{"id":"d13-4","day":13,"name":"mimi's","zh":"海景晚餐","time":"18:30","cat":"美食","type":"food","lat":-33.9205,"lng":151.2575,"hours":"晚餐 · 喺 Coogee 海邊 · Google Maps","desc":"喺 Coogee 海邊歎晚餐，一邊睇住海景一邊食飯，之後先返回 Chatswood（車程約 20–30 分鐘）。","book":false,"alt":false,"url":"","urlLabel":"","img":"mimi_s","cost":"約 A$80–120／位","dish":"生蠔、海鮮拼盤","note":""},{"id":"d14-1","day":14,"name":"Paramount Coffee Project","zh":"工業風咖啡店","time":"08:30","cat":"咖啡","type":"cafe","lat":-33.8847,"lng":151.2094,"hours":"7:00 – 16:00 · Google Maps","desc":"高樓底工業風咖啡店，出品有創意嘅 diner 式菜式，炸雞係招牌之一。","book":false,"alt":false,"url":"","urlLabel":"","img":"Paramount_Coffee_Project","cost":"約 A$20–30／位","dish":"","note":""},{"id":"d14-2","day":14,"name":"Single O Surry Hills","zh":"精品咖啡","time":"10:00","cat":"咖啡","type":"cafe","lat":-33.8838,"lng":151.2095,"hours":"7:00 – 15:30 · Google Maps","desc":"熱鬧嘅街邊咖啡店，自家新鮮烘焙咖啡配時令小食，環境有型。","book":false,"alt":false,"url":"","urlLabel":"","img":"Single_O_Surry_Hills","cost":"約 A$15–25／位","dish":"","note":""},{"id":"d14-3","day":14,"name":"Beta Coffee","zh":"咖啡店","time":"11:00","cat":"咖啡","type":"cafe","lat":-33.8866,"lng":151.2066,"hours":"Google Maps","desc":"行程中另一個咖啡補給站，順路一試。","book":false,"alt":false,"url":"","urlLabel":"","img":"Beta_Coffee","cost":"約 A$5–10／杯","dish":"","note":""},{"id":"d14-4","day":14,"name":"Sydney Fish Market","zh":"悉尼魚市場","time":"12:30","cat":"市場","type":"market","lat":-33.8697,"lng":151.1926,"hours":"7:00 – 22:00 · Google Maps","desc":"南半球最大嘅魚市場，歷史可追溯至 19 世紀悉尼市區魚市場，1969 年遷到 Blackwattle Bay 現址，其後多次擴建。海產零售、批發、餐廳同熟食檔一應俱全：生蠔、龍蝦、壽司、即食檔任揀。想食平靚正海鮮、睇市場運作，或者幫屋企人買手信，呢度係首選；免費入場，按消費計。","book":false,"alt":false,"url":"","urlLabel":"","img":"Sydney_Fish_Market","cost":"免費入場 · 海鮮按消費 約 A$20–50／位","dish":"","note":""},{"id":"d14-5","day":14,"name":"St Mary's Cathedral","zh":"聖瑪利大教堂","time":"15:00","cat":"文化","type":"historic","lat":-33.8715,"lng":151.2133,"hours":"6:30 – 18:30 · Google Maps","desc":"悉尼最大、亦係澳洲第一座天主教主教座堂。現存教堂 1868 年動土，由英國哥德復興式建築師 Wardell 設計，用本地砂岩起咗 60 年至 1928 年先完成主體，雙塔高 74.6 米。內部彩繪玻璃同管風琴非常華麗，靜靜坐低或者聽詩班都幾心靈平靜；自由入場（歡迎捐獻），記得衣著莊重。","book":false,"alt":false,"url":"","urlLabel":"","img":"St_Mary_s_Cathedral","cost":"免費（歡迎自由捐獻）","dish":"","note":""},{"id":"d14-6","day":14,"name":"Bar Totti's","zh":"意式小酒館","time":"18:30","cat":"美食","type":"food","lat":-33.8905,"lng":151.2775,"hours":"12:00 – 00:00 · 晚餐 · Google Maps","desc":"輕鬆嘅鄰里餐廳，意大利式小食配酒同雞尾酒，氣氛熱鬧。記得提早訂位！","book":true,"alt":false,"url":"","urlLabel":"","img":"Bar_Totti_s","cost":"約 A$50–70／位","dish":"木火烤包、劍蝦、意式小食","note":""},{"id":"d15-1","day":15,"name":"Blue Mountains","zh":"藍山","time":"08:30","cat":"景點","type":"scenic","lat":-33.732,"lng":150.312,"hours":"車程約 1.5 小時 · Google Maps","desc":"世界自然遺產「大藍山區」嘅核心，2000 年列入 UNESCO。三姊妹峰（Three Sisters）背後有原住民 Gundungurra 族傳說；1813 年 Blaxland、Lawson 同 Wentworth 三人成功越山，打開澳洲西部發展之路。可以去 Echo Point 望三姊妹峰、搭 Scenic World 登山鐵路，或者去 Leura 小鎮行下；聞名嘅藍色山嵐其實係尤加利樹油揮發形成。","book":false,"alt":true,"url":"","urlLabel":"","img":"Blue_Mountains","cost":"免費入園 · Scenic World 纜車約 A$50–70／人","dish":"","note":""},{"id":"d15-2","day":15,"name":"Hunter Valley Wine Tours","zh":"獵人谷品酒團","time":"11:15","cat":"酒莊","type":"wine","lat":-32.78,"lng":151.29,"hours":"Klook 中文團 11:15 – 17:15 · $1,275／位 含午餐","desc":"澳洲最古老嘅葡萄酒產區，1820 年代由「澳洲葡萄酒之父」James Busby 開始種植，而家有超過 150 間酒莊，以 Semillon 白酒聞名全球。團會去 2-3 間酒莊品酒，兼歎芝士、朱古力同酒莊午餐；長輩唔飲酒都可以打卡葡萄園風光，節奏輕鬆。","book":true,"alt":false,"url":"","urlLabel":"","img":"Hunter_Valley_Wine_Tours","cost":"Klook 團費 約 $1,275／位（含午餐）","dish":"","note":""},{"id":"d15-3","day":15,"name":"The Gidley","zh":"經典牛排館","time":"19:00","cat":"美食","type":"food","lat":-33.8763,"lng":151.2098,"hours":"12:00 – 00:00 · 晚餐 · Google Maps","desc":"老派高級牛排館，配豐富酒單，有素食選擇 — 適合媽媽！記得訂位。","book":true,"alt":false,"url":"","urlLabel":"","img":"The_Gidley","cost":"約 A$100–140／位","dish":"乾式熟成牛排、黑安格斯牛扒（有素食選擇）","note":""},{"id":"d15-4","day":15,"name":"BISTECCA","zh":"意式牛排館","time":"19:00","cat":"美食","type":"food","lat":-33.862,"lng":151.201,"hours":"12:00 – 00:00 · 備選 · Google Maps","desc":"僅限成人嘅意大利風格牛排館，雞尾酒單豐富，鄉村風情。","book":true,"alt":true,"url":"","urlLabel":"","img":"BISTECCA","cost":"約 A$100–150／位","dish":"Bistecca alla Fiorentina 佛羅倫斯 T 骨牛扒","note":""},{"id":"d16-1","day":16,"name":"Toby's Estate Coffee Roasters","zh":"咖啡烘焙名家","time":"08:00","cat":"咖啡","type":"cafe","lat":-33.9046,"lng":151.1944,"hours":"7:30 – 15:00 · Google Maps","desc":"單一產區濃縮咖啡、冷萃樣樣齊，空間明亮時尚。","book":false,"alt":false,"url":"","urlLabel":"","img":"Toby_s_Estate_Coffee_Roasters","cost":"約 A$15–25／位","dish":"單一產區咖啡、Batch Brew","note":""},{"id":"d16-2","day":16,"name":"The Grounds of Alexandria","zh":"文青庭院咖啡園","time":"10:00","cat":"咖啡","type":"cafe","lat":-33.9097,"lng":151.1944,"hours":"7:30 – 21:00 · Google Maps","desc":"前身係 1950 年代糕餅廠，2012 年活化做文青熱點：紅磚牆、噴泉花園、有機香草園同市集檔攤，室內室外座位任揀。出名到要訂位，場內多間舖頭加 The Potting Shed 餐廳，行完可以順手買手信；附近仲有 lululemon outlet！","book":true,"alt":false,"url":"","urlLabel":"","img":"The_Grounds_of_Alexandria","cost":"約 A$25–40／位","dish":"精品咖啡、Brunch 全日早餐","note":""},{"id":"d16-3","day":16,"name":"The Grounds Coffee Factory","zh":"咖啡工場","time":"11:00","cat":"咖啡","type":"cafe","lat":-33.9102,"lng":151.195,"hours":"Google Maps","desc":"同場嘅咖啡工場，不過 Ben 評價係「麻麻」— 可以順路睇下，唔使特登。","book":false,"alt":true,"url":"","urlLabel":"","img":"The_Grounds_Coffee_Factory","cost":"約 A$10–20／位","dish":"咖啡、甜點","note":""},{"id":"d16-4","day":16,"name":"The Grumpy Barista","zh":"咖啡店","time":"12:00","cat":"咖啡","type":"cafe","lat":-33.9,"lng":151.198,"hours":"Google Maps","desc":"名字有趣嘅咖啡店，行完 Alexandria 可以再補一杯。","book":false,"alt":true,"url":"","urlLabel":"","img":"The_Grumpy_Barista","cost":"約 A$8–15／位","dish":"咖啡、Batch Brew","note":""},{"id":"d16-5","day":16,"name":"Sydney Park","zh":"悉尼公園","time":"15:00","cat":"景點","type":"scenic","lat":-33.91,"lng":151.185,"hours":"24 小時開放 · Google Maps","desc":"40 公頃市區公園，前身係 19 世紀末至 1983 年運作嘅磚廠（brickworks），廠區嘅磚窯同煙囪而家成為歷史遺跡。公園有濕地、單車徑同大片草地，居民嚟跑步、踩單車同野餐；冇咁遊客化，想體驗本地人日常生活嘅話啱晒。","book":false,"alt":false,"url":"","urlLabel":"","img":"Sydney_Park","cost":"免費","dish":"","note":""},{"id":"d16-6","day":16,"name":"Pizza Bros","zh":"薄餅店","time":"18:00","cat":"美食","type":"food","lat":-33.906,"lng":151.193,"hours":"晚餐 · Google Maps","desc":"輕鬆嘅 Pizza 晚餐，為 Hea 遊日收尾。","book":false,"alt":false,"url":"","urlLabel":"","img":"Pizza_Bros","cost":"約 A$20–30／位","dish":"手工薄餅、意式小食","note":""},{"id":"d17-00","day":17,"name":"Meriton Suites 退房出發","zh":"","time":"10:30","cat":"住宿","type":"","lat":-33.7969,"lng":151.1833,"hours":"最遲 10:30 離開 · 車程 30–40 分鐘","desc":"退房後直接去悉尼機場 T2，Chatswood 過去約 30–40 分鐘（火車或叫車）。最遲 10:30 上車，11:00 左右到機場，先食午餐再過關。","book":false,"alt":false,"url":"","urlLabel":"","img":null,"cost":"","dish":"","note":""},{"id":"d17-0","day":17,"name":"Sydney Airport 午餐","zh":"","time":"11:30","cat":"美食","type":"","lat":-33.9399,"lng":151.1753,"hours":"SYD T2 · 退房後直去，預留約 45 分鐘","desc":"上機前喺悉尼機場 T2 醫肚，過關前後都有食肆同咖啡店。Chatswood 過去約 30–40 分鐘，計啱時間食完直接去閘口。","book":false,"alt":false,"url":"https://www.sydneyairport.com.au/eat","urlLabel":"悉尼機場餐飲指南","img":null,"cost":"","dish":"","note":""},{"id":"d17-1","day":17,"name":"SYD → MEL 內陸機","zh":"飛往墨爾本","time":"13:00","cat":"交通","type":"info","lat":-33.9399,"lng":151.1753,"hours":"13:00 起飛 · 14:35 抵達（SYD T2 → MEL T3）","desc":"VA842 經濟艙，13:00 悉尼 T2 起飛，14:35 抵達墨爾本 T3。","book":false,"alt":false,"url":"","urlLabel":"","img":"SYD_MEL_","cost":"票價 HK$700–1,500／位","dish":"","note":"","info":"<h5>維珍澳洲 VA842 · 值機與寄艙時限</h5><ul><li>有寄艙行李：最遲 <b>12:00</b> 完成值機同寄艙（起飛前 60 分鐘）。</li><li>行李最早 <b>10:00</b> 才收（起飛前 3 小時，悉尼／墨爾本／布里斯本機場不接受更早）。</li><li>值機 <b>12:30</b> 關閉（起飛前 30 分鐘），之後唔可以再寄艙。</li><li>大型團體或需要特別協助嘅乘客，同樣預留 60 分鐘。</li><li>網上值機：起飛前 <b>48 小時</b>開放，起飛前 <b>30 分鐘</b>關閉。</li></ul><p class=\"warn\">趕唔上值機時間有機會上唔到機，機票亦唔會退。</p><p class=\"src\">資料來源：<a href=\"https://www.virginaustralia.com/hk/en/travel-info/bookings/check-in/\" target=\"_blank\" rel=\"noopener\">Virgin Australia · Check-in</a></p>"},{"id":"d17-2","day":17,"name":"Melbourne Airport 抵達","zh":"","time":"14:35","cat":"交通","type":"","lat":-37.669,"lng":144.841,"hours":"T3 出關 · 14:35 抵達","desc":"出關後叫車去 Carlton，約 25 分鐘。","book":false,"alt":false,"url":"","urlLabel":"","img":null,"cost":"","dish":"","note":""},{"id":"d17-3","day":17,"name":"Swanston Central","zh":"","time":"15:20","cat":"住宿","type":"","lat":-37.8063,"lng":144.96,"hours":"入住 12/17 · 退房 12/23（6 晚）","desc":"160 Victoria St Carlton，放低行李先（機場車程約 25 分鐘）。","book":false,"alt":false,"url":"","urlLabel":"","img":null,"cost":"","dish":"","note":""},{"id":"d17-4","day":17,"name":"Seven Seeds Coffee Roasters","zh":"咖啡 micro-roaster","time":"15:50","cat":"咖啡","type":"cafe","lat":-37.8037,"lng":144.956,"hours":"7:00 – 17:00 · Google Maps","desc":"通透嘅工業風咖啡店兼自家烘焙工場，brunch、三文治同精品茶都出色。","book":false,"alt":false,"url":"","urlLabel":"","img":"Seven_Seeds_Coffee_Roasters","cost":"約 A$20–30／位","dish":"咖啡、Brunch 全日早餐","note":""},{"id":"d17-5","day":17,"name":"Baguette Studios","zh":"法包店","time":"16:20","cat":"咖啡","type":"cafe","lat":-37.808,"lng":144.958,"hours":"Google Maps","desc":"手工法包店，順路買個包做下午小食。","book":false,"alt":false,"url":"","urlLabel":"","img":"Baguette_Studios","cost":"約 A$10–15／位","dish":"法包、酥皮牛角包","note":""},{"id":"d17-7","day":17,"name":"Lune Croissanterie","zh":"世界級可頌","time":"16:50","cat":"美食","type":"dessert","lat":-37.812,"lng":144.966,"hours":"Google Maps","desc":"世界級可頌，賣完即收。抵達日時間緊，趕唔切可 12/18 或 12/22 再嚟。","book":false,"alt":true,"url":"","urlLabel":"","img":"Lune_Croissanterie","cost":"約 A$8–15／位","dish":"世界級可頌（Croissant）","note":""},{"id":"d17-8","day":17,"name":"Hareruya Pantry CBD","zh":"日式小食店","time":"17:10","cat":"美食","type":"food","lat":-37.8115,"lng":144.964,"hours":"Google Maps","desc":"日式風味小食店，順路一試。","book":false,"alt":false,"url":"","urlLabel":"","img":"Hareruya_Pantry_CBD","cost":"約 A$10–20／位","dish":"日式菠蘿包（Melon Pan）","note":""},{"id":"d17-9","day":17,"name":"Chinatown Melbourne","zh":"墨爾本唐人街","time":"17:40","cat":"文化","type":"scenic","lat":-37.8115,"lng":144.97,"hours":"24 小時 · Google Maps","desc":"1851 年淘金熱時期由華工建立，係全澳洲最古老、西方世界持續最久嘅唐人街。Russell St 同 Little Bourke St 一帶有中式牌樓、燒腊檔、茶餐廳同唐餐館，逢農曆新年有舞獅同花市，附近仲有 Chinese Museum。想食返啱口味、飲杯靚茶，嚟呢度就啱。","book":false,"alt":false,"url":"","urlLabel":"","img":"Chinatown_Melbourne","cost":"免費","dish":"","note":""},{"id":"d17-10","day":17,"name":"Bourke Street Mall","zh":"卜克街購物大道","time":"18:30","cat":"購物","type":"shopping","lat":-37.8136,"lng":144.9646,"hours":"24 小時 · 商店約 10:00 – 19:00","desc":"19 世紀由零售大街演變而成嘅購物步行街，其後全面禁止車輛，只準行人同行駛電車。兩旁係 Myer、David Jones 等老牌百貨、連鎖店、餐廳同街頭音樂人表演；聖誕節加燈飾同櫥窗佈置，係墨爾本嘅節日心臟地帶。","book":false,"alt":false,"url":"","urlLabel":"","img":"Bourke_Street_Mall","cost":"免費","dish":"","note":""},{"id":"d18-1","day":18,"name":"Market Lane Coffee","zh":"精品咖啡","time":"09:00","cat":"咖啡","type":"cafe","lat":-37.8295,"lng":144.9565,"hours":"South Melbourne · Google Maps","desc":"墨爾本咖啡界名店，簡潔專注於咖啡本身。","book":false,"alt":false,"url":"","urlLabel":"","img":"Market_Lane_Coffee","cost":"約 A$6–10／杯","dish":"單一產區咖啡、Brunch","note":""},{"id":"d18-2","day":18,"name":"South Melbourne Market","zh":"南墨爾本市場","time":"10:00","cat":"市場","type":"market","lat":-37.8298,"lng":144.956,"hours":"8:00 – 17:00 · 週三/五/六/日開放","desc":"1867 年開市嘅維多利亞時期紅磚市場，係墨爾本最古老嘅市集之一。而家分乾濕兩區：海鮮肉檔、麵包甜品同環球小食檔並存，逢週六最熱鬧。出名嘢有手工薄餅、生蠔、即製咖啡，想買本地芝士同醬料當手信都啱。","book":false,"alt":false,"url":"","urlLabel":"","img":"South_Melbourne_Market","cost":"免費入場 · 消費自便","dish":"即開生蠔、手工薄餅","note":""},{"id":"d18-3","day":18,"name":"ST. ALi Coffee Roasters","zh":"倉庫風咖啡","time":"12:30","cat":"咖啡","type":"cafe","lat":-37.8288,"lng":144.9548,"hours":"7:00 – 17:00 · Google Maps","desc":"潮人倉庫空間，藝術感咖啡配創意 brunch。","book":false,"alt":false,"url":"","urlLabel":"","img":"ST_ALi_Coffee_Roasters","cost":"約 A$20–30／位","dish":"精品咖啡、Brunch 全日早餐","note":""},{"id":"d18-4","day":18,"name":"Brighton Beach Bathing Boxes","zh":"彩虹小屋海灘","time":"15:00","cat":"海灘","type":"beach","lat":-37.918,"lng":144.986,"hours":"建議下午 3:00 – 黃昏 · 光線最美","desc":"一排 82 間維多利亞時代彩色小屋，1860 年代已經存在，當年供換泳衣同存放沙灘用品。每間由業主各自油漆，鮮紅、嫩黃、湖水藍撞色，成為墨爾本最經典嘅明信片畫面；海邊有木棧道，配上海景日落一流。海邊潮濕多鹽，記得保護相機同鏡頭。","book":true,"alt":false,"url":"","urlLabel":"","img":"Brighton_Beach_Bathing_Boxes","cost":"免費","dish":"","note":""},{"id":"d19-1","day":19,"name":"Twelve Apostles","zh":"十二門徒石","time":"10:30","cat":"景點","type":"scenic","lat":-38.665,"lng":143.105,"hours":"沿 Great Ocean Road 車程約 3 小時","desc":"大洋路終點嘅石灰岩奇觀：2,000 萬年來海浪沖刷離岸峭壁，逐漸雕出一支支巨柱。雖名叫「十二門徒」，其實只有 7-8 支仍然企穩，以前叫 Sow and Pigs，1920 年代先至改用聖經典故改名。附近有 1878 年 Loch Ard 號沉船遺址同 1990 年坍塌嘅 London Arch，一次過睇曬。","book":false,"alt":false,"url":"","urlLabel":"","img":"Twelve_Apostles","cost":"免費","dish":"","note":""},{"id":"d19-2","day":19,"name":"Phillip Island · Penguin Parade","zh":"菲利普島 · 企鵝歸巢","time":"黃昏","cat":"景點","type":"scenic","lat":-38.51,"lng":145.15,"hours":"黃昏時段 · 需預約","desc":"菲利普島住咗約 4 萬隻世上最小嘅企鵝 — 神仙小企鵝（只有 33 厘米高）。每晚日落後，出海搵食嘅小企鵝會分批上岸返巢，遊客喺專用木棧道上近距離觀賞，成為全球知名自然奇觀。當地自然公園由 1968 年起負責保育同研究，門票收入資助保護工作；場內不准閃光燈，要遵守導賞員指示。","book":true,"alt":false,"url":"","urlLabel":"","img":"Phillip_Island_Penguin_Parade","cost":"門票約 A$30–80／人（視乎座位等級）· 需預約","dish":"","note":""},{"id":"d19-3","day":19,"name":"Terror Twilight","zh":"晚餐","time":"21:30","cat":"夜生活","type":"food","lat":-37.7985,"lng":144.984,"hours":"晚餐 · Google Maps","desc":"看畢企鵝返程食晚餐，之後返回酒店（車程約 2 小時）。","book":false,"alt":false,"url":"","urlLabel":"","img":"Terror_Twilight","cost":"約 A$40–60／位","dish":"雞尾酒、小食拼盤","note":""},{"id":"d19-4","day":19,"name":"Proud Mary Coffee","zh":"咖啡店","time":"彈性","cat":"咖啡","type":"cafe","lat":-37.7995,"lng":144.984,"hours":"8:00 – 15:00 · 回程途中 · Google Maps","desc":"紅磚牆潮店，單一產區咖啡配豐富早餐。","book":false,"alt":true,"url":"","urlLabel":"","img":"Proud_Mary_Coffee","cost":"約 A$20–30／位","dish":"單一產區咖啡、全日早餐","note":""},{"id":"d19-5","day":19,"name":"Lulu & me Cheesecakes","zh":"芝士蛋糕","time":"彈性","cat":"美食","type":"dessert","lat":-37.81,"lng":144.96,"hours":"Google Maps","desc":"人氣芝士蛋糕店，去 Phillip Island 前補充能量！","book":false,"alt":true,"url":"","urlLabel":"","img":"Lulu_me_Cheesecakes","cost":"約 A$8–15／位","dish":"芝士蛋糕、日式芝士撻","note":""},{"id":"d20-1","day":20,"name":"雅拉河谷史詩葡萄酒導賞團","zh":"Klook 選項 1","time":"08:45","cat":"酒莊","type":"tour","lat":-37.7,"lng":145.35,"hours":"8:45 出發 · 墨爾本出發","desc":"維州最古老嘅酒區：1838 年開始種植葡萄，而家有逾 85 間酒莊，以 Chardonnay、Pinot Noir 同氣泡酒聞名。團會去多間酒莊品酒，含午餐，可加嘆朱古力同氈酒，節奏輕鬆。","book":false,"alt":false,"url":"","urlLabel":"","img":"d20_0","cost":"團費另計 · 視乎 Klook 價格","dish":"","note":""},{"id":"d20-2","day":20,"name":"雅拉河谷酒莊導覽一日遊","zh":"Klook 選項 2","time":"09:30","cat":"酒莊","type":"tour","lat":-37.715,"lng":145.33,"hours":"9:30 出發 · 墨爾本出發","desc":"同為雅拉河谷酒莊一日遊，9:30 出發時間較鬆動。深入百年酒莊參觀釀酒過程，在葡萄園之間嘆世界，適合想輕鬆行一日嘅長輩。","book":false,"alt":true,"url":"","urlLabel":"","img":"d20_1","cost":"團費另計 · 視乎 Klook 價格","dish":"","note":""},{"id":"d21-1","day":21,"name":"State Library Victoria","zh":"維多利亞州立圖書館","time":"10:00","cat":"文化","type":"historic","lat":-37.8098,"lng":144.9646,"hours":"10:00 – 18:00 · Google Maps","desc":"1854 年創立、1856 年開放，澳洲第一間免費公共圖書館。最出名係 1913 年落成嘅 La Trobe 圓頂閱覽室：八邊形分層書架包住穹頂，氣勢磅礴，被譽為全球最美圖書館之一。館藏超過 200 萬冊，仲有亡命牛仔 Ned Kelly 嘅盔甲同 Burke and Wills 探險隊遺物；免費參觀。","book":false,"alt":false,"url":"","urlLabel":"","img":"State_Library_Victoria","cost":"免費","dish":"","note":""},{"id":"d21-2","day":21,"name":"Bakemono Bakers","zh":"日式麵包店","time":"10:40","cat":"咖啡","type":"cafe","lat":-37.8132,"lng":144.963,"hours":"Google Maps","desc":"日式手工麵包店，出品精緻。","book":false,"alt":false,"url":"","urlLabel":"","img":"Bakemono_Bakers","cost":"約 A$8–15／位","dish":"日式菠蘿包、手工麵包","note":""},{"id":"d21-3","day":21,"name":"Melbourne Central","zh":"購物中心","time":"11:15","cat":"購物","type":"shopping","lat":-37.81,"lng":144.962,"hours":"10:00 – 19:00 · Google Maps","desc":"1991 年開幕嘅大型商場，最特別係保留咗 1888 年建嘅 Coop's Shot Tower（子彈製造塔）：九層樓高、當年係全墨爾本最高建築物之一，而家係商場中庭嘅玻璃錐保護遺跡。商場連接 Flinders Street 車站同週邊商場，行街、搵食同嘆冷氣一次過搞掂。","book":false,"alt":false,"url":"","urlLabel":"","img":"Melbourne_Central","cost":"免費","dish":"","note":""},{"id":"d21-4","day":21,"name":"Emporium Melbourne","zh":"商場","time":"11:45","cat":"購物","type":"shopping","lat":-37.8115,"lng":144.963,"hours":"10:00 – 19:00 · Google Maps","desc":"2014 年開幕嘅現代化商場，由舊 Lonsdale Street 地段活化而成，走國際時裝、美妝同精品路線，頂層係大型美食廣場；連接 Myer 同 Melbourne Central 形成一大片購物區。想搵大牌、嘆個靚景午餐，可以順路行吓。","book":false,"alt":false,"url":"","urlLabel":"","img":"Emporium_Melbourne","cost":"免費","dish":"","note":""},{"id":"d21-5","day":21,"name":"The Block Arcade","zh":"19 世紀華麗拱廊","time":"12:15","cat":"文化","type":"historic","lat":-37.8158,"lng":144.9644,"hours":"8:00 – 18:00 · Google Maps","desc":"1892 年開幕、墨爾本最華麗嘅維多利亞時代拱廊，出名係馬賽克地板、玻璃天棚同鑄鐵欄河，名稱來自「The Block」地段。入面有 1893 年開業嘅 Hopetoun 茶室，法式多士同茶點伴住街頭藝人豎琴聲。鐘意歷史建築同打卡影相，一定要行。","book":false,"alt":false,"url":"","urlLabel":"","img":"The_Block_Arcade","cost":"免費","dish":"","note":""},{"id":"d21-6","day":21,"name":"Patricia Coffee Brewers","zh":"站立式咖啡吧","time":"12:45","cat":"咖啡","type":"cafe","lat":-37.816,"lng":144.957,"hours":"7:00 – 16:00 · Google Maps","desc":"冇位坐嘅「極簡」咖啡吧，只賣咖啡 — 但係好多人心目中全墨爾本最好嘅一杯。","book":false,"alt":false,"url":"","urlLabel":"","img":"Patricia_Coffee_Brewers","cost":"約 A$5–8／杯","dish":"Picolo 濃縮咖啡、Batch Brew","note":""},{"id":"d21-7","day":21,"name":"Dukes Coffee Roasters","zh":"精品咖啡","time":"13:15","cat":"咖啡","type":"cafe","lat":-37.8168,"lng":144.965,"hours":"7:00 – 16:30 · Google Maps","desc":"木系明亮店內嘅精品咖啡店，出品穩定。","book":false,"alt":false,"url":"","urlLabel":"","img":"Dukes_Coffee_Roasters","cost":"約 A$5–8／杯","dish":"精品咖啡、Batch Brew","note":""},{"id":"d21-7b","day":21,"name":"Industry Beans","zh":"咖啡店","time":"彈性","cat":"咖啡","type":"cafe","lat":-37.8148,"lng":144.9598,"hours":"Little Collins St · Google Maps","desc":"Little Collins 街上嘅人氣咖啡店，brunch 都唔錯。","book":false,"alt":true,"url":"","urlLabel":"","img":"Industry_Beans","cost":"約 A$20–30／位","dish":"單一產區咖啡、Brunch","note":""},{"id":"d21-8","day":21,"name":"Higher Ground","zh":"前發電站餐廳","time":"13:30","cat":"美食","type":"food","lat":-37.8163,"lng":144.956,"hours":"7:00 – 17:00 · Google Maps","desc":"由百年發電站改建嘅華麗餐廳，紅磚工業風配精緻菜式，好多人嚟影相。建議訂位。","book":true,"alt":false,"url":"","urlLabel":"","img":"Higher_Ground","cost":"約 A$35–50／位","dish":"全日早餐、咖啡、烤肉菜式","note":""},{"id":"d21-9","day":21,"name":"Grain Store","zh":"餐廳","time":"13:40","cat":"美食","type":"food","lat":-37.8195,"lng":144.956,"hours":"7:00 – 15:00 · Google Maps","desc":"明亮工業風空間，精品咖啡加住家風味菜式。建議訂位。","book":true,"alt":true,"url":"","urlLabel":"","img":"Grain_Store","cost":"約 A$30–45／位","dish":"Brunch 全日早餐、季節性菜式","note":""},{"id":"d21-10","day":21,"name":"Pidapipó","zh":"意式雪糕","time":"14:30","cat":"美食","type":"dessert","lat":-37.817,"lng":144.965,"hours":"12:00 – 22:30 · Google Maps","desc":"墨爾本人氣手工 gelato，經典同季節限定口味一應俱全。","book":false,"alt":false,"url":"","urlLabel":"","img":"Pidapip_","cost":"約 A$6–10／杯","dish":"手工 Gelato 雪糕","note":""},{"id":"d21-11","day":21,"name":"Vacation Coffee","zh":"咖啡店","time":"15:00","cat":"咖啡","type":"cafe","lat":-37.815,"lng":144.964,"hours":"Google Maps","desc":"CBD 咖啡巡禮嘅其中一站。","book":false,"alt":true,"url":"","urlLabel":"","img":"Vacation_Coffee","cost":"約 A$5–8／杯","dish":"單一產區咖啡","note":""},{"id":"d21-12","day":21,"name":"The Hardware Société","zh":"人氣早餐店","time":"15:30","cat":"美食","type":"cafe","lat":-37.815,"lng":144.956,"hours":"7:30 – 15:00 · Google Maps","desc":"法蘭西多士同焗蛋係招牌，細小但溫馨嘅人氣早餐店。","book":false,"alt":true,"url":"","urlLabel":"","img":"The_Hardware_Soci_t_","cost":"約 A$25–35／位","dish":"法蘭西多士、焗蛋","note":""},{"id":"d21-13","day":21,"name":"Hector's Deli","zh":"熟食店","time":"16:00","cat":"美食","type":"cafe","lat":-37.818,"lng":144.993,"hours":"Google Maps","desc":"本地人至愛嘅 deli，三文治一流。","book":false,"alt":true,"url":"","urlLabel":"","img":"Hector_s_Deli","cost":"約 A$15–20／位","dish":"煙燻肉三文治、Deli 拼盤","note":""},{"id":"d21-14","day":21,"name":"Federation Square","zh":"聯邦廣場","time":"17:00","cat":"景點","type":"scenic","lat":-37.818,"lng":144.969,"hours":"24 小時 · Google Maps","desc":"2002 年為慶祝澳洲聯邦 100 周年而建，幾何「風車」式建築群由本地事務所設計，當年爭議唔細，而家係墨爾本市中心客廳。廣場經常有免費活動、大屏幕直播澳網同澳式足球；入面有 ACMI 電影博物館同 NGV Australia。由呢度行去 Flinders Street 車站只係 2 分鐘。","book":false,"alt":false,"url":"","urlLabel":"","img":"Federation_Square","cost":"免費","dish":"","note":""},{"id":"d21-15","day":21,"name":"Myer Melbourne","zh":"百年百貨","time":"17:30","cat":"購物","type":"shopping","lat":-37.812,"lng":144.962,"hours":"Google Maps","desc":"澳洲標誌性百貨公司，由 Sidney Myer 於 1900 年創立，Bourke Street 旗艦店 1914 年開業。最出名係 1956 年開始嘅聖誕櫥窗傳統：每年 11-12 月櫥窗會變成會郁動嘅童話故事，聖誕老人巡遊都係年度盛事。行樓上望一望市中心天際，夜間仲靚。","book":false,"alt":false,"url":"","urlLabel":"","img":"Myer_Melbourne","cost":"免費","dish":"","note":""}]}</script>
+<script>
+(function () {
+  'use strict';
+
+  var DATA = JSON.parse(document.getElementById('trip').textContent);
+  var DMETA = DATA.dmeta, PCAT = DATA.pcat, CATS = DATA.cats;
+  var TRIP = DATA.trip, NOTE22 = DATA.note22, META = DATA.meta;
+
+  var EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+  var DAYS = TRIP.map(function (p) { return p.day; })
+    .filter(function (v, i, a) { return a.indexOf(v) === i; })
+    .sort(function (a, b) { return a - b; });
+  var BY = {};
+  DAYS.forEach(function (d) { BY[d] = TRIP.filter(function (p) { return p.day === d; }); });
+  var CITY = { 12: 'sydney', 13: 'sydney', 14: 'sydney', 15: 'sydney', 16: 'sydney', 17: 'link', 18: 'melbourne', 19: 'melbourne', 20: 'melbourne', 21: 'melbourne' };
+
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+    });
+  };
+  var NAMES = {};
+  TRIP.forEach(function (p) { NAMES[p.id] = p; });
+
+  window.__fb = function (img) {
+    var i = (parseInt(img.dataset.ei, 10) || 0) + 1;
+    if (i >= EXTS.length) { img.remove(); return; }
+    img.dataset.ei = String(i);
+    img.src = 'img/' + img.dataset.slug + '.' + EXTS[i];
+  };
+
+  function photo(p, lazy) {
+    if (!p.img) return '';
+    return '<img src="img/' + p.img + '.jpg" data-slug="' + p.img + '" data-ei="0" alt=""' +
+      (lazy === false ? '' : ' loading="lazy"') + ' onerror="window.__fb(this)">';
+  }
+  function icon(p) {
+    var c = PCAT[p.cat];
+    return c ? c.i : '•';
+  }
+  function catLabel(p) {
+    if (CATS[p.type]) return CATS[p.type].label;
+    return p.cat || '';
+  }
+  function mapsUrl(p) {
+    return 'https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(p.name + ' Australia');
+  }
+
+  /* ---------------- 日期側欄 ---------------- */
+  function railHTML() {
+    var groups = [
+      ['悉尼 SYDNEY', 'sydney', DAYS.filter(function (d) { return CITY[d] === 'sydney'; })],
+      ['轉場', 'link', DAYS.filter(function (d) { return CITY[d] === 'link'; })],
+      ['墨爾本 MELBOURNE', 'melbourne', DAYS.filter(function (d) { return CITY[d] === 'melbourne'; })]
+    ];
+    return groups.map(function (g) {
+      if (!g[2].length) return '';
+      var links = g[2].map(function (d) {
+        var m = DMETA[d] || {};
+        var label = (m.label || ('12/' + d)).replace(/（.*?）/, '');
+        return '<a href="#d' + d + '" data-rail="' + d + '">' + esc(label) +
+          '<i>' + BY[d].length + ' 站</i></a>';
+      }).join('');
+      return '<div class="rail__grp" data-city="' + g[1] + '"><p class="rail__lbl">' + esc(g[0]) + '</p><div>' + links + '</div></div>';
+    }).join('');
+  }
+
+  /* ---------------- 单站 ---------------- */
+  function stopHTML(p, i) {
+    var c = PCAT[p.cat] || {};
+    return '<li>' +
+      '<button class="stop' + (p.alt ? ' is-alt' : '') + '" data-id="' + p.id + '" ' +
+      'aria-expanded="false" aria-controls="pan-' + p.id + '">' +
+      '<span class="stop__t">' + esc(p.time) + '</span>' +
+      '<span class="stop__ph" style="color:' + (c.c || '#8d8375') + '">' + icon(p) + photo(p) + '</span>' +
+      '<span class="stop__b"><span class="stop__n">' + esc(p.name) + '</span>' +
+      (p.zh ? '<span class="stop__z">' + esc(p.zh) + '</span>' : '') + '</span>' +
+      '<span class="stop__cat' + (p.alt ? ' is-alt' : '') + '">' + esc(catLabel(p)) + (p.alt ? ' · 備選' : '') + '</span>' +
+      '<span class="stop__c" aria-hidden="true"></span>' +
+      '</button>' +
+      '<p class="stop__pd" aria-hidden="true">' + esc(p.desc) + '</p>' +
+      '<p class="stop__pd stop__pd--meta" aria-hidden="true">' +
+        [p.hours ? '🕒 ' + esc(p.hours) : '',
+         p.cost ? '💰 ' + esc(p.cost) : '',
+         p.dish ? '⭐ ' + esc(p.dish) : ''].filter(Boolean).join('　·　') +
+      '</p>' +
+      '<div class="pan' + (p.img ? '' : ' pan--noimg') + '" id="pan-' + p.id + '" hidden>' + panelHTML(p) + '</div>' +
+      '</li>';
+  }
+
+  function panelHTML(p) {
+    var free = /^免費/.test(p.cost || '');
+    /* 無圖站點不輸出 figure，避免展開後左側留一大塊空白（版面由 .pan--noimg 改單欄） */
+    var fig = p.img ? '<figure class="pan__fig">' + photo(p) + '</figure>' : '';
+    return fig + '<div class="pan__body">' +
+      '<p class="pan__d">' + esc(p.desc) + '</p>' +
+      '<div class="pan__meta">' +
+      (p.hours ? '<span>🕒 <b>' + esc(p.hours) + '</b></span>' : '') +
+      (p.cost ? '<span>💰 <b style="color:' + (free ? '#4c7a55' : 'inherit') + '">' + esc(p.cost) + '</b></span>' : '') +
+      (p.dish ? '<span>⭐ 招牌 <b>' + esc(p.dish) + '</b></span>' : '') +
+      '</div>' +
+      '<div class="pan__row">' +
+      (p.book ? '<span class="pan__tag">需訂位／預約</span>' : '') +
+      (p.alt ? '<span class="pan__tag pan__tag--soft">備選行程 · 時間有彈性</span>' : '') +
+      (p.note ? '<span class="pan__tag pan__tag--soft">' + esc(p.note) + '</span>' : '') +
+      (p.url ? '<a class="pan__a pan__a--alt" href="' + p.url + '" target="_blank" rel="noopener">' + esc(p.urlLabel || '網站') + ' ↗</a>' : '') +
+      '<a class="pan__a" href="' + mapsUrl(p) + '" target="_blank" rel="noopener">Google 地圖 ↗</a>' +
+      '</div>' +
+      (p.info ? '<div class="pan__info">' + p.info + '</div>' : '') +
+      '</div>';
+  }
+
+  /* ---------------- 单日 ---------------- */
+  function groupKey(p) {
+    var m = /^(\d{1,2}):/.exec(p.time || '');
+    var h = m ? parseInt(m[1], 10) : 13;
+    if (h < 12) return 0;
+    if (h < 17) return 1;
+    return 2;
+  }
+  var GLABEL = ['上午', '午後', '晚間'];
+
+  function dayHTML(day) {
+    var m = DMETA[day] || {};
+    var stops = BY[day];
+    var label = m.label || ('12/' + day);
+    var dateStr = label.replace(/（.*?）/, '');
+    var wd = (label.match(/（(.*?)）/) || [])[1] || '';
+    var list;
+
+    if (stops.length >= 12) {
+      var buckets = [[], [], []];
+      stops.forEach(function (p) { buckets[groupKey(p)].push(p); });
+      list = buckets.map(function (arr, gi) {
+        if (!arr.length) return '';
+        var first = arr[0].time, last = arr[arr.length - 1].time;
+        return '<div class="grp" data-g="' + gi + '">' +
+          '<button class="grp__h" aria-expanded="true">' +
+          '<span>' + GLABEL[gi] + '</span><small>' + arr.length + ' 站</small>' +
+          '<i>' + esc(first) + ' – ' + esc(last) + '</i></button>' +
+          '<ul class="stops">' + arr.map(stopHTML).join('') + '</ul></div>';
+      }).join('');
+    } else {
+      list = '<ul class="stops">' + stops.map(stopHTML).join('') + '</ul>';
+    }
+
+    return '<article class="day" id="d' + day + '" data-day="' + day + '" data-city="' + (CITY[day] || 'all') + '">' +
+      '<header class="day__head">' +
+      '<span class="day__no">' + esc(dateStr) + '</span>' +
+      '<div><h3 class="day__t">' + esc(m.title || '') + '</h3>' +
+      '<p class="day__sub">' + (wd ? esc(wd) + ' · ' : '') + esc(m.sub || '') + '</p></div>' +
+      '<span class="day__n">' + stops.length + ' 站</span>' +
+      '</header>' + list +
+      '<div class="mapbank"><div class="map" data-day="' + day + '" role="img" aria-label="' + esc(dateStr) + ' 當日路線圖"></div>' +
+      '<p class="map__note">底圖需連網載入；編號對應上面站序，綠色為備選。</p></div>' +
+      '</article>';
+  }
+
+  function tailsHTML() {
+    if (!NOTE22 || !NOTE22.length) return '';
+    return '<div class="tails">' + NOTE22.map(function (n) {
+      return '<div class="tail"><b>' + esc(n.d) + '</b><p>' + n.t + '</p></div>';
+    }).join('') + '</div>';
+  }
+
+  /* ---------------- 渲染 ---------------- */
+  document.getElementById('rail').innerHTML = railHTML();
+  document.getElementById('days').innerHTML =
+    DAYS.map(dayHTML).join('') + tailsHTML();
+
+  if (META) {
+    var ks = document.getElementById('kpiStops');
+    var kp = document.getElementById('kpiPhotos');
+    if (ks) ks.textContent = META.stops;
+    if (kp) kp.textContent = META.photos;
+  }
+
+  /* ---------------- 展开 / 收起 ---------------- */
+  var daysEl = document.getElementById('days');
+  var lastMapPan = null;
+
+  function closePanel(day, exceptId) {
+    var host = document.querySelector('.day[data-day="' + day + '"]');
+    if (!host) return;
+    host.querySelectorAll('.stop[aria-expanded="true"]').forEach(function (b) {
+      if (b.dataset.id === exceptId) return;
+      b.setAttribute('aria-expanded', 'false');
+      var pn = document.getElementById('pan-' + b.dataset.id);
+      if (pn) pn.hidden = true;
+      setPin(day, b.dataset.id, false);
+    });
+  }
+
+  function openPanel(id, opts) {
+    var p = NAMES[id];
+    if (!p) return;
+    var btn = document.querySelector('.stop[data-id="' + id + '"]');
+    if (!btn) return;
+    var pn = document.getElementById('pan-' + id);
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+    closePanel(p.day, isOpen ? null : id);
+    if (isOpen) {
+      btn.setAttribute('aria-expanded', 'false');
+      pn.hidden = true;
+      setPin(p.day, id, false);
+      return;
+    }
+    btn.setAttribute('aria-expanded', 'true');
+    pn.hidden = false;
+    setPin(p.day, id, true);
+    if (!opts || opts.scroll !== false) {
+      var r = pn.getBoundingClientRect();
+      if (r.bottom > window.innerHeight - 24) {
+        window.scrollBy({ top: Math.min(r.top - 90, r.bottom - window.innerHeight + 40), behavior: 'smooth' });
+      }
+    }
+  }
+
+  daysEl.addEventListener('click', function (e) {
+    var gh = e.target.closest('.grp__h');
+    if (gh) {
+      var g = gh.parentNode;
+      var closed = g.classList.toggle('is-closed');
+      gh.setAttribute('aria-expanded', closed ? 'false' : 'true');
+      return;
+    }
+    var st = e.target.closest('.stop');
+    if (st) { openPanel(st.dataset.id); }
+  });
+
+  /* ---------------- 地图 ---------------- */
+  var MAPS = {};
+
+  function setPin(day, id, on) {
+    var rec = MAPS[day];
+    if (!rec) return;
+    rec.pins.forEach(function (mk) {
+      var el = mk.getElement();
+      if (!el) return;
+      var pin = el.querySelector('.mpin');
+      if (!pin) return;
+      pin.classList.toggle('is-on', on && pin.dataset.id === id);
+    });
+    if (on && rec.map) {
+      var p = NAMES[id];
+      if (p && p.lat && p.lng) rec.map.panTo([p.lat, p.lng], { animate: true, duration: .4 });
+    }
+  }
+
+  function initMap(el) {
+    if (!window.L || el.dataset.done) return;
+    el.dataset.done = '1';
+    var day = +el.dataset.day;
+    var stops = BY[day].filter(function (p) { return p.lat && p.lng; });
+    if (!stops.length) return;
+    var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    var pins = stops.map(function (p, i) {
+      var html = '<div class="mpin' + (p.alt ? ' is-alt' : '') + '" data-id="' + p.id + '">' + (i + 1) + '</div>';
+      var mk = L.marker([p.lat, p.lng], {
+        title: p.name,
+        icon: L.divIcon({ html: html, className: '', iconSize: [24, 24], iconAnchor: [12, 12] })
+      }).addTo(map);
+      mk.on('click', function () { openPanel(p.id, { scroll: true }); });
+      return mk;
+    });
+
+    map.fitBounds(L.latLngBounds(stops.map(function (p) { return [p.lat, p.lng]; })), { padding: [40, 40] });
+    MAPS[day] = { map: map, pins: pins };
+  }
+
+  var mapObserver = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            initMap(en.target);
+            mapObserver.unobserve(en.target);
+          }
+        });
+      }, { rootMargin: '300px 0px' })
+    : null;
+  var mapEls = Array.prototype.slice.call(document.querySelectorAll('.map'));
+  if (mapObserver) mapEls.forEach(function (el) { mapObserver.observe(el); });
+  else mapEls.forEach(initMap);
+
+  /* ---------------- 导航高亮 / 进度 / 回到顶部 ---------------- */
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll('[data-rail]'));
+  var dayEls = Array.prototype.slice.call(document.querySelectorAll('.day'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var progress = document.getElementById('progress');
+  var totop = document.getElementById('totop');
+  var secIds = navLinks.map(function (a) { return a.getAttribute('href').slice(1); });
+
+  function onScroll() {
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.width = (h > 0 ? Math.min(100, st / h * 100) : 0) + '%';
+    if (totop) totop.classList.toggle('is-on', st > 900);
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { onScroll(); ticking = false; });
+  }, { passive: true });
+  onScroll();
+
+  if (totop) totop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var id = en.target.id;
+        if (en.isIntersecting) seen[id] = en.intersectionRatio;
+        else delete seen[id];
+      });
+      var best = null, bestR = 0;
+      Object.keys(seen).forEach(function (k) { if (seen[k] > bestR) { bestR = seen[k]; best = k; } });
+      if (best) {
+        railLinks.forEach(function (a) {
+          a.classList.toggle('is-on', a.getAttribute('href') === '#' + best);
+        });
+        var inSec = best.indexOf('d') === 0 ? 'itin' : best;
+        navLinks.forEach(function (a) {
+          a.classList.toggle('is-on', a.getAttribute('href') === '#' + inSec);
+        });
+      }
+    }, { rootMargin: '-72px 0px -55%', threshold: [0, .2, .5, 1] });
+
+    dayEls.forEach(function (el) { io.observe(el); });
+    secIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+
+  /* ---------------- 入场动画 ---------------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var rv = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-in'); rv.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8%' });
+    document.querySelectorAll('.day, .city, .kpi').forEach(function (el) {
+      el.classList.add('reveal');
+      rv.observe(el);
+    });
+  }
+
+  /* ---------------- 出发倒计时 ---------------- */
+  (function () {
+    var bar = document.getElementById('cd');
+    if (!bar) return;
+    var target = new Date('2026-12-11T19:05:00+08:00').getTime();
+    var d = document.getElementById('cdD'), h = document.getElementById('cdH'), mi = document.getElementById('cdM');
+    function tick() {
+      var diff = target - Date.now();
+      if (diff <= 0) { bar.hidden = true; clearInterval(timer); return; }
+      bar.hidden = false;
+      d.textContent = Math.floor(diff / 864e5);
+      h.textContent = Math.floor(diff % 864e5 / 36e5);
+      mi.textContent = Math.floor(diff % 36e5 / 6e4);
+    }
+    tick();
+    var timer = setInterval(tick, 30000);
+  })();
+
+  /* ---------------- ETA 弹层 ---------------- */
+  (function () {
+    var modal = document.getElementById('etaModal');
+    if (!modal) return;
+    var ok = document.getElementById('etaOk');
+    var today = document.getElementById('etaToday');
+    var lastFocus = null;
+    var KEY = 'au-eta-ack-v3';        // 本次瀏覽階段有效
+    var KEY_DAY = 'au-eta-day-v1';    // 「今日不再提醒」，以本機日期判斷
+
+    function todayStr() {
+      var d = new Date();
+      return d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    function focusables() {
+      return Array.prototype.slice.call(
+        modal.querySelectorAll('button, a[href], input, [tabindex]:not([tabindex="-1"])')
+      ).filter(function (el) { return el.offsetParent !== null; });
+    }
+    function seen() {
+      try {
+        if (sessionStorage.getItem(KEY) === '1') return true;
+        if (localStorage.getItem(KEY_DAY) === todayStr()) return true;
+      } catch (e) { /* file:// 下可能被封鎖，退化為照常提醒 */ }
+      return false;
+    }
+    function mark() {
+      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+    function open() {
+      if (seen()) return;
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var card = modal.querySelector('.eta__card');
+      if (card) card.focus();
+    }
+    function close() {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    ok.addEventListener('click', function () { mark(); close(); });
+    if (today) {
+      today.addEventListener('click', function () {
+        try { localStorage.setItem(KEY_DAY, todayStr()); } catch (e) {}
+        close();
+      });
+    }
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { close(); return; }
+      if (e.key === 'Tab') {
+        var f = focusables();
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    setTimeout(open, 700);
+  })();
+
+  /* ---------------- 首屏图片轮播 ---------------- */
+  (function () {
+    var box = document.getElementById('heroSlides');
+    if (!box) return;
+    var imgs = Array.prototype.slice.call(box.querySelectorAll('img'));
+    if (imgs.length < 2) return;
+    var cap = document.getElementById('heroCap');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.hero__dot'));
+    var noAnim = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var i = 0, timer = null;
+
+    function show(n) {
+      i = (n + imgs.length) % imgs.length;
+      imgs.forEach(function (im, k) { im.classList.toggle('is-on', k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+      if (cap) cap.textContent = imgs[i].dataset.cap || '';
+    }
+    function start() {
+      if (timer || noAnim) return;
+      timer = setInterval(function () { show(i + 1); }, 5200);
+    }
+    function stop() { clearInterval(timer); timer = null; }
+
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { show(+d.dataset.i); stop(); start(); });
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  })();
+
+  /* ---------------- 行程范围切换 ---------------- */
+  (function () {
+    var segs = Array.prototype.slice.call(document.querySelectorAll('.seg__b'));
+    if (!segs.length) return;
+
+    function apply(f) {
+      document.body.dataset.f = f;
+      segs.forEach(function (b) {
+        var on = b.dataset.f === f;
+        b.classList.toggle('is-on', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      var cur = document.querySelector('.rail a.is-on');
+      if (cur) {
+        var target = document.querySelector(cur.getAttribute('href'));
+        if (target && target.offsetParent === null) cur.classList.remove('is-on');
+      }
+    }
+    segs.forEach(function (b) {
+      b.addEventListener('click', function () { apply(b.dataset.f); });
+    });
+
+    /* 預設視圖：12/16 21:00（澳洲東岸夏令時間 UTC+11）之後自動落在墨爾本，
+       其餘時間顯示全部行程。只在初次載入決定，之後完全由使用者控制。 */
+    var MEL_AT = new Date('2026-12-16T21:00:00+11:00').getTime();
+    apply(Date.now() >= MEL_AT ? 'melbourne' : 'all');
+  })();
+
+  /* ---------------- 打印：全展开 ---------------- */
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('.grp.is-closed').forEach(function (g) { g.classList.remove('is-closed'); });
+  });
+
+  var stamp = document.getElementById('footStamp');
+  if (stamp && META && META.generated) {
+    stamp.textContent = '更新於 ' + META.generated.replace(/-/g, '.');
+  }
+})();
+
+</script>
+</body>
+</html>
